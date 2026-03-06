@@ -316,3 +316,26 @@ Coût ingrédient = quantite_g × prix_par_g_reel × (1 + marge_perte_%)
 
 *Univers Caresse — Chantal Mondor — Confidentiel*
 *Mis à jour : 6 mars 2026*
+
+---
+
+## ✅ COMPLÉTÉ — 6 mars 2026 (suite session)
+
+- Bug `</div>` en trop ligne 317 `admin/index.html` corrigé ✅
+- `Univers Caresse1` → `Univers Caresse` dans titre `admin/index.html` ✅
+- Lignes de produits dans cartes collections repositionnées en haut (`collection-carte-lignes-haut`) ✅
+- `window.scrollTo(0,0)` dans `ouvrirFicheCollection()` ✅
+- Boutons fiche collection déplacés en haut du panneau avec séparateur ✅
+- `updateCollectionItem` dans `Code.gs` — ne plus écraser ligne/format/description_ligne, propager couleur_hex et photo_url aux autres rangées ✅
+- `sauvegarderCollection()` — mode collection n'envoie plus ligne/format/description_ligne ✅
+- Ancienne `sauvegarderCollection` supprimée de `Code.gs` (était en double — appartient à admin.js) ✅
+- `.photo-preview` 120×120px dans `style.css` ✅
+- Toast de confirmation centré — `afficherMsg()` enrichie + `.toast` dans `style.css` ✅
+- Section VIOLATIONS FRÉQUENTES ajoutée au briefing ✅
+
+## ⚠️ NOTES IMPORTANTES CODE.GS
+
+- `sauvegarderCollection` N'APPARTIENT PAS à `Code.gs` — c'est une fonction `admin.js`
+- Toujours vérifier les doublons de fonctions avant de modifier `Code.gs`
+- Après chaque modification de `Code.gs` : redéployer en nouvelle version
+- L'URL du déploiement ne change pas entre les versions
