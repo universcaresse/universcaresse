@@ -2,7 +2,7 @@
    UNIVERS CARESSE — main.js
    Mis à jour : 5 mars 2026
    ═══════════════════════════════════════ */
-
+ 
 // ─── CONFIGURATION ───
 const CONFIG = {
   APPS_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyDbcy6kBKcTWtj2B0kLfAioy9f2ShI0UtMPP1wg2K-xKUUDdIDONH_rbB_RCzu7lyhVw/exec',
