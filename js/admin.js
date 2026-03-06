@@ -76,9 +76,21 @@ function fermerSidebarMobile() {
 // ─── MESSAGES ───
 function afficherMsg(zone, texte, type = 'succes') {
   const el = document.getElementById('msg-' + zone);
-  if (!el) return;
-  el.innerHTML = `<div class="msg msg-${type}">${texte}</div>`;
-  setTimeout(() => { el.innerHTML = ''; }, 4000);
+  if (el) {
+    el.innerHTML = `<div class="msg msg-${type}">${texte}</div>`;
+    setTimeout(() => { el.innerHTML = ''; }, 4000);
+  }
+  let toast = document.getElementById('toast-global');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast-global';
+    toast.className = 'toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = texte;
+  toast.className = `toast toast-${type}`;
+  setTimeout(() => toast.classList.add('visible'), 10);
+  setTimeout(() => toast.classList.remove('visible'), 3000);
 }
 
 // ─── COULEUR PAR NOM ───
