@@ -582,7 +582,7 @@ footer {
 .form-panel-titre { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; color: var(--gris-fonce); flex: 1; }
 .form-body { padding: 0 28px 28px; }
 .form-body .form-actions { padding-top: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--beige); }
-
+ 
 
 /* ═══════════════════════════════════════
    ADMIN — TABLEAU
