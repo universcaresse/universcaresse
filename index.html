@@ -22,27 +22,12 @@
     <li id="nav-admin-link" style="display:none"><a href="admin/index.html">Admin</a></li>
   </ul>
   <div class="nav-actions">
-    <button class="btn-connexion" id="btn-connexion" onclick="afficherConnexion()">Connexion</button>
-    <button class="btn-connexion btn-deconnexion" id="btn-deconnexion" style="display:none" onclick="seDeconnecter()">Déconnexion</button>
+    <button class="btn-connexion btn-deconnexion" id="btn-deconnexion" style="display:none" onclick="seDeconnecter()">Déconnexion</button><button class="btn-connexion btn-deconnexion" id="btn-deconnexion" style="display:none" onclick="seDeconnecter()">Déconnexion</button>
     <button class="burger" id="burger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
-
-<!-- MODAL CONNEXION -->
-<div class="modal-overlay" id="modal-connexion" onclick="fermerModalConnexion(event)">
-  <div class="modal-connexion">
-    <button class="modal-fermer" onclick="fermerConnexion()">✕</button>
-    <h2 class="modal-titre">Connexion admin</h2>
-    <div class="form-group">
-      <label class="form-label">Mot de passe</label>
-      <input type="password" class="form-control" id="input-mdp" onkeydown="if(event.key==='Enter')validerConnexion()">
-    </div>
-    <div class="form-erreur" id="erreur-connexion" style="display:none">Mot de passe incorrect</div>
-    <button class="btn-primary" onclick="validerConnexion()">Entrer</button>
-  </div>
-</div>
 
 <!-- MODAL PRODUIT -->
 <div class="modal-overlay" id="modal-produit" onclick="fermerModalProduit(event)">
