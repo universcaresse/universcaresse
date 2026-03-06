@@ -872,7 +872,7 @@ tr:hover td { background: rgba(232,220,200,0.15); }
 .fiche-ligne-desc { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--gris); margin-top: 6px; line-height: 1.6; }
 .collection-carte-lignes { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
 .collection-carte-lignes-haut { position: absolute; top: 12px; left: 12px; right: 12px; display: flex; flex-wrap: wrap; gap: 4px; z-index: 1; }
-.collection-carte-ligne-tag { font-family: 'DM Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.08em; color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.15); padding: 2px 8px;}
+.collection-carte-ligne-tag { font-family: 'DM Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.08em; color: #fff; background: rgba(0,0,0,0.35); padding: 2px 8px;}
 .section-label { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--beige); }
 
 
