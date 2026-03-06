@@ -42,6 +42,20 @@ Mettre à jour le briefing IMMÉDIATEMENT après chaque changement — pas à la
 
 ---
 
+## ⛔ VIOLATIONS FRÉQUENTES — INTERDICTIONS ABSOLUES
+
+- **JAMAIS de style inline** dans le HTML ou le JS — même temporairement — même "juste pour tester"
+- **JAMAIS poser une question sur un fichier déjà fourni** dans la conversation — lire avant de demander
+- **JAMAIS redemander un fichier** qui a déjà été envoyé dans la session
+- **JAMAIS expliquer le pourquoi d'un problème** — proposer directement la solution
+- **JAMAIS utiliser de valeurs CSS hardcodées** (px, rem) si une variable CSS existe déjà
+- **JAMAIS créer une nouvelle fonction** si une existante peut être réutilisée
+- **JAMAIS modifier plus d'une chose à la fois** sans approbation explicite
+- **LIRE le briefing ET les fichiers uploadés AVANT toute réponse**
+- **TESTER MENTALEMENT le code avant de le proposer**
+
+---
+
 ## PROJET
 
 Univers Caresse — savonnerie artisanale de Chantal Mondor.
