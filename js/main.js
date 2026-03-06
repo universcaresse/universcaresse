@@ -130,7 +130,7 @@ function validerConnexion() {
   const mdp = document.getElementById('input-mdp').value;
   if (mdp === CONFIG.MOT_DE_PASSE) {
     sessionStorage.setItem('uc_admin', 'true');
-    window.location.href = '/universcaresse/admin/';
+    window.location.href = '/univers-caresse/admin/';
   } else {
     document.getElementById('erreur-connexion').style.display = 'block';
     document.getElementById('input-mdp').value = '';
