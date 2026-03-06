@@ -1515,3 +1515,14 @@ if (!res || !res.success) {
     document.getElementById('final-total-affichage').textContent = '0,00 $';
   }, 5000);
 }
+function validerConnexionAdmin() {
+  const mdp = document.getElementById('input-mdp-admin').value;
+  if (mdp === CONFIG.MOT_DE_PASSE) {
+    sessionStorage.setItem('uc_admin', 'true');
+    window.location.reload();
+  } else {
+    document.getElementById('erreur-mdp-admin').textContent = 'Mot de passe incorrect.';
+    document.getElementById('input-mdp-admin').value = '';
+    document.getElementById('input-mdp-admin').focus();
+  }
+}
