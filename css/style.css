@@ -580,7 +580,9 @@ footer {
 .form-panel.visible { display: block; }
 .form-panel-header { padding: 20px 28px 16px; border-bottom: 1px solid var(--beige); background: rgba(232,220,200,0.2); display: flex; align-items: center; gap: 16px; }
 .form-panel-titre { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; color: var(--gris-fonce); flex: 1; }
-.form-body { padding: 28px; }
+.form-body { padding: 0 28px 28px; }
+.form-body .form-actions { padding-top: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--beige); }
+
 
 /* ═══════════════════════════════════════
    ADMIN — TABLEAU
