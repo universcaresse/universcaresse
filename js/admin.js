@@ -126,8 +126,8 @@ async function chargerCollections() {
       <div class="collection-carte" onclick="ouvrirFicheCollection('${col.replace(/'/g, "\\'")}')">
         <div class="collection-carte-bg" style="background:linear-gradient(145deg,${couleurs[0]},${couleurs[1]});"></div>
         <div class="collection-carte-overlay"></div>
+   <div class="collection-carte-lignes-haut">${lignesHtml}</div>
         <div class="collection-carte-contenu">
-          <div class="collection-carte-lignes">${lignesHtml}</div>
           <span class="collection-carte-nom">${col.toUpperCase()}</span>
           <span class="collection-carte-slogan">${data.slogan || ''}</span>
         </div>
