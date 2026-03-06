@@ -21,6 +21,27 @@ Il est **infatigable** — les sessions sont longues et productives. Suis le ryt
 **RÈGLE NUMÉRO ZÉRO :**
 Mettre à jour le briefing IMMÉDIATEMENT après chaque changement — pas à la fin de la session. Jean-Claude uploade les fichiers au début de chaque session — le briefing doit être parfait à tout moment.
 
+---
+
+**Mise à jour 6 mars 2026 — À lire absolument :**
+
+Jean-Claude est direct et exigeant — c'est une qualité. Il ne veut pas de réflexions, d'explications de problèmes, de questions sur des fichiers déjà fournis. Il veut la solution, point. Si tu hésites, relis le briefing.
+
+**Les violations qui l'ont fait sortir de ses gonds :**
+- Style inline proposé (même "temporairement")
+- Questions sur des fichiers déjà dans la conversation
+- Expliquer le pourquoi au lieu de proposer la solution
+- Doublons de fonctions non détectés (`sauvegarderCollection` était en double dans `Code.gs`)
+- Variables CSS non vérifiées avant de proposer du code
+
+**Workflow actuel :**
+- Notepad++ pour éditer
+- GitHub Desktop pour commiter (attendre ~5 min pour GitHub Pages)
+- `Code.gs` : après chaque modification, redéployer en **nouvelle version** — l'URL ne change pas
+- Deux `index.html` : racine = public, `/admin/` = admin
+
+**Ton attitude gagnante :** solution directe, une étape à la fois, confirmation avant de coder, jamais de style inline, jamais de nouvelle fonction si une existe.
+
 **Règles absolues :**
 - Fontes sacrées : **Playfair Display, Birthstone, DM Sans** — jamais Cormorant, Jost, Inter, Roboto, Arial
 - **Un seul `style.css`** pour tout — public ET admin — `admin.css` n'existe plus
@@ -339,3 +360,47 @@ Coût ingrédient = quantite_g × prix_par_g_reel × (1 + marge_perte_%)
 - Toujours vérifier les doublons de fonctions avant de modifier `Code.gs`
 - Après chaque modification de `Code.gs` : redéployer en nouvelle version
 - L'URL du déploiement ne change pas entre les versions
+
+---
+
+## 📋 LISTE DE TRAVAIL — Prochaine session
+
+### Admin — Accueil
+- [ ] Tuiles accueil : photo `fondw.png` en arrière-plan, tuiles en `rgba` semi-transparent par-dessus
+- [ ] Icône Collections : rectangles imbriqués (vrais rectangles, SVG option 14 du fichier `icones-collections.html`)
+- [ ] "Bonjour Chantal" + ligne + stats : prendre plus de largeur partout (pas juste mobile)
+- [ ] Nav mobile : supprimer "Site public" et "Déconnexion" de la barre — les mettre dans le burger
+
+### Admin — Connexion
+- [ ] Formulaire de connexion = page 1 de l'admin (plus de redirect vers site public)
+- [ ] Accès direct `/admin/` ouvre le formulaire de connexion
+- [ ] Une fois connecté → tableau de bord
+
+### Site public
+- [ ] Supprimer le bouton Connexion de la nav publique
+- [ ] Section "Qui sommes-nous" intégrée directement sur la page d'accueil au-dessus des collections (plus de section séparée dans le menu)
+- [ ] Nav mobile : supprimer la barre fixe en haut, remplacer par burger flottant
+
+---
+
+## 🔴 EN COURS — Connexion admin (non résolu)
+
+### Ce qui a été fait :
+- `ecran-connexion` ajouté à la fin de `admin/index.html` juste avant `</body>` ✅
+- `validerConnexionAdmin()` ajoutée à la fin de `admin.js` ✅
+- CSS `.ecran-connexion` avec `z-index: 99999` dans `style.css` ✅
+- `DOMContentLoaded` dans `admin.js` modifié pour cacher `.admin-layout` et `#nav-admin` si pas de session ✅
+
+### Problème persistant :
+L'écran de connexion ne couvre pas le contenu — le logo, nav et contenu admin apparaissent derrière/par-dessus le formulaire. Le `z-index` ne semble pas fonctionner.
+
+### À vérifier en priorité :
+1. Le `DOMContentLoaded` dans `admin.js` — vérifier qu'il cache bien `nav-admin` et `.admin-layout`
+2. Vérifier l'ID exact de la nav admin dans `admin/index.html` — est-ce `nav-admin` ou autre chose ?
+3. S'assurer que `validerConnexionAdmin` est bien dans `admin.js`
+4. Le second `DOMContentLoaded` inline dans `admin/index.html` qui appelle `chargerStatsAccueil()` — il s'exécute sans vérification de session
+
+### Fichiers modifiés (à uploader au début de la prochaine session) :
+- `admin/index.html`
+- `admin.js`
+- `style.css`
