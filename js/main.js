@@ -222,11 +222,16 @@ async function appelAPI(action, params = {}) {
 async function appelAPIPost(action, data = {}) {
   try {
     const payload = JSON.stringify({ action, ...data });
-    const response = await fetch(CONFIG.APPS_SCRIPT_URL, {
+ const response = await fetch(CONFIG.APPS_SCRIPT_URL, {
       method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
       body: payload,
       redirect: 'follow'
     });
+ 
+ 
+ 
+ 
     if (!response.ok) throw new Error('Erreur réseau');
     return await response.json();
   } catch (err) {
