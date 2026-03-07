@@ -905,5 +905,12 @@ tr:hover td { background: rgba(232,220,200,0.15); }
 .login-contenu { display: flex; flex-direction: column; align-items: flex-start; padding: var(--padding-page); max-width: 600px; width: 100%; }
 .login-champ { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 32px; }
 .login-input { max-width: 400px; }
+.login-logo-wrap { position: relative; display: flex; justify-content: center; }
+.login-admin-label { position: absolute; top: 0; left: 0; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+.login-logo { width: 220px; }
+.login-separateur { width: 100%; height: 1px; background: var(--accent); margin: 32px 0; }
+.login-row { display: flex; gap: 0; width: 100%; max-width: 400px; }
+.login-row .login-input { flex: 1; border-radius: 4px 0 0 4px; }
+.login-row .login-btn { border-radius: 0 4px 4px 0; white-space: nowrap; }
 .login-contenu .hero-logo-img { width: 200px; }
 .login-contenu .hero-eyebrow { margin-bottom: 24px; }
