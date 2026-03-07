@@ -237,8 +237,10 @@ async function modifierCollection(rowIndex) {
   document.getElementById('fc-ligne').value             = item.ligne || '';
   document.getElementById('fc-format').value            = item.format || '';
   document.getElementById('fc-desc-ligne').value        = item.description_ligne || '';
-  document.getElementById('fc-couleur-hex').value       = item.couleur_hex || '#8b8680';
+ document.getElementById('fc-couleur-hex').value       = item.couleur_hex || '#8b8680';
   document.getElementById('fc-photo-url').value         = item.photo_url || '';
+  const preview = document.getElementById('fc-photo-preview');
+  if (preview) preview.innerHTML = item.photo_url ? `<img src="${item.photo_url}" class="photo-preview">` : '';
   const res = await appelAPI('getRecettesBase');
   ingredientsBase = (res && res.items ? res.items : [])
     .filter(i => i.collection === item.collection && i.ligne === item.ligne)
