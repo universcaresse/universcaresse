@@ -38,7 +38,8 @@ if (id === 'collections')    { chargerCollections(); chargerListesFournisseurs()
   if (id === 'inventaire')     chargerInventaire();
   if (id === 'factures')       chargerFactures();
  if (id === 'nouvelle-facture' && !factureActive) initialiserNouvelleFacture();
-  if (id === 'contenu-site')    chargerContenuSite();
+if (id === 'contenu-site')    chargerContenuSite();
+}
 
 // ─── STATS ACCUEIL ───
 async function chargerStatsAccueil() {
@@ -1550,7 +1551,7 @@ async function sauvegarderContenuSite() {
     contenu[cle] = el.value;
   });
   const data = await appelAdminAPI('updateContenu', { contenu });
-  if (data && data.success) {
+if (data && data.success) {
     afficherMsg('msg-contenu-site', 'Contenu sauvegardé.', 'succes');
   } else {
     afficherMsg('msg-contenu-site', 'Erreur lors de la sauvegarde.', 'erreur');
