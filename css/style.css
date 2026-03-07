@@ -441,7 +441,7 @@ footer {
 .valeur-desc { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; line-height: 1.7; color: var(--gris); font-weight: 300; }
 
 .bandeau-citation { background: var(--primary); padding: 64px var(--padding-page); text-align: center; }
-.citation-texte { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 400; font-style: italic; color: white; line-height: 1.5; max-width: 700px; margin: 0 auto 20px; }
+.citation-texte { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 400; font-style: italic; color: white; line-height: 1.5; max-width: 800px; margin: 0 auto 20px; }
 .citation-source { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.65); }
 
 .section-cta { padding: var(--padding-page); text-align: center; border-top: 1px solid var(--beige); }
