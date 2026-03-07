@@ -28,9 +28,10 @@
 <!-- MODAL PRODUIT -->
 <div class="modal-overlay" id="modal-produit" onclick="fermerModalProduit(event)">
   <div class="modal-produit">
-    <div class="modal-visuel" id="modal-visuel">
-      <button class="modal-fermer" onclick="fermerModal()">✕</button>
-    </div>
+    <div class="modal-visuel-hex" id="modal-visuel-hex"></div>
+<div class="modal-visuel-photo" id="modal-visuel-photo">
+  <button class="modal-fermer" onclick="fermerModal()">✕</button>
+</div>
     <div class="modal-contenu">
       <div class="modal-collection" id="modal-collection"></div>
       <div class="modal-nom" id="modal-nom"></div>
@@ -503,16 +504,22 @@ function ouvrirModal(produit) {
   document.getElementById('modal-collection').textContent = produit.collection;
   document.getElementById('modal-ligne').textContent = produit.ligne;
   document.getElementById('modal-desc').textContent = produit.description;
-  const visuel = document.getElementById('modal-visuel');
-  visuel.style.background = `linear-gradient(145deg, ${produit.couleur_hex}dd, ${produit.couleur_hex}88)`;
-  const imgExistante = visuel.querySelector('img');
+const hex = document.getElementById('modal-visuel-hex');
+  const photo = document.getElementById('modal-visuel-photo');
+  const imgExistante = photo.querySelector('img');
   if (imgExistante) imgExistante.remove();
+
   if (produit.image_url) {
+    hex.style.background = `linear-gradient(145deg, ${produit.couleur_hex}dd, ${produit.couleur_hex}88)`;
+    hex.style.display = '';
+    photo.style.background = '';
     const img = document.createElement('img');
-    img.src = `Images/produits/${produit.image_url}`;
-    img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;';
+    img.src = produit.image_url;
     img.onerror = () => img.remove();
-    visuel.appendChild(img);
+    photo.appendChild(img);
+  } else {
+    hex.style.display = 'none';
+    photo.style.background = `linear-gradient(145deg, ${produit.couleur_hex}dd, ${produit.couleur_hex}88)`;
   }
   const formats = Array.isArray(produit.formats) ? produit.formats : (produit.format ? [produit.format] : []);
   const prix = produit.prix_vente ? parseFloat(produit.prix_vente).toFixed(2).replace('.', ',') + ' $' : '—';
