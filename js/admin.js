@@ -1553,7 +1553,7 @@ async function sauvegarderContenuSite() {
     const cle = el.id.replace('cs-', '');
     contenu[cle] = el.value;
   });
- const data = await appelAPI('updateContenu', { contenu });
+const data = await appelAPIPost('updateContenu', { contenu });
 if (data && data.success) {
     afficherMsg('msg-contenu-site', 'Contenu sauvegardé.', 'succes');
   } else {
