@@ -53,6 +53,7 @@
         <button class="nav-admin-btn">Système <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
         <div class="nav-dropdown">
           <button class="nav-dropdown-item" onclick="afficherSection('densites', null)">Densité</button>
+          <button class="nav-dropdown-item" onclick="afficherSection('contenu-site', null)">Contenu du site</button>
           <button class="nav-dropdown-item bientot">Corrections inventaire</button>
         </div>
       </li>
@@ -99,9 +100,10 @@
         <button class="sidebar-lien bientot">Ventes</button>
       </div>
       <div class="sidebar-sep"></div>
-      <div class="sidebar-groupe">
+     <div class="sidebar-groupe">
         <div class="sidebar-titre">Système</div>
         <button class="sidebar-lien" onclick="afficherSection('densites', this)">Densité</button>
+        <button class="sidebar-lien" onclick="afficherSection('contenu-site', this)">Contenu du site</button>
         <button class="sidebar-lien bientot">Corrections inventaire</button>
       </div>
     </aside>
@@ -708,6 +710,225 @@
         <div class="vide" id="vide-inventaire" style="display:none">
           <div class="vide-titre">Aucun stock disponible</div>
           <div class="vide-desc">Les stocks se calculent à partir des factures finalisées</div>
+        </div>
+      </div>
+
+    <!-- CONTENU DU SITE -->
+      <div class="section-admin" id="section-contenu-site">
+        <div class="page-entete">
+          <div>
+            <div class="page-titre">Contenu du site</div>
+            <div class="page-sous-titre">Textes affichés sur le site public</div>
+          </div>
+          <button class="btn btn-primary" onclick="sauvegarderContenuSite()">Enregistrer</button>
+        </div>
+        <div class="msg-zone" id="msg-contenu-site"></div>
+        <div class="chargement" id="loading-contenu-site"><span class="spinner"></span>Chargement...</div>
+
+        <div id="corps-contenu-site" style="display:none">
+
+          <div class="form-panel" style="margin-bottom:24px">
+            <div class="form-panel-header"><div class="form-panel-titre">Accueil — Hero</div></div>
+            <div class="form-body">
+              <div class="form-grille">
+                <div class="form-groupe">
+                  <label class="form-label">Eyebrow (ex: Collections 2026)</label>
+                  <input type="text" class="form-ctrl" id="cs-accueil_eyebrow">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Texte du bouton CTA</label>
+                  <input type="text" class="form-ctrl" id="cs-accueil_cta">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Stat — valeur (ex: 100%)</label>
+                  <input type="text" class="form-ctrl" id="cs-accueil_stat_valeur">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Stat — libellé (ex: Artisanal)</label>
+                  <input type="text" class="form-ctrl" id="cs-accueil_stat_label">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-panel" style="margin-bottom:24px">
+            <div class="form-panel-header"><div class="form-panel-titre">Qui sommes-nous</div></div>
+            <div class="form-body">
+              <div class="form-grille">
+                <div class="form-groupe">
+                  <label class="form-label">Eyebrow</label>
+                  <input type="text" class="form-ctrl" id="cs-qui_eyebrow">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Titre</label>
+                  <input type="text" class="form-ctrl" id="cs-qui_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Titre — italique</label>
+                  <input type="text" class="form-ctrl" id="cs-qui_titre_em">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Nom signature</label>
+                  <input type="text" class="form-ctrl" id="cs-qui_signature_nom">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Titre signature</label>
+                  <input type="text" class="form-ctrl" id="cs-qui_signature_titre">
+                </div>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Texte principal</label>
+                <textarea class="form-ctrl" id="cs-qui_texte" rows="3"></textarea>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Paragraphe 1</label>
+                <textarea class="form-ctrl" id="cs-section_texte_p1" rows="3"></textarea>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Paragraphe 2</label>
+                <textarea class="form-ctrl" id="cs-section_texte_p2" rows="3"></textarea>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Paragraphe 3</label>
+                <textarea class="form-ctrl" id="cs-section_texte_p3" rows="3"></textarea>
+              </div>
+              <div class="form-grille">
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 01 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-valeur_01_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 01 — description</label>
+                  <textarea class="form-ctrl" id="cs-valeur_01_desc" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 02 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-valeur_02_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 02 — description</label>
+                  <textarea class="form-ctrl" id="cs-valeur_02_desc" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 03 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-valeur_03_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 03 — description</label>
+                  <textarea class="form-ctrl" id="cs-valeur_03_desc" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 04 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-valeur_04_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 04 — description</label>
+                  <textarea class="form-ctrl" id="cs-valeur_04_desc" rows="2"></textarea>
+                </div>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Citation</label>
+                <textarea class="form-ctrl" id="cs-citation_texte" rows="2"></textarea>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Source citation</label>
+                <input type="text" class="form-ctrl" id="cs-citation_source">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-panel" style="margin-bottom:24px">
+            <div class="form-panel-header"><div class="form-panel-titre">Bon à savoir — Engagements</div></div>
+            <div class="form-body">
+              <div class="form-grille">
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 01 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_engagement_01_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 01 — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_engagement_01_texte" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 02 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_engagement_02_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 02 — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_engagement_02_texte" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 03 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_engagement_03_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 03 — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_engagement_03_texte" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 04 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_engagement_04_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 04 — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_engagement_04_texte" rows="2"></textarea>
+                </div>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Note allergènes</label>
+                <textarea class="form-ctrl" id="cs-bas_allergenes" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-panel" style="margin-bottom:24px">
+            <div class="form-panel-header"><div class="form-panel-titre">Bon à savoir — Conservation et commandes</div></div>
+            <div class="form-body">
+              <div class="form-grille">
+                <div class="form-groupe">
+                  <label class="form-label">Conservation — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_conservation_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Conservation — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_conservation_texte" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Cure — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_cure_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Cure — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_cure_texte" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Usage — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_usage_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Usage — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_usage_texte" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Commande — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_commande_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Commande — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_commande_texte" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Demande d'info — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_demande_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Demande d'info — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_demande_texte" rows="2"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
