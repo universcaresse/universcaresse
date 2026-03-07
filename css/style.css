@@ -117,8 +117,12 @@ main { padding-top: var(--nav-h); }
 /* ═══════════════════════════════════════
    ANIMATIONS
    ═══════════════════════════════════════ */
-.fade-in { opacity: 0; transform: translateY(24px); animation: fadeIn 0.7s ease forwards; }
+.fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
 @keyframes fadeIn { to { opacity: 1; transform: none; } }
+
+.mosaic-item { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.mosaic-item.visible { opacity: 1; transform: translateY(0); }
 .delay-1 { animation-delay: 0.1s; }
 .delay-2 { animation-delay: 0.2s; }
 .delay-3 { animation-delay: 0.35s; }

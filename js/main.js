@@ -46,7 +46,36 @@ document.addEventListener('DOMContentLoaded', () => {
   verifierSession();
   initNav();
   initSPA();
+  initScrollAnimations();
 });
+
+function initScrollAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  const mosaicObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const items = entry.target.querySelectorAll('.mosaic-item');
+        items.forEach((item, i) => {
+          setTimeout(() => item.classList.add('visible'), i * 200);
+        });
+        mosaicObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  const mosaic = document.querySelector('.hero-mosaic');
+  if (mosaic) mosaicObserver.observe(mosaic);
+}
 
 // ─── SPA — NAVIGATION PAR SECTIONS ───
 function initSPA() {
