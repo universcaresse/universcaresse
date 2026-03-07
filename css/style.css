@@ -361,7 +361,7 @@ footer {
 .hero-cta svg { width: 16px; height: 16px; transition: transform 0.3s; }
 .hero-cta:hover svg { transform: translateX(4px); }
 .hero-stats { display: flex; justify-content: space-between; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--beige); width: 100%; }
-.hero-stat { flex: 1; }
+.hero-stat { flex: 1; text-align: center; }
 .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 600; color: var(--primary); line-height: 1; }
 .hero-stat-label { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gris); text-transform: uppercase; margin-top: 4px; }
 .hero-right { position: relative; overflow: hidden; background: var(--beige); }
