@@ -898,3 +898,4 @@ tr:hover td { background: rgba(232,220,200,0.15); }
 .connexion-logo { width: 80px; margin-bottom: 8px; }
 .connexion-titre { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gris-fonce); letter-spacing: 0.05em; }.connexion-titre { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--gris-fonce); letter-spacing: 0.05em; }
 .connexion-erreur { color: var(--danger); font-size: 0.85rem; min-height: 20px; }
+.login-body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--blanc); }
