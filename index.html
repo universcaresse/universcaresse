@@ -450,9 +450,9 @@ function construireCatalogue() {
           <p class="collection-entete-desc">${infos.desc_collection || ''}</p>
         </div>
         <div class="collection-entete-visuel">
-          <div class="collection-entete-bg" style="background: linear-gradient(135deg, ${infos.couleur_hex}cc, ${infos.couleur_hex}88);">
-            ${infos.image_ambiance
-              ? `<img src="Images/produits/${infos.image_ambiance}" alt="${col}" onerror="this.style.display='none'">`
+       <div class="collection-entete-bg" style="background: linear-gradient(135deg, ${infos.couleur_hex}cc, ${infos.couleur_hex}88);">
+            ${infos.image_collection
+              ? `<img src="${infos.image_collection}" alt="${col}" onerror="this.style.display='none'">`
               : `<span class="entete-visuel-placeholder">Photo ambiance<br>à venir</span>`}
           </div>
         </div>
@@ -465,8 +465,7 @@ function construireCatalogue() {
 function carteProduit(p) {
   const prix = p.prix_vente ? parseFloat(p.prix_vente).toFixed(2).replace('.', ',') + ' $' : '—';
   const formats = Array.isArray(p.formats) ? p.formats : (p.format ? [p.format] : []);
-	const imgSrc = p.image_url || p.image_collection || '';
-  const image = imgSrc ? `<img src="${imgSrc}" alt="${p.nom}" onerror="this.style.display='none'">` : '';
+const image = p.image_url ? `<img src="${p.image_url}" alt="${p.nom}" onerror="this.style.display='none'">` : '';
   return `
     <div class="carte-produit" onclick='ouvrirModal(${JSON.stringify(p)})'>
       <div class="carte-visuel">
