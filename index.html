@@ -465,7 +465,7 @@ function construireCatalogue() {
 function carteProduit(p) {
   const prix = p.prix_vente ? parseFloat(p.prix_vente).toFixed(2).replace('.', ',') + ' $' : '—';
   const formats = Array.isArray(p.formats) ? p.formats : (p.format ? [p.format] : []);
-  const image = p.image_url ? `<img src="Images/produits/${p.image_url}" alt="${p.nom}" onerror="this.style.display='none'">` : '';
+	const image = p.image_url ? `<img src="${p.image_url}" alt="${p.nom}" onerror="this.style.display='none'">` : '';
   return `
     <div class="carte-produit" onclick='ouvrirModal(${JSON.stringify(p)})'>
       <div class="carte-visuel">
