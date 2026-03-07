@@ -378,6 +378,7 @@ async function envoyerFormulaire() {
       message
     });
 
+   console.log('result:', JSON.stringify(result));
     if (result && result.success) {
       msgSucces.style.display = 'block';
       msgErreur.style.display = 'none';
