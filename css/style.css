@@ -899,12 +899,9 @@ tr:hover td { background: rgba(232,220,200,0.15); }
 .connexion-titre { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gris-fonce); letter-spacing: 0.05em; }.connexion-titre { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--gris-fonce); letter-spacing: 0.05em; }
 .connexion-erreur { color: var(--danger); font-size: 0.85rem; min-height: 20px; }
 .login-body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--blanc); }
-.login-contenu { display: flex; flex-direction: column; align-items: flex-start; padding: var(--padding-page); max-width: 600px; width: 100%; }
-.login-champ { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 32px; }
 .login-input { max-width: 400px; }
 .login-contenu { display: flex; flex-direction: column; align-items: flex-start; padding: var(--padding-page); max-width: 600px; width: 100%; }
 .login-champ { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 32px; }
-.login-input { max-width: 400px; }
 .login-logo-wrap { position: relative; display: flex; justify-content: center; }
 .login-admin-label { position: absolute; top: 0; left: 0; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
 .login-logo { width: 220px; }
