@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = '/univers-caresse/admin/login.html';
     return;
   }
+  document.getElementById('ecran-connexion').classList.add('cache');
   chargerStatsAccueil();
   const dateField = document.getElementById('nf-date');
   if (dateField) dateField.value = new Date().toISOString().split('T')[0];
@@ -1517,7 +1518,9 @@ function validerConnexionAdmin() {
   const mdp = document.getElementById('input-mdp-admin').value;
   if (mdp === CONFIG.MOT_DE_PASSE) {
     sessionStorage.setItem('uc_admin', 'true');
-    window.location.reload();
+    document.getElementById('ecran-connexion').classList.add('cache');
+    chargerStatsAccueil();
+    afficherSection('accueil', null);
   } else {
     document.getElementById('erreur-mdp-admin').textContent = 'Mot de passe incorrect.';
     document.getElementById('input-mdp-admin').value = '';
