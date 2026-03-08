@@ -204,15 +204,14 @@
             <div class="fiche-collection-bandeau" id="fiche-collection-bandeau">
               <span class="form-panel-titre" id="fiche-collection-titre"></span>
               <span class="fiche-collection-slogan" id="fiche-collection-slogan"></span>
+              <div class="form-actions">
+                <button class="btn btn-primary" id="fiche-collection-modifier">Modifier la collection</button>
+                <button class="btn btn-secondary" id="fiche-collection-ajouter-ligne">+ Ajouter une ligne</button>
+                <button class="btn btn-outline" onclick="fermerFicheCollection()">Fermer</button>
+              </div>
             </div>
-            <button class="btn btn-sm btn-outline" onclick="fermerFicheCollection()">Fermer</button>
           </div>
           <div class="form-body">
-            <div class="form-actions">
-              <button class="btn btn-primary" id="fiche-collection-modifier">Modifier la collection</button>
-              <button class="btn btn-secondary" id="fiche-collection-ajouter-ligne">+ Ajouter une ligne</button>
-              <button class="btn btn-outline" onclick="fermerFicheCollection()">Fermer</button>
-            </div>
             <p class="fiche-collection-desc" id="fiche-collection-desc"></p>
             <div class="section-label">Lignes de produits</div>
             <div id="fiche-collection-lignes"></div>
