@@ -451,21 +451,26 @@ async function envoyerFormulaire() {
   }
 }
 function carteProduit(p) {
+  const prix = p.prix_vente ? parseFloat(p.prix_vente).toFixed(2).replace('.', ',') + ' $' : '—';
   const formats = Array.isArray(p.formats) ? p.formats : (p.format ? [p.format] : []);
+  const image = p.image_url ? `<img src="${p.image_url}" alt="${p.nom}" onerror="this.style.display='none'">` : '';
   return `
     <div class="carte-produit" data-produit="${btoa(unescape(encodeURIComponent(JSON.stringify(p))))}" onclick="ouvrirModalFromCard(this)">
       <div class="carte-visuel">
-        ${p.image_url
-          ? `<img src="${p.image_url}" alt="${p.nom}" onerror="this.parentElement.style.background='linear-gradient(135deg,${p.couleur_hex}dd,${p.couleur_hex}88)';this.remove();">`
-          : `<div class="carte-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>PHOTO À VENIR</span></div>`}
-        <div class="carte-dot" style="background:${p.couleur_hex};"></div>
+        <div class="carte-couleur" style="background: ${p.couleur_hex};">
+          ${image}
+          ${!p.image_url ? `<div class="carte-photo-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Photo à venir</div>` : ''}
+          <div class="carte-couleur-dot" style="background: ${p.couleur_hex};"></div>
+        </div>
       </div>
-      <div class="carte-info">
-        <span class="carte-collection">${p.collection || ''}</span>
-        <span class="carte-nom">${p.nom || ''}</span>
-        <span class="carte-ligne">${p.ligne || ''}</span>
+      <div class="carte-infos">
+        <span class="carte-collection-badge">${p.collection}</span>
+        <div class="carte-nom">${p.nom}</div>
+        <div class="carte-ligne">${p.ligne}</div>
         <div class="carte-bas">
-          <span class="carte-prix">${p.prix_vente ? parseFloat(p.prix_vente).toFixed(2).replace('.', ',') + ' $' : '—'}</span>
+          <span class="carte-prix">${prix}</span>
           <div class="carte-formats">${formats.map(f => `<span class="carte-format-tag">${f}</span>`).join('')}</div>
         </div>
       </div>
