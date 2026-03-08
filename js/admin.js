@@ -516,6 +516,12 @@ function ouvrirFormRecette() {
   document.getElementById('fr-statut').value = 'test';
   document.getElementById('fr-collection').value = '';
   document.getElementById('fr-ligne').innerHTML = '<option value="">— Choisir collection —</option>';
+  document.getElementById('fr-couleur-visible').value = '';
+  document.getElementById('fr-image-url').value = '';
+  const prevRecette = document.getElementById('fr-image-preview');
+  if (prevRecette) { prevRecette.src = ''; prevRecette.classList.add('cache'); }
+  const apercuRecette = document.getElementById('fr-couleur-apercu');
+  if (apercuRecette) apercuRecette.style.background = '';
   document.getElementById('form-recettes').classList.add('visible');
   document.getElementById('fr-nom').focus();
 }
