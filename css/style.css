@@ -502,6 +502,7 @@ select.form-control, select.form-ctrl { cursor: pointer; }
    ═══════════════════════════════════════ */
 footer {
   background: url('../Images/fond.png') center center / cover no-repeat;
+  color: var(--blanc-pur-75);
   padding: 28px var(--padding-page);
   display: flex; justify-content: space-between; align-items: center;
   font-family: 'DM Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.06em;
