@@ -450,3 +450,77 @@ async function envoyerFormulaire() {
     btn.textContent = 'Envoyer le message';
   }
 }
+function carteProduit(p) {
+  const formats = Array.isArray(p.formats) ? p.formats : (p.format ? [p.format] : []);
+  return `
+    <div class="carte-produit" data-produit="${btoa(unescape(encodeURIComponent(JSON.stringify(p))))}" onclick="ouvrirModalFromCard(this)">
+      <div class="carte-visuel">
+        ${p.image_url
+          ? `<img src="${p.image_url}" alt="${p.nom}" onerror="this.parentElement.style.background='linear-gradient(135deg,${p.couleur_hex}dd,${p.couleur_hex}88)';this.remove();">`
+          : `<div class="carte-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>PHOTO À VENIR</span></div>`}
+        <div class="carte-dot" style="background:${p.couleur_hex};"></div>
+      </div>
+      <div class="carte-info">
+        <span class="carte-collection">${p.collection || ''}</span>
+        <span class="carte-nom">${p.nom || ''}</span>
+        <span class="carte-ligne">${p.ligne || ''}</span>
+        <div class="carte-bas">
+          <span class="carte-prix">${p.prix_vente ? parseFloat(p.prix_vente).toFixed(2).replace('.', ',') + ' $' : '—'}</span>
+          <div class="carte-formats">${formats.map(f => `<span class="carte-format-tag">${f}</span>`).join('')}</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function ouvrirModalFromCard(el) {
+  const produit = JSON.parse(decodeURIComponent(escape(atob(el.dataset.produit))));
+  ouvrirModal(produit);
+}
+
+function ouvrirModal(produit) {
+  document.getElementById('modal-nom').textContent = produit.nom;
+  document.getElementById('modal-collection').textContent = produit.collection;
+  document.getElementById('modal-ligne').textContent = produit.ligne;
+  document.getElementById('modal-desc').textContent = produit.description;
+  const hex = document.getElementById('modal-visuel-hex');
+  const photo = document.getElementById('modal-visuel-photo');
+  const imgExistante = photo.querySelector('img');
+  if (imgExistante) imgExistante.remove();
+
+  if (produit.image_url) {
+    hex.style.background = `linear-gradient(145deg, ${produit.couleur_hex}dd, ${produit.couleur_hex}88)`;
+    hex.style.display = '';
+    photo.style.background = '';
+    const img = document.createElement('img');
+    img.src = produit.image_url;
+    img.onerror = () => img.remove();
+    photo.appendChild(img);
+  } else {
+    hex.style.display = 'none';
+    photo.style.background = `linear-gradient(145deg, ${produit.couleur_hex}dd, ${produit.couleur_hex}88)`;
+  }
+
+  const formats = Array.isArray(produit.formats) ? produit.formats : (produit.format ? [produit.format] : []);
+  const prix = produit.prix_vente ? parseFloat(produit.prix_vente).toFixed(2).replace('.', ',') + ' $' : '—';
+  const formatsEl = document.getElementById('modal-formats');
+  const formatsTitre = document.getElementById('modal-formats-titre');
+  formatsEl.innerHTML = '';
+  if (formats.length > 0) {
+    if (formatsTitre) formatsTitre.classList.remove('cache');
+    formats.forEach((f, i) => {
+      const btn = document.createElement('div');
+      btn.className = 'modal-format' + (i === 0 ? ' selectionne' : '');
+      btn.innerHTML = `${f}<span class="modal-format-prix">${prix}</span>`;
+      btn.onclick = () => {
+        document.querySelectorAll('.modal-format').forEach(b => b.classList.remove('selectionne'));
+        btn.classList.add('selectionne');
+      };
+      formatsEl.appendChild(btn);
+    });
+  } else {
+    if (formatsTitre) formatsTitre.classList.add('cache');
+  }
+
+  document.getElementById('modal-produit').classList.add('ouvert');
+  document.body.style.overflow = 'hidden';
+}
