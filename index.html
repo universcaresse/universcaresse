@@ -463,7 +463,7 @@ function carteProduit(p) {
   const formats = Array.isArray(p.formats) ? p.formats : (p.format ? [p.format] : []);
   const image = p.image_url ? `<img src="${p.image_url}" alt="${p.nom}" onerror="this.style.display='none'">` : '';
   return `
-    <div class="carte-produit" onclick='ouvrirModal(${JSON.stringify(p)})'>
+    <div class="carte-produit" data-produit="${btoa(unescape(encodeURIComponent(JSON.stringify(p))))}" onclick="ouvrirModalFromCard(this)">
       <div class="carte-visuel">
         <div class="carte-couleur" style="background: ${p.couleur_hex};">
           ${image}
@@ -501,6 +501,11 @@ function filtrer(collection) {
     const offset = cible.getBoundingClientRect().top + window.scrollY - navH - filtresH - 16;
     window.scrollTo({ top: offset, behavior: 'smooth' });
   }
+}
+
+function ouvrirModalFromCard(el) {
+  const produit = JSON.parse(decodeURIComponent(escape(atob(el.dataset.produit))));
+  ouvrirModal(produit);
 }
 
 function ouvrirModal(produit) {
