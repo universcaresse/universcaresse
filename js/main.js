@@ -467,7 +467,7 @@ function carteProduit(p) {
           <div class="carte-couleur-dot" style="background: ${p.couleur_hex};"></div>
         </div>
       </div>
-  <div class="carte-infos ${couleurTexteContraste(p.couleur_hex) === '#f9f7f4' ? 'carte-texte-clair' : 'carte-texte-fonce'}" style="background: ${p.couleur_hex}90;">
+ <div class="carte-infos" style="background: ${p.couleur_hex}90;">
         <span class="carte-collection-badge">${p.collection}</span>
         <div class="carte-nom">${p.nom}</div>
         <div class="carte-ligne">${p.ligne}</div>
@@ -479,13 +479,7 @@ function carteProduit(p) {
     </div>`;
 }
 
-function couleurTexteContraste(hex) {
-  const r = parseInt(hex.slice(1,3), 16);
-  const g = parseInt(hex.slice(3,5), 16);
-  const b = parseInt(hex.slice(5,7), 16);
-  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return luminance > 0.5 ? '#3d3b39' : '#f9f7f4';
-}
+
 
 
 function ouvrirModalFromCard(el) {
