@@ -8,9 +8,22 @@
    VARIABLES
    ═══════════════════════════════════════ */
    
-   :root {
-/* PRIMARY */
-  --primary-04:     rgba(90,138,58,0.04);
+:root {
+  --primary:        #5a8a3a;
+  --primary-dark:   #4a6e2e;
+  --accent:         #d4a445;
+  --danger:         #c44536;
+  --blanc:          #f9f7f4;
+  --beige:          #e8dcc8;
+  --gris:           #8b8680;
+  --gris-fonce:     #3d3b39;
+  --logo:           #333333;
+  --nav-h:          72px;
+  --padding-page:   80px;
+  --padding-mobile: 20px;
+
+  /* PRIMARY */
+  --primary-04:    rgba(90,138,58,0.04);
   --primary-05:     rgba(90,138,58,0.05);
   --primary-06:     rgba(90,138,58,0.06);
   --primary-08:     rgba(90,138,58,0.08);
