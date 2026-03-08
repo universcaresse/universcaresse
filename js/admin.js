@@ -190,9 +190,10 @@ document.getElementById('fiche-collection-modifier').onclick = () => {
     fermerFicheCollection();
     modifierCollection(groupe.info.rowIndex);
   };
-  document.getElementById('fiche-collection-ajouter-ligne').onclick = () => {
+document.getElementById('fiche-collection-ajouter-ligne').onclick = () => {
     fermerFicheCollection();
     ouvrirFormCollectionPour(col);
+    basculerModeFormCollection();
   };
  fiche.classList.add('visible');
   window.scrollTo(0, 0);
