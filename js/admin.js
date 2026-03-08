@@ -532,6 +532,9 @@ function modifierRecette(id) {
   document.getElementById('fr-id').value           = rec.recette_id;
   document.getElementById('fr-nom').value          = rec.nom || '';
   document.getElementById('fr-couleur').value      = rec.couleur_hex || '';
+  document.getElementById('fr-couleur-visible').value = rec.couleur_hex || '';
+  const apercu = document.getElementById('fr-couleur-apercu');
+  if (apercu) apercu.style.background = rec.couleur_hex || '';
   document.getElementById('fr-format').value       = rec.format || '';
   document.getElementById('fr-unites').value       = rec.nb_unites || '';
   document.getElementById('fr-cure').value         = rec.cure || '';
@@ -676,7 +679,11 @@ function apercuCouleurCollection(input) {
   }
 }
 
-
+function apercuCouleurRecette(input) {
+  const apercu = document.getElementById('fr-couleur-apercu');
+  if (apercu) apercu.style.background = input.value || '';
+  document.getElementById('fr-couleur').value = input.value;
+}
 
 // ─── INGRÉDIENTS DE BASE ───
 let ingredientsBase = [];
