@@ -279,6 +279,7 @@ async function sauvegarderCollection() {
       ligne,
       ingredients: ingredientsBase.map(i => ({ type: i.type, nom: i.nom, quantite_g: i.quantite }))
     });
+  const infoCol = donneesCollections.find(i => i.collection === col && !i.ligne);
     const d = {
       collection:        col,
       ligne,
@@ -286,7 +287,9 @@ async function sauvegarderCollection() {
       description_ligne: document.getElementById('fc-desc-ligne').value,
       couleur_hex:       document.getElementById('fc-couleur-hex-ligne').value,
       photo_url:         document.getElementById('fc-photo-url-ligne').value,
-      rang:              '', slogan: '', description_collection: ''
+      rang:              infoCol ? infoCol.rang : '',
+      slogan:            infoCol ? infoCol.slogan : '',
+      description_collection: infoCol ? infoCol.description_collection : ''
     };
     const res = await appelAPIPost('addCollectionItem', d);
     if (res && res.success) {
