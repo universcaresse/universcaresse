@@ -708,7 +708,7 @@ footer {
 .accueil-logo { max-width: 280px; width: 70%; height: auto; margin-bottom: 12px; }
 .accueil-bonjour { font-family: 'Birthstone', cursive; font-size: 3.5rem; color: var(--accent); line-height: 1; align-self: center; }
 .accueil-chantal { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--primary); font-weight: 400; line-height: 1; margin-bottom: 0; align-self: center; }
-.accueil-droite { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 3px; background: url('../Images/fondw.png') center center / cover no-repeat; }
+.accueil-droite { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 3px; background: url('../Images/fond.png') center center / cover no-repeat; }
 .accueil-tuile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; font-family: 'DM Sans', sans-serif; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: white; cursor: pointer; border: none; transition: filter 0.4s ease; min-height: 0; }
 .accueil-tuile:hover { filter: brightness(1.04); }
 .tuile-icone { width: 70px; height: 70px; display: block; transition: transform 0.4s ease; }
