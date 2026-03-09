@@ -336,8 +336,8 @@ async function supprimerLigne(rowIndex) {
   if (!confirm('Supprimer cette ligne ?')) return;
   const res = await appelAPIPost('deleteCollectionItem', { rowIndex });
   if (res && res.success) {
-    afficherMsg('collections', 'Ligne supprimée.');
-    chargerCollections();
+  afficherMsg('collections', 'Ligne supprimée.');
+    await chargerCollections();
   } else {
     afficherMsg('collections', 'Erreur.', 'erreur');
   }
@@ -540,7 +540,7 @@ function modifierRecette(id) {
   document.getElementById('fr-couleur').value      = rec.couleur_hex || '';
   document.getElementById('fr-couleur-visible').value = rec.couleur_hex || '';
   const apercu = document.getElementById('fr-couleur-apercu');
-  if (apercu) apercu.style.background = rec.couleur_hex || '';
+  if (apercu) apercuCouleurRecette(document.getElementById('fr-couleur-visible'));
   document.getElementById('fr-format').value       = rec.format || '';
   document.getElementById('fr-unites').value       = rec.nb_unites || '';
   document.getElementById('fr-cure').value         = rec.cure || '';
