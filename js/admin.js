@@ -522,7 +522,49 @@ async function chargerIngredientsBaseRecette() {
 
 
 function ouvrirFicheRecette(id) {
-  modifierRecette(id);
+  const rec = donneesRecettes.find(r => r.recette_id === id);
+  if (!rec) return;
+  recetteActive = rec;
+  document.getElementById('fiche-recette-titre').textContent = rec.nom || '—';
+  const ings = rec.ingredients && rec.ingredients.length
+    ? rec.ingredients.map(i => `<div class="fiche-ingredient"><span class="fiche-ing-nom">${i.nom}</span><span class="fiche-ing-qte">${i.quantite_g} g</span></div>`).join('')
+    : '<div class="fiche-vide">Aucun ingrédient</div>';
+  document.getElementById('fiche-recette-contenu').innerHTML = `
+    <div class="fiche-grille">
+      <div class="fiche-champ"><span class="fiche-label">Collection</span><span class="fiche-valeur">${rec.collection || '—'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label">Ligne</span><span class="fiche-valeur">${rec.ligne || '—'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label">Format</span><span class="fiche-valeur">${rec.format || '—'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label">Statut</span><span class="fiche-valeur">${rec.statut || 'test'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label">Prix</span><span class="fiche-valeur">${rec.prix_vente ? formaterPrix(rec.prix_vente) : '— $'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label">Cure</span><span class="fiche-valeur">${rec.cure || '—'} jours</span></div>
+    </div>
+    <div class="fiche-section-titre">Description</div>
+    <div class="fiche-texte">${rec.description || '—'}</div>
+    <div class="fiche-section-titre">Instructions</div>
+    <div class="fiche-texte">${rec.instructions || '—'}</div>
+    <div class="fiche-section-titre">Notes</div>
+    <div class="fiche-texte">${rec.notes || '—'}</div>
+    <div class="fiche-section-titre">Ingrédients</div>
+    <div class="fiche-ingredients">${ings}</div>
+  `;
+  fermerFormRecette();
+  document.getElementById('fiche-recette').classList.add('visible');
+}
+
+function fermerFicheRecette() {
+  document.getElementById('fiche-recette').classList.remove('visible');
+  recetteActive = null;
+}
+
+function basculerModeEditionRecette() {
+  if (!recetteActive) return;
+  fermerFicheRecette();
+  modifierRecette(recetteActive.recette_id);
+}
+
+function supprimerRecetteActive() {
+  if (!recetteActive) return;
+  supprimerRecette(recetteActive.recette_id);
 }
 
 
