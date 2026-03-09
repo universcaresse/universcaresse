@@ -562,7 +562,7 @@ footer > * { position: relative; z-index: 1; }
 
 .collections-strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2px; }
 .collection-tile { aspect-ratio: 3/4; position: relative; overflow: hidden; cursor: pointer; background: var(--beige); text-decoration: none; display: block; }
-.collection-tile-bg { position: absolute; inset: 0; transition: transform 0.6s ease; }
+.collection-tile-bg { position: absolute; inset: 0; transition: transform 0.6s ease; background: linear-gradient(135deg, var(--col-hex-1, var(--primary)) 0%, var(--col-hex-2, var(--primary-dark)) 100%); }
 .collection-tile:hover .collection-tile-bg { transform: scale(1.05); }
 .collection-tile-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,28,25,0.7) 0%, rgba(30,28,25,0.1) 60%, transparent 100%); }
 .collection-tile-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px 16px; }

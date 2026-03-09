@@ -25,8 +25,9 @@ const COULEURS_COLLECTIONS = {
 
 function couleurCollection(nom, hex) {
   if (hex && hex.trim()) return [hex.trim(), assombrirCouleur(hex.trim())];
-  const cle = nom ? nom.toUpperCase() : '';
- return COULEURS_COLLECTIONS[cle] || ['#c44536', '#a02d20'];
+  const cle = nom ? nom.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '';
+  const found = Object.keys(COULEURS_COLLECTIONS).find(k => k.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') === cle);
+  return found ? COULEURS_COLLECTIONS[found] : ['#c44536', '#a02d20'];
 }
 function assombrirCouleur(hex) {
   hex = hex.replace('#', '');
@@ -266,14 +267,13 @@ async function chargerCollections() {
     strip.innerHTML = '';
 
     data.collections.forEach(col => {
-    const couleurs = couleurCollection(col.nom, col.couleur_hex);
-      const lien = encodeURIComponent(col.nom);
+      const couleurs = couleurCollection(col.nom, col.couleur_hex);
       strip.innerHTML += `
-       <a href="#catalogue" onclick="naviguer('catalogue'); setTimeout(() => filtrer('${col.nom}'), 300);" class="collection-tile">
-          <div class="collection-tile-bg" style="background: linear-gradient(135deg, ${couleurs[0]} 0%, ${couleurs[1]} 100%);"></div>
+        <a href="#catalogue" onclick="naviguer('catalogue'); setTimeout(() => filtrer('${col.nom}'), 300);" class="collection-tile" style="--col-hex-1: ${couleurs[0]}; --col-hex-2: ${couleurs[1]};">
+          <div class="collection-tile-bg"></div>
           <div class="collection-tile-overlay"></div>
           <div class="collection-tile-content">
-            <span class="collection-tile-name">${col.nom}</span>
+            <span class="collection-tile-name">${col.nom.toUpperCase()}</span>
             <span class="collection-tile-slogan">${col.slogan || ''}</span>
           </div>
         </a>`;
@@ -313,11 +313,11 @@ function afficherCollectionsFallback() {
   collections.forEach(col => {
     const couleurs = couleurCollection(col.nom);
     strip.innerHTML += `
-      <a href="#catalogue" onclick="naviguer('catalogue')" class="collection-tile">
-        <div class="collection-tile-bg" style="background: linear-gradient(135deg, ${couleurs[0]} 0%, ${couleurs[1]} 100%);"></div>
+      <a href="#catalogue" onclick="naviguer('catalogue')" class="collection-tile" style="--col-hex-1: ${couleurs[0]}; --col-hex-2: ${couleurs[1]};">
+        <div class="collection-tile-bg"></div>
         <div class="collection-tile-overlay"></div>
         <div class="collection-tile-content">
-          <span class="collection-tile-name">${col.nom}</span>
+          <span class="collection-tile-name">${col.nom.toUpperCase()}</span>
           <span class="collection-tile-slogan">${col.slogan}</span>
         </div>
       </a>`;
