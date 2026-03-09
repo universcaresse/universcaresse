@@ -1162,8 +1162,8 @@ tr:hover td { background: rgba(232,220,200,0.15); }
   .collection-entete-visuel { display: none; }
 .modal-produit { grid-template-columns: 1fr; }
   .modal-visuel-hex { min-height: 60px; }
-.modal-visuel-photo { min-height: 220px; }
-  .modal-visuel-photo img { object-position: center 30%; }
+.modal-visuel-photo { min-height: 220px; background: var(--col-hex); }
+  .modal-visuel-photo img { object-fit: contain; object-position: center center; }
   .modal-produit { max-height: 90vh; overflow-y: auto; }
 
   .admin-contenu { padding: 24px var(--padding-mobile); }
