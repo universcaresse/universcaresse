@@ -559,8 +559,9 @@ function fermerFicheRecette() {
 
 function basculerModeEditionRecette() {
   if (!recetteActive) return;
+  const id = recetteActive.recette_id;
   fermerFicheRecette();
-  modifierRecette(recetteActive.recette_id);
+  modifierRecette(id);
 }
 
 function supprimerRecetteActive() {
