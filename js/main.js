@@ -468,7 +468,7 @@ function carteProduit(p) {
       <div class="carte-visuel">
         <div class="carte-couleur" style="background: ${p.couleur_hex};">
           ${image}
-          ${p.image_url ? `<div class="carte-couleur-overlay" style="background: linear-gradient(to top, ${p.couleur_hex}cc 0%, ${p.couleur_hex}44 40%, transparent 70%);"></div>` : ''}
+          ${p.image_url ? `<div class="carte-couleur-overlay" style="background: linear-gradient(to top, ${p.couleur_hex}90 0%, ${p.couleur_hex}44 40%, transparent 70%);"></div>` : ''}
           ${!p.image_url ? `<div class="carte-photo-placeholder">
 
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
