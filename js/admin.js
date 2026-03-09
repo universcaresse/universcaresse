@@ -386,43 +386,76 @@ async function chargerRecettes() {
   if (!donneesRecettes.length) { vide.style.display = 'block'; return; }
 
   grille.innerHTML = '';
-  donneesRecettes.forEach(rec => {
-    const couleur = rec.couleur_hex || '#8b8680';
-    const div = document.createElement('div');
-    div.className = 'recette-carte';
-     
-   div.style.cursor = 'pointer';
-    div.onclick = () => ouvrirFicheRecette(rec.recette_id);
-    div.innerHTML = `
-       
-      <div class="recette-visuel">
-        <div class="recette-couleur" style="background:${couleur}">
-          <div class="recette-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <rect x="3" y="3" width="18" height="18" rx="2"/>
-              <circle cx="8.5" cy="8.5" r="1.5"/>
-              <polyline points="21 15 16 10 5 21"/>
-            </svg>
-            Photo à venir
-          </div>
-          <div class="recette-dot" style="background:${couleur}"></div>
-        </div>
-      </div>
+  grille.style.display = 'block';
 
-      
-    <div class="recette-infos">
-        <span class="recette-badge">${rec.collection || '—'}</span>
-        <span class="recette-statut-badge recette-statut-${rec.statut || 'test'}">${rec.statut === 'public' ? 'Public' : 'Test'}</span>
-        <div class="recette-nom">${rec.nom || '—'}</div>
-        <div class="recette-ligne">${rec.ligne || ''}</div>
-        <div class="recette-bas">
-          <span class="recette-prix">${rec.prix_vente ? formaterPrix(rec.prix_vente) : '—\u00a0$'}</span>
-          ${rec.format ? `<span class="recette-format">${rec.format}</span>` : ''}
-        </div>
-      </div>`;
-    grille.appendChild(div);
+  const parCollection = {};
+  const ordreCollections = [];
+  donneesRecettes.forEach(rec => {
+    const col = rec.collection || '—';
+    if (!parCollection[col]) { parCollection[col] = {}; ordreCollections.push(col); }
+    const ligne = rec.ligne || '';
+    if (!parCollection[col][ligne]) parCollection[col][ligne] = [];
+    parCollection[col][ligne].push(rec);
   });
-grille.style.display = 'grid';
+
+  ordreCollections.forEach(col => {
+    const secCol = document.createElement('div');
+    secCol.className = 'recette-section-collection';
+    secCol.dataset.collection = col;
+    secCol.innerHTML = `<div class="recette-collection-titre">${col.toUpperCase()}</div>`;
+
+    const lignes = parCollection[col];
+    Object.keys(lignes).forEach(ligne => {
+      const secLigne = document.createElement('div');
+      secLigne.className = 'recette-section-ligne';
+      secLigne.dataset.ligne = ligne;
+      if (ligne) {
+        secLigne.innerHTML = `<div class="recette-ligne-titre">${ligne.toUpperCase()}</div>`;
+      }
+      const grilleInner = document.createElement('div');
+      grilleInner.className = 'recettes-grille';
+
+      lignes[ligne].forEach(rec => {
+        const couleur = rec.couleur_hex || 'var(--gris)';
+        const div = document.createElement('div');
+        div.className = 'recette-carte';
+        div.onclick = () => ouvrirFicheRecette(rec.recette_id);
+        div.style.setProperty('--col-hex', couleur);
+        div.innerHTML = `
+          <div class="recette-visuel">
+            <div class="recette-couleur">
+              ${rec.image_url
+                ? `<img src="${rec.image_url}" alt="${rec.nom}" onerror="this.style.display='none'">`
+                : `<div class="recette-photo-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <rect x="3" y="3" width="18" height="18" rx="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    Photo à venir
+                  </div>`}
+              <div class="recette-dot"></div>
+            </div>
+          </div>
+          <div class="recette-infos">
+            <span class="recette-badge">${rec.collection || '—'}</span>
+            <span class="recette-statut-badge recette-statut-${rec.statut || 'test'}">${rec.statut === 'public' ? 'Public' : 'Test'}</span>
+            <div class="recette-nom">${rec.nom || '—'}</div>
+            <div class="recette-ligne">${rec.ligne || ''}</div>
+            <div class="recette-bas">
+              <span class="recette-prix">${rec.prix_vente ? formaterPrix(rec.prix_vente) : '—\u00a0$'}</span>
+              ${rec.format ? `<span class="recette-format">${rec.format}</span>` : ''}
+            </div>
+          </div>`;
+        grilleInner.appendChild(div);
+      });
+
+      secLigne.appendChild(grilleInner);
+      secCol.appendChild(secLigne);
+    });
+
+    grille.appendChild(secCol);
+  });
   peuplerFiltresRecettes();
 }
 
