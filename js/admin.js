@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const dateField = document.getElementById('nf-date');
   if (dateField) dateField.value = new Date().toISOString().split('T')[0];
   initBurgerAdmin();
-  chargerCollections();
+  await chargerCollections();
 });
 
 // ─── NAVIGATION SIDEBAR ───
