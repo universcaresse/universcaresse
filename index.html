@@ -194,7 +194,7 @@
       Chargement des collections…
     </div>
 
-    <div class="catalogue-body" id="catalogue-body" style="display:none"></div>
+    <div class="catalogue-body cache" id="catalogue-body"></div>
 
   </section>
 
@@ -401,14 +401,14 @@ async function chargerCatalogue() {
 
 function afficherErreurCatalogue(msg) {
   const el = document.getElementById('chargement');
-  if (el) el.innerHTML = `<p style="color:var(--gris);font-family:'DM Sans',sans-serif;">${msg}</p>`;
+  if (el) el.innerHTML = `<p class="chargement-erreur">${msg}</p>`;
 }
 
 function construireCatalogue() {
   const chargement = document.getElementById('chargement');
   const body = document.getElementById('catalogue-body');
-  if (chargement) chargement.style.display = 'none';
-  if (body) body.style.display = 'block';
+if (chargement) chargement.classList.add('cache');
+if (body) body.classList.remove('cache');
 
   const parCollection = {};
   donneescatalogue.forEach(p => {
@@ -446,7 +446,7 @@ function construireCatalogue() {
           <p class="collection-entete-desc">${infos.desc_collection || ''}</p>
         </div>
         <div class="collection-entete-visuel">
-          <div class="collection-entete-bg" style="background: linear-gradient(135deg, ${infos.couleur_hex}cc, ${infos.couleur_hex}88);">
+          <div class="collection-entete-bg" style="--col-hex: ${infos.couleur_hex};">
             ${infos.image_collection
               ? `<img src="${infos.image_collection}" alt="${col}" onerror="this.style.display='none'">`
               : `<span class="entete-visuel-placeholder">Photo ambiance<br>à venir</span>`}
