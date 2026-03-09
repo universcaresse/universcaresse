@@ -811,6 +811,7 @@ tr:hover td { background: rgba(232,220,200,0.15); }
 .filtres-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
 .filtre-select { width: auto; min-width: 180px; }
 .filtre-recherche { width: auto; min-width: 200px; }
+.filtre-label { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--gris); white-space: nowrap; }
 /* ═══════════════════════════════════════
    ADMIN — CARTES RECETTES
    ═══════════════════════════════════════ */
