@@ -195,9 +195,20 @@ function afficherModePublic() {
 
 // ─── NAVIGATION MOBILE ───
 function initNav() {
+  let dernierScroll = 0;
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('nav');
     if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+    const burger = document.getElementById('burger');
+    if (burger && window.innerWidth <= 900) {
+      const scrollActuel = window.scrollY;
+      if (scrollActuel > dernierScroll && scrollActuel > 60) {
+        burger.classList.add('cache-scroll');
+      } else {
+        burger.classList.remove('cache-scroll');
+      }
+      dernierScroll = scrollActuel;
+    }
   });
 }
 
