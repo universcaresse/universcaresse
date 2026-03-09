@@ -36,7 +36,6 @@
       <div class="modal-collection" id="modal-collection"></div>
       <div class="modal-nom" id="modal-nom"></div>
       <div class="modal-ligne" id="modal-ligne"></div>
-      <p class="modal-desc-ligne" id="modal-desc-ligne"></p>
       <p class="modal-desc" id="modal-desc"></p>
       <div class="modal-formats-titre" id="modal-formats-titre">Format disponible</div>
       <div class="modal-formats" id="modal-formats"></div>
@@ -439,6 +438,28 @@ if (body) body.classList.remove('cache');
     const section = document.createElement('div');
     section.className = 'collection-section';
     section.dataset.collection = col;
+
+    const parLigne = {};
+    const ordreLignes = [];
+    produits.forEach(p => {
+      const ligne = p.ligne || '';
+      if (!parLigne[ligne]) { parLigne[ligne] = []; ordreLignes.push(ligne); }
+      parLigne[ligne].push(p);
+    });
+
+    const lignesHTML = ordreLignes.map(ligne => {
+      const prods = parLigne[ligne];
+      const descLigne = prods[0].desc_ligne || '';
+      return `
+        <div class="ligne-groupe">
+          ${ligne ? `<div class="ligne-groupe-entete">
+            <div class="ligne-groupe-nom">${ligne}</div>
+            ${descLigne ? `<p class="ligne-groupe-desc">${descLigne}</p>` : ''}
+          </div>` : ''}
+          <div class="produits-grille">${prods.map(p => carteProduit(p)).join('')}</div>
+        </div>`;
+    }).join('');
+
     section.innerHTML = `
       <div class="collection-entete">
         <div>
@@ -454,7 +475,7 @@ if (body) body.classList.remove('cache');
           </div>
         </div>
       </div>
-      <div class="produits-grille">${produits.map(p => carteProduit(p)).join('')}</div>`;
+      ${lignesHTML}`;
     body.appendChild(section);
   });
 }

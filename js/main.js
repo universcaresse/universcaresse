@@ -523,8 +523,6 @@ function ouvrirModal(produit) {
   document.getElementById('modal-nom').textContent = produit.nom;
   document.getElementById('modal-collection').textContent = produit.collection;
   document.getElementById('modal-ligne').textContent = produit.ligne;
-  const modalDescLigne = document.getElementById('modal-desc-ligne');
-  if (modalDescLigne) modalDescLigne.textContent = produit.desc_ligne || '';
   document.getElementById('modal-desc').textContent = produit.description;
   const hex = document.getElementById('modal-visuel-hex');
   const photo = document.getElementById('modal-visuel-photo');
