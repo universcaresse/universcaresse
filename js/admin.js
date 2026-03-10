@@ -1398,7 +1398,7 @@ function onChangeFournisseur() {
   const champ = document.getElementById('facture-fournisseur-nouveau');
   if (!sel || !champ) return;
   champ.classList.toggle('cache', sel.value !== '__nouveau__');
-  if (sel.value === '__nouveau__') champ.focus();
+  if (sel.value === '__nouveau__' && window.innerWidth > 900) champ.focus();
 }
 
 function onChangeType() {
