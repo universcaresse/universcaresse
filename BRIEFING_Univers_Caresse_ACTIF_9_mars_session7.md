@@ -561,6 +561,17 @@ En bas de la sidebar, après `.sidebar-groupe` Système :
 - Densités : champ `marge_perte_pct` ajouté dans formulaire + tableau ✅
 - Densités : rangées cliquables → `modifierDensite(type)` ✅
 - `saveDensity` et `addDensityType` dans `Code.gs` : écriture colonne 4 `marge_perte_pct` ✅
+- Modal produit mobile : `.modal-produit` grille 2 colonnes en haut + texte pleine largeur en bas ✅
+- Modal produit mobile : `object-position: center bottom` sur la photo ✅
+- Modal produit mobile : `max-height: 90vh; overflow-y: auto` ✅
+- Cartes "Bon à savoir" : masquées automatiquement si titre vide dans le Sheet ✅
+- S'applique aux engagements (01-04) ET conservation, cure, usage, commande, demande ✅
+- Mode saisonnier (Noël) : ajouté à la liste À FAIRE ✅
+- Nav admin desktop : menu déplacé à droite avec `margin-left: auto` ✅
+- Nav admin desktop : "Site public" et "Déconnexion" ajoutés dans le dropdown Système ✅
+- `.form-body` : padding haut ajouté — `padding: 28px 28px 28px` ✅
+- `.form-control` : padding ajusté — `padding: 14px 14px 10px` ✅
+
 
 ## 🔜 À FAIRE
 
