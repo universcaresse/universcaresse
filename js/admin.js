@@ -893,7 +893,8 @@ function supprimerRecette(id) {
       await chargerRecettes();
     } else {
       afficherMsg('recettes', 'Erreur.', 'erreur');
-  }
+    }
+  });
 }
 
 /* ════════════════════════════════
