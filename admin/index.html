@@ -282,7 +282,7 @@
       <div class="form-panel" id="form-collections">
           <div class="form-panel-header">
             <div class="form-panel-titre" id="form-collections-titre">Nouvelle collection</div>
-            <div style="display:flex;gap:8px;">
+            <div class="td-actions">
               <button class="btn btn-sm btn-outline" id="fc-toggle-mode" onclick="basculerModeFormCollection()">+ Ajouter une ligne</button>
               <button class="btn btn-sm btn-outline" onclick="fermerFormCollection()">Fermer</button>
             </div>
@@ -326,7 +326,7 @@
             </div>
 
             <!-- BLOC LIGNE (caché par défaut) -->
-            <div id="fc-bloc-ligne" style="display:none;">
+            <div id="fc-bloc-ligne" class="cache">
               <div class="form-grille">
                 <div class="form-groupe">
                   <label class="form-label">Collection</label>
@@ -359,7 +359,7 @@
                 <div class="form-groupe col-plein" id="zone-ingredients-base">
                   <label class="form-label">Ingrédients de base</label>
                   <div id="liste-ingredients-base"></div>
-                  <button type="button" class="btn btn-secondary" style="margin-top:8px" onclick="ajouterIngredientBase()">+ Ajouter un ingrédient</button>
+                  <button type="button" class="btn btn-secondary btn-ajouter-ingredient" onclick="ajouterIngredientBase()">+ Ajouter un ingrédient</button>
                 </div>
               </div>
             </div>
@@ -373,7 +373,7 @@
         </div>
         <div class="chargement" id="loading-collections"><span class="spinner"></span>Chargement...</div>
         <div id="contenu-collections"></div>
-        <div class="vide" id="vide-collections" style="display:none">
+        <div class="vide cache" id="vide-collections">
           <div class="vide-titre">Aucune collection</div>
           <div class="vide-desc">Créez votre première entrée</div>
         </div>
@@ -508,8 +508,8 @@
           </div>
         </div>
         <div class="chargement" id="loading-recettes"><span class="spinner"></span>Chargement...</div>
-        <div class="recettes-grille" id="grille-recettes" style="display:none"></div>
-        <div class="vide" id="vide-recettes" style="display:none">
+        <div class="recettes-grille cache" id="grille-recettes"></div>
+        <div class="vide cache" id="vide-recettes">
           <div class="vide-titre">Aucune recette</div>
           <div class="vide-desc">Créez votre première recette</div>
         </div>
@@ -579,7 +579,7 @@
               <option value=""></option>
             </select>
             <input type="text" id="facture-fournisseur-nouveau" class="form-ctrl"
-                   style="display:none; margin-top:8px;" autocomplete="off">
+                   class="cache" autocomplete="off">
           </div>
 
         </div>
@@ -593,15 +593,15 @@
   <!-- ══════════════════════════════
        ÉTAPE 2 — ITEMS
   ══════════════════════════════ -->
-  <div id="wizard-step-2" class="wizard-step" style="display:none;">
+  <div id="wizard-step-2" class="wizard-step cache">
 
     <!-- Bannière facture active -->
-    <div id="facture-banniere" class="facture-active-banner" style="display:none;">
+    <div id="facture-banniere" class="facture-active-banner cache">
       <div>
         <div class="facture-active-titre">Facture <span id="banniere-numero"></span></div>
         <div class="facture-active-info"><span id="banniere-fournisseur"></span></div>
       </div>
-      <div style="text-align:right;">
+      <div class="text-right">
         <div class="facture-sous-total-label">Sous-total</div>
         <div class="facture-sous-total" id="banniere-sous-total">0,00 $</div>
       </div>
@@ -629,7 +629,7 @@
               <option value=""></option>
             </select>
             <input type="text" id="item-ingredient-nouveau" class="form-ctrl"
-                   style="display:none; margin-top:8px;" autocomplete="off">
+                   class="cache" autocomplete="off">
           </div>
 
           <div class="form-groupe">
@@ -670,10 +670,10 @@
     </div>
 
     <!-- Tableau des items -->
-    <div id="items-tableau-zone" style="margin-top:24px;"></div>
+    <div id="items-tableau-zone" class="mt-24"></div>
 
     <!-- Navigation -->
-    <div class="form-actions" style="margin-top:24px;">
+    <div class="form-actions mt-24">
       <button class="btn btn-outline" onclick="wizardEtape1()">← Retour</button>
       <button class="btn btn-primary" onclick="wizardEtape3()">Suivant →</button>
     </div>
@@ -683,7 +683,7 @@
   <!-- ══════════════════════════════
        ÉTAPE 3 — FINALISATION
   ══════════════════════════════ -->
-  <div id="wizard-step-3" class="wizard-step" style="display:none;">
+  <div id="wizard-step-3" class="wizard-step cache">
 
     <div class="finalisation-panel">
       <div class="finalisation-titre">Finalisation de la facture</div>
@@ -724,7 +724,7 @@
         </div>
       </div>
 
-      <div class="form-actions" style="margin-top:28px;">
+      <div class="form-actions mt-24">
         <button class="btn btn-outline" onclick="wizardEtape2()">← Retour</button>
         <button class="btn btn-finaliser" onclick="finaliserFacture()">Finaliser</button>
       </div>
@@ -744,28 +744,28 @@
           </div>
         </div>
         <div class="msg-zone" id="msg-factures"></div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;align-items:center">
-          <select class="form-ctrl" id="filtre-fournisseur" style="width:auto;min-width:180px" onchange="filtrerFactures()">
+        <div class="filtres-bar">
+          <select class="form-ctrl filtre-select" id="filtre-fournisseur" onchange="filtrerFactures()">
             <option value="">Tous les fournisseurs</option>
           </select>
-          <select class="form-ctrl" id="filtre-statut" style="width:auto;min-width:160px" onchange="filtrerFactures()">
+          <select class="form-ctrl filtre-select" id="filtre-statut" onchange="filtrerFactures()">
             <option value="">Tous les statuts</option>
             <option value="En cours">En cours</option>
             <option value="Finalisée">Finalisée</option>
           </select>
           <button class="btn btn-sm btn-outline" onclick="reinitialiserFiltres()">Réinitialiser</button>
-          <span id="factures-compte" style="font-family:'DM Sans',sans-serif;font-size:0.78rem;color:var(--gris);margin-left:auto"></span>
+          <span id="factures-compte" class="factures-compte"></span>
         </div>
         <div class="chargement" id="loading-factures"><span class="spinner"></span>Chargement...</div>
         <div class="tableau-wrap">
-          <table id="tableau-factures" style="display:none">
+          <table id="tableau-factures" class="cache">
             <thead>
               <tr><th>Numéro</th><th>Date</th><th>Fournisseur</th><th>TPS</th><th>TVQ</th><th>Total</th><th>Statut</th><th></th></tr>
             </thead>
             <tbody id="tbody-factures"></tbody>
           </table>
         </div>
-        <div class="vide" id="vide-factures" style="display:none">
+        <div class="vide cache" id="vide-factures">
           <div class="vide-titre">Aucune facture</div>
           <div class="vide-desc">Créez votre première facture</div>
         </div>
@@ -779,7 +779,7 @@
               <button class="btn btn-sm btn-outline" onclick="fermerModalFacture()">Fermer</button>
             </div>
             <div class="modal-admin-body">
-              <div class="chargement" id="loading-detail-facture" style="display:none"><span class="spinner"></span>Chargement...</div>
+              <div class="chargement cache" id="loading-detail-facture"><span class="spinner"></span>Chargement...</div>
               <div id="contenu-detail-facture"></div>
             </div>
           </div>
