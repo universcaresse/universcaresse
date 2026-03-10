@@ -308,7 +308,7 @@
                 </div>
                 <div class="form-groupe col-plein">
                   <label class="form-label">Description collection</label>
-                  <textarea class="form-ctrl" id="fc-desc-col"></textarea>
+                  <textarea class="form-ctrl" id="fc-desc-col" rows="5"></textarea>
                 </div>
                 <div class="form-groupe">
                   <label class="form-label">Couleur HEX</label>
@@ -402,7 +402,7 @@
             <option value="test">Test</option>
             <option value="public">Public</option>
           </select>
-          <label class="filtre-label">Par nom</label><input type="text" class="form-ctrl filtre-recherche" id="filtre-recette-nom" oninput="filtrerRecettes()">
+          <input type="text" class="form-ctrl filtre-recherche" id="filtre-recette-nom" oninput="filtrerRecettes()" placeholder="Par nom">
           <button class="btn btn-outline btn-sm" onclick="reinitialiserFiltresRecettes()">Réinitialiser</button>
         </div>
         <div class="form-panel" id="fiche-recette">
@@ -1095,6 +1095,18 @@
   <input type="password" id="input-mdp-admin" class="form-ctrl">
       <p id="erreur-mdp-admin" class="connexion-erreur"></p>
       <button class="btn btn-primary" onclick="validerConnexionAdmin()">Entrer</button>
+    </div>
+  </div>
+
+  <div class="modal-admin-overlay cache" id="modal-confirm">
+    <div class="modal-admin">
+      <div class="modal-admin-header">
+        <div class="modal-admin-titre" id="modal-confirm-message"></div>
+      </div>
+      <div class="modal-admin-body" style="display:flex;gap:12px;justify-content:flex-end;padding:16px">
+        <button class="btn btn-outline btn-sm" onclick="fermerModalConfirm()">Annuler</button>
+        <button class="btn btn-danger btn-sm" id="modal-confirm-btn">Confirmer</button>
+      </div>
     </div>
   </div>
 </body>

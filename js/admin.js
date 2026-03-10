@@ -251,6 +251,16 @@ function ouvrirFormCollection() {
   document.getElementById('form-collections').classList.add('visible');
   document.getElementById('fc-rang').focus();
 }
+function confirmerAction(message, callback) {
+  document.getElementById('modal-confirm-message').textContent = message;
+  document.getElementById('modal-confirm-btn').onclick = () => { fermerModalConfirm(); callback(); };
+  document.getElementById('modal-confirm').classList.remove('cache');
+}
+
+function fermerModalConfirm() {
+  document.getElementById('modal-confirm').classList.add('cache');
+}
+
 function fermerFormCollection() {
   document.getElementById('contenu-collections').classList.remove('cache');
   document.getElementById('form-collections').classList.remove('visible');
@@ -354,15 +364,16 @@ async function sauvegarderCollection() {
   }
 }
 
-async function supprimerLigne(rowIndex) {
-  if (!confirm('Supprimer cette ligne ?')) return;
-  const res = await appelAPIPost('deleteCollectionItem', { rowIndex });
-  if (res && res.success) {
-  afficherMsg('collections', 'Ligne supprimée.');
-    await chargerCollections();
-  } else {
-    afficherMsg('collections', 'Erreur.', 'erreur');
-  }
+function supprimerLigne(rowIndex) {
+  confirmerAction('Supprimer cette ligne ?', async () => {
+    const res = await appelAPIPost('deleteCollectionItem', { rowIndex });
+    if (res && res.success) {
+      afficherMsg('collections', 'Ligne supprimée.');
+      await chargerCollections();
+    } else {
+      afficherMsg('collections', 'Erreur.', 'erreur');
+    }
+  });
 }
 
 /* ════════════════════════════════
@@ -858,15 +869,15 @@ function rafraichirListeIngredientsBase() {
   `).join('');
 }
 
-async function supprimerRecette(id) {
-  if (!confirm('Supprimer cette recette ?')) return;
-  const res = await appelAPIPost('deleteRecette', { recette_id: id });
-  if (res && res.success) {
-    fermerFicheRecette();
-    afficherMsg('recettes', 'Recette supprimée.');
-    await chargerRecettes();
-  } else {
-    afficherMsg('recettes', 'Erreur.', 'erreur');
+function supprimerRecette(id) {
+  confirmerAction('Supprimer cette recette ?', async () => {
+    const res = await appelAPIPost('deleteRecette', { recette_id: id });
+    if (res && res.success) {
+      fermerFicheRecette();
+      afficherMsg('recettes', 'Recette supprimée.');
+      await chargerRecettes();
+    } else {
+      afficherMsg('recettes', 'Erreur.', 'erreur');
   }
 }
 
@@ -1025,8 +1036,8 @@ function reinitialiserFormProduit() {
   document.getElementById('btn-annuler-produit').classList.add('cache');
 }
 
-async function supprimerProduit(rowIndex) {
-  if (!confirm('Supprimer ce produit ?')) return;
+function supprimerProduit(rowIndex) {
+  confirmerAction('Supprimer ce produit ?', async () => {
   const res = await appelAPIPost('deleteProduct', { numeroFacture: factureActive.numero, rowIndex });
   if (res && res.success) {
     await rechargerProduits();
@@ -1036,23 +1047,24 @@ async function supprimerProduit(rowIndex) {
   }
 }
 
-async function finaliserFacture() {
-  if (!confirm('Finaliser cette facture ?')) return;
-  const st  = produitsFacture.reduce((acc, p) => acc + (p.prixTotal || 0), 0);
-  const tps = parseFloat(document.getElementById('nf-tps').value) || 0;
-  const tvq = parseFloat(document.getElementById('nf-tvq').value) || 0;
-  const res = await appelAPIPost('finalizeInvoice', {
-    numeroFacture: factureActive.numero,
-    sousTotal: st.toFixed(2),
-    tps:       tps.toFixed(2),
-    tvq:       tvq.toFixed(2)
+function finaliserFacture() {
+  confirmerAction('Finaliser cette facture ?', async () => {
+    const st  = produitsFacture.reduce((acc, p) => acc + (p.prixTotal || 0), 0);
+    const tps = parseFloat(document.getElementById('nf-tps').value) || 0;
+    const tvq = parseFloat(document.getElementById('nf-tvq').value) || 0;
+    const res = await appelAPIPost('finalizeInvoice', {
+      numeroFacture: factureActive.numero,
+      sousTotal: st.toFixed(2),
+      tps:       tps.toFixed(2),
+      tvq:       tvq.toFixed(2)
+    });
+    if (res && res.success) {
+      afficherMsg('nouvelle-facture', `Facture finalisée. Total\u00a0: ${formaterPrix(parseFloat(res.total))}`);
+      reinitialiserNouvelleFacture();
+    } else {
+      afficherMsg('nouvelle-facture', 'Erreur.', 'erreur');
+    }
   });
-  if (res && res.success) {
-    afficherMsg('nouvelle-facture', `Facture finalisée. Total\u00a0: ${formaterPrix(parseFloat(res.total))}`);
-    reinitialiserNouvelleFacture();
-  } else {
-    afficherMsg('nouvelle-facture', 'Erreur.', 'erreur');
-  }
 }
 
 function reinitialiserNouvelleFacture() {
@@ -1197,15 +1209,16 @@ function fermerModalFacture() {
   document.getElementById('modal-facture').classList.remove('ouvert');
 }
 
-async function supprimerFacture(numero) {
-  if (!confirm('Supprimer la facture ' + numero + ' et tous ses produits ?')) return;
-  const res = await appelAPIPost('deleteInvoice', { numeroFacture: numero });
-  if (res && res.success) {
-    afficherMsg('factures', 'Facture supprimée.');
-    chargerFactures();
-  } else {
-    afficherMsg('factures', 'Erreur lors de la suppression.', 'erreur');
-  }
+function supprimerFacture(numero) {
+  confirmerAction('Supprimer la facture ' + numero + ' et tous ses produits ?', async () => {
+    const res = await appelAPIPost('deleteInvoice', { numeroFacture: numero });
+    if (res && res.success) {
+      afficherMsg('factures', 'Facture supprimée.');
+      chargerFactures();
+    } else {
+      afficherMsg('factures', 'Erreur lors de la suppression.', 'erreur');
+    }
+  });
 }
 
 /* ════════════════════════════════
