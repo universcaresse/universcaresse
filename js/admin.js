@@ -247,10 +247,12 @@ function ouvrirFormCollection() {
   });
   ingredientsBase = [];
   rafraichirListeIngredientsBase();
+  document.getElementById('contenu-collections').classList.add('cache');
   document.getElementById('form-collections').classList.add('visible');
   document.getElementById('fc-rang').focus();
 }
 function fermerFormCollection() {
+  document.getElementById('contenu-collections').classList.remove('cache');
   document.getElementById('form-collections').classList.remove('visible');
 }
 
@@ -383,8 +385,7 @@ async function chargerRecettes() {
 
    const res = await appelAPI('getRecettes');
 
- loading.classList.add('cache');
-  if (!res || !res.success) { afficherMsg('recettes', 'Erreur.', 'erreur'); return; }
+ if (!res || !res.success) { loading.classList.add('cache'); afficherMsg('recettes', 'Erreur.', 'erreur'); return; }
   donneesRecettes = (res.recettes || []).sort((a, b) =>
     (parseInt(a.rang) || 99) - (parseInt(b.rang) || 99) ||
     (a.ligne || '').localeCompare(b.ligne || '') ||
@@ -654,12 +655,16 @@ function ouvrirFormRecette() {
   if (prevRecette) { prevRecette.src = ''; prevRecette.classList.add('cache'); }
   const apercuRecette = document.getElementById('fr-couleur-apercu');
   if (apercuRecette) apercuRecette.style.background = '';
+  document.getElementById('filtres-bar').classList.add('cache');
+  document.getElementById('grille-recettes').classList.add('cache');
   document.getElementById('form-recettes').classList.add('visible');
   document.getElementById('fr-nom').focus();
 }
 
 function fermerFormRecette() {
   document.getElementById('form-recettes').classList.remove('visible');
+  document.getElementById('filtres-bar').classList.remove('cache');
+  document.getElementById('grille-recettes').classList.remove('cache');
 }
 
 function modifierRecette(id) {
@@ -686,6 +691,8 @@ document.getElementById('fr-collection').value   = rec.collection || '';
   document.getElementById('fr-image-url').value    = rec.image_url || '';
   const preview = document.getElementById('fr-image-preview');
   if (preview) preview.innerHTML = rec.image_url ? `<img src="${rec.image_url}" class="photo-preview">` : '';
+  document.getElementById('filtres-bar').classList.add('cache');
+  document.getElementById('grille-recettes').classList.add('cache');
   document.getElementById('form-recettes').classList.add('visible');
   document.getElementById('fr-nom').focus();
 }
