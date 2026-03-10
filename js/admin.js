@@ -126,15 +126,15 @@ async function chargerCollections() {
   const loading = document.getElementById('loading-collections');
   const contenu = document.getElementById('contenu-collections');
   const vide    = document.getElementById('vide-collections');
-  loading.classList.remove('cache');
+  loading.style.display = 'block';
   contenu.innerHTML = '';
-  vide.classList.add('cache');
+  vide.style.display = 'none';
 
   const res = await appelAPI('getCollections');
-  loading.classList.add('cache');
+  loading.style.display = 'none';
   if (!res || !res.success) { afficherMsg('collections', 'Erreur lors du chargement.', 'erreur'); return; }
   donneesCollections = res.items || [];
-  if (!donneesCollections.length) { vide.classList.remove('cache'); return; }
+  if (!donneesCollections.length) { vide.style.display = 'block'; return; }
 
   const groupes = {};
   donneesCollections.forEach(item => {
@@ -227,8 +227,8 @@ function ouvrirFormCollection() {
   document.getElementById('form-collections-titre').textContent = 'Nouvelle collection';
   document.getElementById('fc-rowIndex').value = '';
   document.getElementById('fc-mode').value = 'collection';
-  document.getElementById('fc-bloc-collection').classList.remove('cache');
-  document.getElementById('fc-bloc-ligne').classList.add('cache');
+  document.getElementById('fc-bloc-collection').style.display = '';
+  document.getElementById('fc-bloc-ligne').style.display = 'none';
   document.getElementById('fc-toggle-mode').textContent = '+ Ajouter une ligne';
   ['fc-rang','fc-collection','fc-slogan','fc-desc-col','fc-couleur-hex','fc-photo-url',
    'fc-ligne','fc-format','fc-desc-ligne','fc-couleur-hex-ligne','fc-photo-url-ligne','fc-collection-ligne']
@@ -365,16 +365,16 @@ async function chargerRecettes() {
   const loading = document.getElementById('loading-recettes');
   const grille  = document.getElementById('grille-recettes');
   const vide    = document.getElementById('vide-recettes');
-  loading.classList.remove('cache');
-  grille.classList.add('cache');
-  vide.classList.add('cache');
+  loading.style.display = 'block';
+  grille.style.display  = 'none';
+  vide.style.display    = 'none';
   document.getElementById('filtre-recette-collection').value = '';
   document.getElementById('filtre-recette-ligne').innerHTML  = '<option value="">Toutes les lignes</option>';
   document.getElementById('filtre-recette-ligne').disabled   = true;
 
    const res = await appelAPI('getRecettes');
 
- loading.classList.add('cache');
+ loading.style.display = 'none';
   if (!res || !res.success) { afficherMsg('recettes', 'Erreur.', 'erreur'); return; }
   donneesRecettes = (res.recettes || []).sort((a, b) =>
     (parseInt(a.rang) || 99) - (parseInt(b.rang) || 99) ||
@@ -383,10 +383,10 @@ async function chargerRecettes() {
   );
   await chargerCollectionsPourSelecteur();
 
-  if (!donneesRecettes.length) { vide.classList.remove('cache'); return; }
+  if (!donneesRecettes.length) { vide.style.display = 'block'; return; }
 
   grille.innerHTML = '';
-  grille.classList.remove('cache');
+  grille.style.display = 'block';
 
   const parCollection = {};
   const ordreCollections = [];
@@ -508,7 +508,7 @@ function filtrerRecettes() {
     carte.classList.toggle('cache', !ok);
     if (ok) visible++;
   });
-  vide.classList.toggle('cache', visible !== 0);
+  vide.style.display = visible === 0 ? 'block' : 'none';
 }
 
 function reinitialiserFiltresRecettes() {
@@ -764,15 +764,15 @@ function basculerModeFormCollection() {
 
   if (mode.value === 'collection') {
     mode.value = 'ligne';
-    blocCol.classList.add('cache');
-    blocLig.classList.remove('cache');
+    blocCol.style.display = 'none';
+    blocLig.style.display = '';
     titre.textContent = 'Nouvelle ligne — ' + (col || '');
     toggle.textContent = '← Retour collection';
     document.getElementById('fc-collection-ligne').value = col;
   } else {
     mode.value = 'collection';
-    blocCol.classList.remove('cache');
-    blocLig.classList.add('cache');
+    blocCol.style.display = '';
+    blocLig.style.display = 'none';
     titre.textContent = document.getElementById('fc-rowIndex').value ? 'Modifier la collection' : 'Nouvelle collection';
     toggle.textContent = '+ Ajouter une ligne';
   }
@@ -869,8 +869,8 @@ async function creerFacture() {
   if (res && res.success) {
     factureActive = { numero, date, fournisseur };
     produitsFacture = [];
-    document.getElementById('etape1-facture').classList.add('cache');
-    document.getElementById('etape2-facture').classList.remove('cache');
+    document.getElementById('etape1-facture').style.display = 'none';
+    document.getElementById('etape2-facture').style.display = 'block';
     document.getElementById('nf-entete-titre').textContent = 'Facture ' + numero;
     document.getElementById('nf-entete-info').textContent  = date + ' — ' + fournisseur;
     mettreAJourTotaux(0);
@@ -932,7 +932,7 @@ function afficherProduits() {
   const tableau = document.getElementById('tableau-produits');
   const vide    = document.getElementById('vide-produits');
   const tbody   = document.getElementById('tbody-produits');
-  if (!produitsFacture.length) { tableau.classList.add('cache'); vide.classList.remove('cache'); return; }
+  if (!produitsFacture.length) { tableau.style.display = 'none'; vide.style.display = 'block'; return; }
   tbody.innerHTML = '';
   produitsFacture.forEach(p => {
     const tr = document.createElement('tr');
@@ -952,8 +952,8 @@ function afficherProduits() {
       </td>`;
     tbody.appendChild(tr);
   });
-  vide.classList.add('cache');
-  tableau.classList.remove('cache');
+  vide.style.display  = 'none';
+  tableau.style.display = 'table';
 }
 
 function mettreAJourTotaux(sousTotal) {
@@ -982,7 +982,7 @@ function modifierProduit(rowIndex) {
   document.getElementById('fp-type').value          = p.type || '';
   document.getElementById('fp-ingredient').value    = p.ingredient || '';
   calculerPrixParG();
-  document.getElementById('btn-annuler-produit').classList.remove('cache');
+  document.getElementById('btn-annuler-produit').style.display = 'inline-flex';
   document.getElementById('fp-nom').focus();
 }
 
@@ -993,7 +993,7 @@ function reinitialiserFormProduit() {
     .forEach(id => { const e = document.getElementById(id); if (e) e.value = ''; });
   document.getElementById('fp-contenu-unite').value = 'g';
   document.getElementById('fp-type').value = '';
-  document.getElementById('btn-annuler-produit').classList.add('cache');
+  document.getElementById('btn-annuler-produit').style.display = 'none';
 }
 
 async function supprimerProduit(rowIndex) {
@@ -1029,8 +1029,8 @@ async function finaliserFacture() {
 function reinitialiserNouvelleFacture() {
   factureActive = null;
   produitsFacture = [];
-  document.getElementById('etape2-facture').classList.add('cache');
-  document.getElementById('etape1-facture').classList.remove('cache');
+  document.getElementById('etape2-facture').style.display = 'none';
+  document.getElementById('etape1-facture').style.display = 'block';
   ['nf-numero','nf-fournisseur','nf-tps','nf-tvq'].forEach(id => {
     document.getElementById(id).value = '';
   });
@@ -1046,13 +1046,13 @@ async function chargerFactures() {
   const loading = document.getElementById('loading-factures');
   const tableau = document.getElementById('tableau-factures');
   const vide    = document.getElementById('vide-factures');
-  loading.classList.remove('cache');
-  tableau.classList.add('cache');
-  vide.classList.add('cache');
+  loading.style.display = 'block';
+  tableau.style.display = 'none';
+  vide.style.display    = 'none';
 
   const res = await appelAPI('getInvoicesListWithFilters');
 
-loading.classList.add('cache');
+loading.style.display = 'none';
   if (!res || !res.invoices) { afficherMsg('factures', 'Erreur lors du chargement.', 'erreur'); return; }
   toutesFactures = res.invoices || [];
 
@@ -1092,7 +1092,7 @@ function afficherFactures(liste) {
 
   compte.textContent = liste.length + ' facture' + (liste.length > 1 ? 's' : '');
 
-  if (!liste.length) { tableau.classList.add('cache'); vide.classList.remove('cache'); return; }
+  if (!liste.length) { tableau.style.display = 'none'; vide.style.display = 'block'; return; }
 
   tbody.innerHTML = '';
   const triees = [...liste].sort((a, b) => b.dateRaw.localeCompare(a.dateRaw));
@@ -1119,8 +1119,8 @@ function afficherFactures(liste) {
     tbody.appendChild(tr);
   });
 
-  vide.classList.add('cache');
-  tableau.classList.remove('cache');
+  vide.style.display    = 'none';
+  tableau.style.display = 'table';
 }
 
 async function voirDetailFacture(numero, date, fournisseur) {
@@ -1129,10 +1129,10 @@ async function voirDetailFacture(numero, date, fournisseur) {
   document.getElementById('modal-facture-titre').textContent = 'Facture ' + numero;
   document.getElementById('modal-facture-info').textContent  = date + ' — ' + fournisseur;
   document.getElementById('contenu-detail-facture').innerHTML = '';
-  document.getElementById('loading-detail-facture').classList.remove('cache');
+  document.getElementById('loading-detail-facture').style.display = 'block';
 
   const res = await appelAPIPost('getInvoiceProducts', { numeroFacture: numero });
-  document.getElementById('loading-detail-facture').classList.add('cache');
+  document.getElementById('loading-detail-facture').style.display = 'none';
 
   if (!res || !res.success || !res.products.length) {
     document.getElementById('contenu-detail-facture').innerHTML = '<div class="vide"><div class="vide-titre">Aucun produit</div></div>';
@@ -1186,19 +1186,19 @@ async function chargerInventaire() {
   const loading = document.getElementById('loading-inventaire');
   const contenu = document.getElementById('contenu-inventaire');
   const vide    = document.getElementById('vide-inventaire');
-  loading.classList.remove('cache');
+  loading.style.display = 'block';
   contenu.innerHTML = '';
-  vide.classList.add('cache');
+  vide.style.display = 'none';
 
   const res = await appelAPI('getInventory');
 
 
- loading.classList.add('cache');
+ loading.style.display = 'none';
   if (!res || !res.success) { afficherMsg('inventaire', 'Erreur.', 'erreur'); return; }
 
   const inv   = res.inventory || {};
   const types = Object.keys(inv).sort();
-  if (!types.length) { vide.classList.remove('cache'); return; }
+  if (!types.length) { vide.style.display = 'block'; return; }
 
   let html = '';
   let total = 0;
@@ -1254,18 +1254,18 @@ async function chargerDensites() {
   const loading = document.getElementById('loading-densites');
   const tableau = document.getElementById('tableau-densites');
   const vide    = document.getElementById('vide-densites');
-  loading.classList.remove('cache');
-  tableau.classList.add('cache');
-  vide.classList.add('cache');
+  loading.style.display = 'block';
+  tableau.style.display = 'none';
+  vide.style.display    = 'none';
 
   const res = await appelAPI('getDensities');
 
 
-loading.classList.add('cache');
+loading.style.display = 'none';
   if (!res || !Array.isArray(res.densities)) { afficherMsg('densites', 'Erreur.', 'erreur'); return; }
   donneesDensites = res.densities;
 
-  if (!donneesDensites.length) { vide.classList.remove('cache'); return; }
+  if (!donneesDensites.length) { vide.style.display = 'block'; return; }
 
   const tbody = document.getElementById('tbody-densites');
   tbody.innerHTML = '';
@@ -1285,7 +1285,7 @@ loading.classList.add('cache');
       </td>`;
     tbody.appendChild(tr);
   });
-  tableau.classList.remove('cache');
+  tableau.style.display = 'table';
 }
 
 function ouvrirFormDensite() {
@@ -1397,7 +1397,7 @@ function onChangeFournisseur() {
   const sel   = document.getElementById('facture-fournisseur');
   const champ = document.getElementById('facture-fournisseur-nouveau');
   if (!sel || !champ) return;
-  champ.classList.toggle('cache', sel.value !== '__nouveau__');
+  champ.style.display = sel.value === '__nouveau__' ? 'block' : 'none';
   if (sel.value === '__nouveau__') champ.focus();
 }
 
@@ -1420,14 +1420,14 @@ function onChangeIngredient() {
   const sel   = document.getElementById('item-ingredient');
   const champ = document.getElementById('item-ingredient-nouveau');
   if (!sel || !champ) return;
-  champ.classList.toggle('cache', sel.value !== '__nouveau__');
+  champ.style.display = sel.value === '__nouveau__' ? 'block' : 'none';
   if (sel.value === '__nouveau__') champ.focus();
 }
 
 function wizardEtape1() {
-  document.getElementById('wizard-step-1').classList.remove('cache');
-  document.getElementById('wizard-step-2').classList.add('cache');
-  document.getElementById('wizard-step-3').classList.add('cache');
+  document.getElementById('wizard-step-1').style.display = 'block';
+  document.getElementById('wizard-step-2').style.display = 'none';
+  document.getElementById('wizard-step-3').style.display = 'none';
   document.getElementById('wizard-etape-1').classList.add('active');
   document.getElementById('wizard-etape-1').classList.remove('complete');
   document.getElementById('wizard-etape-2').classList.remove('active', 'complete');
@@ -1459,9 +1459,9 @@ async function wizardEtape2() {
     }
   }
 
-  document.getElementById('wizard-step-1').classList.add('cache');
-  document.getElementById('wizard-step-2').classList.remove('cache');
-  document.getElementById('wizard-step-3').classList.add('cache');
+  document.getElementById('wizard-step-1').style.display = 'none';
+  document.getElementById('wizard-step-2').style.display = 'block';
+  document.getElementById('wizard-step-3').style.display = 'none';
   document.getElementById('wizard-etape-1').classList.remove('active');
   document.getElementById('wizard-etape-1').classList.add('complete');
   document.getElementById('wizard-etape-2').classList.add('active');
@@ -1475,9 +1475,9 @@ function wizardEtape3() {
     afficherMsg('item-msg', 'Ajoutez au moins un item avant de continuer.', 'erreur');
     return;
   }
-  document.getElementById('wizard-step-1').classList.add('cache');
-  document.getElementById('wizard-step-2').classList.add('cache');
-  document.getElementById('wizard-step-3').classList.remove('cache');
+  document.getElementById('wizard-step-1').style.display = 'none';
+  document.getElementById('wizard-step-2').style.display = 'none';
+  document.getElementById('wizard-step-3').style.display = 'block';
   document.getElementById('wizard-etape-2').classList.remove('active');
   document.getElementById('wizard-etape-2').classList.add('complete');
   document.getElementById('wizard-etape-3').classList.add('active');
@@ -1489,7 +1489,7 @@ function wizardEtape3() {
 function afficherBanniereFacture() {
   const banniere = document.getElementById('facture-banniere');
   if (!banniere || !factureActive) return;
-  banniere.classList.remove('cache');
+  banniere.style.display = 'flex';
   const sousTotal = produitsFacture.reduce((s, i) => s + i.prixTotal, 0);
   document.getElementById('banniere-numero').textContent     = factureActive.numeroFacture;
   document.getElementById('banniere-fournisseur').textContent = factureActive.fournisseur;
@@ -1549,7 +1549,7 @@ function reinitialiserFormulaireItem() {
   ['item-type','item-ingredient','item-format-qte','item-prix-unitaire','item-quantite','item-notes']
     .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
   const champNouv = document.getElementById('item-ingredient-nouveau');
-  if (champNouv) { champNouv.classList.add('cache'); champNouv.value = ''; }
+  if (champNouv) { champNouv.style.display = 'none'; champNouv.value = ''; }
   document.getElementById('item-format-unite').value = 'g';
   document.getElementById('item-ingredient').innerHTML = '<option value=""></option>';
 }
@@ -1632,7 +1632,7 @@ if (!res || !res.success) {
     document.getElementById('facture-numero').value = '';
     document.getElementById('facture-date').value   = new Date().toISOString().split('T')[0];
     document.getElementById('facture-fournisseur').value = '';
-    document.getElementById('facture-banniere').classList.add('cache');
+    document.getElementById('facture-banniere').style.display = 'none';
     document.getElementById('items-tableau-zone').innerHTML = '';
     document.getElementById('final-total-affichage').textContent = '0,00 $';
   }, 5000);
@@ -1655,17 +1655,17 @@ function validerConnexionAdmin() {
 async function chargerContenuSite() {
   const loading = document.getElementById('loading-contenu-site');
   const corps = document.getElementById('corps-contenu-site');
-  if (loading) loading.classList.remove('cache');
-  if (corps) corps.classList.add('cache');
+  if (loading) loading.style.display = 'flex';
+  if (corps) corps.style.display = 'none';
  const data = await appelAPI('getContenu');
-if (loading) loading.classList.add('cache');
+if (loading) loading.style.display = 'none';
   if (!data || !data.success || !data.contenu) { afficherMsg('msg-contenu-site', 'Erreur de chargement.', 'erreur'); return; }
   const c = data.contenu;
   Object.keys(c).forEach(cle => {
     const el = document.getElementById('cs-' + cle);
     if (el) el.value = c[cle];
   });
-  if (corps) corps.classList.remove('cache');
+  if (corps) corps.style.display = 'block';
 }
 
 async function sauvegarderContenuSite() {
