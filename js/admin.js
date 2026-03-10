@@ -1256,7 +1256,7 @@ async function chargerInventaire() {
         <div class="tableau-wrap">
           <table>
             <thead>
-              <tr><th>Ingrédient</th><th>Fournisseur</th><th>Unités</th><th>Format</th><th>Total (g)</th><th>Prix/g</th><th>Valeur</th></tr>
+              <tr><th>Ingrédient</th><th>Fournisseur</th><th>Unités</th><th>Format</th><th>Prix/g</th><th>Valeur</th></tr>
             </thead>
             <tbody>`;
     Object.keys(ings).sort().forEach(nom => {
@@ -1269,7 +1269,6 @@ async function chargerInventaire() {
             <td style="color:var(--gris);font-size:0.8rem">${fourn}</td>
             <td>${d.unites}</td>
             <td style="color:var(--gris);font-size:0.78rem">${d.format || '—'}</td>
-            <td>${Math.round(d.grammes).toLocaleString('fr-CA')}\u00a0g</td>
             <td style="color:var(--gris);font-size:0.78rem">${d.prixParG ? d.prixParG.toFixed(4) + ' $/g' : '—'}</td>
             <td style="color:var(--primary);font-weight:500">${formaterPrix(d.valeur)}</td>
           </tr>`;
