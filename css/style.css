@@ -1028,7 +1028,8 @@ tr:hover td { background: rgba(232,220,200,0.15); }
    RESPONSIVE
    ═══════════════════════════════════════ */
 @media (max-width: 900px) {
-  nav { display: none; }
+  nav { background: none; box-shadow: none; border: none; }
+  nav .nav-actions { display: none; }
  .burger-flottant {
     display: flex;
     position: fixed; top: 16px; right: 24px; z-index: 200;
