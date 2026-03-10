@@ -422,7 +422,7 @@ async function chargerRecettes() {
         secLigne.innerHTML = `<div class="recette-ligne-titre">${ligne.toUpperCase()}</div>`;
       }
       const grilleInner = document.createElement('div');
-      grilleInner.className = 'recettes-grille';
+      grilleInner.className = 'recette-cartes-grille';
 
       lignes[ligne].forEach(rec => {
         const couleur = rec.couleur_hex || 'var(--gris)';

@@ -860,7 +860,8 @@ tr:hover td { background: rgba(232,220,200,0.15); }
 /* ═══════════════════════════════════════
    ADMIN — CARTES RECETTES
    ═══════════════════════════════════════ */
-.recettes-grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; }
+.recettes-grille { display: block; }
+.recette-cartes-grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; }
 .recette-carte { background: white; transition: transform 0.3s, box-shadow 0.3s; position: relative; display: flex; flex-direction: column; }
 .recette-carte:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(90,138,58,0.1); }
 .recette-visuel { aspect-ratio: 1; position: relative; overflow: hidden; flex-shrink: 0; }
