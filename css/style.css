@@ -392,7 +392,7 @@ main { padding-top: var(--nav-h); }
 .form-optionnel { font-weight: 300; text-transform: none; letter-spacing: 0; font-size: 0.68rem; color: var(--beige); }
 
 .form-control, .form-ctrl {
-  width: 100%; padding: 12px 14px;
+  width: 100%; padding: 14px 14px 10px;
   font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 300;
   border: 1px solid var(--beige); background: white; color: var(--gris-fonce);
   outline: none; transition: border-color 0.2s; -webkit-appearance: none; appearance: none;
@@ -1038,6 +1038,7 @@ tr:hover td { background: rgba(232,220,200,0.15); }
     display: flex;
     gap: 4px;
     list-style: none;
+    margin-left: auto;
   }
 
   .nav-admin-item {
