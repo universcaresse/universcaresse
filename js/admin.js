@@ -894,7 +894,7 @@ function supprimerRecette(id) {
     } else {
       afficherMsg('recettes', 'Erreur.', 'erreur');
   }
-}
+
 
 /* ════════════════════════════════
    NOUVELLE FACTURE
