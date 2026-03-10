@@ -517,15 +517,12 @@ function ouvrirModalFromCard(el) {
 }
 
 function filtrerApresChargement(collection) {
-  const verifier = (tentative) => {
-    const sections = document.querySelectorAll('.collection-section');
-    if (sections.length > 0) {
-      filtrer(collection);
-    } else if (tentative < 20) {
-      setTimeout(() => verifier(tentative + 1), 150);
-    }
-  };
-  verifier(0);
+  const sections = document.querySelectorAll('.collection-section');
+  if (sections.length > 0) {
+    filtrer(collection);
+  } else {
+    collectionEnAttente = collection;
+  }
 }
 
 function filtrer(collection) {
