@@ -526,9 +526,10 @@ function filtrerRecettes() {
   });
 
   document.querySelectorAll('#grille-recettes .recette-section-ligne').forEach(sec => {
-    const ok = (!col || sec.closest('.recette-section-collection')?.dataset.collection === col)
-            && (!ligne || sec.dataset.ligne === ligne);
-    sec.classList.toggle('cache', !ok);
+    const secCol = sec.closest('.recette-section-collection');
+    const okCol = !col || secCol?.dataset.collection === col;
+    const okLigne = !ligne || sec.dataset.ligne === ligne;
+    sec.classList.toggle('cache', !(okCol && okLigne));
   });
 }
 
