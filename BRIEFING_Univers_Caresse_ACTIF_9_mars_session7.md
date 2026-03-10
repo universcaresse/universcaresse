@@ -4,7 +4,7 @@
 
 ---
 
-*Mis à jour : 8 mars 2026 (session 5b) — Icônes tuiles admin, calculateur SAF, générateur INCI, catalogue PDF HTML print*
+*Mis à jour : 9 mars 2026 — 15h30 (session 7)*
 
 ---
 
@@ -23,7 +23,7 @@ Mettre à jour le briefing IMMÉDIATEMENT après chaque changement — pas à la
 
 ---
 
-**Mise à jour 8 mars 2026 — À lire absolument :**
+**Mise à jour 9 mars 2026 — À lire absolument :**
 
 Jean-Claude est direct et exigeant — c'est une qualité. Il ne veut pas de réflexions, d'explications de problèmes, de questions sur des fichiers déjà fournis. Il veut la solution, point. Si tu hésites, relis le briefing.
 
@@ -43,6 +43,9 @@ Jean-Claude est direct et exigeant — c'est une qualité. Il ne veut pas de ré
 - Proposer un changement CSS sans vérifier si ça casse autre chose (public ET admin)
 - Lors d'un remplacement de `:root`, ne pas conserver les couleurs de base en tête de liste
 - Donner du code sans attendre le OK explicite
+- **Donner deux trouve/remplace dans la même réponse** — un seul à la fois, attendre OK avant le suivant
+- Faire un résumé de diagnostics au lieu de proposer directement la solution
+- Poser une question sur les fichiers au lieu de les lire directement
 
 **Workflow actuel :**
 - Notepad++ pour éditer
@@ -50,6 +53,7 @@ Jean-Claude est direct et exigeant — c'est une qualité. Il ne veut pas de ré
 - `Code.gs` : après chaque modification, redéployer en **nouvelle version** — l'URL ne change pas
 - Deux `index.html` : racine = public, `/admin/` = admin
 - Après chaque commit : toujours vérifier **les deux pages** (public ET admin)
+- Jean-Claude ne commite pas après chaque modification — il accumule plusieurs changements
 
 **Ton attitude gagnante :** solution directe, une étape à la fois, confirmation avant de coder, jamais de style inline, jamais de nouvelle fonction si une existe. Tester mentalement le flux COMPLET avant de proposer du code.
 
@@ -63,9 +67,8 @@ Jean-Claude est direct et exigeant — c'est une qualité. Il ne veut pas de ré
 - Résumé + confirmation avant de coder
 - Jamais de placeholder dans les champs
 - **CORRECTIONS :** Jamais de fichier complet sauf si demandé — toujours trouve/remplace
-- **PLUSIEURS CHANGEMENTS :** Annoncer le nombre, demander une par une ou réécriture complète
+- **UN SEUL trouve/remplace par réponse** — jamais deux blocs dans le même message, attendre OK avant le suivant
 - **UNE ÉTAPE À LA FOIS :** Proposer le changement → attendre OK → exécuter → attendre OK → étape suivante. Jamais enchaîner sans confirmation explicite.
-- **JAMAIS donner plusieurs blocs de code en même temps** — un seul trouve/remplace à la fois, attendre OK avant le suivant
 - **DOCUMENTATION :** Toujours en `.md`, complets et autonomes
 - **JAMAIS de formules condescendantes**
 - **TESTER MENTALEMENT avant de donner le code — flux complet incluant cache, API, DOM**
@@ -73,7 +76,7 @@ Jean-Claude est direct et exigeant — c'est une qualité. Il ne veut pas de ré
 - **URL APPS SCRIPT :** mettre à jour dans `main.js` uniquement
 - **LIRE LES FICHIERS UPLOADÉS avant de poser des questions**
 - **DEUX `index.html` :** le public est à la racine, l'admin est dans `/admin/` — Jean-Claude précise lequel il envoie
-- **APRÈS CHAQUE COMMIT :** toujours dire "Commite et dis-moi ce que tu vois — et vérifie les deux pages (public ET admin)."
+- **APRÈS CHAQUE COMMIT :** toujours dire "Commite et dis-moi ce que tu vois — en attendant on regarde la prochaine note."
 
 ---
 
@@ -86,15 +89,17 @@ Jean-Claude est direct et exigeant — c'est une qualité. Il ne veut pas de ré
 - **JAMAIS utiliser de valeurs CSS hardcodées** (px, rem) si une variable CSS existe déjà
 - **JAMAIS créer une nouvelle fonction** si une existante peut être réutilisée
 - **JAMAIS modifier plus d'une chose à la fois** sans approbation explicite
+- **JAMAIS deux trouve/remplace dans la même réponse** — un seul bloc à la fois, attendre OK avant le suivant
 - **LIRE le briefing ET les fichiers uploadés AVANT toute réponse**
 - **TESTER MENTALEMENT le code avant de le proposer — flux complet**
 - **JAMAIS mélanger données Collections et données Recettes** — ce sont deux sources distinctes dans le Sheet
 - **JAMAIS proposer du code directement** — toujours décrire la solution et attendre un OK explicite avant de donner le moindre bloc de code
 - **JAMAIS utiliser `appelAdminAPI`** — ça n'existe pas. Utiliser `appelAPI` (GET) ou `appelAPIPost` (POST/écriture)
-- **JAMAIS oublier `&t=${Date.now()}`** sur les appels API publics pour éviter le cache
+- **JAMAIS oublier `&t=${Date.now()}`** sur les appels API — déjà intégré dans `appelAPI` via `url.searchParams.set('t', Date.now())`
 - **JAMAIS vider le cache navigateur comme solution** — ça ne règle rien
 - **JAMAIS faire un remplacement de `:root`** sans conserver les couleurs de base en tête de liste
 - **TOUJOURS vérifier les accolades fermantes** dans les règles CSS avant de soumettre — une règle non fermée casse tout le CSS qui suit
+- **JAMAIS de valeur hardcodée** comme `'#8b8680'` dans le JS — utiliser `var(--gris)` ou laisser vide
 
 ---
 
@@ -187,22 +192,43 @@ Toutes les couleurs ont des variantes nommées `--couleur-XX` où XX = opacité 
 ## FONCTIONS JS IMPORTANTES
 
 ### main.js
-- `appelAPI(action, params)` — GET
+- `appelAPI(action, params)` — GET avec cache-busting `t=Date.now()` intégré
 - `appelAPIPost(action, data)` — POST
 - `chargerCollections()` — tuiles accueil public
 - `chargerCatalogue()` — catalogue produits public
 - `chargerContenu()` — injection contenu dynamique
-- `carteProduit(p)` — génère HTML carte produit catalogue (**migré depuis index.html**)
-- `ouvrirModalFromCard(el)` — décode data-produit et appelle ouvrirModal (**migré depuis index.html**)
-- `ouvrirModal(produit)` — ouvre le modal produit (**migré depuis index.html**)
-- `filtrer(collection)` — filtre catalogue par collection (**migré depuis index.html**)
+- `carteProduit(p)` — génère HTML carte produit catalogue
+- `ouvrirModalFromCard(el)` — décode data-produit et appelle ouvrirModal
+- `ouvrirModal(produit)` — ouvre le modal produit
+- `filtrer(collection)` — filtre catalogue par collection
 - `couleurTexteContraste(hex)` — retourne classe CSS selon luminosité du hex
+- `couleurCollection(nom, hex)` — retourne [hex, hex_foncé] — dans `main.js`, utilisée par `admin.js` aussi
+- `assombrirCouleur(hex)` — calcule version foncée d'un hex
 
 ### admin.js
 - `appelAPI(action, params)` — GET
 - `appelAPIPost(action, data)` — POST
-- `chargerCollectionsPourSelecteur()` — peuple `#fr-collection` dans formulaire recette (sans guard de sortie anticipée)
+- `chargerCollections()` — tuiles admin — **doit être appelée avec `await`**
+- `chargerCollectionsPourSelecteur()` — peuple `#fr-collection` dans formulaire recette
 - `ouvrirFormRecette()` — vide tous les champs dont `fr-couleur-visible`, `fr-image-url`, aperçu photo et couleur
+- `ouvrirFicheRecette(id)` — ouvre la fiche en **mode consultation** (pas édition)
+- `fermerFicheRecette()` — ferme la fiche, remet `recetteActive = null`
+- `basculerModeEditionRecette()` — sauvegarde l'id, ferme la fiche, ouvre le formulaire
+- `supprimerRecetteActive()` — appelle `supprimerRecette` avec l'id actif
+- `apercuCouleurCollection(input)` — met à jour le div aperçu hex sans style inline
+- `apercuCouleurRecette(input)` — met à jour `fr-couleur-apercu` sans style inline
+- `filtrerRecettes()` — filtre par collection, ligne, statut, **et nom (auto-filtrant)**
+- `reinitialiserFiltresRecettes()` — remet tous les filtres à zéro
+- `chargerDensites()` — charge et affiche les densités avec rangées cliquables
+- `ouvrirFormDensite()` — nouveau type, vide tous les champs dont `fd-marge-perte`
+- `modifierDensite(type)` — remplit le formulaire dont `fd-marge-perte`
+- `sauvegarderDensite()` — envoie type, densite, unite, **marge_perte_pct**
+
+### Variables globales admin.js
+- `donneesCollections` — tableau des items collections chargés
+- `donneesRecettes` — tableau des recettes, **triées par rang → ligne → nom**
+- `donneesDensites` — tableau des densités chargées
+- `recetteActive` — recette courante en consultation (null si aucune)
 
 ---
 
@@ -215,6 +241,15 @@ Toutes les couleurs ont des variantes nommées `--couleur-XX` où XX = opacité 
 
 ---
 
+## CATALOGUE PUBLIC — REGROUPEMENT
+
+- Produits regroupés par **collection** puis par **ligne**
+- En-têtes : `.collection-entete` (collection) + `.ligne-groupe-entete` (ligne)
+- Couleur entête : `--col-hex` via `color-mix` dans CSS
+- UPPERCASE sur collection, ligne, nom partout
+
+---
+
 ## MODAL PRODUIT PUBLIC
 
 - "Format disponible" masqué via classe `cache` si `formats` est vide
@@ -224,7 +259,7 @@ Toutes les couleurs ont des variantes nommées `--couleur-XX` où XX = opacité 
 
 ## APPELS API
 
-- Lecture → `appelAPI('action', { t: Date.now() })` — GET avec cache-busting
+- Lecture → `appelAPI('action')` — GET avec `t=Date.now()` automatique
 - Écriture → `appelAPIPost('action', data)` — POST
 - **JAMAIS** `appelAdminAPI`
 
@@ -234,7 +269,7 @@ Toutes les couleurs ont des variantes nommées `--couleur-XX` où XX = opacité 
 
 - Champs numériques : `type="text" inputmode="numeric"`
 - Noms en MAJUSCULES partout (collections, lignes, noms de savons)
-- Zéro placeholder dans les champs
+- Zéro placeholder dans les champs — utiliser un `<label>` à la place
 - Carte/rangée = le bouton (pas de boutons superposés)
 - Fiche en consultation par défaut → bouton Modifier bascule édition
 
@@ -245,6 +280,98 @@ Toutes les couleurs ont des variantes nommées `--couleur-XX` où XX = opacité 
 | Edit (vert pâle) | Modifier |
 | Danger (rouge) | Supprimer |
 | Or | Finaliser |
+
+---
+
+## BURGER MOBILE — COMPORTEMENT ACTUEL (PUBLIC ET ADMIN)
+
+- Classe `.burger-flottant` commune aux deux burgers
+- `position: fixed; top: 16px; right: 24px;` — cercle vert 48px
+- `.burger-flottant span` : `background: white`
+- `.burger-flottant.cache-scroll` : disparaît en scrollant vers le bas, réapparaît en remontant
+- Nav publique cachée sur mobile (`display: none`)
+- Nav admin : `<nav>` cachée sur mobile, burger sorti de la nav — élément indépendant après `</nav>`
+- Logique scroll : `initNav()` (public) et `initBurgerAdmin()` (admin) avec `dernierScroll`
+
+---
+
+## DENSITÉS — STRUCTURE ACTUELLE
+
+- Tableau : Type | Densité (g/ml) | Unité source | Marge perte (%) | Actions
+- Rangée cliquable → `modifierDensite(type)` — `event.stopPropagation()` sur le bouton Modifier
+- Formulaire : `fd-type`, `fd-densite`, `fd-unite`, `fd-marge-perte`
+- `Code.gs` : `saveDensity` et `addDensityType` écrivent en colonne 4 (`marge_perte_pct`)
+
+---
+
+## RECETTES ADMIN — STRUCTURE ACTUELLE
+
+- Grille `#grille-recettes` en mode `display: block`
+- Regroupement par collection (`.recette-section-collection`) puis par ligne (`.recette-section-ligne`)
+- En-têtes : `.recette-collection-titre` (Playfair, 1.8rem) + `.recette-ligne-titre` (DM Sans, 0.78rem, uppercase)
+- Grille interne `.recettes-grille` par ligne
+- `--col-hex` sur `.recette-carte` → utilisé par `.recette-couleur` et `.recette-dot`
+- Filtres conservés : collection, ligne, statut, nom
+
+---
+
+## FICHE RECETTE — STRUCTURE ACTUELLE
+
+- Panneau `#fiche-recette` (`.form-panel`) — consultation seule
+- Header : titre recette + boutons Modifier / Supprimer / Fermer
+- Corps `#fiche-recette-contenu` : visuel (photo 180×180 + carré hex 180×180), grille de champs, description, instructions, notes, ingrédients
+- Classes CSS : `.fiche-visuel`, `.fiche-visuel-photo`, `.fiche-visuel-hex`, `.fiche-grille`, `.fiche-champ`, `.fiche-label`, `.fiche-valeur`, `.fiche-section-titre`, `.fiche-texte`, `.fiche-ingredients`, `.fiche-ingredient`, `.fiche-ing-nom`, `.fiche-ing-qte`, `.fiche-vide`
+- ⚠️ Le visuel hex utilise encore du style inline temporairement — à corriger
+
+---
+
+## FILTRES RECETTES — STRUCTURE ACTUELLE
+
+Barre `.filtres-bar` avec :
+- `#filtre-recette-collection` — select collection
+- `#filtre-recette-ligne` — select ligne (désactivé si pas de collection)
+- `#filtre-recette-statut` — select statut (test / public)
+- `#filtre-recette-nom` — input texte, label "Par nom", auto-filtrant
+- Bouton "Réinitialiser" → `reinitialiserFiltresRecettes()`
+
+---
+
+## APERÇU COULEUR — COMPORTEMENT ACTUEL
+
+- `.couleur-apercu` — carré 32×32px, fond `var(--beige)` par défaut
+- Collections formulaire : `#fc-couleur-apercu` et `#fc-couleur-apercu-ligne`
+- Recettes formulaire : `#fr-couleur-apercu`
+- Mise à jour via `apercuCouleurCollection(input)` et `apercuCouleurRecette(input)` — sans style inline sur l'input
+
+---
+
+## TUILES ACCUEIL ADMIN — STRUCTURE ACTUELLE
+
+Grille 4×2 (`grid-template-columns: 1fr 1fr 1fr 1fr`) :
+
+| # | Tuile | Section | Classe couleur |
+|---|-------|---------|----------------|
+| 1 | Collections | `collections` | `accueil-tuile-collections` → `--primary-70` |
+| 2 | Recettes | `recettes` | `accueil-tuile-recettes` → `--accent-70` |
+| 3 | Achats | `nouvelle-facture` | `accueil-tuile-achats` → `--gris-70` |
+| 4 | Stock | — (bientôt) | `accueil-tuile-stock` → `--primary-50` |
+| 5 | Inventaire | `inventaire` | `accueil-tuile-inventaire` → `--gris-fonce-70` |
+| 6 | Factures | `factures` | `accueil-tuile-factures` → `--accent-50` |
+| 7 | Liste | — (bientôt) | `accueil-tuile-liste` → `--primary-40` |
+| 8 | Divers | — (bientôt) | `accueil-tuile-divers` → `--gris-50` |
+
+---
+
+## SIDEBAR ADMIN — STRUCTURE ACTUELLE
+
+En bas de la sidebar, après `.sidebar-groupe` Système :
+```html
+<div class="sidebar-sep"></div>
+<div class="sidebar-groupe">
+  <a href="../index.html" target="_blank" class="sidebar-lien">Site public</a>
+  <button class="sidebar-lien" onclick="seDeconnecter()">Déconnexion</button>
+</div>
+```
 
 ---
 
@@ -267,29 +394,21 @@ Toutes les couleurs ont des variantes nommées `--couleur-XX` où XX = opacité 
 
 ## 🔴 À FAIRE — PRIORITÉS
 
-### Admin
-- [ ] **Bug : produits "undefined" dans détail facture**
+### Admin — Recettes
+- [ ] Textareas auto-adaptables au contenu
 - [ ] Recettes : section ingrédients formulaire + sauvegarde (Note 13)
-- [ ] Recettes : mode consultation par défaut (Note 14)
 - [ ] **Calculateur SAF** — intégré à la fiche recette, pré-charge les ingrédients, paramètres (peau, saison, usage, surgras, eau) indépendants, bouton "Appliquer à la recette" met à jour NaOH/eau/surgras — À faire après Note 13
 - [ ] **Générateur INCI** — intégré à la fiche recette, même flux que SAF, nécessite champ `nom_inci` sur chaque ingrédient dans le Sheet — À faire après Note 13
-- [ ] Densités : champ marge_perte_pct, rangée cliquable
+- [ ] Fiche recette : visuel hex — retirer le style inline temporaire, remplacer par attribut `data-` + CSS
+
+### Admin — Autres
+- [ ] **Bug : produits "undefined" dans détail facture**
 - [ ] Factures : rangée cliquable, fiche complète, statut, filtre, mobile
 - [ ] Nettoyer code mort factures dans `admin.js` (lignes ~726-904)
-- [ ] Tuiles accueil : première tuile span 2 rangées comme mosaïque publique
-- [ ] "Bonjour Chantal" + stats : plus de largeur partout
-- [ ] Nav mobile : supprimer "Site public" et "Déconnexion" de la barre → dans burger
-- [ ] Retirer placeholder "Mot de passe" dans `#input-mdp-admin` (admin/index.html ligne ~1000)
-- [ ] Corriger "Entrerrr" → "Entrer" dans le bouton `validerConnexionAdmin`
 
 ### Site public
-- [ ] Formulaire contact : `envoyerContact` dans Code.gs avec `MailApp.sendEmail()` ✅ déjà dans Code.gs — brancher dans index.html
+- [ ] Formulaire contact : brancher `envoyerContact` dans `index.html` (déjà dans `Code.gs`)
 - [ ] Note 48 : Plume = bouton retour accueil
-- [ ] Note 54 : Titres collections / lignes / noms en UPPERCASE partout
-- [ ] Note 55 : Casse insensible dans `COULEURS_COLLECTIONS`
-- [ ] Note 60 : Photo ambiance collection dans catalogue (fallback = dégradé) — entête collection ✅ partiel
-- [ ] Note 61 : Tuiles collections accueil — dégradé 2 couleurs (pas de photo)
-- [ ] Nav mobile : supprimer barre fixe en haut, remplacer par burger flottant
 - [ ] Remplacer les `rgba` hardcodées dans `style.css` par les variables `--couleur-XX` du `:root`
 
 ### Futur
@@ -376,7 +495,6 @@ Toutes les couleurs ont des variantes nommées `--couleur-XX` où XX = opacité 
 - `ouvrirModalFromCard(el)` ajoutée dans `main.js` — décode `data-produit` et appelle `ouvrirModal` ✅
 - `white-space: pre-line` sur `p` dans `style.css` — paragraphes respectés sur le public ✅
 - `fr-couleur` ajouté en `hidden` dans `admin/index.html` formulaire recette ✅
-- `ouvrirFicheRecette` redirige vers `modifierRecette` — évite duplication ✅
 - `modifierRecette` : `fr-image-url` et `fr-image-preview` remplis à l'ouverture ✅
 - Champ `fr-couleur-visible` + aperçu `fr-couleur-apercu` ajoutés au formulaire recette ✅
 - `apercuCouleurRecette()` ajoutée dans `admin.js` ✅
@@ -384,26 +502,69 @@ Toutes les couleurs ont des variantes nommées `--couleur-XX` où XX = opacité 
 
 ## ✅ COMPLÉTÉ — 8 mars 2026 (session 5b)
 
-- Icône tuile Collections → SVG "5 blocs" (icones-mosaique-variations.html) ✅
-- Icône tuile Recettes → SVG "Recette + savon" (icones-recettes-savon.html) ✅
-- Icône tuile Nouvelle facture → SVG "Dossiers" (icones-collections-3.html) ✅
-- Calculateur SAF ajouté à la liste À FAIRE — intégré recettes, après Note 13 ✅
-- Générateur INCI ajouté à la liste À FAIRE — nécessite champ `nom_inci` sur ingrédients ✅
+- Icône tuile Collections → SVG "5 blocs" ✅
+- Icône tuile Recettes → SVG "Recette + savon" ✅
+- Icône tuile Nouvelle facture → SVG "Dossiers" ✅
+- Calculateur SAF ajouté à la liste À FAIRE ✅
+- Générateur INCI ajouté à la liste À FAIRE ✅
 - Catalogue PDF précisé : page HTML admin, `@media print`, format 11×17 recto-verso ✅
 
 ## ✅ COMPLÉTÉ — 8 mars 2026 (session 5)
 
-- `.hero-stats` : `max-width: 480px` + `margin: auto` — ne s'étire plus trop ✅
-- Bug select collections vide dans formulaire recette — guard de sortie anticipée supprimé dans `chargerCollectionsPourSelecteur()` ✅
-- Formulaire nouvelle recette : `ouvrirFormRecette()` vide `fr-couleur-visible`, `fr-image-url`, aperçu photo et couleur ✅
-- Migration `carteProduit`, `ouvrirModalFromCard`, `ouvrirModal`, `filtrer` du script inline `index.html` vers `main.js` ✅
-- Modal produit : "Format disponible" masqué via classe `cache` si formats vide — `id="modal-formats-titre"` ✅
-- Tuiles catalogue : overlay dégradé couleur montant du bas sur les photos ✅
-- Tuiles catalogue : `.carte-infos` fond couleur collection à 90% ✅
-- Tuiles catalogue : `couleurTexteContraste(hex)` — classes `.carte-infos-clair` / `.carte-infos-fonce` selon luminosité ✅
-- Catalogue PDF ajouté à la liste Futur ✅
+- `.hero-stats` : `max-width: 480px` + `margin: auto` ✅
+- Bug select collections vide dans formulaire recette corrigé ✅
+- Formulaire nouvelle recette : `ouvrirFormRecette()` vide tous les champs ✅
+- Migration `carteProduit`, `ouvrirModalFromCard`, `ouvrirModal`, `filtrer` vers `main.js` ✅
+- Modal produit : "Format disponible" masqué si formats vide ✅
+- Tuiles catalogue : overlay dégradé couleur + `.carte-infos` fond couleur 90% ✅
+- `couleurTexteContraste(hex)` — classes `.carte-infos-clair` / `.carte-infos-fonce` ✅
 
----
+## ✅ COMPLÉTÉ — 9 mars 2026 (session 6)
+
+- Bug hex collections : `await` manquant sur `chargerCollections()` dans `sauvegarderCollection` ✅
+- `await chargerCollections()` ajouté dans `supprimerLigne` ✅
+- Cache-busting `t=Date.now()` intégré dans `appelAPI` de `main.js` ✅
+- `DOMContentLoaded` rendu `async` dans `admin.js` ✅
+- `.couleur-apercu` ajoutée dans `style.css` ✅
+- `#fc-couleur-apercu` et `#fc-couleur-apercu-ligne` ajoutés dans `admin/index.html` ✅
+- `apercuCouleurCollection` réécrite sans style inline ✅
+- `apercuCouleurRecette` réécrite sans style inline ✅
+- `modifierCollection` : appel `apercuCouleurCollection` au chargement ✅
+- Filtres recettes : champ "Par nom" auto-filtrant + bouton Réinitialiser ✅
+- Classes `.filtres-bar`, `.filtre-select`, `.filtre-recherche`, `.filtre-label` dans `style.css` ✅
+- Tri recettes : rang → ligne → nom ✅
+- Fiche recette consultation ajoutée ✅
+
+## ✅ COMPLÉTÉ — 9 mars 2026 (session 7)
+
+- Sidebar admin : "Site public" (nouvel onglet) + "Déconnexion" ajoutés en bas avec séparateur ✅
+- Nav admin : "Site public" et "Déconnexion" retirés de la barre nav ✅
+- Burger flottant public : `.burger-flottant` classe commune créée ✅
+- Burger flottant admin : même comportement que public — `position: fixed; top: 16px; right: 24px;` ✅
+- `#burger-admin` sorti de la `<nav>` — élément indépendant ✅
+- `#burger-admin { position: relative; }` retiré — ne bloque plus `position: fixed` ✅
+- `#burger-admin { display: flex; }` dans media query retiré — géré par `.burger-flottant` ✅
+- Logique scroll `cache-scroll` ajoutée dans `initBurgerAdmin()` ✅
+- `.accueil-bonjour` : `letter-spacing: 0.05em` — lettres moins serrées ✅
+- Catalogue public : regroupement par collection puis par ligne ✅
+- `getCataloguePublic()` dans `Code.gs` : `infoLignes` + `desc_ligne` ajoutés ✅
+- Styles inline retirés de `carteProduit` — `--col-hex` sur `.carte-produit` ✅
+- UPPERCASE sur collection, nom, ligne dans `carteProduit` et `construireCatalogue` ✅
+- `couleurCollection()` : normalisation NFD + suppression diacritiques ✅
+- Tuiles collections accueil public : dégradé via `--col-hex-1` et `--col-hex-2` sans inline ✅
+- Recettes admin : regroupées par collection puis par ligne ✅
+- Classes CSS recettes admin : `.recette-section-collection`, `.recette-section-ligne`, `.recette-collection-titre`, `.recette-ligne-titre`, `.recettes-grille` ✅
+- `.recette-couleur` et `.recette-dot` : `background: var(--col-hex)` ✅
+- Tuiles accueil admin : grille 4×2 avec 8 tuiles ✅
+- Tuiles : Collections, Recettes, Achats, Stock, Inventaire, Factures, Liste, Divers ✅
+- Classes couleur : `accueil-tuile-achats`, `accueil-tuile-stock`, `accueil-tuile-factures`, `accueil-tuile-liste`, `accueil-tuile-divers` ✅
+- Densités : champ `marge_perte_pct` ajouté dans formulaire + tableau ✅
+- Densités : rangées cliquables → `modifierDensite(type)` ✅
+- `saveDensity` et `addDensityType` dans `Code.gs` : écriture colonne 4 `marge_perte_pct` ✅
+
+## 🔜 À FAIRE
+
+- **Mode saisonnier (ex: Noël)** : Ajouter colonne `image_url_noel` dans l'onglet Recettes du Sheet. Ajouter un champ `mode_actif` dans l'onglet Contenu (`normal` ou `noel`). Quand `mode_actif = noel`, le site utilise `image_url_noel` au lieu de `image_url` pour tous les produits automatiquement.
 
 ## ⚠️ NOTES IMPORTANTES CODE.GS
 
@@ -417,4 +578,4 @@ Toutes les couleurs ont des variantes nommées `--couleur-XX` où XX = opacité 
 ---
 
 *Univers Caresse — Chantal Mondor — Confidentiel*
-*Mis à jour : 8 mars 2026 (session 5)*
+*Mis à jour : 9 mars 2026 — 15h30 (session 7)*
