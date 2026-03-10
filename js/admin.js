@@ -110,6 +110,15 @@ function afficherMsg(zone, texte, type = 'succes') {
 }
 
 // ─── COULEUR PAR NOM ───
+function couleurTexteContraste(hex) {
+  if (!hex || !hex.startsWith('#')) return 'carte-infos-clair';
+  const r = parseInt(hex.slice(1,3), 16);
+  const g = parseInt(hex.slice(3,5), 16);
+  const b = parseInt(hex.slice(5,7), 16);
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance > 0.6 ? 'carte-infos-fonce' : 'carte-infos-clair';
+}
+
 function stringToColor(str) {
   const palette = ['#5a8a3a','#4a7c9e','#9b6b9b','#c4773a','#3a8a7a','#8a5a3a','#6b7a3a','#9b3a5a','#3a5a8a'];
   let h = 0;
@@ -438,7 +447,7 @@ async function chargerRecettes() {
               <div class="recette-dot"></div>
             </div>
           </div>
-          <div class="recette-infos">
+          <div class="recette-infos ${couleurTexteContraste(couleur)}">
             <span class="recette-badge">${rec.collection || '—'}</span>
             <span class="recette-statut-badge recette-statut-${rec.statut || 'test'}">${rec.statut === 'public' ? 'Public' : 'Test'}</span>
             <div class="recette-nom">${rec.nom || '—'}</div>
