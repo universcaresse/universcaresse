@@ -1049,7 +1049,7 @@ tr:hover td { background: rgba(232,220,200,0.15); }
     width: 220px; background: var(--blanc); padding: 20px var(--padding-mobile);
     border: 1px solid var(--beige);
     box-shadow: 0 8px 32px var(--noir-15);
-    gap: 16px; z-index: 199;
+    gap: 16px; z-index: 201;
   }
 
 
