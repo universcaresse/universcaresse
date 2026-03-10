@@ -519,6 +519,17 @@ function filtrerRecettes() {
     if (ok) visible++;
   });
   vide.classList.toggle('cache', visible !== 0);
+
+  document.querySelectorAll('#grille-recettes .recette-section-collection').forEach(sec => {
+    const ok = !col || sec.dataset.collection === col;
+    sec.classList.toggle('cache', !ok);
+  });
+
+  document.querySelectorAll('#grille-recettes .recette-section-ligne').forEach(sec => {
+    const ok = (!col || sec.closest('.recette-section-collection')?.dataset.collection === col)
+            && (!ligne || sec.dataset.ligne === ligne);
+    sec.classList.toggle('cache', !ok);
+  });
 }
 
 function reinitialiserFiltresRecettes() {
