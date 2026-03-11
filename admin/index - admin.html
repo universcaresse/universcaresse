@@ -192,7 +192,7 @@
               </span>
               <span class="tuile-nom">Achats</span>
             </button>
-            <button class="accueil-tuile accueil-tuile-stock" disabled>
+            <button class="accueil-tuile accueil-tuile-stock">
               <span class="tuile-icone">
                 <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="8" y="20" width="14" height="20" rx="2"/>
@@ -225,7 +225,7 @@
               </span>
               <span class="tuile-nom">Factures</span>
             </button>
-            <button class="accueil-tuile accueil-tuile-liste" disabled>
+            <button class="accueil-tuile accueil-tuile-liste">
               <span class="tuile-icone">
                 <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="14" r="2.5"/>
@@ -238,7 +238,7 @@
               </span>
               <span class="tuile-nom">Liste</span>
             </button>
-            <button class="accueil-tuile accueil-tuile-divers" disabled>
+            <button class="accueil-tuile accueil-tuile-divers">
               <span class="tuile-icone">
                 <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="24" cy="24" r="6"/>
@@ -308,7 +308,7 @@
                 </div>
                 <div class="form-groupe col-plein">
                   <label class="form-label">Description collection</label>
-                  <textarea class="form-ctrl" id="fc-desc-col" rows="5"></textarea>
+                  <textarea class="form-ctrl" id="fc-desc-col"></textarea>
                 </div>
                 <div class="form-groupe">
                   <label class="form-label">Couleur HEX</label>
@@ -402,7 +402,7 @@
             <option value="test">Test</option>
             <option value="public">Public</option>
           </select>
-          <input type="text" class="form-ctrl filtre-recherche" id="filtre-recette-nom" oninput="filtrerRecettes()" placeholder="Par nom">
+          <label class="filtre-label">Par nom</label><input type="text" class="form-ctrl filtre-recherche" id="filtre-recette-nom" oninput="filtrerRecettes()">
           <button class="btn btn-outline btn-sm" onclick="reinitialiserFiltresRecettes()">Réinitialiser</button>
         </div>
         <div class="form-panel" id="fiche-recette">
@@ -455,10 +455,6 @@
               <div class="form-groupe">
                 <label class="form-label">Format</label>
                 <input type="text" class="form-ctrl" id="fr-format">
-              </div>
-              <div class="form-groupe col-plein">
-                <label class="form-label">Collections secondaires</label>
-                <select class="form-ctrl" id="fr-collections-secondaires" multiple size="4"></select>
               </div>
               <div class="form-groupe">
                 <label class="form-label">Nb unités / fournée</label>
@@ -820,7 +816,7 @@
         <div class="msg-zone" id="msg-contenu-site"></div>
         <div class="chargement" id="loading-contenu-site"><span class="spinner"></span>Chargement...</div>
 
-        <div id="corps-contenu-site" class="cache">
+        <div id="corps-contenu-site" style="display:none">
 
           <div class="form-panel visible">
             <div class="form-panel-header"><div class="form-panel-titre">Accueil — Hero</div></div>
@@ -936,57 +932,93 @@
             <div class="form-panel-header"><div class="form-panel-titre">Bon à savoir — Engagements</div></div>
             <div class="form-body">
               <div class="form-grille">
-                <div class="form-groupe"><label class="form-label">Engagement 01 — titre</label><input type="text" class="form-ctrl" id="cs-bas_engagement_01_titre"></div>
-                <div class="form-groupe"><label class="form-label">Engagement 01 — texte</label><textarea class="form-ctrl" id="cs-bas_engagement_01_texte" rows="2"></textarea></div>
-                <div class="form-groupe"><label class="form-label">Engagement 02 — titre</label><input type="text" class="form-ctrl" id="cs-bas_engagement_02_titre"></div>
-                <div class="form-groupe"><label class="form-label">Engagement 02 — texte</label><textarea class="form-ctrl" id="cs-bas_engagement_02_texte" rows="2"></textarea></div>
-                <div class="form-groupe"><label class="form-label">Engagement 03 — titre</label><input type="text" class="form-ctrl" id="cs-bas_engagement_03_titre"></div>
-                <div class="form-groupe"><label class="form-label">Engagement 03 — texte</label><textarea class="form-ctrl" id="cs-bas_engagement_03_texte" rows="2"></textarea></div>
-                <div class="form-groupe"><label class="form-label">Engagement 04 — titre</label><input type="text" class="form-ctrl" id="cs-bas_engagement_04_titre"></div>
-                <div class="form-groupe"><label class="form-label">Engagement 04 — texte</label><textarea class="form-ctrl" id="cs-bas_engagement_04_texte" rows="2"></textarea></div>
-                <div class="form-groupe"><label class="form-label">Engagement 05 — titre</label><input type="text" class="form-ctrl" id="cs-bas_engagement_05_titre"></div>
-                <div class="form-groupe"><label class="form-label">Engagement 05 — texte</label><textarea class="form-ctrl" id="cs-bas_engagement_05_texte" rows="2"></textarea></div>
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 01 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_engagement_01_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 01 — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_engagement_01_texte" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 02 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_engagement_02_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 02 — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_engagement_02_texte" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 03 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_engagement_03_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 03 — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_engagement_03_texte" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 04 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_engagement_04_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Engagement 04 — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_engagement_04_texte" rows="2"></textarea>
+                </div>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Note allergènes</label>
+                <textarea class="form-ctrl" id="cs-bas_allergenes" rows="3"></textarea>
               </div>
             </div>
           </div>
 
           <div class="form-panel visible">
-            <div class="form-panel-header"><div class="form-panel-titre">Bon à savoir — Notes importantes</div></div>
+            <div class="form-panel-header"><div class="form-panel-titre">Bon à savoir — Conservation et commandes</div></div>
             <div class="form-body">
               <div class="form-grille">
-                <div class="form-groupe"><label class="form-label">Note 01 — titre</label><input type="text" class="form-ctrl" id="cs-bas_note_01_titre"></div>
-                <div class="form-groupe"><label class="form-label">Note 01 — texte</label><textarea class="form-ctrl" id="cs-bas_note_01_texte" rows="2"></textarea></div>
-                <div class="form-groupe"><label class="form-label">Note 02 — titre</label><input type="text" class="form-ctrl" id="cs-bas_note_02_titre"></div>
-                <div class="form-groupe"><label class="form-label">Note 02 — texte</label><textarea class="form-ctrl" id="cs-bas_note_02_texte" rows="2"></textarea></div>
-                <div class="form-groupe"><label class="form-label">Note 03 — titre</label><input type="text" class="form-ctrl" id="cs-bas_note_03_titre"></div>
-                <div class="form-groupe"><label class="form-label">Note 03 — texte</label><textarea class="form-ctrl" id="cs-bas_note_03_texte" rows="2"></textarea></div>
-                <div class="form-groupe"><label class="form-label">Note 04 — titre</label><input type="text" class="form-ctrl" id="cs-bas_note_04_titre"></div>
-                <div class="form-groupe"><label class="form-label">Note 04 — texte</label><textarea class="form-ctrl" id="cs-bas_note_04_texte" rows="2"></textarea></div>
-                <div class="form-groupe"><label class="form-label">Note 05 — titre</label><input type="text" class="form-ctrl" id="cs-bas_note_05_titre"></div>
-                <div class="form-groupe"><label class="form-label">Note 05 — texte</label><textarea class="form-ctrl" id="cs-bas_note_05_texte" rows="2"></textarea></div>
+                <div class="form-groupe">
+                  <label class="form-label">Conservation — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_conservation_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Conservation — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_conservation_texte" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Cure — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_cure_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Cure — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_cure_texte" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Usage — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_usage_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Usage — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_usage_texte" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Commande — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_commande_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Commande — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_commande_texte" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Demande d'info — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-bas_demande_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Demande d'info — texte</label>
+                  <textarea class="form-ctrl" id="cs-bas_demande_texte" rows="2"></textarea>
+                </div>
               </div>
             </div>
           </div>
-
-          <div class="form-panel visible">
-            <div class="form-panel-header"><div class="form-panel-titre">Bon à savoir — Conservation et utilisation</div></div>
-            <div class="form-body">
-              <div class="form-grille">
-                <div class="form-groupe"><label class="form-label">Conservation 01 — titre</label><input type="text" class="form-ctrl" id="cs-bas_conservation_01_titre"></div>
-                <div class="form-groupe"><label class="form-label">Conservation 01 — texte</label><textarea class="form-ctrl" id="cs-bas_conservation_01_texte" rows="2"></textarea></div>
-                <div class="form-groupe"><label class="form-label">Conservation 02 — titre</label><input type="text" class="form-ctrl" id="cs-bas_conservation_02_titre"></div>
-                <div class="form-groupe"><label class="form-label">Conservation 02 — texte</label><textarea class="form-ctrl" id="cs-bas_conservation_02_texte" rows="2"></textarea></div>
-                <div class="form-groupe"><label class="form-label">Conservation 03 — titre</label><input type="text" class="form-ctrl" id="cs-bas_conservation_03_titre"></div>
-                <div class="form-groupe"><label class="form-label">Conservation 03 — texte</label><textarea class="form-ctrl" id="cs-bas_conservation_03_texte" rows="2"></textarea></div>
-                <div class="form-groupe"><label class="form-label">Conservation 04 — titre</label><input type="text" class="form-ctrl" id="cs-bas_conservation_04_titre"></div>
-                <div class="form-groupe"><label class="form-label">Conservation 04 — texte</label><textarea class="form-ctrl" id="cs-bas_conservation_04_texte" rows="2"></textarea></div>
-                <div class="form-groupe"><label class="form-label">Conservation 05 — titre</label><input type="text" class="form-ctrl" id="cs-bas_conservation_05_titre"></div>
-                <div class="form-groupe"><label class="form-label">Conservation 05 — texte</label><textarea class="form-ctrl" id="cs-bas_conservation_05_texte" rows="2"></textarea></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-panel visible">
 
         </div>
       </div>
@@ -1063,18 +1095,6 @@
   <input type="password" id="input-mdp-admin" class="form-ctrl">
       <p id="erreur-mdp-admin" class="connexion-erreur"></p>
       <button class="btn btn-primary" onclick="validerConnexionAdmin()">Entrer</button>
-    </div>
-  </div>
-
-  <div class="modal-admin-overlay cache" id="modal-confirm">
-    <div class="modal-admin">
-      <div class="modal-admin-header">
-        <div class="modal-admin-titre" id="modal-confirm-message"></div>
-      </div>
-      <div class="modal-admin-body" style="display:flex;gap:12px;justify-content:flex-end;padding:16px">
-        <button class="btn btn-outline btn-sm" onclick="fermerModalConfirm()">Annuler</button>
-        <button class="btn btn-danger btn-sm" id="modal-confirm-btn">Confirmer</button>
-      </div>
     </div>
   </div>
 </body>
