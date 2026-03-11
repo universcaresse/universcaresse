@@ -905,7 +905,7 @@ tr:hover td { background: rgba(232,220,200,0.15); }
 /* ═══════════════════════════════════════
    ADMIN — INVENTAIRE
    ═══════════════════════════════════════ */
-.inv-section { margin-bottom: 20px; }
+.inv-section { margin-bottom: 20px; margin-top: 16px; }
 .inv-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; width: 100%; }
 .inv-titre { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; color: var(--gris-fonce); font-style: italic; white-space: nowrap; }
 .inv-line { flex: 1; height: 1px; background: var(--beige); min-width: 0; }
