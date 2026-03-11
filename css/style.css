@@ -755,13 +755,18 @@ footer > * { position: relative; z-index: 1; }
 /* ═══════════════════════════════════════
    ADMIN — ACCUEIL
    ═══════════════════════════════════════ */
-.accueil-admin { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - var(--nav-h)); margin: -48px -56px; }
+.accueil-admin { display: grid; grid-template-columns: 1fr 1fr; height: calc(100vh - var(--nav-h)); margin: -48px -56px; }
 .accueil-gauche { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; padding: 40px 64px; border-right: 1px solid var(--beige); gap: 4px; }
 .accueil-logo { max-width: 280px; width: 70%; height: auto; margin-bottom: 12px; }
 .accueil-bonjour { font-family: 'Birthstone', cursive; font-size: 3.5rem; color: var(--accent); line-height: 1; align-self: center; letter-spacing: 0.05em; }
 .accueil-chantal { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--primary); font-weight: 400; line-height: 1; margin-bottom: 0; align-self: center; }
-.accueil-droite { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 16px; background: url('../Images/fond.png') center center / cover no-repeat; }
-.accueil-tuile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: white; cursor: pointer; border: none; transition: filter 0.4s ease; aspect-ratio: 1; max-height: 140px; }
+.accueil-droite { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; background: url('../Images/fond.png') center center / cover no-repeat; }
+.accueil-grande-tuile { display: flex; flex-direction: row; }
+.accueil-grande-tuile-vert       { background: var(--primary-70); }
+.accueil-grande-tuile-jaune      { background: var(--accent-70); }
+.accueil-grande-tuile-gris       { background: var(--gris-70); }
+.accueil-grande-tuile-gris-fonce { background: var(--gris-fonce-70); }
+.accueil-tuile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: white; cursor: pointer; border: none; transition: filter 0.4s ease; flex: 1; }
 .accueil-tuile:hover { filter: brightness(1.08); }
 .accueil-tuile:disabled { opacity: 0.4; cursor: default; filter: none; }
 .tuile-icone { width: 36px; height: 36px; display: block; transition: transform 0.4s ease; }
@@ -777,6 +782,10 @@ footer > * { position: relative; z-index: 1; }
 .accueil-tuile-factures    { background: var(--accent-50); }
 .accueil-tuile-liste       { background: var(--primary-40); }
 .accueil-tuile-divers      { background: var(--gris-50); }
+.accueil-grande-tuile-vert       { background: var(--primary-70); }
+.accueil-grande-tuile-jaune      { background: var(--accent-70); }
+.accueil-grande-tuile-gris       { background: var(--gris-70); }
+.accueil-grande-tuile-gris-fonce { background: var(--gris-fonce-70); }
 
 /* ═══════════════════════════════════════
    ADMIN — FORM PANEL
