@@ -285,6 +285,7 @@ function fermerModalConfirm() {
   document.getElementById('modal-confirm').classList.remove('ouvert');
 }
 
+
 function fermerFormCollection() {
   document.getElementById('contenu-collections').classList.remove('cache');
   document.getElementById('form-collections').classList.remove('visible');
@@ -420,7 +421,8 @@ async function supprimerLigne(rowIndex, collection, ligne) {
     : 'Supprimer cette ligne ?';
   confirmerAction(msg, async () => {
     const res = await appelAPIPost('deleteCollectionItem', { rowIndex });
-    if (res && res.success) {
+if (res && res.success) {
+      fermerFicheCollection();
       afficherMsg('collections', 'Ligne supprimée.');
       await chargerCollections();
     } else {
