@@ -207,7 +207,7 @@ function ouvrirFicheCollection(col) {
         ${item.description_ligne ? `<p class="fiche-ligne-desc">${item.description_ligne}</p>` : ''}
       </div>
      <button class="btn btn-sm btn-edit" onclick="modifierLigneProduit(${item.rowIndex})">Modifier</button>
-      <button class="btn btn-sm btn-danger" onclick="supprimerLigne(${item.rowIndex}, '${item.collection}', '${item.ligne}')">Supprimer</button>
+      <button class="btn btn-sm btn-danger" onclick="supprimerLigne(${item.rowIndex}, \`${item.collection}\`, \`${item.ligne}\`)">Supprimer</button>
     </div>`).join('');
 
   const fiche = document.getElementById('fiche-collection');
