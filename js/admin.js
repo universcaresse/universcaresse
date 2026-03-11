@@ -720,7 +720,7 @@ function ouvrirFormRecette() {
   if (prevRecette) { prevRecette.src = ''; prevRecette.classList.add('cache'); }
   const apercuRecette = document.getElementById('fr-couleur-apercu');
   if (apercuRecette) apercuRecette.style.background = '';
-  document.getElementById('filtres-bar').classList.add('cache');
+ document.querySelector('#section-recettes .filtres-bar').classList.add('cache');
   document.getElementById('grille-recettes').classList.add('cache');
   document.getElementById('form-recettes').classList.add('visible');
   document.getElementById('fr-nom').focus();
@@ -762,7 +762,7 @@ document.getElementById('fr-collection').value   = rec.collection || '';
       opt.selected = Array.isArray(rec.collections_secondaires) && rec.collections_secondaires.includes(opt.value);
     });
   }
-  document.getElementById('filtres-bar').classList.add('cache');
+ document.querySelector('#section-recettes .filtres-bar').classList.add('cache');
   document.getElementById('grille-recettes').classList.add('cache');
   document.getElementById('form-recettes').classList.add('visible');
   document.getElementById('fr-nom').focus();
