@@ -761,7 +761,7 @@ footer > * { position: relative; z-index: 1; }
 .accueil-bonjour { font-family: 'Birthstone', cursive; font-size: 3.5rem; color: var(--accent); line-height: 1; align-self: center; letter-spacing: 0.05em; }
 .accueil-chantal { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--primary); font-weight: 400; line-height: 1; margin-bottom: 0; align-self: center; }
 .accueil-droite { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; background: url('../Images/fond.png') center center / cover no-repeat; }
-.accueil-grande-tuile { display: flex; flex-direction: row; align-items: stretch; }
+.accueil-grande-tuile { display: flex; flex-direction: row; align-items: stretch; height: 100%; }
 .accueil-grande-tuile-vert       { background: var(--primary-70); }
 .accueil-grande-tuile-jaune      { background: var(--accent-70); }
 .accueil-grande-tuile-gris       { background: var(--gris-70); }
