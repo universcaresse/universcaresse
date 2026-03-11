@@ -765,6 +765,8 @@ document.getElementById('fr-collection').value   = rec.collection || '';
  document.querySelector('#section-recettes .filtres-bar').classList.add('cache');
   document.getElementById('grille-recettes').classList.add('cache');
   document.getElementById('form-recettes').classList.add('visible');
+ ingredientsRecette = (rec.ingredients || []).map(i => ({ type: i.type, nom: i.nom, quantite: i.quantite_g }));
+  rafraichirListeIngredientsRecette();
   document.getElementById('fr-nom').focus();
 }
 async function sauvegarderRecette() {
@@ -787,7 +789,7 @@ async function sauvegarderRecette() {
     statut:       document.getElementById('fr-statut').value || 'test',
     image_url:    document.getElementById('fr-image-url').value,
     collections_secondaires: Array.from(document.getElementById('fr-collections-secondaires')?.selectedOptions || []).map(o => o.value),
-    ingredients:  []
+     ingredients:  ingredientsRecette.map(i => ({ type: i.type, nom: i.nom, quantite_g: i.quantite }))
   };
   if (!d.nom) { afficherMsg('recettes', 'Le nom est requis.', 'erreur'); return; }
   const res = await appelAPIPost('saveRecette', d);
@@ -895,6 +897,39 @@ function apercuCouleurRecette(input) {
   const apercu = document.getElementById('fr-couleur-apercu');
   if (apercu) apercu.style.background = /^#[0-9a-fA-F]{6}$/.test(input.value.trim()) ? input.value.trim() : 'var(--beige)';
   document.getElementById('fr-couleur').value = input.value;
+}
+
+// ─── INGRÉDIENTS RECETTE ───
+let ingredientsRecette = [];
+
+function ajouterIngredientRecette(type='', nom='', quantite=0) {
+  ingredientsRecette.push({ type, nom, quantite });
+  rafraichirListeIngredientsRecette();
+}
+
+function supprimerIngredientRecette(index) {
+  ingredientsRecette.splice(index, 1);
+  rafraichirListeIngredientsRecette();
+}
+
+function rafraichirListeIngredientsRecette() {
+  const liste = document.getElementById('liste-ingredients-recette');
+  if (!liste) return;
+  if (ingredientsRecette.length === 0) { liste.innerHTML = ''; return; }
+  liste.innerHTML = ingredientsRecette.map((ing, i) => `
+    <div class="ingredient-rangee">
+      <select class="form-ctrl" onchange="ingredientsRecette[${i}].type=this.value; ingredientsRecette[${i}].nom=''; rafraichirListeIngredientsRecette()">
+        <option value="">— Type —</option>
+        ${(listesDropdown.types || []).map(t => `<option value="${t}" ${ing.type===t?'selected':''}>${t}</option>`).join('')}
+      </select>
+      <select class="form-ctrl" onchange="ingredientsRecette[${i}].nom=this.value">
+        <option value="">— Ingrédient —</option>
+        ${(listesDropdown.fullData || []).filter(d => d.type===ing.type).map(d => `<option value="${d.ingredient}" ${ing.nom===d.ingredient?'selected':''}>${d.ingredient}</option>`).join('')}
+      </select>
+      <input type="text" inputmode="numeric" class="form-ctrl" style="width:90px" value="${ing.quantite||''}" placeholder="g" onchange="ingredientsRecette[${i}].quantite=parseFloat(this.value)||0">
+      <button class="btn btn-sm btn-danger" onclick="supprimerIngredientRecette(${i})">✕</button>
+    </div>
+  `).join('');
 }
 
 // ─── INGRÉDIENTS DE BASE ───
