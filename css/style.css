@@ -766,7 +766,7 @@ footer > * { position: relative; z-index: 1; }
 .accueil-grande-tuile-jaune      { background: var(--accent-70); }
 .accueil-grande-tuile-gris       { background: var(--gris-70); }
 .accueil-grande-tuile-gris-fonce { background: var(--gris-fonce-70); }
-.accueil-tuile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: white; cursor: pointer; border: none; transition: filter 0.4s ease; flex: 1; }
+.accueil-tuile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: white; cursor: pointer; border: none; transition: filter 0.4s ease; flex: 1; background: transparent; }
 .accueil-tuile:hover { filter: brightness(1.08); }
 .accueil-tuile:disabled { opacity: 0.4; cursor: default; filter: none; }
 .tuile-icone { width: 36px; height: 36px; display: block; transition: transform 0.4s ease; }
