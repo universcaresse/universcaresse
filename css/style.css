@@ -755,7 +755,7 @@ footer > * { position: relative; z-index: 1; }
 /* ═══════════════════════════════════════
    ADMIN — ACCUEIL
    ═══════════════════════════════════════ */
-.accueil-admin { display: grid; grid-template-columns: 1fr 1fr; height: calc(100vh - var(--nav-h)); margin: -48px -56px; overflow: hidden; }
+.accueil-admin { display: grid; grid-template-columns: 1fr 1fr; height: calc(100vh - var(--nav-h)); margin: -48px -56px; margin-bottom: 0; overflow: hidden; }
 .accueil-gauche { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; padding: 40px 64px; border-right: 1px solid var(--beige); gap: 4px; }
 .accueil-logo { max-width: 280px; width: 70%; height: auto; margin-bottom: 12px; }
 .accueil-bonjour { font-family: 'Birthstone', cursive; font-size: 3.5rem; color: var(--accent); line-height: 1; align-self: center; letter-spacing: 0.05em; }
