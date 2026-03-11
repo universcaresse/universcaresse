@@ -1,1184 +1,1099 @@
-/* ═══════════════════════════════════════
-   UNIVERS CARESSE — style.css
-   Source unique — public + admin
-   Mis à jour : 5 mars 2026
-   ═══════════════════════════════════════ */
-
-/* ═══════════════════════════════════════
-   VARIABLES
-   ═══════════════════════════════════════ */
-   
-:root {
-  --primary:        #5a8a3a;
-  --primary-dark:   #4a6e2e;
-  --accent:         #d4a445;
-  --danger:         #c44536;
-  --blanc:          #f9f7f4;
-  --beige:          #e8dcc8;
-  --gris:           #8b8680;
-  --gris-fonce:     #3d3b39;
-  --logo:           #333333;
-  --nav-h:          72px;
-  --padding-page:   80px;
-  --padding-mobile: 20px;
-
-  /* PRIMARY */
-  --primary-04:    rgba(90,138,58,0.04);
-  --primary-05:     rgba(90,138,58,0.05);
-  --primary-06:     rgba(90,138,58,0.06);
-  --primary-08:     rgba(90,138,58,0.08);
-  --primary-10:     rgba(90,138,58,0.10);
-  --primary-12:     rgba(90,138,58,0.12);
-  --primary-15:     rgba(90,138,58,0.15);
-  --primary-16:     rgba(90,138,58,0.16);
-  --primary-18:     rgba(90,138,58,0.18);
-  --primary-20:     rgba(90,138,58,0.20);
-  --primary-30:     rgba(90,138,58,0.30);
-  --primary-40:     rgba(90,138,58,0.40);
-  --primary-50:     rgba(90,138,58,0.50);
-  --primary-60:     rgba(90,138,58,0.60);
-  --primary-70:     rgba(90,138,58,0.70);
-  --primary-75:     rgba(90,138,58,0.75);
-  --primary-80:     rgba(90,138,58,0.80);
-  --primary-85:     rgba(90,138,58,0.85);
-  --primary-88:     rgba(90,138,58,0.88);
-  --primary-90:     rgba(90,138,58,0.90);
-
-  /* DANGER */
-  --danger-06:      rgba(196,69,54,0.06);
-  --danger-08:      rgba(196,69,54,0.08);
-  --danger-10:      rgba(196,69,54,0.10);
-  --danger-15:      rgba(196,69,54,0.15);
-  --danger-16:      rgba(196,69,54,0.16);
-  --danger-20:      rgba(196,69,54,0.20);
-  --danger-30:      rgba(196,69,54,0.30);
-  --danger-40:      rgba(196,69,54,0.40);
-  --danger-50:      rgba(196,69,54,0.50);
-  --danger-60:      rgba(196,69,54,0.60);
-  --danger-70:      rgba(196,69,54,0.70);
-  --danger-75:      rgba(196,69,54,0.75);
-  --danger-80:      rgba(196,69,54,0.80);
-  --danger-85:      rgba(196,69,54,0.85);
-  --danger-88:      rgba(196,69,54,0.88);
-  --danger-90:      rgba(196,69,54,0.90);
-
-  /* ACCENT */
-  --accent-08:      rgba(212,164,69,0.08);
-  --accent-10:      rgba(212,164,69,0.10);
-  --accent-12:      rgba(212,164,69,0.12);
-  --accent-15:      rgba(212,164,69,0.15);
-  --accent-20:      rgba(212,164,69,0.20);
-  --accent-30:      rgba(212,164,69,0.30);
-  --accent-40:      rgba(212,164,69,0.40);
-  --accent-50:      rgba(212,164,69,0.50);
-  --accent-60:      rgba(212,164,69,0.60);
-  --accent-70:      rgba(212,164,69,0.70);
-  --accent-75:      rgba(212,164,69,0.75);
-  --accent-80:      rgba(212,164,69,0.80);
-  --accent-85:      rgba(212,164,69,0.85);
-  --accent-88:      rgba(212,164,69,0.88);
-  --accent-90:      rgba(212,164,69,0.90);
-
-  /* BEIGE */
-  --beige-08:       rgba(232,220,200,0.08);
-  --beige-10:       rgba(232,220,200,0.10);
-  --beige-15:       rgba(232,220,200,0.15);
-  --beige-20:       rgba(232,220,200,0.20);
-  --beige-30:       rgba(232,220,200,0.30);
-  --beige-40:       rgba(232,220,200,0.40);
-  --beige-50:       rgba(232,220,200,0.50);
-  --beige-60:       rgba(232,220,200,0.60);
-  --beige-70:       rgba(232,220,200,0.70);
-  --beige-75:       rgba(232,220,200,0.75);
-  --beige-80:       rgba(232,220,200,0.80);
-  --beige-85:       rgba(232,220,200,0.85);
-  --beige-88:       rgba(232,220,200,0.88);
-  --beige-90:       rgba(232,220,200,0.90);
-
-  /* BLANC */
-  --blanc-15:       rgba(249,247,244,0.15);
-  --blanc-20:       rgba(249,247,244,0.20);
-  --blanc-30:       rgba(249,247,244,0.30);
-  --blanc-40:       rgba(249,247,244,0.40);
-  --blanc-50:       rgba(249,247,244,0.50);
-  --blanc-60:       rgba(249,247,244,0.60);
-  --blanc-70:       rgba(249,247,244,0.70);
-  --blanc-75:       rgba(249,247,244,0.75);
-  --blanc-80:       rgba(249,247,244,0.80);
-  --blanc-85:       rgba(249,247,244,0.85);
-  --blanc-88:       rgba(249,247,244,0.88);
-  --blanc-90:       rgba(249,247,244,0.90);
-  --blanc-92:       rgba(249,247,244,0.92);
-
-  /* BLANC PUR */
-  --blanc-pur-15:   rgba(255,255,255,0.15);
-  --blanc-pur-45:   rgba(255,255,255,0.45);
-  --blanc-pur-50:   rgba(255,255,255,0.50);
-  --blanc-pur-60:   rgba(255,255,255,0.60);
-  --blanc-pur-65:   rgba(255,255,255,0.65);
-  --blanc-pur-70:   rgba(255,255,255,0.70);
-  --blanc-pur-75:   rgba(255,255,255,0.75);
-  --blanc-pur-80:   rgba(255,255,255,0.80);
-  --blanc-pur-85:   rgba(255,255,255,0.85);
-  --blanc-pur-88:   rgba(255,255,255,0.88);
-  --blanc-pur-90:   rgba(255,255,255,0.90);
-
-  /* GRIS */
-  --gris-08:        rgba(139,134,128,0.08);
-  --gris-10:        rgba(139,134,128,0.10);
-  --gris-15:        rgba(139,134,128,0.15);
-  --gris-20:        rgba(139,134,128,0.20);
-  --gris-30:        rgba(139,134,128,0.30);
-  --gris-40:        rgba(139,134,128,0.40);
-  --gris-50:        rgba(139,134,128,0.50);
-  --gris-60:        rgba(139,134,128,0.60);
-  --gris-70:        rgba(139,134,128,0.70);
-  --gris-75:        rgba(139,134,128,0.75);
-  --gris-80:        rgba(139,134,128,0.80);
-  --gris-85:        rgba(139,134,128,0.85);
-  --gris-88:        rgba(139,134,128,0.88);
-  --gris-90:        rgba(139,134,128,0.90);
-
-  /* GRIS FONCÉ */
-  --gris-fonce-08:  rgba(61,59,57,0.08);
-  --gris-fonce-10:  rgba(61,59,57,0.10);
-  --gris-fonce-15:  rgba(61,59,57,0.15);
-  --gris-fonce-20:  rgba(61,59,57,0.20);
-  --gris-fonce-30:  rgba(61,59,57,0.30);
-  --gris-fonce-40:  rgba(61,59,57,0.40);
-  --gris-fonce-50:  rgba(61,59,57,0.50);
-  --gris-fonce-60:  rgba(61,59,57,0.60);
-  --gris-fonce-70:  rgba(61,59,57,0.70);
-  --gris-fonce-75:  rgba(61,59,57,0.75);
-  --gris-fonce-80:  rgba(61,59,57,0.80);
-  --gris-fonce-85:  rgba(61,59,57,0.85);
-  --gris-fonce-88:  rgba(61,59,57,0.88);
-  --gris-fonce-90:  rgba(61,59,57,0.90);
-
-  /* NOIR */
-  --noir-08:        rgba(0,0,0,0.08);
-  --noir-10:        rgba(0,0,0,0.10);
-  --noir-15:        rgba(0,0,0,0.15);
-  --noir-20:        rgba(0,0,0,0.20);
-  --noir-30:        rgba(0,0,0,0.30);
-  --noir-40:        rgba(0,0,0,0.40);
-  --noir-50:        rgba(0,0,0,0.50);
-  --noir-60:        rgba(0,0,0,0.60);
-  --noir-70:        rgba(0,0,0,0.70);
-  --noir-75:        rgba(0,0,0,0.75);
-  --noir-80:        rgba(0,0,0,0.80);
-  --noir-85:        rgba(0,0,0,0.85);
-  --noir-88:        rgba(0,0,0,0.88);
-  --noir-90:        rgba(0,0,0,0.90);
-}
-
-/* ═══════════════════════════════════════
-   RESET
-   ═══════════════════════════════════════ */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 300;
-  background: var(--blanc);
-  color: var(--gris-fonce);
-  overflow-x: hidden;
-}
-
-/* ═══════════════════════════════════════
-   TYPOGRAPHIE
-   ═══════════════════════════════════════ */
-h1, h2, h3 { font-family: 'Playfair Display', serif; }
-p { white-space: pre-line; }
-
-/* ═══════════════════════════════════════
-   NAVIGATION
-   ═══════════════════════════════════════ */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  height: var(--nav-h);
-display: flex; align-items: center; justify-content: flex-end;
-  padding: 0 48px;
-  background: rgba(249,247,244,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: none;
-  transition: box-shadow 0.3s;
-}
-nav.scrolled { box-shadow: 0 2px 20px rgba(90,138,58,0.08); }
-
-.nav-logo { display: flex; flex-direction: column; text-decoration: none; line-height: 1.1; }
-.logo-nom { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--logo); letter-spacing: 0.04em; }
-.logo-tagline { font-family: 'Birthstone', cursive; font-size: 0.95rem; color: var(--accent); line-height: 1.2; }
-.logo-sub { font-family: 'Playfair Display', serif; font-size: 0.6rem; font-weight: 400; color: var(--gris); letter-spacing: 0.18em; text-transform: lowercase; }
-
-.nav-links { display: flex; gap: 32px; list-style: none; margin-left: auto; }
-.nav-links a {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--gris); text-decoration: none; font-weight: 400;
-  transition: color 0.2s; position: relative;
-}
-.nav-links a::after {
-  content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
-  height: 1px; background: var(--accent);
-  transform: scaleX(0); transition: transform 0.3s;
-}
-.nav-links a:hover { color: var(--primary); }
-.nav-links a:hover::after { transform: scaleX(1); }
-.nav-links a.active { color: var(--primary); }
-.nav-links a.active::after { transform: scaleX(1); }
-
-.nav-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
-
-.btn-connexion {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 8px 18px; border: 1px solid var(--beige);
-  background: transparent; color: var(--gris); cursor: pointer; transition: all 0.2s;
-}
-.btn-connexion:hover { border-color: var(--primary); color: var(--primary); }
-.btn-deconnexion { border-color: var(--danger); color: var(--danger); }
-.btn-deconnexion:hover { background: var(--danger); color: white; border-color: var(--danger); }
-
-.btn-nav-admin {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 8px 18px; border: 1px solid var(--beige);
-  background: transparent; color: var(--gris); cursor: pointer; transition: all 0.2s;
-  text-decoration: none; display: inline-flex; align-items: center;
-}
-.btn-nav-admin:hover { border-color: var(--primary); color: var(--primary); }
-
-.nav-badge {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
-  background: var(--primary); color: white; padding: 4px 12px;
-}
-
-.burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
-.burger span { display: block; width: 22px; height: 2px; background: var(--gris-fonce); transition: all 0.3s; }
-
-/* ═══════════════════════════════════════
-   MAIN & SPA
-   ═══════════════════════════════════════ */
-main { padding-top: var(--nav-h); }
-.page-section { display: none; }
-.page-section.active { display: block; }
-
-/* ═══════════════════════════════════════
-   ANIMATIONS
-   ═══════════════════════════════════════ */
-.fade-in { opacity: 0; transform: translateY(24px); transition: opacity 2s ease, transform 2s ease; }
-.fade-in.visible { opacity: 1; transform: translateY(0); }
-@keyframes fadeIn { to { opacity: 1; transform: none; } }
-
-.mosaic-item { opacity: 1; }
-.mosaic-soap-label { opacity: 0; transform: translateY(10px); transition: opacity 0.8s ease, transform 0.8s ease; }
-.mosaic-item.visible .mosaic-soap-label { opacity: 1; transform: translateY(0); }
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.35s; }
-.delay-4 { animation-delay: 0.5s; }
-.delay-5 { animation-delay: 0.65s; }
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes modalEntre {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: none; }
-}
-
-/* ═══════════════════════════════════════
-   BOUTONS
-   ═══════════════════════════════════════ */
-.btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
-  font-weight: 500; cursor: pointer; border: none;
-  padding: 11px 24px; transition: all 0.2s; text-decoration: none;
-}
-.btn-sm { padding: 7px 16px; font-size: 0.68rem; }
-
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: var(--primary); color: white; border: none;
-  padding: 12px 28px; font-family: 'DM Sans', sans-serif;
-  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
-  font-weight: 500; cursor: pointer; transition: background 0.2s;
-}
-.btn-primary:hover { background: var(--primary-dark); }
-
-.btn-secondary {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: rgba(90,138,58,0.1); color: var(--primary); border: none;
-  padding: 12px 28px; font-family: 'DM Sans', sans-serif;
-  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
-  font-weight: 500; cursor: pointer; transition: background 0.2s;
-}
-.btn-secondary:hover { background: rgba(90,138,58,0.18); }
-
-.btn-danger {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: var(--danger); color: white; border: none;
-  padding: 12px 28px; font-family: 'DM Sans', sans-serif;
-  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
-  font-weight: 500; cursor: pointer; transition: background 0.2s;
-}
-.btn-danger:hover { background: #a33528; }
-
-.btn-accent {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: var(--accent); color: white; border: none;
-  padding: 12px 28px; font-family: 'DM Sans', sans-serif;
-  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
-  font-weight: 500; cursor: pointer; transition: background 0.2s;
-}
-.btn-accent:hover { background: #b8892e; }
-
-.btn-outline {
-  background: transparent; color: var(--gris); border: 1px solid var(--beige);
-}
-.btn-outline:hover { border-color: var(--primary); color: var(--primary); }
-
-.btn-edit {
-  background: rgba(90,138,58,0.08); color: var(--primary);
-  padding: 6px 14px; font-size: 0.68rem;
-  font-family: 'DM Sans', sans-serif; font-weight: 500;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  border: none; cursor: pointer; transition: background 0.2s;
-}
-.btn-edit:hover { background: rgba(90,138,58,0.16); }
-
-.btn-suppr {
-  background: rgba(196,69,54,0.08); color: var(--danger);
-  padding: 6px 14px; font-size: 0.68rem;
-  font-family: 'DM Sans', sans-serif; font-weight: 500;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  border: none; cursor: pointer; transition: background 0.2s;
-}
-.btn-suppr:hover { background: rgba(196,69,54,0.16); }
-
-.btn-finaliser {
-  background: var(--accent); color: white;
-  font-family: 'DM Sans', sans-serif; font-size: 0.75rem;
-  letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500;
-  padding: 11px 28px; border: none; cursor: pointer; transition: filter 0.2s;
-}
-.btn-finaliser:hover { filter: brightness(1.08); }
-
-.btn-envoyer {
-  display: inline-flex; align-items: center; gap: 12px;
-  background: var(--primary); color: white; border: none;
-  padding: 16px 40px; font-family: 'DM Sans', sans-serif;
-  font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
-  font-weight: 500; cursor: pointer; transition: background 0.2s, transform 0.2s;
-}
-.btn-envoyer:hover { background: var(--primary-dark); transform: translateY(-1px); }
-.btn-envoyer svg { width: 16px; height: 16px; transition: transform 0.3s; }
-.btn-envoyer:hover svg { transform: translateX(4px); }
-.btn-envoyer:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-/* ═══════════════════════════════════════
-   FORMULAIRES
-   ═══════════════════════════════════════ */
-.form-group { margin-bottom: 20px; }
-.form-groupe { display: flex; flex-direction: column; gap: 6px; }
-
-.form-label {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--gris); display: block; margin-bottom: 8px; font-weight: 500;
-}
-.form-label span { color: var(--danger); }
-.form-optionnel { font-weight: 300; text-transform: none; letter-spacing: 0; font-size: 0.68rem; color: var(--beige); }
-
-.form-control, .form-ctrl {
-  width: 100%; padding: 14px 14px 10px;
-  font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 300;
-  border: 1px solid var(--beige); background: white; color: var(--gris-fonce);
-  outline: none; transition: border-color 0.2s; -webkit-appearance: none; appearance: none;
-}
-.form-control:focus, .form-ctrl:focus { border-color: var(--primary); }
-textarea.form-control, textarea.form-ctrl { resize: vertical; min-height: 80px; line-height: 1.6; }
-select.form-control, select.form-ctrl { cursor: pointer; }
-.form-ctrl[readonly] { background: rgba(232,220,200,0.3); color: var(--gris); }
-
-.form-erreur { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--danger); margin-bottom: 16px; }
-.form-actions { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
-.form-submit { margin-top: 8px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.form-note { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; color: var(--gris); font-weight: 300; }
-
-.form-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
-.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.col-plein { grid-column: 1 / -1; }
-
-/* ═══════════════════════════════════════
-   MESSAGES
-   ═══════════════════════════════════════ */
-.msg-zone { min-height: 0; }
-.msg {
-  padding: 12px 18px; margin-bottom: 16px;
-  font-family: 'DM Sans', sans-serif; font-size: 0.84rem;
-  display: flex; align-items: center; gap: 10px;
-}
-.msg-succes, #msg-succes {
-  background: rgba(90,138,58,0.08); border-left: 3px solid var(--primary);
-  color: var(--gris-fonce); padding: 20px 24px; margin-top: 20px;
-  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; line-height: 1.6; display: none;
-}
-.msg-erreur, #msg-erreur {
-  background: rgba(196,69,54,0.06); border-left: 3px solid var(--danger);
-  color: var(--gris-fonce); padding: 20px 24px; margin-top: 20px;
-  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; line-height: 1.6; display: none;
-}
-
-/* ═══════════════════════════════════════
-   MODAL
-   ═══════════════════════════════════════ */
-.modal-overlay {
-  display: none; position: fixed; inset: 0; z-index: 200;
-  background: rgba(30,28,25,0.6); backdrop-filter: blur(4px);
-  align-items: center; justify-content: center;
-}
-.modal-overlay.ouvert { display: flex; }
-
-.modal-connexion {
-  background: var(--blanc); padding: 48px 40px;
-  width: 90%; max-width: 380px; position: relative;
-  animation: modalEntre 0.3s ease;
-}
-.modal-fermer {
-  position: absolute; top: 16px; right: 16px;
-  background: rgba(255,255,255,0.85); border: none; cursor: pointer;
-  color: var(--gris-fonce); font-size: 1rem; transition: all 0.2s;
-  width: 32px; height: 32px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  z-index: 10;
-}
-.modal-fermer:hover { color: var(--gris-fonce); }
-.modal-titre { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 28px; color: var(--gris-fonce); }
-
-.modal-produit {
-  background: var(--blanc); max-width: 820px; width: 90%;
-  max-height: min(88vh, 900px);
-  display: grid; grid-template-columns: 1fr 2fr 1fr;
-  overflow-y: auto;
-  animation: modalEntre 0.35s ease;
-}
-.modal-visuel-hex { min-height: 320px; }
-.modal-visuel-photo { min-height: 320px; position: relative; display: flex; align-items: center; justify-content: center; }
-.modal-visuel-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.modal-contenu { padding: 40px 32px; }
-.modal-collection { font-family: 'DM Sans', sans-serif; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-.modal-nom { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 600; color: var(--gris-fonce); margin-bottom: 4px; }
-.modal-ligne { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--gris); margin-bottom: 8px; font-weight: 300; }
-.modal-desc-ligne { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--gris); margin-bottom: 20px; font-weight: 300; font-style: italic; }
-.ligne-groupe { margin-bottom: 48px; }
-.ligne-groupe-entete { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--beige); }
-.ligne-groupe-nom { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400; color: var(--gris-fonce); margin-bottom: 8px; }
-.ligne-groupe-desc { font-family: 'DM Sans', sans-serif; font-size: 0.88rem; line-height: 1.7; color: var(--gris); font-weight: 300; }
-.modal-desc { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; line-height: 1.85; color: var(--gris); font-weight: 300; margin-bottom: 24px; }
-.modal-formats-titre { font-family: 'DM Sans', sans-serif; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); margin-bottom: 10px; }
-.modal-formats { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
-.modal-format { padding: 10px 18px; border: 1px solid var(--beige); cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; transition: all 0.2s; color: var(--gris); text-align: center; min-width: 80px; }
-.modal-format:hover, .modal-format.selectionne { border-color: var(--primary); color: var(--primary); background: rgba(90,138,58,0.04); }
-.modal-format-prix { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--primary); display: block; margin-top: 2px; }
-.modal-cta { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; font-weight: 500; }
-.modal-cta:hover { background: var(--primary-dark); }
-
-.modal-admin-overlay {
-  display: none; position: fixed; inset: 0; z-index: 300;
-  background: rgba(30,28,25,0.6); backdrop-filter: blur(4px);
-  align-items: center; justify-content: center;
-}
-.modal-admin-overlay.ouvert { display: flex; }
-.modal-admin { background: var(--blanc); max-width: 860px; width: 94%; max-height: 88vh; overflow-y: auto; animation: modalEntre 0.3s ease; }
-.modal-admin-header { padding: 24px 32px; border-bottom: 1px solid var(--beige); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.modal-admin-titre { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gris-fonce); }
-.modal-admin-info { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--gris); margin-top: 2px; }
-.modal-admin-body { padding: 28px 32px; }
-
-/* ═══════════════════════════════════════
-   CHARGEMENT / SPINNER
-   ═══════════════════════════════════════ */
-.chargement { text-align: center; padding: 80px 20px; font-family: 'DM Sans', sans-serif; color: var(--gris); font-size: 0.9rem; }
-.chargement-spinner { width: 36px; height: 36px; border: 2px solid var(--beige); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
-.spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid var(--beige); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 10px; vertical-align: middle; }
-.chargement-erreur { color: var(--gris); font-family: 'DM Sans', sans-serif; }
-
-/* ═══════════════════════════════════════
-   FOOTER
-   ═══════════════════════════════════════ */
-footer {
-  background: url('../Images/fond.png') center center / cover no-repeat;
-  color: var(--blanc-pur-75);
-  padding: 28px var(--padding-page);
-  display: flex; justify-content: space-between; align-items: center;
-  font-family: 'DM Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.06em;
-  position: relative;
-}
-footer::before {
-  content: ''; position: absolute; inset: 0;
-  background: var(--gris-fonce-70);
-  z-index: 0;
-}
-footer > * { position: relative; z-index: 1; }
-.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: white; font-weight: 400; letter-spacing: 0.04em; }
-.footer-tagline { font-family: 'Birthstone', cursive; font-size: 1.1rem; margin-top: 4px; color: var(--accent); }
-
-/* ═══════════════════════════════════════
-   HERO ACCUEIL PUBLIC
-   ═══════════════════════════════════════ */
-.hero { min-height: calc(100vh - var(--nav-h)); display: grid; grid-template-columns: 1fr 1fr; }
-.hero-left { display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 24px 64px 80px 80px; position: relative; }
-.hero-left::after { display: none; }
-.hero-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; font-weight: 500; }
-.hero-cta { display: flex; align-items: center; gap: 16px; background: var(--primary); color: white; padding: 16px 36px; font-size: 0.78rem; font-family: 'DM Sans', sans-serif; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: background 0.3s, transform 0.2s; }
-.hero-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
-.hero-cta svg { width: 16px; height: 16px; transition: transform 0.3s; }
-.hero-cta:hover svg { transform: translateX(4px); }
-.hero-stats { display: flex; justify-content: space-between; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--beige); width: 100%; max-width: 480px; margin-left: auto; margin-right: auto; }
-.hero-stat { flex: 1; text-align: center; }
-.hero-stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 600; color: var(--primary); line-height: 1; }
-.hero-stat-label { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gris); text-transform: uppercase; margin-top: 4px; }
-.hero-right { position: relative; overflow: hidden; background: url('../Images/fond.png') center center / cover no-repeat; }
-.hero-logo-img { max-width: 360px; width: 100%; margin-bottom: 16px; display: block; margin-left: auto; margin-right: auto; }
-
-.hero-mosaic { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; height: 100%; gap: 16px; padding: 16px; }
-.mosaic-item { overflow: hidden; position: relative; }
-.mosaic-item:first-child { grid-row: span 2; }
-.mosaic-soap { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; color: rgba(255,255,255,0.9); text-transform: uppercase; position: relative; overflow: hidden; transition: transform 0.6s; opacity: 0.82; }
-.mosaic-soap:hover { transform: scale(1.03); }
-.mosaic-soap-accent  { background: var(--accent);  height: 100%; }
-.mosaic-soap-primary { background: var(--primary); height: 100%; }
-.mosaic-soap-gris    { background: var(--gris);    height: 100%; }
-.mosaic-soap-label { position: relative; z-index: 1; text-align: center; }
-.mosaic-soap-name { font-size: 0.85rem; font-weight: 500; display: block; }
-.mosaic-soap-col { font-size: 0.62rem; opacity: 0.75; letter-spacing: 0.12em; }
-
-/* ═══════════════════════════════════════
-   SECTION COLLECTIONS — ACCUEIL
-   ═══════════════════════════════════════ */
-.section-collections { padding: var(--padding-page); background: var(--blanc); }
-.section-header { display: flex; align-items: baseline; gap: 24px; margin-bottom: 48px; }
-.section-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 400; color: var(--gris-fonce); }
-.section-line { flex: 1; height: 1px; background: var(--beige); }
-.section-count { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; }
-
-.collections-strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2px; }
-.collection-tile { aspect-ratio: 3/4; position: relative; overflow: hidden; cursor: pointer; background: var(--beige); text-decoration: none; display: block; }
-.collection-tile-bg { position: absolute; inset: 0; transition: transform 0.6s ease; background: linear-gradient(135deg, var(--col-hex-1, var(--primary)) 0%, var(--col-hex-2, var(--primary-dark)) 100%); }
-.collection-tile:hover .collection-tile-bg { transform: scale(1.05); }
-.collection-tile-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,28,25,0.7) 0%, rgba(30,28,25,0.1) 60%, transparent 100%); }
-.collection-tile-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px 16px; }
-.collection-tile-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: white; letter-spacing: 0.03em; display: block; }
-.collection-tile-slogan { font-family: 'DM Sans', sans-serif; font-size: 0.68rem; color: rgba(255,255,255,0.75); margin-top: 4px; display: block; letter-spacing: 0.04em; font-weight: 300; }
-
-/* ═══════════════════════════════════════
-   EN-TÊTE DE PAGE
-   ═══════════════════════════════════════ */
-.page-entete { padding: var(--padding-page) var(--padding-page) 56px; border-bottom: 1px solid var(--beige); display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
-.page-entete-gauche { max-width: 560px; }
-.page-entete-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; font-weight: 500; }
-.page-entete-titre { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 3.5vw, 3.2rem); font-weight: 400; line-height: 1.1; color: var(--gris-fonce); }
-.page-entete-titre em { font-style: italic; color: var(--primary); }
-.page-entete-plume { width: 100px; opacity: 0.15; flex-shrink: 0; }
-
-/* ═══════════════════════════════════════
-   QUI SOMMES-NOUS
-   ═══════════════════════════════════════ */
-.page-hero { padding: var(--padding-page) var(--padding-page) 64px; border-bottom: 1px solid var(--beige); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.page-hero-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; font-weight: 500; }
-.page-hero-titre { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 400; line-height: 1.1; color: var(--gris-fonce); margin-bottom: 8px; }
-.page-hero-titre em { font-style: italic; color: var(--primary); display: block; }
-.page-hero-texte { font-family: 'DM Sans', sans-serif; font-size: 1rem; line-height: 1.9; color: var(--gris); font-weight: 300; margin-top: 28px; max-width: 480px; }
-.page-hero-signature { font-family: 'Birthstone', cursive; font-size: 1.8rem; color: var(--accent); margin-top: 40px; margin-bottom: 4px; }
-.page-hero-titre-signature { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); font-weight: 400; }
-.page-hero-signature-bloc { margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--beige); }
-.page-hero-visuel { display: flex; align-items: center; justify-content: center; max-width: 480px; }
-.page-hero-visuel-bg { width: 100%; aspect-ratio: 4/5; background: var(--beige); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-.page-hero-visuel-bg img.photo-ambiance { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-.plume-deco { width: 180px; opacity: 0.25; position: relative; z-index: 1; }
-
-.section-texte { padding: var(--padding-page); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-.texte-principal p { font-family: 'DM Sans', sans-serif; font-size: 1rem; line-height: 1.9; color: var(--gris); font-weight: 300; margin-bottom: 24px; }
-.texte-principal p:last-child { margin-bottom: 0; }
-.valeur-item { padding: 28px 0; border-bottom: 1px solid var(--beige); }
-.valeur-item:first-child { padding-top: 0; }
-.valeur-item:last-child { border-bottom: none; }
-.valeur-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 600; color: var(--beige); line-height: 1; margin-bottom: 8px; }
-.valeur-titre { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--gris-fonce); margin-bottom: 8px; }
-.valeur-desc { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; line-height: 1.7; color: var(--gris); font-weight: 300; }
-
-.bandeau-citation { background: var(--primary); padding: 64px var(--padding-page); text-align: center; }
-.citation-texte { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 400; font-style: italic; color: white; line-height: 1.5; max-width: 800px; margin: 0 auto 20px; }
-.citation-source { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.65); }
-
-.section-cta { padding: var(--padding-page); text-align: center; border-top: 1px solid var(--beige); }
-.section-cta h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 400; color: var(--gris-fonce); margin-bottom: 16px; }
-.section-cta p { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--gris); font-weight: 300; margin-bottom: 40px; }
-.section-cta a { display: inline-flex; align-items: center; gap: 14px; background: var(--primary); color: white; padding: 16px 40px; font-size: 0.78rem; font-family: 'DM Sans', sans-serif; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: background 0.3s, transform 0.2s; }
-.section-cta a:hover { background: var(--primary-dark); transform: translateY(-1px); }
-.section-cta a svg { width: 16px; height: 16px; transition: transform 0.3s; }
-.section-cta a:hover svg { transform: translateX(4px); }
-
-/* ═══════════════════════════════════════
-   BON À SAVOIR
-   ═══════════════════════════════════════ */
-.bonne-section { padding: 64px var(--padding-page); border-bottom: 1px solid var(--beige); }
-.bonne-section:last-of-type { border-bottom: none; }
-.bonne-section-titre { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; color: var(--gris-fonce); margin-bottom: 32px; display: flex; align-items: center; gap: 16px; }
-.bonne-section-titre::after { content: ''; flex: 1; height: 1px; background: var(--beige); }
-.items-grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
-.info-card { background: white; padding: 28px 28px 28px 24px; border-left: 3px solid var(--primary); }
-.info-card.accent { border-left-color: var(--accent); }
-.info-card.neutre { border-left-color: var(--beige); }
-.info-card-titre { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gris-fonce); margin-bottom: 10px; }
-.info-card-texte { font-family: 'DM Sans', sans-serif; font-size: 0.88rem; line-height: 1.75; color: var(--gris); font-weight: 300; }
-.note-allergenes { margin: 0 var(--padding-page) 64px; background: rgba(212,164,69,0.08); border: 1px solid rgba(212,164,69,0.3); padding: 28px 32px; display: flex; gap: 20px; align-items: flex-start; }
-.note-allergenes-icone { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; color: var(--accent); }
-.note-allergenes-texte { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; line-height: 1.7; color: var(--gris-fonce); font-weight: 300; }
-.note-allergenes-texte strong { font-weight: 500; display: block; margin-bottom: 4px; }
-
-/* ═══════════════════════════════════════
-   CONTACT
-   ═══════════════════════════════════════ */
-.contact-grille { padding: 72px var(--padding-page) var(--padding-page); display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px; align-items: start; }
-.contact-info-titre { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--gris-fonce); margin-bottom: 24px; }
-.contact-info-desc { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; line-height: 1.8; color: var(--gris); font-weight: 300; margin-bottom: 40px; }
-.contact-item { display: flex; gap: 16px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid var(--beige); }
-.contact-item:first-of-type { border-top: 1px solid var(--beige); }
-.contact-item-icone { width: 36px; height: 36px; background: rgba(90,138,58,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
-.contact-item-icone svg { width: 16px; height: 16px; color: var(--primary); }
-.contact-item-label { font-family: 'DM Sans', sans-serif; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris); font-weight: 500; margin-bottom: 4px; }
-.contact-item-valeur { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--gris-fonce); font-weight: 300; }
-.contact-item-valeur a { color: var(--primary); text-decoration: none; transition: color 0.2s; }
-.contact-item-valeur a:hover { color: var(--primary-dark); }
-.contact-delai { margin-top: 32px; padding: 20px 24px; background: rgba(90,138,58,0.06); border-left: 3px solid var(--primary); }
-.contact-delai p { font-family: 'DM Sans', sans-serif; font-size: 0.82rem; line-height: 1.7; color: var(--gris); font-weight: 300; }
-.contact-delai strong { font-weight: 500; color: var(--gris-fonce); }
-.formulaire-titre { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--gris-fonce); margin-bottom: 32px; }
-
-/* ═══════════════════════════════════════
-   CATALOGUE PUBLIC
-   ═══════════════════════════════════════ */
-.catalogue-hero { padding: 56px var(--padding-page) 40px; border-bottom: 1px solid var(--beige); display: flex; align-items: flex-end; justify-content: space-between; }
-.catalogue-title { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 400; color: var(--gris-fonce); }
-.catalogue-title span { color: var(--primary); font-style: italic; }
-.catalogue-subtitle { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--gris); font-weight: 300; margin-top: 8px; }
-.filtres-bar { padding: 20px var(--padding-page); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; border-bottom: 1px solid var(--beige); background: var(--blanc); position: sticky; top: var(--nav-h); z-index: 50; }
-.filtre-label { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); margin-right: 8px; font-weight: 500; }
-.filtre-btn { padding: 7px 18px; font-size: 0.72rem; letter-spacing: 0.08em; border: 1px solid var(--beige); background: transparent; color: var(--gris); cursor: pointer; font-family: 'DM Sans', sans-serif; text-transform: uppercase; transition: all 0.2s; font-weight: 400; }
-.filtre-btn:hover { border-color: var(--primary); color: var(--primary); }
-.filtre-btn.actif { background: var(--primary); border-color: var(--primary); color: white; }
-.catalogue-body { padding: 48px var(--padding-page) 80px; }
-.collection-section { margin-bottom: 72px; }
-.collection-section.masquee { display: none; }
-.collection-entete { display: grid; grid-template-columns: 1fr 340px; gap: 48px; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--beige); align-items: start; }
-.collection-entete-nom { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 400; color: var(--gris-fonce); margin-bottom: 4px; }
-.collection-entete-slogan { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-style: italic; color: var(--accent); margin-bottom: 14px; }
-.collection-entete-desc { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; line-height: 1.8; color: var(--gris); font-weight: 300; max-width: 560px; }
-.collection-entete-visuel { aspect-ratio: 4/5; overflow: hidden; position: relative; }
-.collection-entete-bg { width: 100%; aspect-ratio: 4/5; background: linear-gradient(135deg, color-mix(in srgb, var(--col-hex) 80%, transparent), color-mix(in srgb, var(--col-hex) 53%, transparent)); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-.collection-entete-bg img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-.entete-visuel-placeholder { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: rgba(255,255,255,0.6); font-style: italic; letter-spacing: 0.06em; text-align: center; position: relative; z-index: 1; }
-.produits-grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; }
-.carte-produit { background: white; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
-.carte-produit:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(90,138,58,0.12); }
-.carte-visuel { aspect-ratio: 1; position: relative; overflow: hidden; }
-.carte-couleur { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transition: transform 0.5s; position: relative; background: var(--col-hex); }
-.carte-produit:hover .carte-couleur { transform: scale(1.04); }
-.carte-couleur img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-.carte-couleur-dot { position: absolute; bottom: 12px; right: 12px; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--blanc-pur-60); background: var(--col-hex); }
-.carte-couleur-overlay { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, color-mix(in srgb, var(--col-hex) 56%, transparent) 0%, color-mix(in srgb, var(--col-hex) 27%, transparent) 40%, transparent 70%); }
-.carte-infos { padding: 16px 16px 18px; background: color-mix(in srgb, var(--col-hex) 90%, transparent); }
-.carte-photo-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: rgba(255,255,255,0.5); font-family: 'DM Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; }
-.carte-photo-placeholder svg { width: 26px; height: 26px; opacity: 0.4; }
-
-.carte-infos.carte-infos-clair .carte-collection-badge,
-.recette-infos.carte-infos-clair .recette-badge { color: var(--blanc-pur-75); }
-.carte-infos.carte-infos-clair .carte-nom,
-.recette-infos.carte-infos-clair .recette-nom { color: var(--blanc); }
-.carte-infos.carte-infos-clair .carte-ligne,
-.recette-infos.carte-infos-clair .recette-ligne { color: var(--blanc-pur-70); }
-.carte-infos.carte-infos-clair .carte-prix,
-.recette-infos.carte-infos-clair .recette-prix { color: var(--blanc); }
-.carte-infos.carte-infos-clair .carte-bas { border-top-color: var(--blanc-pur-30); }
-
-.carte-infos.carte-infos-fonce .carte-collection-badge,
-.recette-infos.carte-infos-fonce .recette-badge { color: rgba(0,0,0,0.55); }
-.carte-infos.carte-infos-fonce .carte-nom,
-.recette-infos.carte-infos-fonce .recette-nom { color: rgba(0,0,0,0.85); }
-.carte-infos.carte-infos-fonce .carte-ligne,
-.recette-infos.carte-infos-fonce .recette-ligne { color: rgba(0,0,0,0.55); }
-.carte-infos.carte-infos-fonce .carte-prix,
-.recette-infos.carte-infos-fonce .recette-prix { color: rgba(0,0,0,0.85); }
-.carte-collection-badge { display: inline-block; font-family: 'DM Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; font-weight: 500; }
-.carte-nom { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; color: var(--gris-fonce); margin-bottom: 4px; line-height: 1.2; }
-.carte-ligne { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; color: var(--gris); margin-bottom: 12px; font-weight: 300; }
-.carte-bas { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--beige); }
-.carte-prix { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--primary); }
-.carte-formats { display: flex; gap: 4px; flex-wrap: wrap; }
-.carte-format-tag { padding: 3px 7px; font-family: 'DM Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.06em; border: 1px solid var(--beige); color: var(--gris); text-transform: uppercase; }
-
-/* ═══════════════════════════════════════
-   ADMIN — LAYOUT
-   ═══════════════════════════════════════ */
-.admin-layout { display: flex; padding-top: var(--nav-h); min-height: 100vh; }
-.admin-contenu { flex: 1; margin-left: 0; padding: 48px 56px; min-width: 0; }
-.section-admin { display: none; }
-.section-admin.visible { display: block; }
-
-/* ═══════════════════════════════════════
-   ADMIN — SIDEBAR
-   ═══════════════════════════════════════ */
-#burger-admin { display: flex; }
-.sidebar { position: fixed; top: var(--nav-h); right: 0; left: auto; width: 220px; height: calc(100vh - var(--nav-h)); transform: translateX(100%); z-index: 90; background: var(--blanc); box-shadow: -4px 0 20px rgba(0,0,0,0.08); overflow-y: auto; }
-.sidebar.ouvert { transform: translateX(0); }
-.sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(30,28,25,0.4); z-index: 89; top: var(--nav-h); }
-.sidebar-overlay.visible { display: block; }
-.sidebar-groupe { margin-bottom: 4px; }
-.sidebar-titre { font-family: 'DM Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--beige); padding: 14px 24px 6px; font-weight: 500; }
-.sidebar-lien { display: block; padding: 9px 24px; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 300; color: var(--gris); text-decoration: none; cursor: pointer; border: none; background: none; width: 100%; text-align: right; transition: all 0.15s; border-left: 3px solid transparent; }
-.sidebar-lien:hover { background: rgba(90,138,58,0.05); color: var(--primary); }
-.sidebar-lien.actif { background: rgba(90,138,58,0.08); color: var(--primary); border-left-color: var(--primary); font-weight: 500; }
-.sidebar-lien.bientot { color: var(--beige); cursor: default; font-style: italic; }
-.sidebar-lien.bientot:hover { background: none; color: var(--beige); }
-.sidebar-sep { height: 1px; background: var(--beige); margin: 10px 24px; }
-
-/* ═══════════════════════════════════════
-   ADMIN — EN-TÊTE DE PAGE
-   ═══════════════════════════════════════ */
-.page-titre { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 400; color: var(--gris-fonce); }
-.page-titre em { font-style: italic; color: var(--primary); }
-.page-sous-titre { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--gris); margin-top: 4px; letter-spacing: 0.04em; }
-
-/* ═══════════════════════════════════════
-   ADMIN — ACCUEIL
-   ═══════════════════════════════════════ */
-.accueil-admin { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - var(--nav-h)); margin: -48px -56px; }
-.accueil-gauche { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; text-align: left; padding: 40px 64px; border-right: 1px solid var(--beige); gap: 4px; }
-.accueil-logo { max-width: 280px; width: 70%; height: auto; margin-bottom: 12px; }
-.accueil-bonjour { font-family: 'Birthstone', cursive; font-size: 3.5rem; color: var(--accent); line-height: 1; align-self: center; letter-spacing: 0.05em; }
-.accueil-chantal { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--primary); font-weight: 400; line-height: 1; margin-bottom: 0; align-self: center; }
-.accueil-droite { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 16px; background: url('../Images/fond.png') center center / cover no-repeat; }
-.accueil-tuile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: white; cursor: pointer; border: none; transition: filter 0.4s ease; aspect-ratio: 1; max-height: 140px; }
-.accueil-tuile:hover { filter: brightness(1.08); }
-.accueil-tuile:disabled { opacity: 0.4; cursor: default; filter: none; }
-.tuile-icone { width: 36px; height: 36px; display: block; transition: transform 0.4s ease; }
-.tuile-icone svg { width: 100%; height: 100%; }
-.accueil-tuile:hover:not(:disabled) .tuile-icone { transform: translateY(-3px); }
-.tuile-nom { position: relative; z-index: 1; }
-.tuile-nom::after { content: ''; display: block; width: 20px; height: 1px; background: rgba(255,255,255,0.45); margin: 8px auto 0; transition: width 0.3s ease; }
-.accueil-tuile-collections { background: var(--primary-70); }
-.accueil-tuile-recettes    { background: var(--accent-70); }
-.accueil-tuile-achats      { background: var(--gris-70); }
-.accueil-tuile-stock       { background: var(--primary-50); }
-.accueil-tuile-inventaire  { background: var(--gris-fonce-70); }
-.accueil-tuile-factures    { background: var(--accent-50); }
-.accueil-tuile-liste       { background: var(--primary-40); }
-.accueil-tuile-divers      { background: var(--gris-50); }
-
-/* ═══════════════════════════════════════
-   ADMIN — FORM PANEL
-   ═══════════════════════════════════════ */
-.form-panel { display: none; background: white; border: 1px solid var(--beige); margin-bottom: 32px; overflow: hidden; }
-.form-panel.visible { display: block; }
-.form-panel-header { padding: 20px 28px 16px; border-bottom: 1px solid var(--beige); background: rgba(232,220,200,0.2); display: flex; align-items: center; gap: 16px; }
-.form-panel-titre { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; color: var(--gris-fonce); flex: 1; }
-.form-body { padding: 28px 28px 28px; }
-.form-body .form-actions { padding-top: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--beige); }
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="../Images/plume.png">
+  <title>Administration — Univers Caresse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Birthstone&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+ <!-- admin.css fusionné dans style.css -->
+</head>
+<body>
+
+  <!-- ACCÈS REFUSÉ -->
+  <div class="acces-refuse" id="acces-refuse">
+    <div class="acces-refuse-titre">Accès restreint</div>
+    <p class="acces-refuse-desc">Vous devez être connecté pour accéder à cette page.</p>
+    <a href="../index.html" class="btn btn-primary">Retour à l'accueil</a>
+  </div>
+
+  <!-- NAVIGATION -->
+<nav id="nav">
+  <ul class="nav-admin-links">
+      <li class="nav-admin-item">
+        <button class="nav-admin-btn" onclick="afficherSection('accueil', null)">Accueil</button>
+      </li>
+         <li class="nav-admin-item">
+        <button class="nav-admin-btn">Création <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-item" onclick="afficherSection('collections', null)">Collections</button>
+          <button class="nav-dropdown-item" onclick="afficherSection('recettes', null)">Recettes</button>
+          <button class="nav-dropdown-item bientot">Catalogue</button>
+        </div>
+      </li>
+      <li class="nav-admin-item">
+        <button class="nav-admin-btn">Achats <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-item" onclick="afficherSection('nouvelle-facture', null)">Nouvelle facture</button>
+          <button class="nav-dropdown-item" onclick="afficherSection('factures', null)">Les factures</button>
+          <button class="nav-dropdown-item" onclick="afficherSection('inventaire', null)">Inventaire</button>
+        </div>
+      </li>
+      <li class="nav-admin-item">
+        <button class="nav-admin-btn">Production <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-item bientot">Confection</button>
+          <button class="nav-dropdown-item bientot">Ventes</button>
+        </div>
+      </li>
+      <li class="nav-admin-item">
+        <button class="nav-admin-btn">Listes <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-item bientot">Les produits</button>
+          <button class="nav-dropdown-item bientot">Inventaire</button>
+          <button class="nav-dropdown-item bientot">Vente</button>
+          <button class="nav-dropdown-item bientot">Bilan</button>
+        </div>
+      </li>
+      <li class="nav-admin-item">
+        <button class="nav-admin-btn">Système <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-item" onclick="afficherSection('densites', null)">Densité</button>
+          <button class="nav-dropdown-item" onclick="afficherSection('contenu-site', null)">Contenu du site</button>
+          <button class="nav-dropdown-item bientot">Corrections inventaire</button>
+          <a class="nav-dropdown-item" href="../index.html" target="_blank">Site public</a>
+          <button class="nav-dropdown-item" onclick="seDeconnecter()">Déconnexion</button>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <button class="burger burger-flottant" id="burger-admin" onclick="toggleSidebarAdmin()" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- LAYOUT -->
+  <div class="admin-layout">
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar-admin">
+    <div class="sidebar-groupe">
+        <button class="sidebar-lien" onclick="afficherSection('accueil', this)">Accueil</button>
+      </div>
+      <div class="sidebar-sep"></div>
+      <div class="sidebar-groupe">
+        <div class="sidebar-titre">Création</div>
+        <button class="sidebar-lien actif" onclick="afficherSection('collections', this)">Collections</button>
+        <button class="sidebar-lien" onclick="afficherSection('recettes', this)">Recettes</button>
+        <button class="sidebar-lien bientot">Catalogue</button>
+      </div>
+      <div class="sidebar-sep"></div>
+      <div class="sidebar-groupe">
+        <div class="sidebar-titre">Achats</div>
+        <button class="sidebar-lien" onclick="afficherSection('nouvelle-facture', this)">Nouvelle facture</button>
+        <button class="sidebar-lien" onclick="afficherSection('factures', this)">Les factures</button>
+        <button class="sidebar-lien" onclick="afficherSection('inventaire', this)">Inventaire</button>
+      </div>
+      <div class="sidebar-sep"></div>
+      <div class="sidebar-groupe">
+        <div class="sidebar-titre">Production</div>
+        <button class="sidebar-lien bientot">Confection</button>
+        <button class="sidebar-lien bientot">Ventes</button>
+      </div>
+      <div class="sidebar-sep"></div>
+     <div class="sidebar-groupe">
+        <div class="sidebar-titre">Système</div>
+        <button class="sidebar-lien" onclick="afficherSection('densites', this)">Densité</button>
+        <button class="sidebar-lien" onclick="afficherSection('contenu-site', this)">Contenu du site</button>
+     <button class="sidebar-lien bientot">Corrections inventaire</button>
+      </div>
+      <div class="sidebar-sep"></div>
+      <div class="sidebar-groupe">
+        <a href="../index.html" target="_blank" class="sidebar-lien">Site public</a>
+        <button class="sidebar-lien" onclick="seDeconnecter()">Déconnexion</button>
+      </div>
+    </aside>
+
+    <!-- CONTENU -->
+    <main class="admin-contenu">
+
+
+
+      <!-- ACCUEIL -->
+   <div class="section-admin" id="section-accueil">
+        <div class="accueil-admin">
+      <div class="accueil-gauche">
+         <p class="hero-eyebrow fade-in">Administration</p>
+            <img src="../Images/Logofinal.png" alt="Univers Caresse" class="hero-logo-img fade-in delay-2">
+            <div class="accueil-chantal fade-in delay-3">Bonjour <span class="accueil-bonjour">Chantal</span></div>
+            <div class="hero-stats fade-in delay-5">
+                <div>
+                <div class="hero-stat-num" id="admin-stat-collections">—</div>
+                <div class="hero-stat-label">Collections</div>
+                </div>
+                <div>
+                <div class="hero-stat-num" id="admin-stat-produits">—</div>
+                <div class="hero-stat-label">Produits</div>
+                </div>
+                <div>
+                <div class="hero-stat-num">100%</div>
+                <div class="hero-stat-label">Artisanal</div>
+                </div>
+            </div>
+          </div>
+
+          
+          <div class="accueil-droite">
+
+            <!-- TUILE VERTE : Collections + Recettes -->
+            <div class="accueil-grande-tuile accueil-grande-tuile-vert">
+              <button class="tuile-btn tuile-btn-vert" onclick="afficherSection('collections', null)">
+                <span class="tuile-icone">
+                  <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="4" width="12" height="20" rx="2"/>
+                    <rect x="20" y="4" width="24" height="12" rx="2"/>
+                    <rect x="20" y="20" width="11" height="24" rx="2"/>
+                    <rect x="35" y="20" width="9" height="10" rx="2"/>
+                    <rect x="4" y="28" width="12" height="16" rx="2"/>
+                    <rect x="35" y="34" width="9" height="10" rx="2"/>
+                  </svg>
+                </span>
+                <span class="tuile-nom">Collections</span>
+              </button>
+              <button class="tuile-btn tuile-btn-vert" onclick="afficherSection('recettes', null)">
+                <span class="tuile-icone">
+                  <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="6" y="14" width="22" height="26" rx="3"/>
+                    <line x1="10" y1="22" x2="24" y2="22"/>
+                    <line x1="10" y1="27" x2="24" y2="27"/>
+                    <line x1="10" y1="32" x2="18" y2="32"/>
+                    <path d="M26 10 C26 10 32 8 36 12 C40 16 38 22 34 24 C30 26 26 24 26 20 Z"/>
+                    <circle cx="36" cy="8" r="2"/>
+                    <circle cx="42" cy="12" r="1.5"/>
+                    <circle cx="40" cy="18" r="1"/>
+                  </svg>
+                </span>
+                <span class="tuile-nom">Recettes</span>
+              </button>
+            </div>
+
+            <!-- TUILE JAUNE : Achats + Factures -->
+            <div class="accueil-grande-tuile accueil-grande-tuile-jaune">
+              <button class="tuile-btn tuile-btn-jaune" onclick="afficherSection('nouvelle-facture', null)">
+                <span class="tuile-icone">
+                  <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 18 L6 38 L42 38 L42 18 L22 18 L19 14 L6 14 Z"/>
+                    <path d="M10 14 L10 10 L24 10 L27 14"/>
+                    <path d="M28 18 L28 22 L42 22"/>
+                    <line x1="12" y1="26" x2="22" y2="26"/>
+                    <line x1="12" y1="30" x2="26" y2="30"/>
+                    <line x1="30" y1="28" x2="38" y2="28"/>
+                    <line x1="30" y1="32" x2="36" y2="32"/>
+                  </svg>
+                </span>
+                <span class="tuile-nom">Achats</span>
+              </button>
+              <button class="tuile-btn tuile-btn-jaune" onclick="afficherSection('factures', null)">
+                <span class="tuile-icone">
+                  <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="10" y="6" width="28" height="36" rx="2"/>
+                    <line x1="16" y1="16" x2="32" y2="16"/>
+                    <line x1="16" y1="22" x2="32" y2="22"/>
+                    <line x1="16" y1="28" x2="24" y2="28"/>
+                  </svg>
+                </span>
+                <span class="tuile-nom">Factures</span>
+              </button>
+            </div>
+
+            <!-- TUILE GRIS : Inventaire + Stock -->
+            <div class="accueil-grande-tuile accueil-grande-tuile-gris">
+              <button class="tuile-btn tuile-btn-gris" onclick="afficherSection('inventaire', null)">
+                <span class="tuile-icone">
+                  <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 16 L24 8 L40 16 L40 36 L24 44 L8 36 Z"/>
+                    <path d="M8 16 L24 24 L40 16"/>
+                    <line x1="24" y1="24" x2="24" y2="44"/>
+                    <path d="M16 12 L32 20"/>
+                  </svg>
+                </span>
+                <span class="tuile-nom">Inventaire</span>
+              </button>
+              <button class="tuile-btn tuile-btn-gris" disabled>
+                <span class="tuile-icone">
+                  <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="8" y="20" width="14" height="20" rx="2"/>
+                    <rect x="26" y="14" width="14" height="26" rx="2"/>
+                    <line x1="4" y1="40" x2="44" y2="40"/>
+                    <line x1="12" y1="20" x2="12" y2="16"/><line x1="16" y1="20" x2="16" y2="16"/>
+                  </svg>
+                </span>
+                <span class="tuile-nom">Stock</span>
+              </button>
+            </div>
+
+            <!-- TUILE GRIS FONCÉ : Liste + Divers -->
+            <div class="accueil-grande-tuile accueil-grande-tuile-gris-fonce">
+              <button class="tuile-btn tuile-btn-gris-fonce" disabled>
+                <span class="tuile-icone">
+                  <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="14" r="2.5"/>
+                    <circle cx="12" cy="24" r="2.5"/>
+                    <circle cx="12" cy="34" r="2.5"/>
+                    <line x1="20" y1="14" x2="40" y2="14"/>
+                    <line x1="20" y1="24" x2="40" y2="24"/>
+                    <line x1="20" y1="34" x2="36" y2="34"/>
+                  </svg>
+                </span>
+                <span class="tuile-nom">Liste</span>
+              </button>
+              <button class="tuile-btn tuile-btn-gris-fonce" disabled>
+                <span class="tuile-icone">
+                  <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="24" cy="24" r="6"/>
+                    <path d="M24 6 L24 12 M24 36 L24 42 M6 24 L12 24 M36 24 L42 24 M10 10 L14 14 M34 34 L38 38 M38 10 L34 14 M14 34 L10 38"/>
+                  </svg>
+                </span>
+                <span class="tuile-nom">Divers</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- COLLECTIONS -->
+     <div class="section-admin" id="section-collections">
+        <div class="page-entete">
+          <div>
+            <div class="page-titre">Collections <em>&amp;</em> Lignes</div>
+            <div class="page-sous-titre">Gérer les collections et leurs lignes de produits</div>
+          </div>
+          <button class="btn btn-primary" onclick="ouvrirFormCollection()">+ Nouvelle entrée</button>
+        </div>
+        <div class="msg-zone" id="msg-collections"></div>
+       <div class="form-panel" id="fiche-collection">
+          <div class="form-panel-header">
+            <div class="fiche-collection-bandeau" id="fiche-collection-bandeau">
+              <span class="form-panel-titre" id="fiche-collection-titre"></span>
+              <span class="fiche-collection-slogan" id="fiche-collection-slogan"></span>
+              <div class="form-actions">
+                <button class="btn btn-primary" id="fiche-collection-modifier">Modifier la collection</button>
+                <button class="btn btn-secondary" id="fiche-collection-ajouter-ligne">+ Ajouter une ligne</button>
+                <button class="btn btn-outline" onclick="fermerFicheCollection()">Fermer</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-body">
+            <p class="fiche-collection-desc" id="fiche-collection-desc"></p>
+            <div class="section-label">Lignes de produits</div>
+            <div id="fiche-collection-lignes"></div>
+          </div>
+        </div> 
+      <div class="form-panel" id="form-collections">
+          <div class="form-panel-header">
+            <div class="form-panel-titre" id="form-collections-titre">Nouvelle collection</div>
+            <div class="td-actions">
+              <button class="btn btn-sm btn-outline" id="fc-toggle-mode" onclick="basculerModeFormCollection()">+ Ajouter une ligne</button>
+              <button class="btn btn-sm btn-outline" onclick="fermerFormCollection()">Fermer</button>
+            </div>
+          </div>
+          <div class="form-body">
+            <input type="hidden" id="fc-rowIndex">
+            <input type="hidden" id="fc-mode" value="collection">
+
+            <!-- BLOC COLLECTION -->
+            <div id="fc-bloc-collection">
+              <div class="form-grille">
+                <div class="form-groupe">
+                  <label class="form-label">Rang</label>
+                  <input type="text" inputmode="numeric" class="form-ctrl" id="fc-rang">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Collection</label>
+                  <input type="text" class="form-ctrl" id="fc-collection">
+                </div>
+                <div class="form-groupe col-plein">
+                  <label class="form-label">Slogan</label>
+                  <input type="text" class="form-ctrl" id="fc-slogan">
+                </div>
+                <div class="form-groupe col-plein">
+                  <label class="form-label">Description collection</label>
+                  <textarea class="form-ctrl" id="fc-desc-col" rows="5"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Couleur HEX</label>
+                <input type="text" class="form-ctrl" id="fc-couleur-hex" oninput="apercuCouleurCollection(this)"><div id="fc-couleur-apercu" class="couleur-apercu"></div>
+                </div>
+                <div class="form-groupe col-plein">
+                  <label class="form-label">Photo collection</label>
+                  <div class="cloudinary-zone">
+                    <input type="text" class="form-ctrl" id="fc-photo-url">
+                    <button type="button" class="btn btn-secondary" onclick="ouvrirCloudinaryCollection()">Choisir une photo</button>
+                  </div>
+                  <div id="fc-photo-preview"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BLOC LIGNE (caché par défaut) -->
+            <div id="fc-bloc-ligne" class="cache">
+              <div class="form-grille">
+                <div class="form-groupe">
+                  <label class="form-label">Collection</label>
+                  <input type="text" class="form-ctrl" id="fc-collection-ligne" readonly>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Nom de la ligne</label>
+                  <input type="text" class="form-ctrl" id="fc-ligne">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Format</label>
+                  <input type="text" class="form-ctrl" id="fc-format">
+                </div>
+                <div class="form-groupe col-plein">
+                  <label class="form-label">Description ligne</label>
+                  <textarea class="form-ctrl" id="fc-desc-ligne"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Couleur HEX ligne</label>
+                  <input type="text" class="form-ctrl" id="fc-couleur-hex-ligne" oninput="apercuCouleurCollection(this)">
+                </div>
+                <div class="form-groupe col-plein">
+                  <label class="form-label">Photo ligne</label>
+                  <div class="cloudinary-zone">
+                    <input type="text" class="form-ctrl" id="fc-photo-url-ligne">
+                    <button type="button" class="btn btn-secondary" onclick="ouvrirCloudinaryLigne()">Choisir une photo</button>
+                  </div>
+                  <div id="fc-photo-preview-ligne"></div>
+                </div>
+                <div class="form-groupe col-plein" id="zone-ingredients-base">
+                  <label class="form-label">Ingrédients de base</label>
+                  <div id="liste-ingredients-base"></div>
+                  <button type="button" class="btn btn-secondary btn-ajouter-ingredient" onclick="ajouterIngredientBase()">+ Ajouter un ingrédient</button>
+                </div>
+              </div>
+            </div>
+			 
  
-
-/* ═══════════════════════════════════════
-   ADMIN — TABLEAU
-   ═══════════════════════════════════════ */
-.tableau-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; }
-thead tr { border-bottom: 2px solid var(--beige); }
-th { text-align: left; padding: 10px 16px; font-family: 'DM Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); font-weight: 500; }
-td { padding: 14px 16px; border-bottom: 1px solid rgba(232,220,200,0.4); font-family: 'DM Sans', sans-serif; font-size: 0.84rem; }
-tr:hover td { background: rgba(232,220,200,0.15); }
-.td-actions { display: flex; gap: 6px; flex-wrap: wrap; }
-
-/* ═══════════════════════════════════════
-   ADMIN — BADGES
-   ═══════════════════════════════════════ */
-.badge-collection { display: inline-block; font-family: 'DM Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; font-weight: 500; background: rgba(212,164,69,0.12); color: var(--accent); }
-.badge-statut-ok { font-family: 'DM Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; font-weight: 500; background: rgba(90,138,58,0.1); color: var(--primary); }
-.badge-statut-cours { font-family: 'DM Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; font-weight: 500; background: rgba(212,164,69,0.12); color: var(--accent); }
-
-/* ═══════════════════════════════════════
-   ADMIN — CARTES COLLECTIONS
-   ═══════════════════════════════════════ */
-.collections-grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 3px; margin-bottom: 32px; }
-.collection-carte { position: relative; aspect-ratio: 3/4; overflow: hidden; background: var(--beige); }
-.collection-carte-bg { position: absolute; inset: 0; transition: transform 0.5s ease; }
-.collection-carte:hover .collection-carte-bg { transform: scale(1.04); }
-.collection-carte-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,28,25,0.75) 0%, rgba(30,28,25,0.1) 55%, transparent 100%); }
-.collection-carte-contenu { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px 18px;margin-left: auto; }
-.collection-carte-nom { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; color: white; letter-spacing: 0.03em; display: block; margin-bottom: 4px; }
-.collection-carte-slogan { font-family: 'DM Sans', sans-serif; font-size: 0.65rem; color: rgba(255,255,255,0.7); display: block; letter-spacing: 0.04em; font-weight: 300; }
-.collection-carte-actions { position: absolute; top: 12px; right: 12px; display: flex; flex-direction: column; gap: 6px; opacity: 0; transition: opacity 0.2s; }
-.collection-carte:hover .collection-carte-actions { opacity: 1; }
-.carte-btn { font-family: 'DM Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 12px; border: none; cursor: pointer; font-weight: 500; }
-.carte-btn-edit { background: rgba(255,255,255,0.88); color: var(--primary); }
-.carte-btn-edit:hover { background: white; }
-.carte-btn-suppr { background: rgba(196,69,54,0.88); color: white; }
-.carte-btn-suppr:hover { background: var(--danger); }
-.collection-lignes-liste { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
-.collection-ligne-item { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); padding: 6px 10px; border-radius: 2px; }
-.collection-ligne-nom { color: white; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; flex: 1; }
-.collection-ligne-format { color: rgba(255,255,255,0.7); font-family: 'DM Sans', sans-serif; font-size: 0.75rem; }
-.collection-ligne-actions { display: flex; gap: 4px; margin-left: 8px; }
-.photo-preview { width: 120px; height: 120px; object-fit: cover; border-radius: 6px; display: block; margin-top: 8px; }
-
-.couleur-apercu { width: 32px; height: 32px; border: 1px solid var(--beige); display: inline-block; vertical-align: middle; margin-left: 8px; background: var(--beige); }
-.btn-ajouter-ingredient { margin-top: 8px; }
-.text-right { text-align: right; }
-.mt-24 { margin-top: 24px; }
-.factures-compte { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--gris); margin-left: auto; }
-.filtres-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
-.filtre-select { width: auto; min-width: 180px; }
-.filtre-recherche { width: auto; min-width: 200px; }
-.fiche-grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px; }
-.fiche-visuel { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
-.fiche-visuel-photo { width: 180px; height: 180px; object-fit: cover; flex-shrink: 0; }
-.fiche-visuel-hex { width: 180px; height: 180px; flex-shrink: 0; }
-.fiche-champ { display: flex; flex-direction: column; gap: 4px; }
-.fiche-label { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gris); }
-.fiche-valeur { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--gris-fonce); }
-.fiche-section-titre { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--gris-fonce); margin: 24px 0 8px; border-bottom: 1px solid var(--beige); padding-bottom: 6px; }
-.fiche-texte { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--gris-fonce); white-space: pre-line; }
-.fiche-ingredients { display: flex; flex-direction: column; gap: 6px; }
-.fiche-ingredient { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--beige); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; }
-.fiche-ing-nom { color: var(--gris-fonce); }
-.fiche-ing-qte { color: var(--gris); }
-.fiche-vide { color: var(--gris); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; }
-
-
-
-
-
-
-
-
-
-
-
-
-/* ═══════════════════════════════════════
-   ADMIN — CARTES RECETTES
-   ═══════════════════════════════════════ */
-.recettes-grille { display: block; }
-.recette-cartes-grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; }
-.recette-carte { background: white; transition: transform 0.3s, box-shadow 0.3s; position: relative; display: flex; flex-direction: column; }
-.recette-carte:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(90,138,58,0.1); }
-.recette-visuel { aspect-ratio: 1; position: relative; overflow: hidden; flex-shrink: 0; }
-.recette-couleur { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transition: transform 0.5s; background: var(--col-hex, var(--gris)); position: relative; overflow: hidden; }
-.recette-couleur img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-.recette-couleur-overlay { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to top, color-mix(in srgb, var(--col-hex) 56%, transparent) 0%, color-mix(in srgb, var(--col-hex) 10%, transparent) 20%, transparent 35%); }
-.recette-carte:hover .recette-couleur { transform: scale(1.04); }
-.recette-photo-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: rgba(255,255,255,0.45); font-family: 'DM Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; }
-.recette-photo-placeholder svg { width: 26px; height: 26px; opacity: 0.4; }
-.recette-dot { position: absolute; bottom: 12px; right: 12px; width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--blanc-pur-50); background: var(--col-hex, var(--gris)); }
-.recette-section-collection { margin-bottom: 56px; }
-.recette-collection-titre { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 400; color: var(--gris-fonce); margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--beige); }
-.recette-section-ligne { margin-bottom: 40px; }
-.recette-ligne-titre { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); margin-bottom: 16px; font-weight: 500; }
-.recette-carte-actions { position: absolute; top: 10px; right: 10px; display: flex; gap: 6px; opacity: 0; transition: opacity 0.2s; }
-.recette-carte:hover .recette-carte-actions { opacity: 1; }
-.recette-infos { padding: 16px 18px 18px; background: var(--col-hex); }
-.recette-badge { display: inline-block; font-family: 'DM Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; font-weight: 500; }
-.recette-statut-badge { display: inline-block; font-family: 'DM Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; font-weight: 500; margin-left: 6px; }
-.recette-statut-public { background: rgba(90,138,58,0.1); color: var(--primary); }
-.recette-statut-test { background: rgba(212,164,69,0.12); color: var(--accent); }
-.recette-nom { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--gris-fonce); margin-bottom: 4px; line-height: 1.2; }
-.recette-ligne { font-family: 'DM Sans', sans-serif; font-size: 0.73rem; color: var(--gris); margin-bottom: 12px; font-weight: 300; }
-.recette-bas { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--beige); }
-.recette-prix { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--primary); }
-.recette-format { font-family: 'DM Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.06em; padding: 3px 8px; border: 1px solid var(--beige); color: var(--gris); }
-
-/* ═══════════════════════════════════════
-   ADMIN — INVENTAIRE
-   ═══════════════════════════════════════ */
-.inv-section { margin-bottom: 20px; }
-.inv-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; width: 100%; }
-.inv-titre { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; color: var(--gris-fonce); font-style: italic; white-space: nowrap; }
-.inv-line { flex: 1; height: 1px; background: var(--beige); min-width: 0; }
-.inv-total { text-align: right; padding: 12px 0; border-top: 2px solid var(--beige); margin-top: 8px; }
-.inv-total-label { font-family: 'DM Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); }
-.inv-total-montant { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--primary); }
-
-/* ═══════════════════════════════════════
-   ADMIN — FACTURES
-   ═══════════════════════════════════════ */
-.facture-active-banner { background: white; border: 1px solid var(--beige); border-left: 4px solid var(--primary); padding: 16px 24px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-.facture-active-titre { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gris-fonce); }
-.facture-active-info { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--gris); margin-top: 2px; }
-.facture-sous-total { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--primary); }
-.facture-sous-total-label { font-family: 'DM Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gris); text-align: right; }
-.finalisation-panel { background: white; border: 1px solid var(--beige); padding: 28px; margin-top: 24px; }
-.finalisation-titre { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 20px; color: var(--gris-fonce); }
-.total-final-row { display: flex; align-items: center; gap: 32px; margin-top: 20px; flex-wrap: wrap; }
-.total-final-montant { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gris-fonce); }
-.total-final-label { font-family: 'DM Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris); }
-
-/* ═══════════════════════════════════════
-   ADMIN — WIZARD
-   ═══════════════════════════════════════ */
-.wizard-etapes { display: flex; align-items: center; margin-bottom: 40px; }
-.wizard-etape { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.wizard-cercle { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--beige); background: var(--blanc); color: var(--gris); font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
-.wizard-label { font-family: 'DM Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris); transition: color 0.3s; }
-.wizard-etape.active .wizard-cercle { border-color: var(--primary); background: var(--primary); color: white; }
-.wizard-etape.active .wizard-label { color: var(--primary); font-weight: 500; }
-.wizard-etape.complete .wizard-cercle { border-color: var(--primary); background: rgba(90,138,58,0.1); color: var(--primary); }
-.wizard-trait { flex: 1; height: 1px; background: var(--beige); margin: 0 12px; margin-bottom: 24px; }
-
-/* ═══════════════════════════════════════
-   ADMIN — ÉTATS
-   ═══════════════════════════════════════ */
-.vide { text-align: center; padding: 64px 20px; }
-.vide-titre { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gris); margin-bottom: 8px; font-style: italic; }
-.vide-desc { font-family: 'DM Sans', sans-serif; font-size: 0.8rem; color: var(--beige); }
-.section-bientot { text-align: center; padding: 80px 20px; border: 1px dashed var(--beige); }
-.section-bientot h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--gris); margin-bottom: 12px; font-weight: 400; font-style: italic; }
-.section-bientot p { font-family: 'DM Sans', sans-serif; font-size: 0.82rem; color: var(--beige); }
-
-/* ═══════════════════════════════════════
-   ADMIN — ACCÈS REFUSÉ
-   ═══════════════════════════════════════ */
-.acces-refuse { display: none; position: fixed; inset: 0; background: var(--blanc); z-index: 400; align-items: center; justify-content: center; flex-direction: column; gap: 20px; text-align: center; }
-.acces-refuse.visible { display: flex; }
-.acces-refuse-titre { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gris); font-style: italic; }
-.acces-refuse-desc { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--gris); }
-
-/* ═══════════════════════════════════════
-   ADMIN — NAV DROPDOWNS
-   ═══════════════════════════════════════ */
-.nav-admin-links { display: none; }
-
-@media (min-width: 1024px) {
-   .nav-admin-links {
-    display: flex;
-    gap: 4px;
-    list-style: none;
-    margin-left: auto;
-  }
-
-  .nav-admin-item {
-    position: relative;
-  }
-
-  .nav-admin-btn {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gris);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: color 0.2s;
-    font-weight: 400;
-  }
-  .nav-admin-btn:hover { color: var(--primary); }
-  .nav-admin-btn svg { width: 10px; height: 10px; transition: transform 0.2s; }
-  .nav-admin-item:hover .nav-admin-btn svg { transform: rotate(180deg); }
-
-.nav-dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    padding-top: 8px;
-    background: var(--blanc);
-    border: 1px solid var(--beige);
-    box-shadow: 0 8px 24px rgba(30,28,25,0.08);
-    min-width: 180px;
-    z-index: 150;
-  }
-  .nav-admin-item:hover .nav-dropdown { display: block; }
-
-  .nav-dropdown-item {
-    display: block;
-    width: 100%;
-    padding: 11px 20px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
-    color: var(--gris);
-    background: none;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.15s;
-    border-left: 3px solid transparent;
-    font-weight: 300;
-  }
-  .nav-dropdown-item:hover {
-    background: rgba(90,138,58,0.05);
-    color: var(--primary);
-    border-left-color: var(--primary);
-  }
-  .nav-dropdown-item.bientot {
-    color: var(--beige);
-    cursor: default;
-    font-style: italic;
-  } 
-  .nav-dropdown-item.bientot:hover {
-    background: none;
-    color: var(--beige);
-    border-left-color: transparent;
-  }
-}
+            <div class="form-actions">
+              <button class="btn btn-primary" onclick="sauvegarderCollection()">Enregistrer</button>
+              <button class="btn btn-secondary" onclick="fermerFormCollection()">Annuler</button>
+            </div>
+          </div>
+        </div>
+        <div class="chargement" id="loading-collections"><span class="spinner"></span>Chargement...</div>
+        <div id="contenu-collections"></div>
+        <div class="vide cache" id="vide-collections">
+          <div class="vide-titre">Aucune collection</div>
+          <div class="vide-desc">Créez votre première entrée</div>
+        </div>
+        </div>
   
-/* ═══════════════════════════════════════
-   RESPONSIVE
-   ═══════════════════════════════════════ */
-@media (max-width: 900px) {
-  nav { background: none; box-shadow: none; border: none; backdrop-filter: none; }
-  nav .nav-actions { display: none; }
- .burger-flottant {
-    display: flex;
-    position: fixed; top: 16px; right: 24px; z-index: 200;
-    width: 48px; height: 48px; border-radius: 50%;
-    background: var(--primary); border: none;
-    align-items: center; justify-content: center;
-    box-shadow: 0 4px 16px var(--noir-30);
-    transition: transform 0.3s, opacity 0.3s;
-    flex-direction: column; gap: 5px; padding: 0;
-  }
-  .burger-flottant span { background: white; }
-  .burger-flottant.cache-scroll { opacity: 0; pointer-events: none; transform: translateY(-16px); }
-  #filtres-bar.cache-scroll { opacity: 0; pointer-events: none; transform: translateY(-100%); }
-  .nav-links { display: none; }
-  .nav-links.ouvert {
-    display: flex; flex-direction: column;
-    position: fixed; top: 80px; right: 24px;
-    width: 220px; background: var(--blanc); padding: 20px var(--padding-mobile);
-    border: 1px solid var(--beige);
-    box-shadow: 0 8px 32px var(--noir-15);
-    gap: 16px; z-index: 201;
-  }
 
+      <!-- RECETTES -->
+      <div class="section-admin" id="section-recettes">
+        <div class="page-entete">
+          <div>
+            <div class="page-titre">Recettes</div>
+            <div class="page-sous-titre">Gérer les formulations de savons</div>
+          </div>
+          <button class="btn btn-primary" onclick="ouvrirFormRecette()">+ Nouvelle recette</button>
+        </div>
+       <div class="msg-zone" id="msg-recettes"></div>
+        <div class="filtres-bar">
+          <select class="form-ctrl filtre-select" id="filtre-recette-collection" onchange="onFiltreCollection()">
+            <option value="">Toutes les collections</option>
+          </select>
+          <select class="form-ctrl filtre-select" id="filtre-recette-ligne" onchange="filtrerRecettes()" disabled>
+            <option value="">Toutes les lignes</option>
+          </select>
+          <select class="form-ctrl filtre-select" id="filtre-recette-statut" onchange="filtrerRecettes()">
+            <option value="">Tous les statuts</option>
+            <option value="test">Test</option>
+            <option value="public">Public</option>
+          </select>
+          <input type="text" class="form-ctrl filtre-recherche" id="filtre-recette-nom" oninput="filtrerRecettes()" placeholder="Par nom">
+          <button class="btn btn-outline btn-sm" onclick="reinitialiserFiltresRecettes()">Réinitialiser</button>
+        </div>
+        <div class="form-panel" id="fiche-recette">
+          <div class="form-panel-header">
+            <div class="form-panel-titre" id="fiche-recette-titre"></div>
+            <div class="form-actions">
+              <button class="btn btn-sm btn-primary" onclick="basculerModeEditionRecette()">Modifier</button>
+              <button class="btn btn-sm btn-danger" onclick="supprimerRecetteActive()">Supprimer</button>
+              <button class="btn btn-sm btn-outline" onclick="fermerFicheRecette()">Fermer</button>
+            </div>
+          </div>
+          <div class="form-body" id="fiche-recette-contenu"></div>
+        </div>
+        <div class="form-panel" id="fiche-recette">
+          <div class="form-panel-header">
+            <div class="form-panel-titre" id="fiche-recette-titre"></div>
+            <div class="form-actions">
+              <button class="btn btn-sm btn-primary" onclick="basculerModeEditionRecette()">Modifier</button>
+              <button class="btn btn-sm btn-danger" onclick="supprimerRecetteActive()">Supprimer</button>
+              <button class="btn btn-sm btn-outline" onclick="fermerFicheRecette()">Fermer</button>
+            </div>
+          </div>
+          <div class="form-body" id="fiche-recette-contenu"></div>
+        </div>
+        <div class="form-panel" id="form-recettes">
+          <div class="form-panel-header">
+            <div class="form-panel-titre" id="form-recettes-titre">Nouvelle recette</div>
+            <button class="btn btn-sm btn-outline" onclick="fermerFormRecette()">Fermer</button>
+          </div>
+          <div class="form-body">
+           <input type="hidden" id="fr-id">
+                <input type="hidden" id="fr-couleur">
+            <div class="form-grille">
+              <div class="form-groupe col-demi">
+                <label class="form-label">Nom</label>
+                <input type="text" class="form-ctrl" id="fr-nom">
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Collection</label>
+                <select class="form-ctrl" id="fr-collection" onchange="mettreAJourLignes()">
+                  <option value="">— Choisir —</option>
+                </select>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Ligne</label>
+                <select class="form-ctrl" id="fr-ligne">
+                  <option value="">— Choisir collection —</option>
+                </select>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Format</label>
+                <input type="text" class="form-ctrl" id="fr-format">
+              </div>
+              <div class="form-groupe col-plein">
+                <label class="form-label">Collections secondaires</label>
+                <select class="form-ctrl" id="fr-collections-secondaires" multiple size="4"></select>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Nb unités / fournée</label>
+                <input type="text" inputmode="numeric" class="form-ctrl" id="fr-unites">
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Cure (jours)</label>
+                <input type="text" inputmode="numeric" class="form-ctrl" id="fr-cure">
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Prix de vente ($)</label>
+                <input type="text" inputmode="numeric" class="form-ctrl" id="fr-prix">
+              </div>
+              <div class="form-groupe col-plein">
+                <label class="form-label">Description</label>
+                <textarea class="form-ctrl" id="fr-description" rows="3"></textarea>
+              </div>
+              <div class="form-groupe col-plein">
+                <label class="form-label">Instructions</label>
+                <textarea class="form-ctrl" id="fr-instructions" rows="4"></textarea>
+              </div>
+              <div class="form-groupe col-plein">
+                <label class="form-label">Notes</label>
+                <textarea class="form-ctrl" id="fr-notes" rows="2"></textarea>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Statut</label>
+                <select class="form-ctrl" id="fr-statut">
+                  <option value="test">Test</option>
+                  <option value="public">Public</option>
+                </select>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Couleur HEX</label>
+                <input type="text" class="form-ctrl" id="fr-couleur-visible" oninput="apercuCouleurRecette(this)">
+                <div id="fr-couleur-apercu" class="couleur-apercu"></div>
+              </div>
+            </div>
+           <div class="form-groupe col-plein">
+              <label class="form-label">Photo</label>
+              <div class="cloudinary-zone">
+                <input type="text" class="form-ctrl" id="fr-image-url" readonly>
+                <button type="button" class="btn btn-secondary" onclick="ouvrirCloudinary()">Choisir une photo</button>
+              </div>
+              <div id="fr-image-preview"></div>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" onclick="sauvegarderRecette()">Enregistrer</button>
+              <button class="btn btn-secondary" onclick="fermerFormRecette()">Annuler</button>
+            </div>
+          </div>
+        </div>
+        <div class="chargement" id="loading-recettes"><span class="spinner"></span>Chargement...</div>
+        <div class="recettes-grille cache" id="grille-recettes"></div>
+        <div class="vide cache" id="vide-recettes">
+          <div class="vide-titre">Aucune recette</div>
+          <div class="vide-desc">Créez votre première recette</div>
+        </div>
+      </div>
 
-  .hero { grid-template-columns: 1fr; }
-  .hero-right { min-height: 280px; }
-  .hero-left { padding: 48px var(--padding-mobile); }
-  .hero-left::after { display: none; }
+     <!-- ════════════════════════════════════════
+     SECTION : NOUVELLE FACTURE
+     À insérer dans admin/index.html
+     dans la zone des sections admin
+     ════════════════════════════════════════ -->
 
-  .section-collections { padding: 48px var(--padding-mobile); }
-  .page-entete { padding: 48px var(--padding-mobile) 40px; flex-direction: column; gap: 16px; }
-  .page-entete-plume { display: none; }
-  .page-hero { grid-template-columns: 1fr; padding: 48px var(--padding-mobile); gap: 40px; }
-  .page-hero-visuel-bg { aspect-ratio: 3/2; }
-  .section-texte { grid-template-columns: 1fr; padding: 48px var(--padding-mobile); gap: 48px; }
-  .bandeau-citation { padding: 48px var(--padding-mobile); }
-  .section-cta { padding: 48px var(--padding-mobile); }
-  .bonne-section { padding: 48px var(--padding-mobile); }
-  .note-allergenes { margin: 0 var(--padding-mobile) 48px; }
-  .contact-grille { grid-template-columns: 1fr; padding: 48px var(--padding-mobile); gap: 48px; }
-  .form-row-2 { grid-template-columns: 1fr; }
-  .catalogue-hero { padding: 40px var(--padding-mobile) 28px; flex-direction: column; gap: 12px; }
-  .filtres-bar { padding: 14px var(--padding-mobile); }
-  .catalogue-body { padding: 28px var(--padding-mobile) 60px; }
-  .collection-entete { grid-template-columns: 1fr; }
-  .collection-entete-visuel { display: none; }
+      <div id="section-nouvelle-facture" class="section-admin">
 
-.modal-produit { grid-template-columns: 1fr 2fr; grid-template-rows: auto auto; max-height: 90vh; overflow-y: auto; }
- .modal-visuel-hex { min-height: 240px; grid-column: 1; grid-row: 1; }
-  .modal-visuel-photo { min-height: 240px; grid-column: 2; grid-row: 1; }
-  .modal-visuel-photo img { object-fit: cover; object-position: center 70%; }
-  .modal-contenu { grid-column: 1 / -1; grid-row: 2; }
+  <!-- EN-TÊTE DE PAGE -->
+  <div class="page-entete">
+    <div>
+      <h1 class="page-titre">Nouvelle <em>facture</em></h1>
+      <p class="page-sous-titre">Achats d'ingrédients</p>
+    </div>
+  </div>
 
-  .admin-contenu { padding: 24px var(--padding-mobile); }
-  .accueil-admin { grid-template-columns: 1fr; margin: -24px calc(-1 * var(--padding-mobile)); }
-  .accueil-gauche { padding: 48px 24px; border-right: none; border-bottom: 1px solid var(--beige); }
-  .accueil-tuile { min-height: 130px; }
-  .form-grille { grid-template-columns: 1fr; }
-  .col-plein { grid-column: 1; }
-  .recettes-grille { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
-  .collections-grille { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-  .total-final-row { flex-direction: column; align-items: flex-start; }
+  <!-- ZONE MESSAGES GLOBAUX -->
+  <div id="facture-msg" class="msg-zone"></div>
 
-  footer { padding: 32px var(--padding-mobile); flex-direction: column; gap: 16px; text-align: center; }
-}
+  <!-- INDICATEUR D'ÉTAPES -->
+  <div class="wizard-etapes">
+    <div class="wizard-etape active" id="wizard-etape-1">
+      <div class="wizard-cercle">1</div>
+      <div class="wizard-label">Facture</div>
+    </div>
+    <div class="wizard-trait"></div>
+    <div class="wizard-etape" id="wizard-etape-2">
+      <div class="wizard-cercle">2</div>
+      <div class="wizard-label">Items</div>
+    </div>
+    <div class="wizard-trait"></div>
+    <div class="wizard-etape" id="wizard-etape-3">
+      <div class="wizard-cercle">3</div>
+      <div class="wizard-label">Finalisation</div>
+    </div>
+  </div>
 
-@media (max-width: 480px) {
-  .recettes-grille { grid-template-columns: 1fr 1fr; gap: 12px; }
-  .collections-grille { grid-template-columns: 1fr 1fr; }
-  .td-actions { flex-direction: column; }
-  table { font-size: 0.78rem; }
-  th, td { padding: 10px 8px; }
-}
+  <!-- ══════════════════════════════
+       ÉTAPE 1 — EN-TÊTE FACTURE
+  ══════════════════════════════ -->
+  <div id="wizard-step-1" class="wizard-step">
+    <div class="form-panel visible">
+      <div class="form-panel-header">
+        <span class="form-panel-titre">Informations de la facture</span>
+      </div>
+      <div class="form-body">
+        <div class="form-grille">
+
+          <div class="form-groupe">
+            <label class="form-label">N° facture</label>
+            <input type="text" id="facture-numero" class="form-ctrl" autocomplete="off">
+          </div>
+
+          <div class="form-groupe">
+            <label class="form-label">Date</label>
+            <input type="date" id="facture-date" class="form-ctrl">
+          </div>
+
+          <div class="form-groupe col-plein">
+            <label class="form-label">Fournisseur</label>
+            <select id="facture-fournisseur" class="form-ctrl" onchange="onChangeFournisseur()">
+              <option value=""></option>
+            </select>
+            <input type="text" id="facture-fournisseur-nouveau" class="form-ctrl"
+                   class="cache" autocomplete="off">
+          </div>
+
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" onclick="wizardEtape2()">Suivant →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       ÉTAPE 2 — ITEMS
+  ══════════════════════════════ -->
+  <div id="wizard-step-2" class="wizard-step cache">
+
+    <!-- Bannière facture active -->
+    <div id="facture-banniere" class="facture-active-banner cache">
+      <div>
+        <div class="facture-active-titre">Facture <span id="banniere-numero"></span></div>
+        <div class="facture-active-info"><span id="banniere-fournisseur"></span></div>
+      </div>
+      <div class="text-right">
+        <div class="facture-sous-total-label">Sous-total</div>
+        <div class="facture-sous-total" id="banniere-sous-total">0,00 $</div>
+      </div>
+    </div>
+
+    <!-- Formulaire ajout item -->
+    <div class="form-panel visible">
+      <div class="form-panel-header">
+        <span class="form-panel-titre">Ajouter un item</span>
+      </div>
+      <div class="form-body">
+        <div id="item-msg" class="msg-zone"></div>
+        <div class="form-grille">
+
+          <div class="form-groupe">
+            <label class="form-label">Type</label>
+            <select id="item-type" class="form-ctrl" onchange="onChangeType()">
+              <option value=""></option>
+            </select>
+          </div>
+
+          <div class="form-groupe">
+            <label class="form-label">Ingrédient</label>
+            <select id="item-ingredient" class="form-ctrl" onchange="onChangeIngredient()">
+              <option value=""></option>
+            </select>
+            <input type="text" id="item-ingredient-nouveau" class="form-ctrl"
+                   class="cache" autocomplete="off">
+          </div>
+
+          <div class="form-groupe">
+            <label class="form-label">Format — quantité</label>
+            <input type="text" inputmode="numeric" id="item-format-qte" class="form-ctrl" autocomplete="off">
+          </div>
+
+          <div class="form-groupe">
+            <label class="form-label">Unité</label>
+            <select id="item-format-unite" class="form-ctrl">
+              <option value="g">g</option>
+              <option value="ml">ml</option>
+              <option value="kg">kg</option>
+              <option value="L">L</option>
+            </select>
+          </div>
+
+          <div class="form-groupe">
+            <label class="form-label">Prix unitaire ($)</label>
+            <input type="text" inputmode="numeric" id="item-prix-unitaire" class="form-ctrl" autocomplete="off">
+          </div>
+
+          <div class="form-groupe">
+            <label class="form-label">Quantité achetée</label>
+            <input type="text" inputmode="numeric" id="item-quantite" class="form-ctrl" autocomplete="off">
+          </div>
+
+          <div class="form-groupe col-plein">
+            <label class="form-label">Notes <span class="form-optionnel">(optionnel)</span></label>
+            <input type="text" id="item-notes" class="form-ctrl" autocomplete="off">
+          </div>
+
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" onclick="ajouterItem()">+ Ajouter</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tableau des items -->
+    <div id="items-tableau-zone" class="mt-24"></div>
+
+    <!-- Navigation -->
+    <div class="form-actions mt-24">
+      <button class="btn btn-outline" onclick="wizardEtape1()">← Retour</button>
+      <button class="btn btn-primary" onclick="wizardEtape3()">Suivant →</button>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════
+       ÉTAPE 3 — FINALISATION
+  ══════════════════════════════ -->
+  <div id="wizard-step-3" class="wizard-step cache">
+
+    <div class="finalisation-panel">
+      <div class="finalisation-titre">Finalisation de la facture</div>
+
+      <div id="final-msg" class="msg-zone"></div>
+
+      <div class="form-grille">
+
+        <div class="form-groupe">
+          <label class="form-label">Sous-total</label>
+          <input type="text" id="final-sous-total" class="form-ctrl" readonly>
+        </div>
+
+        <div class="form-groupe">
+          <label class="form-label">Livraison ($)</label>
+          <input type="text" inputmode="numeric" id="final-livraison" class="form-ctrl"
+                 oninput="calculerTotalFinal()" autocomplete="off">
+        </div>
+
+        <div class="form-groupe">
+          <label class="form-label">TPS ($)</label>
+          <input type="text" inputmode="numeric" id="final-tps" class="form-ctrl"
+                 oninput="calculerTotalFinal()" autocomplete="off">
+        </div>
+
+        <div class="form-groupe">
+          <label class="form-label">TVQ ($)</label>
+          <input type="text" inputmode="numeric" id="final-tvq" class="form-ctrl"
+                 oninput="calculerTotalFinal()" autocomplete="off">
+        </div>
+
+      </div>
+
+      <div class="total-final-row">
+        <div>
+          <div class="total-final-label">Total</div>
+          <div class="total-final-montant" id="final-total-affichage">0,00 $</div>
+        </div>
+      </div>
+
+      <div class="form-actions mt-24">
+        <button class="btn btn-outline" onclick="wizardEtape2()">← Retour</button>
+        <button class="btn btn-finaliser" onclick="finaliserFacture()">Finaliser</button>
+      </div>
+
+    </div>
+
+  </div>
+
+      </div>
+
+      <!-- FACTURES -->
+      <div class="section-admin" id="section-factures">
+        <div class="page-entete">
+          <div>
+            <div class="page-titre">Les factures</div>
+            <div class="page-sous-titre">Historique des factures d'achat</div>
+          </div>
+        </div>
+        <div class="msg-zone" id="msg-factures"></div>
+        <div class="filtres-bar">
+          <select class="form-ctrl filtre-select" id="filtre-fournisseur" onchange="filtrerFactures()">
+            <option value="">Tous les fournisseurs</option>
+          </select>
+          <select class="form-ctrl filtre-select" id="filtre-statut" onchange="filtrerFactures()">
+            <option value="">Tous les statuts</option>
+            <option value="En cours">En cours</option>
+            <option value="Finalisée">Finalisée</option>
+          </select>
+          <button class="btn btn-sm btn-outline" onclick="reinitialiserFiltres()">Réinitialiser</button>
+          <span id="factures-compte" class="factures-compte"></span>
+        </div>
+        <div class="chargement" id="loading-factures"><span class="spinner"></span>Chargement...</div>
+        <div class="tableau-wrap">
+          <table id="tableau-factures" class="cache">
+            <thead>
+              <tr><th>Numéro</th><th>Date</th><th>Fournisseur</th><th>TPS</th><th>TVQ</th><th>Total</th><th>Statut</th><th></th></tr>
+            </thead>
+            <tbody id="tbody-factures"></tbody>
+          </table>
+        </div>
+        <div class="vide cache" id="vide-factures">
+          <div class="vide-titre">Aucune facture</div>
+          <div class="vide-desc">Créez votre première facture</div>
+        </div>
+        <div class="modal-admin-overlay" id="modal-facture">
+          <div class="modal-admin">
+            <div class="modal-admin-header">
+              <div>
+                <div class="modal-admin-titre" id="modal-facture-titre">Facture</div>
+                <div class="modal-admin-info" id="modal-facture-info"></div>
+              </div>
+              <button class="btn btn-sm btn-outline" onclick="fermerModalFacture()">Fermer</button>
+            </div>
+            <div class="modal-admin-body">
+              <div class="chargement cache" id="loading-detail-facture"><span class="spinner"></span>Chargement...</div>
+              <div id="contenu-detail-facture"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INVENTAIRE -->
+      <div class="section-admin" id="section-inventaire">
+        <div class="page-entete">
+          <div>
+            <div class="page-titre">Inventaire</div>
+            <div class="page-sous-titre">Stocks — factures finalisées seulement</div>
+          </div>
+          <button class="btn btn-outline" onclick="chargerInventaire()">Actualiser</button>
+        </div>
+        <div class="msg-zone" id="msg-inventaire"></div>
+        <div class="chargement" id="loading-inventaire"><span class="spinner"></span>Chargement...</div>
+        <div id="contenu-inventaire"></div>
+        <div class="vide" id="vide-inventaire" style="display:none">
+          <div class="vide-titre">Aucun stock disponible</div>
+          <div class="vide-desc">Les stocks se calculent à partir des factures finalisées</div>
+        </div>
+      </div>
+
+    <!-- CONTENU DU SITE -->
+      <div class="section-admin" id="section-contenu-site">
+        <div class="page-entete">
+          <div>
+            <div class="page-titre">Contenu du site</div>
+            <div class="page-sous-titre">Textes affichés sur le site public</div>
+          </div>
+          <button class="btn btn-primary" onclick="sauvegarderContenuSite()">Enregistrer</button>
+        </div>
+        <div class="msg-zone" id="msg-contenu-site"></div>
+        <div class="chargement" id="loading-contenu-site"><span class="spinner"></span>Chargement...</div>
+
+        <div id="corps-contenu-site" class="cache">
+
+          <div class="form-panel visible">
+            <div class="form-panel-header"><div class="form-panel-titre">Accueil — Hero</div></div>
+            <div class="form-body">
+              <div class="form-grille">
+                <div class="form-groupe">
+                  <label class="form-label">Eyebrow (ex: Collections 2026)</label>
+                  <input type="text" class="form-ctrl" id="cs-accueil_eyebrow">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Texte du bouton CTA</label>
+                  <input type="text" class="form-ctrl" id="cs-accueil_cta">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Stat — valeur (ex: 100%)</label>
+                  <input type="text" class="form-ctrl" id="cs-accueil_stat_valeur">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Stat — libellé (ex: Artisanal)</label>
+                  <input type="text" class="form-ctrl" id="cs-accueil_stat_label">
+                </div>
+              </div>
+            </div>
+          </div>
+
+         <div class="form-panel visible">
+            <div class="form-panel-header"><div class="form-panel-titre">Qui sommes-nous</div></div>
+            <div class="form-body">
+              <div class="form-grille">
+                <div class="form-groupe">
+                  <label class="form-label">Eyebrow</label>
+                  <input type="text" class="form-ctrl" id="cs-qui_eyebrow">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Titre</label>
+                  <input type="text" class="form-ctrl" id="cs-qui_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Titre — italique</label>
+                  <input type="text" class="form-ctrl" id="cs-qui_titre_em">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Nom signature</label>
+                  <input type="text" class="form-ctrl" id="cs-qui_signature_nom">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Titre signature</label>
+                  <input type="text" class="form-ctrl" id="cs-qui_signature_titre">
+                </div>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Texte principal</label>
+                <textarea class="form-ctrl" id="cs-qui_texte" rows="3"></textarea>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Paragraphe 1</label>
+                <textarea class="form-ctrl" id="cs-section_texte_p1" rows="3"></textarea>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Paragraphe 2</label>
+                <textarea class="form-ctrl" id="cs-section_texte_p2" rows="3"></textarea>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Paragraphe 3</label>
+                <textarea class="form-ctrl" id="cs-section_texte_p3" rows="3"></textarea>
+              </div>
+              <div class="form-grille">
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 01 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-valeur_01_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 01 — description</label>
+                  <textarea class="form-ctrl" id="cs-valeur_01_desc" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 02 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-valeur_02_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 02 — description</label>
+                  <textarea class="form-ctrl" id="cs-valeur_02_desc" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 03 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-valeur_03_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 03 — description</label>
+                  <textarea class="form-ctrl" id="cs-valeur_03_desc" rows="2"></textarea>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 04 — titre</label>
+                  <input type="text" class="form-ctrl" id="cs-valeur_04_titre">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Valeur 04 — description</label>
+                  <textarea class="form-ctrl" id="cs-valeur_04_desc" rows="2"></textarea>
+                </div>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Citation</label>
+                <textarea class="form-ctrl" id="cs-citation_texte" rows="2"></textarea>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Source citation</label>
+                <input type="text" class="form-ctrl" id="cs-citation_source">
+              </div>
+            </div>
+          </div>
+
+       <div class="form-panel visible">
+            <div class="form-panel-header"><div class="form-panel-titre">Bon à savoir — Engagements</div></div>
+            <div class="form-body">
+              <div class="form-grille">
+                <div class="form-groupe"><label class="form-label">Engagement 01 — titre</label><input type="text" class="form-ctrl" id="cs-bas_engagement_01_titre"></div>
+                <div class="form-groupe"><label class="form-label">Engagement 01 — texte</label><textarea class="form-ctrl" id="cs-bas_engagement_01_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Engagement 02 — titre</label><input type="text" class="form-ctrl" id="cs-bas_engagement_02_titre"></div>
+                <div class="form-groupe"><label class="form-label">Engagement 02 — texte</label><textarea class="form-ctrl" id="cs-bas_engagement_02_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Engagement 03 — titre</label><input type="text" class="form-ctrl" id="cs-bas_engagement_03_titre"></div>
+                <div class="form-groupe"><label class="form-label">Engagement 03 — texte</label><textarea class="form-ctrl" id="cs-bas_engagement_03_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Engagement 04 — titre</label><input type="text" class="form-ctrl" id="cs-bas_engagement_04_titre"></div>
+                <div class="form-groupe"><label class="form-label">Engagement 04 — texte</label><textarea class="form-ctrl" id="cs-bas_engagement_04_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Engagement 05 — titre</label><input type="text" class="form-ctrl" id="cs-bas_engagement_05_titre"></div>
+                <div class="form-groupe"><label class="form-label">Engagement 05 — texte</label><textarea class="form-ctrl" id="cs-bas_engagement_05_texte" rows="2"></textarea></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-panel visible">
+            <div class="form-panel-header"><div class="form-panel-titre">Bon à savoir — Notes importantes</div></div>
+            <div class="form-body">
+              <div class="form-grille">
+                <div class="form-groupe"><label class="form-label">Note 01 — titre</label><input type="text" class="form-ctrl" id="cs-bas_note_01_titre"></div>
+                <div class="form-groupe"><label class="form-label">Note 01 — texte</label><textarea class="form-ctrl" id="cs-bas_note_01_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Note 02 — titre</label><input type="text" class="form-ctrl" id="cs-bas_note_02_titre"></div>
+                <div class="form-groupe"><label class="form-label">Note 02 — texte</label><textarea class="form-ctrl" id="cs-bas_note_02_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Note 03 — titre</label><input type="text" class="form-ctrl" id="cs-bas_note_03_titre"></div>
+                <div class="form-groupe"><label class="form-label">Note 03 — texte</label><textarea class="form-ctrl" id="cs-bas_note_03_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Note 04 — titre</label><input type="text" class="form-ctrl" id="cs-bas_note_04_titre"></div>
+                <div class="form-groupe"><label class="form-label">Note 04 — texte</label><textarea class="form-ctrl" id="cs-bas_note_04_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Note 05 — titre</label><input type="text" class="form-ctrl" id="cs-bas_note_05_titre"></div>
+                <div class="form-groupe"><label class="form-label">Note 05 — texte</label><textarea class="form-ctrl" id="cs-bas_note_05_texte" rows="2"></textarea></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-panel visible">
+            <div class="form-panel-header"><div class="form-panel-titre">Bon à savoir — Conservation et utilisation</div></div>
+            <div class="form-body">
+              <div class="form-grille">
+                <div class="form-groupe"><label class="form-label">Conservation 01 — titre</label><input type="text" class="form-ctrl" id="cs-bas_conservation_01_titre"></div>
+                <div class="form-groupe"><label class="form-label">Conservation 01 — texte</label><textarea class="form-ctrl" id="cs-bas_conservation_01_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Conservation 02 — titre</label><input type="text" class="form-ctrl" id="cs-bas_conservation_02_titre"></div>
+                <div class="form-groupe"><label class="form-label">Conservation 02 — texte</label><textarea class="form-ctrl" id="cs-bas_conservation_02_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Conservation 03 — titre</label><input type="text" class="form-ctrl" id="cs-bas_conservation_03_titre"></div>
+                <div class="form-groupe"><label class="form-label">Conservation 03 — texte</label><textarea class="form-ctrl" id="cs-bas_conservation_03_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Conservation 04 — titre</label><input type="text" class="form-ctrl" id="cs-bas_conservation_04_titre"></div>
+                <div class="form-groupe"><label class="form-label">Conservation 04 — texte</label><textarea class="form-ctrl" id="cs-bas_conservation_04_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Conservation 05 — titre</label><input type="text" class="form-ctrl" id="cs-bas_conservation_05_titre"></div>
+                <div class="form-groupe"><label class="form-label">Conservation 05 — texte</label><textarea class="form-ctrl" id="cs-bas_conservation_05_texte" rows="2"></textarea></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-panel visible">
+
+        </div>
+      </div>
+
+      <!-- DENSITÉS -->
+      <div class="section-admin" id="section-densites">
+        <div class="page-entete">
+          <div>
+            <div class="page-titre">Densités</div>
+            <div class="page-sous-titre">Facteurs de conversion ml → g par type d'ingrédient</div>
+          </div>
+          <button class="btn btn-primary" onclick="ouvrirFormDensite()">+ Nouveau type</button>
+        </div>
+        <div class="msg-zone" id="msg-densites"></div>
+        <div class="form-panel" id="form-densites">
+          <div class="form-panel-header">
+            <div class="form-panel-titre" id="form-densites-titre">Nouveau type</div>
+            <button class="btn btn-sm btn-outline" onclick="fermerFormDensite()">Fermer</button>
+          </div>
+          <div class="form-body">
+            <input type="hidden" id="fd-mode">
+            <div class="form-grille">
+              <div class="form-groupe">
+                <label class="form-label">Type d'ingrédient</label>
+                <input type="text" class="form-ctrl" id="fd-type" placeholder="">
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Densité (g/ml)</label>
+                <input type="text" inputmode="numeric" class="form-ctrl" id="fd-densite" placeholder="">
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Unité source</label>
+                <select class="form-ctrl" id="fd-unite">
+                  <option value="ml">ml</option>
+                  <option value="g">g</option>
+                  <option value="L">L</option>
+                  <option value="kg">kg</option>
+                </select>
+              </div>
+              <div class="form-groupe">
+                <label class="form-label">Marge de perte (%)</label>
+                <input type="text" inputmode="numeric" class="form-ctrl" id="fd-marge-perte">
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" onclick="sauvegarderDensite()">Enregistrer</button>
+              <button class="btn btn-secondary" onclick="fermerFormDensite()">Annuler</button>
+            </div>
+          </div>
+        </div>
+        <div class="chargement" id="loading-densites"><span class="spinner"></span>Chargement...</div>
+        <table id="tableau-densites" style="display:none">
+          <thead>
+            <tr><th>Type d'ingrédient</th><th>Densité (g/ml)</th><th>Unité source</th><th>Marge perte (%)</th><th></th></tr>
+          </thead>
+          <tbody id="tbody-densites"></tbody>
+        </table>
+        <div class="vide" id="vide-densites" style="display:none">
+          <div class="vide-titre">Aucune densité</div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+ <script src="https://upload-widget.cloudinary.com/global/all.js"></script>
+<script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+    
+ <div id="ecran-connexion" class="ecran-connexion cache">
+    <div class="connexion-boite">
+      <img src="../Images/Logofinal.png" alt="Univers Caresse" class="connexion-logo">
+      <h2 class="connexion-titre">Administration</h2>
+  <input type="password" id="input-mdp-admin" class="form-ctrl">
+      <p id="erreur-mdp-admin" class="connexion-erreur"></p>
+      <button class="btn btn-primary" onclick="validerConnexionAdmin()">Entrer</button>
+    </div>
+  </div>
+
+  <div class="modal-admin-overlay cache" id="modal-confirm">
+    <div class="modal-admin">
+      <div class="modal-admin-header">
+        <div class="modal-admin-titre" id="modal-confirm-message"></div>
+      </div>
+      <div class="modal-admin-body" style="display:flex;gap:12px;justify-content:flex-end;padding:16px">
+        <button class="btn btn-outline btn-sm" onclick="fermerModalConfirm()">Annuler</button>
+        <button class="btn btn-danger btn-sm" id="modal-confirm-btn">Confirmer</button>
+      </div>
+    </div>
+  </div>
+</body>
  
-
-/* ═══════════════════════════════════════
-   ADMIN — FICHE COLLECTION
-   ═══════════════════════════════════════ */
-.fiche-collection-bandeau {
-  padding: 20px 24px;
-  border-radius: 2px;
-  margin-bottom: 20px;
-}
-.fiche-collection-bandeau .form-panel-titre { color: var(--gris-fonce); font-size: 1.3rem; display: block; }
-.fiche-collection-slogan { color: var(--gris);font-family: 'DM Sans', sans-serif; font-size: 0.82rem; display: block; margin-top: 4px; }
-.fiche-collection-desc { font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--gris); line-height: 1.7; margin-bottom: 24px; }
-.fiche-ligne-item { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--beige); }
-.fiche-ligne-item:last-child { border-bottom: none; }
-.fiche-ligne-info { flex: 1; }
-.fiche-ligne-nom { font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; color: var(--gris-fonce); display: block; }
-.fiche-ligne-format { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; color: var(--gris); display: block; margin-top: 2px; }
-.fiche-ligne-desc { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--gris); margin-top: 6px; line-height: 1.6; }
-.collection-carte-lignes { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
-.collection-carte-lignes-haut { position: absolute; top: 12px; left: 12px; right: 12px; display: flex; flex-wrap: wrap; gap: 4px; z-index: 1; }
-.collection-carte-ligne-tag { font-family: 'DM Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.08em; color: #fff; background: rgba(0,0,0,0.3); padding: 2px 8px; display: block; width: fit-content;}
-.section-label { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--beige); }
-
-
-/* ═══════════════════════════════════════
-   ADMIN — TOAST
-   ═══════════════════════════════════════ */
-
-
-.toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); background: var(--gris-fonce); color: var(--blanc); padding: 16px 32px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 1rem; z-index: 9999; opacity: 0; transition: opacity 0.3s, transform 0.3s; pointer-events: none; }
-.toast.visible { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-.toast.toast-succes { background: var(--primary); }
-.toast.toast-erreur { background: var(--danger); }
-
-
-/* ═══════════════════════════════════════
-   ADMIN — écran de connexion
-
-   ═══════════════════════════════════════ */
-.ecran-connexion { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--blanc); display: none; align-items: center; justify-content: center; z-index: 99999; }
-.ecran-connexion.visible { display: flex; }
-.cache { display: none !important; }
-.connexion-boite { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 300px; padding: 48px 40px; background: white; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
-.connexion-logo { width: 80px; margin-bottom: 8px; }
-.connexion-titre { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--gris-fonce); letter-spacing: 0.05em; }
-.connexion-erreur { color: var(--danger); font-size: 0.85rem; min-height: 20px; }
-.login-body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--blanc); }
-.login-contenu { display: flex; flex-direction: column; align-items: center; padding: var(--padding-page); max-width: 600px; width: 100%; }
-.login-logo-wrap { position: relative; display: flex; justify-content: center; width: 100%; margin-bottom: 8px; }
-.login-admin-label { position: absolute; top: 0; left: 0; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
-.login-logo { width: 220px; }
-.login-separateur { width: 100%; height: 1px; background: var(--accent); margin: 32px 0; }
-.login-champ { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-.login-row { display: flex; gap: 0; width: 100%; }
-.login-row .login-input { flex: 1; border-radius: 4px 0 0 4px; }
-.login-row .login-btn { border-radius: 0 4px 4px 0; white-space: nowrap; }
-.connexion-erreur { color: var(--danger); font-size: 0.85rem; min-height: 20px; }
-
-
-
-/* ═══════════════════════════════════════
-  truc
-
-   ═══════════════════════════════════════ */
-
-.citation-guillemet { color: var(--accent); }
+</html>
