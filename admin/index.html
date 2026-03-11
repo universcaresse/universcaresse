@@ -770,7 +770,7 @@
         <div class="tableau-wrap">
           <table id="tableau-factures" class="cache">
             <thead>
-              <tr><th>Numéro</th><th>Date</th><th>Fournisseur</th><th>Total</th><th>Statut</th><th></th></tr>
+              <tr><th>Numéro</th><th>Date</th><th>Fournisseur</th><th>TPS</th><th>TVQ</th><th>Total</th><th>Statut</th><th></th></tr>
             </thead>
             <tbody id="tbody-factures"></tbody>
           </table>
@@ -1045,7 +1045,7 @@
           </div>
         </div>
         <div class="chargement" id="loading-densites"><span class="spinner"></span>Chargement...</div>
-        <table id="tableau-densites" style="display:none">
+        <table id="tableau-densites" class="cache">
           <thead>
             <tr><th>Type d'ingrédient</th><th>Densité (g/ml)</th><th>Unité source</th><th>Marge perte (%)</th><th></th></tr>
           </thead>
