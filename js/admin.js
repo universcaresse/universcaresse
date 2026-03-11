@@ -206,7 +206,7 @@ function ouvrirFicheCollection(col) {
         ${item.format ? `<span class="fiche-ligne-format">${item.format}</span>` : ''}
         ${item.description_ligne ? `<p class="fiche-ligne-desc">${item.description_ligne}</p>` : ''}
       </div>
-      <button class="btn btn-sm btn-edit" onclick="modifierCollection(${item.rowIndex})">Modifier</button>
+      <button class="btn btn-sm btn-edit" onclick="modifierProduit(${item.rowIndex})">Modifier</button>
     </div>`).join('');
 
   const fiche = document.getElementById('fiche-collection');
