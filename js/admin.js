@@ -235,9 +235,9 @@ document.getElementById('fiche-collection-ajouter-ligne').onclick = () => {
     ouvrirFormCollectionPour(col);
     basculerModeFormCollection();
   };
- fiche.classList.add('visible');
-const conteneur = document.querySelector('.admin-contenu');
-  if (conteneur) conteneur.scrollTop = 0;
+ document.getElementById('btn-supprimer-collection').onclick = () => supprimerCollection(col, groupe);
+  fiche.classList.add('visible');
+  window.scrollTo(0, 0);
 }
 
 function fermerFicheCollection() {
@@ -274,6 +274,8 @@ function ouvrirFormCollection() {
   document.getElementById('contenu-collections').classList.add('cache');
  document.getElementById('contenu-collections').classList.add('cache');
   document.getElementById('form-collections').classList.add('visible');
+  const btnSupprLigneNouv = document.getElementById('btn-supprimer-ligne');
+  if (btnSupprLigneNouv) btnSupprLigneNouv.classList.add('cache');
   window.scrollTo(0, 0);
 }
 function confirmerAction(message, callback) {
@@ -314,8 +316,13 @@ async function modifierLigneProduit(rowIndex) {
     .filter(i => i.collection === item.collection && i.ligne === item.ligne)
     .map(i => ({ type: i.ingredient_type, nom: i.ingredient_nom, quantite: i.quantite_g }));
   rafraichirListeIngredientsBase();
-  document.getElementById('contenu-collections').classList.add('cache');
+   document.getElementById('contenu-collections').classList.add('cache');
   document.getElementById('form-collections').classList.add('visible');
+  const btnSupprLigne = document.getElementById('btn-supprimer-ligne');
+  if (btnSupprLigne) {
+    btnSupprLigne.classList.remove('cache');
+    btnSupprLigne.onclick = () => supprimerLigne(rowIndex, item.collection, item.ligne);
+  }
   window.scrollTo(0, 0);
 }
 
@@ -419,18 +426,44 @@ async function sauvegarderCollection() {
     if (btnSauvegarder) { btnSauvegarder.disabled = false; btnSauvegarder.innerHTML = 'Enregistrer'; }
   }
 }
+async function supprimerCollection(col, groupe) {
+  if (!donneesRecettes.length) {
+    const res = await appelAPI('getRecettes');
+    donneesRecettes = (res && res.recettes) ? res.recettes : [];
+  }
+  const recettesLiees = donneesRecettes.filter(r => r.collection === col);
+  if (recettesLiees.length > 0) {
+    afficherMsg('collections', `Impossible — ${recettesLiees.length} recette(s) référencent cette collection. Modifiez-les d'abord.`, 'erreur');
+    return;
+  }
+  const lignes = groupe.lignes ? groupe.lignes.length : 0;
+  const msg = lignes > 0
+    ? `Cette collection contient ${lignes} ligne(s). Supprimer quand même ?`
+    : 'Supprimer cette collection ?';
+  confirmerAction(msg, async () => {
+    const rowIndexes = donneesCollections.filter(i => i.collection === col).map(i => i.rowIndex);
+    for (const rowIndex of rowIndexes) {
+      await appelAPIPost('deleteCollectionItem', { rowIndex });
+    }
+    fermerFicheCollection();
+    afficherMsg('collections', 'Collection supprimée.');
+    await chargerCollections();
+  });
+}
+
 async function supprimerLigne(rowIndex, collection, ligne) {
   if (!donneesRecettes.length) {
     const res = await appelAPI('getRecettes');
     donneesRecettes = (res && res.recettes) ? res.recettes : [];
   }
   const recettesLiees = donneesRecettes.filter(r => r.collection === collection && r.ligne === ligne);
-  const msg = recettesLiees.length > 0
-    ? `Cette ligne a ${recettesLiees.length} recette(s) liée(s). Supprimer quand même ?`
-    : 'Supprimer cette ligne ?';
-  confirmerAction(msg, async () => {
+  if (recettesLiees.length > 0) {
+    afficherMsg('collections', `Impossible — ${recettesLiees.length} recette(s) référencent cette ligne. Modifiez-les d'abord.`, 'erreur');
+    return;
+  }
+  confirmerAction('Supprimer cette ligne ?', async () => {
     const res = await appelAPIPost('deleteCollectionItem', { rowIndex });
-if (res && res.success) {
+    if (res && res.success) {
       fermerFicheCollection();
       afficherMsg('collections', 'Ligne supprimée.');
       await chargerCollections();
@@ -705,8 +738,8 @@ function ouvrirFicheRecette(id) {
   `;
   fermerFormRecette();
   document.getElementById('fiche-recette').classList.add('visible');
+  window.scrollTo(0, 0);
 }
-
 function fermerFicheRecette() {
   document.getElementById('fiche-recette').classList.remove('visible');
   recetteActive = null;
