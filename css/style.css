@@ -1102,9 +1102,9 @@ tr:hover td { background: rgba(232,220,200,0.15); }
   .collection-entete-visuel { display: none; }
 
 .modal-produit { grid-template-columns: 1fr 2fr; grid-template-rows: auto auto; max-height: 90vh; overflow-y: auto; }
- .modal-visuel-hex { min-height: 240px; grid-column: 1; grid-row: 1; }
-  .modal-visuel-photo { min-height: 240px; grid-column: 2; grid-row: 1; }
-  .modal-visuel-photo img { object-fit: cover; object-position: center 70%; }
+  .modal-visuel-hex { min-height: 320px; grid-column: 1; grid-row: 1; }
+  .modal-visuel-photo { min-height: 320px; grid-column: 2; grid-row: 1; }
+  .modal-visuel-photo img { object-fit: cover; object-position: center center; }
   .modal-contenu { grid-column: 1 / -1; grid-row: 2; }
 
   .admin-contenu { padding: 24px var(--padding-mobile); }

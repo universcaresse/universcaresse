@@ -10,29 +10,26 @@
 </head>
 <body>
 
-<!-- NAVIGATION --> 
+<!-- NAVIGATION -->
 <nav id="nav">
-
   <ul class="nav-links" id="nav-links">
     <li><a href="#accueil" class="active" onclick="naviguer('accueil')">Accueil</a></li>
     <li><a href="#catalogue" onclick="naviguer('catalogue')">Catalogue</a></li>
-    <li><a href="#qui-sommes-nous" onclick="naviguer('qui-sommes-nous')">Qui sommes-nous</a></li>
     <li><a href="#bon-a-savoir" onclick="naviguer('bon-a-savoir')">Bon à savoir</a></li>
     <li><a href="#contact" onclick="naviguer('contact')">Contact</a></li>
-  
   </ul>
   <div class="nav-actions">
-  
-    <button class="burger" id="burger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </nav>
+<button class="burger burger-flottant" id="burger" onclick="toggleMenu()">
+  <span></span><span></span><span></span>
+</button>
 
 <!-- MODAL PRODUIT -->
 <div class="modal-overlay" id="modal-produit" onclick="fermerModalProduit(event)">
   <div class="modal-produit">
-    <div class="modal-visuel" id="modal-visuel">
+    <div class="modal-visuel-hex" id="modal-visuel-hex"></div>
+    <div class="modal-visuel-photo" id="modal-visuel-photo">
       <button class="modal-fermer" onclick="fermerModal()">✕</button>
     </div>
     <div class="modal-contenu">
@@ -40,9 +37,8 @@
       <div class="modal-nom" id="modal-nom"></div>
       <div class="modal-ligne" id="modal-ligne"></div>
       <p class="modal-desc" id="modal-desc"></p>
-      <div class="modal-formats-titre">Format disponible</div>
+      <div class="modal-formats-titre" id="modal-formats-titre">Format disponible</div>
       <div class="modal-formats" id="modal-formats"></div>
-      <button class="modal-cta" onclick="naviguer('contact')">Demande d'information</button>
     </div>
   </div>
 </div>
@@ -56,13 +52,13 @@
 
     <div class="hero">
       <div class="hero-left">
-        <p class="hero-eyebrow fade-in">Collections 2026-2027</p>
+        <p class="hero-eyebrow fade-in" id="contenu-accueil-eyebrow"></p>
         <img src="Images/Logofinal.png" alt="Univers Caresse" class="hero-logo-img fade-in delay-3">
         <a href="#catalogue" class="hero-cta fade-in delay-4" onclick="naviguer('catalogue')">
-          Découvrir les collections
+          <span id="contenu-accueil-cta"></span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
-     <div class="hero-stats fade-in delay-5">
+        <div class="hero-stats fade-in delay-5">
           <div class="hero-stat">
             <div class="hero-stat-num" id="hero-stat-collections">—</div>
             <div class="hero-stat-label">Collections</div>
@@ -72,8 +68,8 @@
             <div class="hero-stat-label">Produits</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-num">100%</div>
-            <div class="hero-stat-label">Artisanal</div>
+            <div class="hero-stat-num" id="contenu-accueil-stat-valeur"></div>
+            <div class="hero-stat-label" id="contenu-accueil-stat-label"></div>
           </div>
         </div>
       </div>
@@ -81,7 +77,7 @@
       <div class="hero-right">
         <div class="hero-mosaic">
           <div class="mosaic-item">
-            <div class="mosaic-soap" style="background: var(--accent); height:100%;">
+            <div class="mosaic-soap mosaic-soap-accent">
               <div class="mosaic-soap-label">
                 <span class="mosaic-soap-name">nouvelles</span>
                 <span class="mosaic-soap-col">livre</span>
@@ -89,7 +85,7 @@
             </div>
           </div>
           <div class="mosaic-item">
-            <div class="mosaic-soap" style="background: var(--primary); height:100%;">
+            <div class="mosaic-soap mosaic-soap-primary">
               <div class="mosaic-soap-label">
                 <span class="mosaic-soap-name">disponible</span>
                 <span class="mosaic-soap-col">en prod</span>
@@ -97,7 +93,7 @@
             </div>
           </div>
           <div class="mosaic-item">
-            <div class="mosaic-soap" style="background: var(--gris); height:100%;">
+            <div class="mosaic-soap mosaic-soap-gris">
               <div class="mosaic-soap-label">
                 <span class="mosaic-soap-name">a voir</span>
                 <span class="mosaic-soap-col">theme</span>
@@ -106,6 +102,64 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="section-line"></div>
+
+    <!-- ── QUI SOMMES-NOUS intégré ── -->
+    <div class="page-hero fade-in">
+      <div>
+        <p class="page-hero-eyebrow" id="contenu-qui-eyebrow"></p>
+        <h1 class="page-hero-titre">
+          <span id="contenu-qui-titre"></span>
+          <em id="contenu-qui-titre-em"></em>
+        </h1>
+        <p class="page-hero-texte" id="contenu-qui-texte"></p>
+        <div class="page-hero-signature-bloc">
+          <div class="page-hero-signature" id="contenu-qui-signature-nom"></div>
+          <div class="page-hero-titre-signature" id="contenu-qui-signature-titre"></div>
+        </div>
+      </div>
+      <div class="page-hero-visuel">
+        <div class="page-hero-visuel-bg">
+          <img class="photo-ambiance" src="Images/savonnerie.png" alt="Atelier Univers Caresse" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+
+    <section class="section-texte">
+      <div class="texte-principal fade-in delay-1">
+        <p id="contenu-section-texte-p1"></p>
+        <p id="contenu-section-texte-p2"></p>
+        <p id="contenu-section-texte-p3"></p>
+      </div>
+      <div class="fade-in delay-2">
+        <div class="valeur-item">
+          <div class="valeur-num">01</div>
+          <div class="valeur-titre" id="contenu-valeur-01-titre"></div>
+          <div class="valeur-desc" id="contenu-valeur-01-desc"></div>
+        </div>
+        <div class="valeur-item">
+          <div class="valeur-num">02</div>
+          <div class="valeur-titre" id="contenu-valeur-02-titre"></div>
+          <div class="valeur-desc" id="contenu-valeur-02-desc"></div>
+        </div>
+        <div class="valeur-item">
+          <div class="valeur-num">03</div>
+          <div class="valeur-titre" id="contenu-valeur-03-titre"></div>
+          <div class="valeur-desc" id="contenu-valeur-03-desc"></div>
+        </div>
+        <div class="valeur-item">
+          <div class="valeur-num">04</div>
+          <div class="valeur-titre" id="contenu-valeur-04-titre"></div>
+          <div class="valeur-desc" id="contenu-valeur-04-desc"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="bandeau-citation">
+      <p class="citation-texte"><span class="citation-guillemet">«&nbsp;</span><span id="contenu-citation-texte"></span><span class="citation-guillemet">&nbsp;»</span></p>
+      <span class="citation-source" id="contenu-citation-source"></span>
     </div>
 
     <section class="section-collections">
@@ -130,9 +184,8 @@
         <p class="catalogue-subtitle">Produits fabriqués à la main, en petites séries</p>
       </div>
     </div>
- 
+
     <div class="filtres-bar" id="filtres-bar">
-      <span class="filtre-label">Collection :</span>
       <button class="filtre-btn actif" data-filtre="tout" onclick="filtrer('tout')">Toutes</button>
     </div>
 
@@ -141,81 +194,7 @@
       Chargement des collections…
     </div>
 
-    <div class="catalogue-body" id="catalogue-body" style="display:none"></div>
-
-  </section>
-
-  <!-- ══════════════════════════════════
-       SECTION QUI SOMMES-NOUS
-  ══════════════════════════════════ -->
-  <section id="section-qui-sommes-nous" class="page-section">
-
-    <div class="page-hero fade-in">
-      <div>
-        <p class="page-hero-eyebrow">Savonnerie artisanale</p>
-        <h1 class="page-hero-titre">
-          L'art de la
-          <em>douceur naturelle</em>
-        </h1>
-        <p class="page-hero-texte">
-          Dans notre savonnerie artisanale, chaque création est pensée pour offrir une expérience sensorielle unique. Nos savons sont élaborés avec des ingrédients naturels soigneusement sélectionnés, dans le respect de votre peau et de l'environnement.
-        </p>
-        <div class="page-hero-signature-bloc">
-          <div class="page-hero-signature">Chantal Mondor</div>
-          <div class="page-hero-titre-signature">Fondatrice — Univers Caresse</div>
-        </div>
-      </div>
-      <div class="page-hero-visuel">
-        <div class="page-hero-visuel-bg">
-          <img class="photo-ambiance" src="Images/savonnerie.png" alt="Atelier Univers Caresse" onerror="this.style.display='none'">
-          <img class="plume-deco" src="Images/plume.png" alt="" onerror="this.style.display='none'">
-        </div>
-      </div>
-    </div>
-
-    <section class="section-texte">
-      <div class="texte-principal fade-in delay-1">
-        <p>Découvrez nos collections inspirées par la nature, où chaque fragrance raconte une histoire et chaque texture invite à la douceur. De la fraîcheur des lagunes à la chaleur gourmande, laissez-vous porter par un voyage olfactif exceptionnel.</p>
-        <p>Chaque savon est fabriqué à la main en petites séries, selon le procédé de saponification à froid. Cette méthode traditionnelle préserve toutes les propriétés des huiles végétales et produit naturellement de la glycérine, reconnue pour ses vertus hydratantes.</p>
-        <p>Nos formules sont sans huile de palme, entièrement biodégradables et emballées de façon écoresponsable. Parce que prendre soin de soi ne devrait jamais se faire au détriment de la planète.</p>
-      </div>
-      <div class="fade-in delay-2">
-        <div class="valeur-item">
-          <div class="valeur-num">01</div>
-          <div class="valeur-titre">Ingrédients naturels</div>
-          <div class="valeur-desc">Chaque ingrédient est choisi pour ses propriétés bienfaisantes. Huiles végétales, beurres précieux, argiles et plantes sont au cœur de nos formules.</div>
-        </div>
-        <div class="valeur-item">
-          <div class="valeur-num">02</div>
-          <div class="valeur-titre">Saponification à froid</div>
-          <div class="valeur-desc">Le procédé à froid préserve toutes les propriétés des huiles et génère naturellement de la glycérine. Un savoir-faire traditionnel au service de votre peau.</div>
-        </div>
-        <div class="valeur-item">
-          <div class="valeur-num">03</div>
-          <div class="valeur-titre">Fabriqué au Québec</div>
-          <div class="valeur-desc">Chaque savon naît dans notre atelier québécois, en petites séries soigneusement contrôlées pour vous garantir fraîcheur et qualité.</div>
-        </div>
-        <div class="valeur-item">
-          <div class="valeur-num">04</div>
-          <div class="valeur-titre">Sans huile de palme</div>
-          <div class="valeur-desc">Nos formules excluent l'huile de palme et privilégient des alternatives durables, pour un soin qui respecte autant votre peau que l'environnement.</div>
-        </div>
-      </div>
-    </section>
-
-    <div class="bandeau-citation">
-      <p class="citation-texte">« Chaque savon est pensé comme une caresse — un geste de douceur offert à votre peau, et à la nature. »</p>
-      <span class="citation-source">Chantal Mondor — Fondatrice</span>
-    </div>
-
-    <section class="section-cta">
-      <h2>Découvrez nos collections</h2>
-      <p>Dix univers inspirés par la nature, fabriqués à la main avec amour.</p>
-      <a href="#catalogue" onclick="naviguer('catalogue')">
-        Voir le catalogue
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </section>
+    <div class="catalogue-body cache" id="catalogue-body"></div>
 
   </section>
 
@@ -235,64 +214,59 @@
     <section class="bonne-section fade-in delay-1">
       <h2 class="bonne-section-titre">Nos engagements</h2>
       <div class="items-grille">
-        <div class="info-card">
-          <div class="info-card-titre">Ingrédients de qualité</div>
-          <div class="info-card-texte">Toujours confectionné avec des ingrédients de qualité, soigneusement sélectionnés pour leurs propriétés bienfaisantes et leur respect de la peau.</div>
+        <div class="info-card cache" id="card-bas-engagement-01"><div class="info-card-titre" id="contenu-bas-engagement-01-titre"></div><div class="info-card-texte" id="contenu-bas-engagement-01-texte"></div></div>
+        <div class="info-card cache" id="card-bas-engagement-02"><div class="info-card-titre" id="contenu-bas-engagement-02-titre"></div><div class="info-card-texte" id="contenu-bas-engagement-02-texte"></div></div>
+        <div class="info-card cache" id="card-bas-engagement-03"><div class="info-card-titre" id="contenu-bas-engagement-03-titre"></div><div class="info-card-texte" id="contenu-bas-engagement-03-texte"></div></div>
+        <div class="info-card cache" id="card-bas-engagement-04"><div class="info-card-titre" id="contenu-bas-engagement-04-titre"></div><div class="info-card-texte" id="contenu-bas-engagement-04-texte"></div></div>
+        <div class="info-card cache" id="card-bas-engagement-05"><div class="info-card-titre" id="contenu-bas-engagement-05-titre"></div><div class="info-card-texte" id="contenu-bas-engagement-05-texte"></div></div>
+      </div>
+    </section>
+
+    <section class="bonne-section fade-in delay-2">
+      <h2 class="bonne-section-titre">Notes importantes</h2>
+      <div id="zone-notes-importantes">
+        <div class="note-allergenes cache" id="card-bas-note-01">
+          <svg class="note-allergenes-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div class="note-allergenes-texte"><strong id="contenu-bas-note-01-titre"></strong><span id="contenu-bas-note-01-texte"></span></div>
         </div>
-        <div class="info-card">
-          <div class="info-card-titre">Petites quantités et sur commande</div>
-          <div class="info-card-texte">Nos produits sont fabriqués en petite quantité et sur commande, pour vous garantir fraîcheur et soin à chaque savon.</div>
+        <div class="note-allergenes cache" id="card-bas-note-02">
+          <svg class="note-allergenes-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div class="note-allergenes-texte"><strong id="contenu-bas-note-02-titre"></strong><span id="contenu-bas-note-02-texte"></span></div>
         </div>
-        <div class="info-card">
-          <div class="info-card-titre">Sans huile de palme</div>
-          <div class="info-card-texte">Nos formules excluent l'huile de palme. Nous privilégions des alternatives durables qui respectent autant votre peau que l'environnement.</div>
+        <div class="note-allergenes cache" id="card-bas-note-03">
+          <svg class="note-allergenes-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div class="note-allergenes-texte"><strong id="contenu-bas-note-03-titre"></strong><span id="contenu-bas-note-03-texte"></span></div>
         </div>
-        <div class="info-card">
-          <div class="info-card-titre">Entièrement biodégradable</div>
-          <div class="info-card-texte">Nos savons sont entièrement biodégradables pour minimiser leur impact environnemental.</div>
+        <div class="note-allergenes cache" id="card-bas-note-04">
+          <svg class="note-allergenes-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div class="note-allergenes-texte"><strong id="contenu-bas-note-04-titre"></strong><span id="contenu-bas-note-04-texte"></span></div>
+        </div>
+        <div class="note-allergenes cache" id="card-bas-note-05">
+          <svg class="note-allergenes-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div class="note-allergenes-texte"><strong id="contenu-bas-note-05-titre"></strong><span id="contenu-bas-note-05-texte"></span></div>
         </div>
       </div>
     </section>
 
-    <div class="note-allergenes fade-in delay-2">
-      <svg class="note-allergenes-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-      </svg>
-      <div class="note-allergenes-texte">
-        <strong>Allergies et sensibilités</strong>
-        Si vous avez des allergies connues ou une peau sensible, consultez la liste complète des ingrédients (INCI) disponible sur demande pour chaque produit. En cas de doute, effectuez un test cutané avant la première utilisation.
-      </div>
-    </div>
-
     <section class="bonne-section fade-in delay-2">
       <h2 class="bonne-section-titre">Conservation et utilisation</h2>
       <div class="items-grille">
-        <div class="info-card accent">
-          <div class="info-card-titre">Conservation idéale</div>
-          <div class="info-card-texte">Conservez vos savons dans un endroit sec, à l'abri de l'humidité et de la lumière directe. Un porte-savon bien drainé prolonge considérablement leur durée de vie.</div>
-        </div>
-        <div class="info-card accent">
-          <div class="info-card-titre">Période de cure</div>
-          <div class="info-card-texte">Nos savons à froid bénéficient d'une période de cure de 4 à 6 semaines après fabrication. Ce processus permet au savon de durcir et d'atteindre son plein potentiel.</div>
-        </div>
-        <div class="info-card accent">
-          <div class="info-card-titre">Usage recommandé</div>
-          <div class="info-card-texte">Nos produits sont destinés à un usage externe uniquement. Évitez le contact avec les yeux. En cas d'irritation, cessez l'utilisation et consultez un professionnel de la santé.</div>
-        </div>
+        <div class="info-card accent cache" id="card-bas-conservation-01"><div class="info-card-titre" id="contenu-bas-conservation-01-titre"></div><div class="info-card-texte" id="contenu-bas-conservation-01-texte"></div></div>
+        <div class="info-card accent cache" id="card-bas-conservation-02"><div class="info-card-titre" id="contenu-bas-conservation-02-titre"></div><div class="info-card-texte" id="contenu-bas-conservation-02-texte"></div></div>
+        <div class="info-card accent cache" id="card-bas-conservation-03"><div class="info-card-titre" id="contenu-bas-conservation-03-titre"></div><div class="info-card-texte" id="contenu-bas-conservation-03-texte"></div></div>
+        <div class="info-card accent cache" id="card-bas-conservation-04"><div class="info-card-titre" id="contenu-bas-conservation-04-titre"></div><div class="info-card-texte" id="contenu-bas-conservation-04-texte"></div></div>
+        <div class="info-card accent cache" id="card-bas-conservation-05"><div class="info-card-titre" id="contenu-bas-conservation-05-titre"></div><div class="info-card-texte" id="contenu-bas-conservation-05-texte"></div></div>
       </div>
     </section>
 
     <section class="bonne-section fade-in delay-3">
       <h2 class="bonne-section-titre">Commandes et délais</h2>
       <div class="items-grille">
-        <div class="info-card neutre">
-          <div class="info-card-titre">Sur commande</div>
-          <div class="info-card-texte">La majorité de nos produits sont préparés sur commande. Comptez un délai de préparation variable selon les produits et la disponibilité des ingrédients.</div>
-        </div>
-        <div class="info-card neutre">
-          <div class="info-card-titre">Demande d'information</div>
-          <div class="info-card-texte">Pour toute question sur la disponibilité, les délais ou les ingrédients, utilisez notre formulaire de contact. Nous vous répondrons dans les meilleurs délais.</div>
-        </div>
+        <div class="info-card neutre cache" id="card-bas-commande-01"><div class="info-card-titre" id="contenu-bas-commande-01-titre"></div><div class="info-card-texte" id="contenu-bas-commande-01-texte"></div></div>
+        <div class="info-card neutre cache" id="card-bas-commande-02"><div class="info-card-titre" id="contenu-bas-commande-02-titre"></div><div class="info-card-texte" id="contenu-bas-commande-02-texte"></div></div>
+        <div class="info-card neutre cache" id="card-bas-commande-03"><div class="info-card-titre" id="contenu-bas-commande-03-titre"></div><div class="info-card-texte" id="contenu-bas-commande-03-texte"></div></div>
+        <div class="info-card neutre cache" id="card-bas-commande-04"><div class="info-card-titre" id="contenu-bas-commande-04-titre"></div><div class="info-card-texte" id="contenu-bas-commande-04-texte"></div></div>
+        <div class="info-card neutre cache" id="card-bas-commande-05"><div class="info-card-titre" id="contenu-bas-commande-05-titre"></div><div class="info-card-texte" id="contenu-bas-commande-05-texte"></div></div>
       </div>
     </section>
 
@@ -403,6 +377,7 @@
 let donneescatalogue = [];
 let collectionsOrdre = [];
 let catalogueCharge = false;
+let collectionEnAttente = null;
 
 async function chargerCatalogue() {
   if (catalogueCharge) return;
@@ -422,19 +397,27 @@ async function chargerCatalogue() {
 
 function afficherErreurCatalogue(msg) {
   const el = document.getElementById('chargement');
-  if (el) el.innerHTML = `<p style="color:var(--gris);font-family:'DM Sans',sans-serif;">${msg}</p>`;
+  if (el) el.innerHTML = `<p class="chargement-erreur">${msg}</p>`;
 }
 
 function construireCatalogue() {
   const chargement = document.getElementById('chargement');
   const body = document.getElementById('catalogue-body');
-  if (chargement) chargement.style.display = 'none';
-  if (body) body.style.display = 'block';
+if (chargement) chargement.classList.add('cache');
+if (body) body.classList.remove('cache');
 
   const parCollection = {};
   donneescatalogue.forEach(p => {
     if (!parCollection[p.collection]) parCollection[p.collection] = [];
     parCollection[p.collection].push(p);
+    if (Array.isArray(p.collections_secondaires)) {
+      p.collections_secondaires.forEach(colSec => {
+        if (!parCollection[colSec]) parCollection[colSec] = [];
+        if (!parCollection[colSec].find(x => x.recette_id === p.recette_id)) {
+          parCollection[colSec].push(p);
+        }
+      });
+    }
   });
 
   const ordre = collectionsOrdre.length ? collectionsOrdre : Object.keys(parCollection);
@@ -459,105 +442,58 @@ function construireCatalogue() {
     const section = document.createElement('div');
     section.className = 'collection-section';
     section.dataset.collection = col;
+
+    const parLigne = {};
+    const ordreLignes = [];
+    produits.forEach(p => {
+      const ligne = p.ligne || '';
+      if (!parLigne[ligne]) { parLigne[ligne] = []; ordreLignes.push(ligne); }
+      parLigne[ligne].push(p);
+    });
+
+    const lignesHTML = ordreLignes.map(ligne => {
+      const prods = parLigne[ligne];
+      const descLigne = prods[0].desc_ligne || '';
+      return `
+        <div class="ligne-groupe">
+          ${ligne ? `<div class="ligne-groupe-entete">
+            <div class="ligne-groupe-nom">${ligne.toUpperCase()}</div>
+            ${descLigne ? `<p class="ligne-groupe-desc">${descLigne}</p>` : ''}
+          </div>` : ''}
+          <div class="produits-grille">${prods.map(p => carteProduit(p)).join('')}</div>
+        </div>`;
+    }).join('');
+
     section.innerHTML = `
       <div class="collection-entete">
         <div>
-          <h2 class="collection-entete-nom">${col}</h2>
+          <h2 class="collection-entete-nom">${col.toUpperCase()}</h2>
           <p class="collection-entete-slogan">${infos.slogan || ''}</p>
           <p class="collection-entete-desc">${infos.desc_collection || ''}</p>
         </div>
         <div class="collection-entete-visuel">
-          <div class="collection-entete-bg" style="background: linear-gradient(135deg, ${infos.couleur_hex}cc, ${infos.couleur_hex}88);">
-            ${infos.image_ambiance
-              ? `<img src="Images/produits/${infos.image_ambiance}" alt="${col}" onerror="this.style.display='none'">`
+          <div class="collection-entete-bg" style="--col-hex: ${infos.couleur_hex};">
+            ${infos.image_collection
+              ? `<img src="${infos.image_collection}" alt="${col}" onerror="this.style.display='none'">`
               : `<span class="entete-visuel-placeholder">Photo ambiance<br>à venir</span>`}
           </div>
         </div>
       </div>
-      <div class="produits-grille">${produits.map(p => carteProduit(p)).join('')}</div>`;
+      ${lignesHTML}`;
     body.appendChild(section);
   });
-}
-
-function carteProduit(p) {
-  const prix = p.prix_vente ? parseFloat(p.prix_vente).toFixed(2).replace('.', ',') + ' $' : '—';
-  const formats = Array.isArray(p.formats) ? p.formats : (p.format ? [p.format] : []);
-  const image = p.image_url ? `<img src="Images/produits/${p.image_url}" alt="${p.nom}" onerror="this.style.display='none'">` : '';
-  return `
-    <div class="carte-produit" onclick='ouvrirModal(${JSON.stringify(p)})'>
-      <div class="carte-visuel">
-        <div class="carte-couleur" style="background: ${p.couleur_hex};">
-          ${image}
-          ${!p.image_url ? `<div class="carte-photo-placeholder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            Photo à venir</div>` : ''}
-          <div class="carte-couleur-dot" style="background: ${p.couleur_hex};"></div>
-        </div>
-      </div>
-      <div class="carte-infos">
-        <span class="carte-collection-badge">${p.collection}</span>
-        <div class="carte-nom">${p.nom}</div>
-        <div class="carte-ligne">${p.ligne}</div>
-        <div class="carte-bas">
-          <span class="carte-prix">${prix}</span>
-          <div class="carte-formats">${formats.map(f => `<span class="carte-format-tag">${f}</span>`).join('')}</div>
-        </div>
-      </div>
-    </div>`;
-}
-
-function filtrer(collection) {
-  document.querySelectorAll('.filtre-btn').forEach(b => b.classList.remove('actif'));
-  const btn = document.querySelector(`[data-filtre="${collection}"]`);
-  if (btn) btn.classList.add('actif');
-  document.querySelectorAll('.collection-section').forEach(s => {
-    s.classList.toggle('masquee', collection !== 'tout' && s.dataset.collection !== collection);
-  });
-}
-
-function ouvrirModal(produit) {
-  document.getElementById('modal-nom').textContent = produit.nom;
-  document.getElementById('modal-collection').textContent = produit.collection;
-  document.getElementById('modal-ligne').textContent = produit.ligne;
-  document.getElementById('modal-desc').textContent = produit.description;
-  const visuel = document.getElementById('modal-visuel');
-  visuel.style.background = `linear-gradient(145deg, ${produit.couleur_hex}dd, ${produit.couleur_hex}88)`;
-  const imgExistante = visuel.querySelector('img');
-  if (imgExistante) imgExistante.remove();
-  if (produit.image_url) {
-    const img = document.createElement('img');
-    img.src = `Images/produits/${produit.image_url}`;
-    img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;';
-    img.onerror = () => img.remove();
-    visuel.appendChild(img);
+  if (collectionEnAttente) {
+    filtrer(collectionEnAttente);
+    collectionEnAttente = null;
   }
-  const formats = Array.isArray(produit.formats) ? produit.formats : (produit.format ? [produit.format] : []);
-  const prix = produit.prix_vente ? parseFloat(produit.prix_vente).toFixed(2).replace('.', ',') + ' $' : '—';
-  const formatsEl = document.getElementById('modal-formats');
-  formatsEl.innerHTML = '';
-  formats.forEach((f, i) => {
-    const btn = document.createElement('div');
-    btn.className = 'modal-format' + (i === 0 ? ' selectionne' : '');
-    btn.innerHTML = `${f}<span class="modal-format-prix">${prix}</span>`;
-    btn.onclick = () => {
-      document.querySelectorAll('.modal-format').forEach(b => b.classList.remove('selectionne'));
-      btn.classList.add('selectionne');
-    };
-    formatsEl.appendChild(btn);
-  });
-  document.getElementById('modal-produit').classList.add('ouvert');
-  document.body.style.overflow = 'hidden';
 }
-
 function fermerModal() {
   document.getElementById('modal-produit').classList.remove('ouvert');
   document.body.style.overflow = '';
 }
-
 function fermerModalProduit(e) {
   if (e.target === document.getElementById('modal-produit')) fermerModal();
 }
 </script>
-
 </body>
 </html>
