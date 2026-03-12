@@ -1546,7 +1546,8 @@ async function chargerListesFournisseurs() {
   const res = await appelAPI('getDropdownLists');
   if (res) {
     listesDropdown.types    = res.types    || [];
-    listesDropdown.fullData = res.fullData || [];
+ listesDropdown.fullData = res.fullData || [];
+    listesDropdown.config   = res.config   || {};
   }
   const resFactures = await appelAPI('getInvoicesListWithFilters');
   if (resFactures) {
@@ -1727,7 +1728,21 @@ async function ajouterItem() {
     return;
   }
 
-  const prixTotal = parseFloat(quantite) * parseFloat(prixUnit);
+const prixTotal = parseFloat(quantite) * parseFloat(prixUnit);
+
+  // Calcul prix/g
+  let prixParG = null;
+  const cfg = listesDropdown.config?.[type];
+  if (cfg && formatQte) {
+    const qte      = parseFloat(formatQte);
+    const densite  = cfg.densite || 1;
+    const perte    = cfg.margePertePct || 0;
+    let qteEnG     = cfg.unite === 'ml' ? qte * densite : qte;
+    if (formatUnite === 'kg') qteEnG = qte * 1000;
+    if (formatUnite === 'L')  qteEnG = qte * 1000 * densite;
+    const qteUtile = qteEnG * (1 - perte / 100);
+    prixParG = qteUtile > 0 ? parseFloat(prixUnit) / qteUtile : null;
+  }
 
   const res = await appelAPIPost('addProduct', {
     numFacture:   factureActive.numeroFacture,
@@ -1738,6 +1753,7 @@ async function ajouterItem() {
     formatQte:    parseFloat(formatQte),
     formatUnite,
     prixUnitaire: parseFloat(prixUnit),
+    prixParG:     prixParG,
     quantite:     parseFloat(quantite),
     notes:        notes || '',
     codeBarres:   ''
