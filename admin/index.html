@@ -304,7 +304,7 @@
               <div class="form-grille">
                 <div class="form-groupe col-petit">
                   <label class="form-label">Rang</label>
-                  <input type="text" inputmode="numeric" class="form-ctrl" id="fc-rang">
+                  <input type="text" inputmode="decimal" class="form-ctrl" id="fc-rang">
                 </div>
                 <div class="form-groupe">
                   <label class="form-label">Collection</label>
@@ -461,15 +461,15 @@
               </div>
               <div class="form-groupe">
                 <label class="form-label">Nb unités / fournée</label>
-                <input type="text" inputmode="numeric" class="form-ctrl" id="fr-unites">
+                <input type="text" inputmode="decimal" class="form-ctrl" id="fr-unites">
               </div>
               <div class="form-groupe">
                 <label class="form-label">Cure (jours)</label>
-                <input type="text" inputmode="numeric" class="form-ctrl" id="fr-cure">
+                <input type="text" inputmode="decimal" class="form-ctrl" id="fr-cure">
               </div>
               <div class="form-groupe">
                 <label class="form-label">Prix de vente ($)</label>
-                <input type="text" inputmode="numeric" class="form-ctrl" id="fr-prix">
+                <input type="text" inputmode="decimal" class="form-ctrl" id="fr-prix">
               </div>
               <div class="form-groupe col-plein">
                 <label class="form-label">Description</label>
@@ -658,12 +658,12 @@
 
           <div class="form-groupe">
             <label class="form-label">Prix unitaire ($)</label>
-            <input type="text" inputmode="numeric" id="item-prix-unitaire" class="form-ctrl" autocomplete="off">
+            <input type="text" inputmode="decimal" id="item-prix-unitaire" class="form-ctrl" autocomplete="off">
           </div>
 
           <div class="form-groupe">
             <label class="form-label">Quantité achetée</label>
-            <input type="text" inputmode="numeric" id="item-quantite" class="form-ctrl" autocomplete="off">
+            <input type="text" inputmode="decimal" id="item-quantite" class="form-ctrl" autocomplete="off">
           </div>
 
           <div class="form-groupe col-plein">
@@ -708,19 +708,19 @@
 
         <div class="form-groupe">
           <label class="form-label">Livraison ($)</label>
-          <input type="text" inputmode="numeric" id="final-livraison" class="form-ctrl"
+          <input type="text" inputmode="decimal" id="final-livraison" class="form-ctrl"
                  oninput="calculerTotalFinal()" autocomplete="off">
         </div>
 
         <div class="form-groupe">
           <label class="form-label">TPS ($)</label>
-          <input type="text" inputmode="numeric" id="final-tps" class="form-ctrl"
+          <input type="text" inputmode="decimal" id="final-tps" class="form-ctrl"
                  oninput="calculerTotalFinal()" autocomplete="off">
         </div>
 
         <div class="form-groupe">
           <label class="form-label">TVQ ($)</label>
-          <input type="text" inputmode="numeric" id="final-tvq" class="form-ctrl"
+          <input type="text" inputmode="decimal" id="final-tvq" class="form-ctrl"
                  oninput="calculerTotalFinal()" autocomplete="off">
         </div>
 
@@ -1038,7 +1038,7 @@
               </div>
               <div class="form-groupe">
                 <label class="form-label">Densité (g/ml)</label>
-                <input type="text" inputmode="numeric" class="form-ctrl" id="fd-densite" placeholder="">
+                <input type="text" inputmode="decimal" class="form-ctrl" id="fd-densite" placeholder="">
               </div>
                 <label class="form-label">Unité source</label>
                 <select class="form-ctrl" id="fd-unite">
@@ -1050,7 +1050,7 @@
               </div>
               <div class="form-groupe">
                 <label class="form-label">Marge de perte (%)</label>
-                <input type="text" inputmode="numeric" class="form-ctrl" id="fd-marge-perte">
+                <input type="text" inputmode="decimal" class="form-ctrl" id="fd-marge-perte">
               </div>
             </div>
             <div class="form-actions">
