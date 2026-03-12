@@ -307,10 +307,14 @@ async function modifierLigneProduit(rowIndex) {
   document.getElementById('fc-desc-ligne').value = item.description_ligne || '';
   document.getElementById('fc-couleur-hex-ligne').value = item.couleur_hex || '';
   document.getElementById('fc-photo-url-ligne').value = item.photo_url || '';
-  apercuCouleurCollection(document.getElementById('fc-couleur-hex-ligne'));
+ apercuCouleurCollection(document.getElementById('fc-couleur-hex-ligne'));
+  const resBase = await appelAPI('getRecettesBase');
+  ingredientsBase = (resBase && resBase.items ? resBase.items : [])
+    .filter(i => i.collection === item.collection && i.ligne === item.ligne)
+    .map(i => ({ type: i.ingredient_type, nom: i.ingredient_nom, quantite: i.quantite_g }));
+  rafraichirListeIngredientsBase();
   document.getElementById('contenu-collections').classList.add('cache');
   document.getElementById('form-collections').classList.add('visible');
- 
 }
 
 async function modifierCollection(rowIndex) {
