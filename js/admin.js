@@ -250,7 +250,7 @@ function fermerFicheCollection() {
 
 function ouvrirFormCollectionPour(col) {
   ouvrirFormCollection();
-  document.getElementById('fc-collection').value = col;
+  
 }
 
 function ouvrirFormCollection() {
@@ -583,7 +583,12 @@ function peuplerFiltresRecettes() {
   const sel = document.getElementById('filtre-recette-collection');
   const valActuelle = sel.value;
   sel.innerHTML = '<option value="">Toutes les collections</option>';
-  const collections = [...new Set(donneesRecettes.map(r => r.collection).filter(Boolean))].sort();
+const collections = [...new Set(donneesRecettes.map(r => r.collection).filter(Boolean))]
+    .sort((a, b) => {
+      const rangA = (donneesCollections.find(i => i.collection === a) || {}).rang || 99;
+      const rangB = (donneesCollections.find(i => i.collection === b) || {}).rang || 99;
+      return rangA - rangB || a.localeCompare(b);
+    });
   collections.forEach(col => {
     const opt = document.createElement('option');
     opt.value = col; opt.textContent = col;
@@ -630,16 +635,18 @@ function filtrerRecettes() {
   });
   vide.classList.toggle('cache', visible !== 0);
 
-  document.querySelectorAll('#grille-recettes .recette-section-collection').forEach(sec => {
-    const ok = !col || sec.dataset.collection === col;
-    sec.classList.toggle('cache', !ok);
-  });
-
-  document.querySelectorAll('#grille-recettes .recette-section-ligne').forEach(sec => {
+document.querySelectorAll('#grille-recettes .recette-section-ligne').forEach(sec => {
     const secCol = sec.closest('.recette-section-collection');
     const okCol = !col || secCol?.dataset.collection === col;
     const okLigne = !ligne || sec.dataset.ligne === ligne;
-    sec.classList.toggle('cache', !(okCol && okLigne));
+    const aDesCartesVisibles = [...sec.querySelectorAll('.recette-carte')].some(c => !c.classList.contains('cache'));
+    sec.classList.toggle('cache', !(okCol && okLigne) || !aDesCartesVisibles);
+  });
+
+  document.querySelectorAll('#grille-recettes .recette-section-collection').forEach(sec => {
+    const okCol = !col || sec.dataset.collection === col;
+    const aDesLignesVisibles = [...sec.querySelectorAll('.recette-section-ligne')].some(l => !l.classList.contains('cache'));
+    sec.classList.toggle('cache', !okCol || !aDesLignesVisibles);
   });
 }
 
@@ -1157,8 +1164,7 @@ function modifierProduit(rowIndex) {
   document.getElementById('fp-type').value          = p.type || '';
   document.getElementById('fp-ingredient').value    = p.ingredient || '';
   calculerPrixParG();
-  document.getElementById('btn-annuler-produit').classList.remove('cache');
-  document.getElementById('fp-nom').focus();
+ 
 }
 
 function annulerEditionProduit() { reinitialiserFormProduit(); }
