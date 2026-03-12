@@ -334,7 +334,9 @@ async function modifierCollection(rowIndex) {
   document.getElementById('fc-rang').value              = item.rang || '';
   document.getElementById('fc-collection').value        = item.collection || '';
   document.getElementById('fc-slogan').value            = item.slogan || '';
-  document.getElementById('fc-desc-col').value          = item.description_collection || '';
+ const descCol = document.getElementById('fc-desc-col');
+descCol.value = item.description_collection || '';
+ajusterHauteurTextarea(descCol);
   document.getElementById('fc-ligne').value             = item.ligne || '';
   document.getElementById('fc-format').value            = item.format || '';
   document.getElementById('fc-desc-ligne').value        = item.description_ligne || '';
@@ -878,6 +880,12 @@ if (res && res.success) {
 
 // ─── CLOUDINARY ───
 let _mediaLibrary = null;
+
+function ajusterHauteurTextarea(el) {
+  if (!el) return;
+  el.style.height = 'auto';
+  el.style.height = el.scrollHeight + 'px';
+}
 
 function ouvrirMediaLibrary(champId, previewId) {
   if (!_mediaLibrary) {

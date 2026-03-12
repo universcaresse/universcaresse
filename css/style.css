@@ -399,6 +399,7 @@ main { padding-top: var(--nav-h); }
 }
 .form-control:focus, .form-ctrl:focus { border-color: var(--primary); }
 textarea.form-control, textarea.form-ctrl { resize: vertical; min-height: 80px; line-height: 1.6; }
+textarea.textarea-auto { resize: none; overflow: hidden; }
 select.form-control, select.form-ctrl { cursor: pointer; }
 .form-ctrl[readonly] { background: rgba(232,220,200,0.3); color: var(--gris); }
 
