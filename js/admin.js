@@ -272,8 +272,9 @@ function ouvrirFormCollection() {
   ingredientsBase = [];
   rafraichirListeIngredientsBase();
   document.getElementById('contenu-collections').classList.add('cache');
+ document.getElementById('contenu-collections').classList.add('cache');
   document.getElementById('form-collections').classList.add('visible');
-  document.getElementById('fc-rang').focus();
+  window.scrollTo(0, 0);
 }
 function confirmerAction(message, callback) {
   document.getElementById('modal-confirm-message').textContent = message;
@@ -315,6 +316,7 @@ async function modifierLigneProduit(rowIndex) {
   rafraichirListeIngredientsBase();
   document.getElementById('contenu-collections').classList.add('cache');
   document.getElementById('form-collections').classList.add('visible');
+  window.scrollTo(0, 0);
 }
 
 async function modifierCollection(rowIndex) {
@@ -338,9 +340,10 @@ document.getElementById('fc-couleur-hex').value       = item.couleur_hex || 'var
   ingredientsBase = (res && res.items ? res.items : [])
     .filter(i => i.collection === item.collection && i.ligne === item.ligne)
     .map(i => ({ type: i.ingredient_type, nom: i.ingredient_nom, quantite: i.quantite_g }));
-  rafraichirListeIngredientsBase();
+rafraichirListeIngredientsBase();
+  document.getElementById('contenu-collections').classList.add('cache');
   document.getElementById('form-collections').classList.add('visible');
-  document.getElementById('fc-collection').focus();
+  window.scrollTo(0, 0);
 }
 
 
@@ -375,12 +378,14 @@ async function sauvegarderCollection() {
       slogan:            infoCol ? infoCol.slogan : '',
       description_collection: infoCol ? infoCol.description_collection : ''
     };
-    const res = await appelAPIPost('addCollectionItem', d);
+  const res = rowIndex
+      ? await appelAPIPost('updateCollectionItem', { ...d, rowIndex: parseInt(rowIndex) })
+      : await appelAPIPost('addCollectionItem', d);
     if (res && res.success) {
       if (btnSauvegarder) { btnSauvegarder.disabled = false; btnSauvegarder.innerHTML = 'Enregistrer'; }
       fermerFormCollection();
-      afficherMsg('collections', 'Ligne ajoutée.');
-       await chargerCollections();
+      afficherMsg('collections', rowIndex ? 'Ligne mise à jour.' : 'Ligne ajoutée.');
+      await chargerCollections();
     } else {
       afficherMsg('collections', 'Erreur lors de la sauvegarde.', 'erreur');
       if (btnSauvegarder) { btnSauvegarder.disabled = false; btnSauvegarder.innerHTML = 'Enregistrer'; }
@@ -736,8 +741,8 @@ function ouvrirFormRecette() {
   if (apercuRecette) apercuRecette.style.background = '';
  document.querySelector('#section-recettes .filtres-bar').classList.add('cache');
   document.getElementById('grille-recettes').classList.add('cache');
-  document.getElementById('form-recettes').classList.add('visible');
-  document.getElementById('fr-nom').focus();
+ document.getElementById('form-recettes').classList.add('visible');
+  window.scrollTo(0, 0);
 }
 
 function fermerFormRecette() {
@@ -781,7 +786,7 @@ ingredientsRecette = (rec.ingredients || []).map(i => ({ type: i.type, nom: i.no
   document.getElementById('grille-recettes').classList.add('cache');
   document.getElementById('form-recettes').classList.add('visible');
   rafraichirListeIngredientsRecette();
-  document.getElementById('fr-nom').focus();
+  window.scrollTo(0, 0);
 }
 async function sauvegarderRecette() {
   const btnSauvegarder = document.querySelector('#form-recettes .btn-primary');
