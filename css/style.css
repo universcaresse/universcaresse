@@ -408,6 +408,10 @@ select.form-control, select.form-ctrl { cursor: pointer; }
 .form-note { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; color: var(--gris); font-weight: 300; }
 
 .form-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
+.ingredient-rangee { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.ingredient-rangee .form-ctrl:first-child { flex: 1; }
+.ingredient-rangee .form-ctrl:nth-child(2) { flex: 2; }
+.ingredient-rangee .form-ctrl:nth-child(3) { width: 90px; flex: none; }
 .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .col-plein { grid-column: 1 / -1; }
 .col-petit { max-width: 120px; }

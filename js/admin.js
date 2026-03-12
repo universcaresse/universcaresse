@@ -951,7 +951,7 @@ function rafraichirListeIngredientsRecette() {
         <option value="">— Ingrédient —</option>
         ${(listesDropdown.fullData || []).filter(d => d.type===ing.type).map(d => `<option value="${d.ingredient}" ${ing.nom===d.ingredient?'selected':''}>${d.ingredient}</option>`).join('')}
       </select>
-      <input type="text" inputmode="numeric" class="form-ctrl" style="width:90px" value="${ing.quantite||''}" placeholder="g" onchange="ingredientsRecette[${i}].quantite=parseFloat(this.value)||0">
+      <input type="text" inputmode="numeric" class="form-ctrl" value="${ing.quantite||''}" placeholder="g" onchange="ingredientsRecette[${i}].quantite=parseFloat(this.value)||0">
       <button class="btn btn-sm btn-danger" onclick="supprimerIngredientRecette(${i})">✕</button>
     </div>
   `).join('');
@@ -974,17 +974,17 @@ function rafraichirListeIngredientsBase() {
   const liste = document.getElementById('liste-ingredients-base');
   if (!liste) return;
   if (ingredientsBase.length === 0) { liste.innerHTML = ''; return; }
-  liste.innerHTML = ingredientsBase.map((ing, i) => `
-    <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
-    <select class="form-ctrl" style="flex:1" onchange="ingredientsBase[${i}].type=this.value; ingredientsBase[${i}].nom=''; rafraichirListeIngredientsBase()">
+ liste.innerHTML = ingredientsBase.map((ing, i) => `
+    <div class="ingredient-rangee">
+      <select class="form-ctrl" onchange="ingredientsBase[${i}].type=this.value; ingredientsBase[${i}].nom=''; rafraichirListeIngredientsBase()">
         <option value="">— Type —</option>
-       ${(listesDropdown.types || []).map(t => `<option value="${t}" ${ing.type===t?'selected':''}>${t}</option>`).join('')}
+        ${(listesDropdown.types || []).map(t => `<option value="${t}" ${ing.type===t?'selected':''}>${t}</option>`).join('')}
       </select>
-      <select class="form-ctrl" style="flex:2" onchange="ingredientsBase[${i}].nom=this.value">
+      <select class="form-ctrl" onchange="ingredientsBase[${i}].nom=this.value">
         <option value="">— Ingrédient —</option>
-      ${(listesDropdown.fullData || []).filter(d => d.type===ing.type).map(d => `<option value="${d.ingredient}" ${ing.nom===d.ingredient?'selected':''}>${d.ingredient}</option>`).join('')}
+        ${(listesDropdown.fullData || []).filter(d => d.type===ing.type).map(d => `<option value="${d.ingredient}" ${ing.nom===d.ingredient?'selected':''}>${d.ingredient}</option>`).join('')}
       </select>
-      <input type="text" inputmode="numeric" class="form-ctrl" style="width:90px" value="${ing.quantite||''}" placeholder="g" onchange="ingredientsBase[${i}].quantite=parseFloat(this.value)||0">
+      <input type="text" inputmode="numeric" class="form-ctrl" value="${ing.quantite||''}" placeholder="g" onchange="ingredientsBase[${i}].quantite=parseFloat(this.value)||0">
       <button class="btn btn-sm btn-danger" onclick="supprimerIngredientBase(${i})">✕</button>
     </div>
   `).join('');
