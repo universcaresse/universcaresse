@@ -674,8 +674,12 @@ async function chargerCollectionsPourSelecteur() {
   if (selSec) {
     selSec.innerHTML = '';
     Object.keys(collectionsDisponibles).sort().forEach(col => {
-      const o = document.createElement('option');
-      o.value = col; o.textContent = col; selSec.appendChild(o);
+      const label = document.createElement('label');
+      const cb = document.createElement('input');
+      cb.type = 'checkbox'; cb.value = col; cb.id = 'sec-' + col;
+      label.appendChild(cb);
+      label.appendChild(document.createTextNode(col));
+      selSec.appendChild(label);
     });
   }
 }
@@ -818,8 +822,8 @@ document.getElementById('fr-collection').value   = rec.collection || '';
   if (previewNoel) previewNoel.innerHTML = rec.image_url_noel ? `<img src="${rec.image_url_noel}" class="photo-preview">` : '';
   const selSec = document.getElementById('fr-collections-secondaires');
   if (selSec) {
-    Array.from(selSec.options).forEach(opt => {
-      opt.selected = Array.isArray(rec.collections_secondaires) && rec.collections_secondaires.includes(opt.value);
+    Array.from(selSec.querySelectorAll('input[type="checkbox"]')).forEach(cb => {
+      cb.checked = Array.isArray(rec.collections_secondaires) && rec.collections_secondaires.includes(cb.value);
     });
   }
 ingredientsRecette = (rec.ingredients || []).map(i => ({ type: i.type, nom: i.nom, quantite: i.quantite_g }));
@@ -849,7 +853,7 @@ async function sauvegarderRecette() {
     statut:       document.getElementById('fr-statut').value || 'test',
     image_url:         document.getElementById('fr-image-url').value,
     image_url_noel:    document.getElementById('fr-image-url-noel').value,
-    collections_secondaires: Array.from(document.getElementById('fr-collections-secondaires')?.selectedOptions || []).map(o => o.value),
+    collections_secondaires: Array.from(document.getElementById('fr-collections-secondaires')?.querySelectorAll('input[type="checkbox"]:checked') || []).map(cb => cb.value),
      ingredients:  ingredientsRecette.map(i => ({ type: i.type, nom: i.nom, quantite_g: i.quantite }))
   };
   if (!d.nom) { afficherMsg('recettes', 'Le nom est requis.', 'erreur'); return; }
