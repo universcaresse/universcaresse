@@ -1448,21 +1448,18 @@ async function chargerInventaire() {
   let html = '';
   let total = 0;
 
+ html += `
+    <div class="tableau-wrap">
+      <table>
+        <thead>
+          <tr><th>Ingrédient</th><th>Fournisseur</th><th>Unités</th><th>Format</th><th>Valeur</th></tr>
+        </thead>
+        <tbody>`;
+
   types.forEach(type => {
     const ings = inv[type];
-    html += `
-      <div class="inv-section">
-        <div class="inv-header">
-          <div class="inv-titre">${type}</div>
-          <div class="inv-line"></div>
-        </div>
-        <div class="tableau-wrap">
-          <table>
-            <thead>
-              <tr><th>Ingrédient</th><th>Fournisseur</th><th>Unités</th><th>Format</th><th>Valeur</th></tr>
-            </thead>
-            <tbody>`;
-   Object.keys(ings).sort().forEach(nom => {
+    html += `<tr><td colspan="5" class="inv-titre-rangee">${type}</td></tr>`;
+    Object.keys(ings).sort().forEach(nom => {
       const fournisseurs = Object.keys(ings[nom]);
       const prixMin = Math.min(...fournisseurs.map(f => ings[nom][f].prixParG || Infinity));
       fournisseurs.forEach((fourn, idx) => {
@@ -1479,10 +1476,9 @@ async function chargerInventaire() {
           </tr>`;
       });
     });
-	
-	
-    html += `</tbody></table></div></div>`;
   });
+
+  html += `</tbody></table></div>`;
 
   html += `
     <div class="inv-total">
