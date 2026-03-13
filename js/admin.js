@@ -773,6 +773,8 @@ function fermerFicheRecette() {
   document.getElementById('fiche-recette').classList.remove('visible');
   document.querySelector('#section-recettes .filtres-bar').classList.remove('cache');
   document.getElementById('grille-recettes').classList.remove('cache');
+  document.getElementById('filtre-recette-nom').value = '';
+  filtrerRecettes();
   recetteActive = null;
 }
 
