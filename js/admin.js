@@ -921,7 +921,16 @@ function ouvrirMediaLibrary(champId, previewId) {
       }
     }
   );
-  _mediaLibrary.show();
+_mediaLibrary.show();
+  setTimeout(function nettoyerOverlayCloudinary() {
+    const overlays = document.querySelectorAll('body > div[style*="z-index: 99999"]');
+    overlays.forEach(el => {
+      if (el.style.visibility === 'hidden' || el.style.display === 'none') el.remove();
+    });
+    if (document.querySelector('body > div[style*="z-index: 99999"]')) {
+      setTimeout(nettoyerOverlayCloudinary, 1000);
+    }
+  }, 2000);
 }
 
 function fermerMediaLibrary() {
