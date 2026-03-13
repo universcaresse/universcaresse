@@ -297,9 +297,10 @@ function fermerFormCollection() {
 
 async function modifierLigneProduit(rowIndex) {
   const item = donneesCollections.find(i => i.rowIndex === rowIndex);
-  if (!item) return;
-  fermerFicheCollection();
-  document.getElementById('form-collections-titre').textContent = 'Modifier la ligne — ' + (item.collection || '');
+ if (!item) return;
+  document.getElementById('fiche-collection').classList.remove('visible');
+  document.getElementById('contenu-collections').classList.add('cache');
+  document.getElementById('form-collections-titre').textContentt = 'Modifier la ligne — ' + (item.collection || '');
   document.getElementById('fc-rowIndex').value = rowIndex;
   document.getElementById('fc-mode').value = 'ligne';
   document.getElementById('fc-bloc-collection').classList.add('cache');
