@@ -738,8 +738,9 @@ function ouvrirFicheRecette(id) {
     ? rec.ingredients.map(i => `<div class="fiche-ingredient"><span class="fiche-ing-nom">${i.nom}</span><span class="fiche-ing-qte">${i.quantite_g} g</span></div>`).join('')
     : '<div class="fiche-vide">Aucun ingrédient</div>';
   document.getElementById('fiche-recette-contenu').innerHTML = `
-    <div class="fiche-visuel">
+  <div class="fiche-visuel">
       ${rec.image_url ? `<img src="${rec.image_url}" class="fiche-visuel-photo">` : ''}
+      ${rec.image_url_noel ? `<img src="${rec.image_url_noel}" class="fiche-visuel-photo">` : ''}
       <div class="fiche-visuel-hex" style="background:${rec.couleur_hex || 'var(--beige)'}"></div>
     </div>
     <div class="fiche-grille">
