@@ -1436,24 +1436,28 @@ async function chargerInventaire() {
         <div class="tableau-wrap">
           <table>
             <thead>
-              <tr><th>Ingrédient</th><th>Fournisseur</th><th>Unités</th><th>Format</th><th>Prix/g</th><th>Valeur</th></tr>
+              <tr><th>Ingrédient</th><th>Fournisseur</th><th>Unités</th><th>Format</th><th>Valeur</th></tr>
             </thead>
             <tbody>`;
-    Object.keys(ings).sort().forEach(nom => {
-      Object.keys(ings[nom]).forEach((fourn, idx) => {
+   Object.keys(ings).sort().forEach(nom => {
+      const fournisseurs = Object.keys(ings[nom]);
+      const prixMin = Math.min(...fournisseurs.map(f => ings[nom][f].prixParG || Infinity));
+      fournisseurs.forEach((fourn, idx) => {
         const d = ings[nom][fourn];
         total += d.valeur || 0;
+        const meilleur = d.prixParG && d.prixParG === prixMin && fournisseurs.length > 1;
         html += `
           <tr>
-            <td style="font-weight:${idx === 0 ? '500' : '300'}">${idx === 0 ? nom : ''}</td>
-            <td style="color:var(--gris);font-size:0.8rem">${fourn}</td>
+            <td class="${idx === 0 ? 'td-ing-nom' : 'td-ing-nom-suite'}">${idx === 0 ? nom : ''}</td>
+            <td class="${meilleur ? 'td-ing-fourn-meilleur' : 'td-ing-fourn'}">${fourn}${meilleur ? ' ★' : ''}</td>
             <td>${d.unites}</td>
-            <td style="color:var(--gris);font-size:0.78rem">${d.format || '—'}</td>
-            <td style="color:var(--gris);font-size:0.78rem">${d.prixParG ? d.prixParG.toFixed(4) + ' $/g' : '—'}</td>
-            <td style="color:var(--primary);font-weight:500">${formaterPrix(d.valeur)}</td>
+            <td class="td-ing-format">${d.format || '—'}</td>
+            <td class="td-ing-valeur">${formaterPrix(d.valeur)}</td>
           </tr>`;
       });
     });
+	
+	
     html += `</tbody></table></div></div>`;
   });
 
