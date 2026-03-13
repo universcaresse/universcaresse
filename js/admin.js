@@ -761,7 +761,7 @@ fermerFormRecette();
   document.getElementById('fiche-recette').classList.add('visible');
   document.querySelector('#section-recettes .filtres-bar').classList.add('cache');
   document.getElementById('grille-recettes').classList.add('cache');
-  window.scrollTo(0, 0);
+  document.querySelector('.admin-contenu').scrollTop = 0;
 }
 function fermerFicheRecette() {
   document.getElementById('fiche-recette').classList.remove('visible');
