@@ -443,9 +443,13 @@ async function supprimerCollection(col, groupe) {
     ? `Cette collection contient ${lignes} ligne(s). Supprimer quand même ?`
     : 'Supprimer cette collection ?';
   confirmerAction(msg, async () => {
-    const rowIndexes = donneesCollections.filter(i => i.collection === col).map(i => i.rowIndex);
+  const rowIndexes = donneesCollections.filter(i => i.collection === col).map(i => i.rowIndex).sort((a, b) => b - a);
     for (const rowIndex of rowIndexes) {
-      await appelAPIPost('deleteCollectionItem', { rowIndex });
+      const res = await appelAPIPost('deleteCollectionItem', { rowIndex });
+      if (!res || !res.success) {
+        afficherMsg('collections', 'Erreur lors de la suppression.', 'erreur');
+        return;
+      }
     }
     fermerFicheCollection();
     afficherMsg('collections', 'Collection supprimée.');
