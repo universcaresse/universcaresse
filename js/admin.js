@@ -237,11 +237,13 @@ document.getElementById('fiche-collection-ajouter-ligne').onclick = () => {
   };
  document.getElementById('btn-supprimer-collection').onclick = () => supprimerCollection(col, groupe);
   fiche.classList.add('visible');
+  document.getElementById('contenu-collections').classList.add('cache');
   window.scrollTo(0, 0);
 }
 
 function fermerFicheCollection() {
   document.getElementById('fiche-collection').classList.remove('visible');
+  document.getElementById('contenu-collections').classList.remove('cache');
 }
 
 
