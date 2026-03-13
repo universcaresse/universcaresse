@@ -200,14 +200,13 @@ function ouvrirFicheCollection(col) {
 
   const couleurs = couleurCollection(col, groupe.info.couleur_hex);
   const lignesHtml = (groupe.lignes || []).map(item => `
-    <div class="fiche-ligne-item">
+  
+ <div class="fiche-ligne-item" onclick="modifierLigneProduit(${item.rowIndex})">
       <div class="fiche-ligne-info">
         <span class="fiche-ligne-nom">${item.ligne.toUpperCase()}</span>
         ${item.format ? `<span class="fiche-ligne-format">${item.format}</span>` : ''}
         ${item.description_ligne ? `<p class="fiche-ligne-desc">${item.description_ligne}</p>` : ''}
       </div>
-     <button class="btn btn-sm btn-edit" onclick="modifierLigneProduit(${item.rowIndex})">Modifier</button>
-      <button class="btn btn-sm btn-danger" onclick="supprimerLigne(${item.rowIndex}, \`${item.collection}\`, \`${item.ligne}\`)">Supprimer</button>
     </div>`).join('');
 
   const fiche = document.getElementById('fiche-collection');
