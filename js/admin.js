@@ -881,9 +881,9 @@ async function sauvegarderRecette() {
   const res = await appelAPIPost('saveRecette', d);
 if (res && res.success) {
     if (btnSauvegarder) { btnSauvegarder.disabled = false; btnSauvegarder.innerHTML = 'Enregistrer'; }
-    fermerFormRecette();
+   fermerFormRecette();
     afficherMsg('recettes', id ? 'Recette mise à jour.' : 'Recette créée.');
-    chargerRecettes();
+    await chargerRecettes();
   } else {
     afficherMsg('recettes', 'Erreur.', 'erreur');
     if (btnSauvegarder) { btnSauvegarder.disabled = false; btnSauvegarder.innerHTML = 'Enregistrer'; }
