@@ -734,7 +734,7 @@ footer > * { position: relative; z-index: 1; }
    ADMIN — LAYOUT
    ═══════════════════════════════════════ */
 .admin-layout { display: flex; padding-top: var(--nav-h); height: 100vh; overflow: hidden; }
-.admin-contenu { flex: 1; margin-left: 0; padding: 48px 56px; min-width: 0; box-sizing: border-box; height: calc(100vh - var(--nav-h)); overflow-y: auto; position: relative; }
+.admin-contenu { flex: 1; margin-left: 0; padding: 48px 56px; min-width: 0; box-sizing: border-box; height: calc(100vh - var(--nav-h)); overflow-y: auto; }
 .section-admin { display: none; }
 .section-admin.visible { display: block; }
 /* ═══════════════════════════════════════
@@ -1068,19 +1068,6 @@ tr.cliquable { cursor: pointer; }
 /* ═══════════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════════ */
-@media (max-width: 900px) and (orientation: portrait) {
-  .admin-contenu::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0;
-    width: 50%;
-    height: 100%;
-    background: url('../Images/fond.png') center center / cover no-repeat;
-    opacity: 0.07;
-    pointer-events: none;
-    z-index: 0;
-  }
-}
 
 @media (max-width: 900px) {
   nav { background: none; box-shadow: none; border: none; backdrop-filter: none; }
