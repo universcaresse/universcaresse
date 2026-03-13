@@ -44,7 +44,7 @@ function afficherSection(id, bouton) {
 if (id === 'accueil')        chargerStatsAccueil();
 if (id === 'collections')    { chargerCollections(); chargerListesFournisseurs(); }
  if (id === 'recettes')       { chargerRecettes(); chargerListesFournisseurs(); }
-  if (id === 'densites')       chargerDensites();
+if (id === 'densites')       chargerDensites().then(() => { const c = document.querySelector('.admin-contenu'); if (c) c.scrollTop = 0; });
   if (id === 'inventaire')     chargerInventaire();
   if (id === 'factures')       chargerFactures();
  if (id === 'nouvelle-facture' && !factureActive) initialiserNouvelleFacture();
