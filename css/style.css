@@ -338,6 +338,7 @@ main { padding-top: var(--nav-h); }
   background: transparent; color: var(--gris); border: 1px solid var(--beige);
 }
 .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+.btn-icone { padding: 11px 14px; }
 
 .btn-edit {
   background: rgba(90,138,58,0.08); color: var(--primary);
