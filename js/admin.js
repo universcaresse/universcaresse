@@ -684,14 +684,22 @@ async function chargerCollectionsPourSelecteur() {
     if (item.ligne && !collectionsDisponibles[item.collection].includes(item.ligne))
       collectionsDisponibles[item.collection].push(item.ligne);
   });
-  Object.keys(collectionsDisponibles).sort().forEach(col => {
+ const colsParRang = Object.keys(collectionsDisponibles).sort((a, b) => {
+    const rangA = (donneesCollections.find(i => i.collection === a) || {}).rang || 99;
+    const rangB = (donneesCollections.find(i => i.collection === b) || {}).rang || 99;
+    return rangA - rangB;
+  });
+  colsParRang.forEach(col => {
     const o = document.createElement('option');
     o.value = col; o.textContent = col; sel.appendChild(o);
   });
   const selSec = document.getElementById('fr-collections-secondaires');
   if (selSec) {
     selSec.innerHTML = '';
-    Object.keys(collectionsDisponibles).sort().forEach(col => {
+    colsParRang.forEach(col => {
+		
+		
+		
       const label = document.createElement('label');
       const cb = document.createElement('input');
       cb.type = 'checkbox'; cb.value = col; cb.id = 'sec-' + col;
