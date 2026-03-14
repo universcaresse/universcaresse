@@ -399,7 +399,7 @@ main { padding-top: var(--nav-h); }
   outline: none; transition: border-color 0.2s; -webkit-appearance: none; appearance: none;
 }
 .form-control:focus, .form-ctrl:focus { border-color: var(--primary); }
-textarea.form-control, textarea.form-ctrl { resize: vertical; min-height: 80px; line-height: 1.6; }
+textarea.form-control, textarea.form-ctrl { resize: vertical; min-height: 120px; line-height: 1.6; }
 textarea.textarea-auto { resize: none; overflow: hidden; }
 select.form-control, select.form-ctrl { cursor: pointer; }
 .form-ctrl[readonly] { background: rgba(232,220,200,0.3); color: var(--gris); }

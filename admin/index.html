@@ -822,6 +822,16 @@
           <button class="btn btn-outline" onclick="chargerInventaire()">Actualiser</button>
         </div>
         <div class="msg-zone" id="msg-inventaire"></div>
+        <div class="filtres-bar" id="filtres-inventaire">
+          <input type="text" class="form-ctrl filtre-recherche" id="inv-recherche" placeholder="Rechercher…" oninput="filtrerInventaire()">
+          <select class="form-ctrl" id="inv-filtre-type" onchange="filtrerInventaire()">
+            <option value="">Tous les types</option>
+          </select>
+          <select class="form-ctrl" id="inv-filtre-fourn" onchange="filtrerInventaire()">
+            <option value="">Tous les fournisseurs</option>
+          </select>
+          <button class="btn btn-outline btn-icone" onclick="reinitialiserFiltresInventaire()" title="Réinitialiser">✕</button>
+        </div>
         <div class="chargement" id="loading-inventaire"><span class="spinner"></span>Chargement...</div>
         <div id="contenu-inventaire"></div>
         <div class="vide" id="vide-inventaire" style="display:none">

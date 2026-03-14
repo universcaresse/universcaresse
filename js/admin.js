@@ -1445,6 +1445,7 @@ function supprimerFacture(numero) {
 /* ════════════════════════════════
    INVENTAIRE
 ════════════════════════════════ */
+let donneesInventaire = {};
 async function chargerInventaire() {
   const loading = document.getElementById('loading-inventaire');
   const contenu = document.getElementById('contenu-inventaire');
@@ -1459,9 +1460,21 @@ async function chargerInventaire() {
  loading.classList.add('cache');
   if (!res || !res.success) { afficherMsg('inventaire', 'Erreur.', 'erreur'); return; }
 
-  const inv   = res.inventory || {};
+donneesInventaire = res.inventory || {};
+  const inv   = donneesInventaire;
   const types = Object.keys(inv).sort();
   if (!types.length) { vide.classList.remove('cache'); return; }
+
+  const selType = document.getElementById('inv-filtre-type');
+  const selFourn = document.getElementById('inv-filtre-fourn');
+  selType.innerHTML = '<option value="">Tous les types</option>';
+  selFourn.innerHTML = '<option value="">Tous les fournisseurs</option>';
+  const fournsSet = new Set();
+  types.forEach(type => {
+    selType.innerHTML += `<option value="${type}">${type}</option>`;
+    Object.keys(inv[type]).forEach(nom => Object.keys(inv[type][nom]).forEach(f => fournsSet.add(f)));
+  });
+  Array.from(fournsSet).sort().forEach(f => { selFourn.innerHTML += `<option value="${f}">${f}</option>`; });
 
   let html = '';
   let total = 0;
@@ -1504,7 +1517,45 @@ async function chargerInventaire() {
       <div class="inv-total-montant">${formaterPrix(total)}</div>
     </div>`;
 
+contenu.innerHTML = html;
+}
+
+function filtrerInventaire() {
+  const recherche = (document.getElementById('inv-recherche')?.value || '').toLowerCase();
+  const typeFiltre = document.getElementById('inv-filtre-type')?.value || '';
+  const fournFiltre = document.getElementById('inv-filtre-fourn')?.value || '';
+  const inv = donneesInventaire;
+  const types = Object.keys(inv).sort();
+  const contenu = document.getElementById('contenu-inventaire');
+  let html = '<div class="tableau-wrap"><table><thead><tr><th>Ingrédient</th><th>Fournisseur</th><th>Unités</th><th>Format</th><th>Valeur</th></tr></thead><tbody>';
+  let total = 0;
+  types.forEach(type => {
+    if (typeFiltre && type !== typeFiltre) return;
+    const ings = inv[type];
+    let rangeeType = false;
+    Object.keys(ings).sort().forEach(nom => {
+      if (recherche && !nom.toLowerCase().includes(recherche)) return;
+      const fournisseurs = Object.keys(ings[nom]).filter(f => !fournFiltre || f === fournFiltre);
+      if (!fournisseurs.length) return;
+      if (!rangeeType) { html += `<tr><td colspan="5" class="inv-titre-rangee">${type}</td></tr>`; rangeeType = true; }
+      const prixMin = Math.min(...fournisseurs.map(f => ings[nom][f].prixParG || Infinity));
+      fournisseurs.forEach((fourn, idx) => {
+        const d = ings[nom][fourn];
+        total += d.valeur || 0;
+        const meilleur = d.prixParG && d.prixParG === prixMin && fournisseurs.length > 1;
+        html += `<tr><td class="${idx === 0 ? 'td-ing-nom' : 'td-ing-nom-suite'}">${idx === 0 ? nom : ''}</td><td class="${meilleur ? 'td-ing-fourn-meilleur' : 'td-ing-fourn'}">${fourn}${meilleur ? ' ★' : ''}</td><td>${d.unites}</td><td class="td-ing-format">${d.format || '—'}</td><td class="td-ing-valeur">${formaterPrix(d.valeur)}</td></tr>`;
+      });
+    });
+  });
+  html += `</tbody></table></div><div class="inv-total"><div class="inv-total-label">Valeur totale de l'inventaire</div><div class="inv-total-montant">${formaterPrix(total)}</div></div>`;
   contenu.innerHTML = html;
+}
+
+function reinitialiserFiltresInventaire() {
+  document.getElementById('inv-recherche').value = '';
+  document.getElementById('inv-filtre-type').value = '';
+  document.getElementById('inv-filtre-fourn').value = '';
+  filtrerInventaire();
 }
 
 /* ════════════════════════════════
