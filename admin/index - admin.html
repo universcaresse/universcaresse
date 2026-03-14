@@ -26,8 +26,8 @@
       <li class="nav-admin-item">
         <button class="nav-admin-btn" onclick="afficherSection('accueil', null)">Accueil</button>
       </li>
-         <li class="nav-admin-item">
-        <button class="nav-admin-btn">Création <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
+      <li class="nav-admin-item">
+        <button class="nav-admin-btn" onclick="toggleDropdownAdmin(this)">Création <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
         <div class="nav-dropdown">
           <button class="nav-dropdown-item" onclick="afficherSection('collections', null)">Collections</button>
           <button class="nav-dropdown-item" onclick="afficherSection('recettes', null)">Recettes</button>
@@ -35,7 +35,7 @@
         </div>
       </li>
       <li class="nav-admin-item">
-        <button class="nav-admin-btn">Achats <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
+        <button class="nav-admin-btn" onclick="toggleDropdownAdmin(this)">Achats <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
         <div class="nav-dropdown">
           <button class="nav-dropdown-item" onclick="afficherSection('nouvelle-facture', null)">Nouvelle facture</button>
           <button class="nav-dropdown-item" onclick="afficherSection('factures', null)">Les factures</button>
@@ -43,14 +43,14 @@
         </div>
       </li>
       <li class="nav-admin-item">
-        <button class="nav-admin-btn">Production <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
+        <button class="nav-admin-btn" onclick="toggleDropdownAdmin(this)">Production <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
         <div class="nav-dropdown">
           <button class="nav-dropdown-item bientot">Confection</button>
           <button class="nav-dropdown-item bientot">Ventes</button>
         </div>
       </li>
       <li class="nav-admin-item">
-        <button class="nav-admin-btn">Listes <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
+        <button class="nav-admin-btn" onclick="toggleDropdownAdmin(this)">Listes <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
         <div class="nav-dropdown">
           <button class="nav-dropdown-item bientot">Les produits</button>
           <button class="nav-dropdown-item bientot">Inventaire</button>
@@ -59,7 +59,7 @@
         </div>
       </li>
       <li class="nav-admin-item">
-        <button class="nav-admin-btn">Système <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
+        <button class="nav-admin-btn" onclick="toggleDropdownAdmin(this)">Système <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
         <div class="nav-dropdown">
           <button class="nav-dropdown-item" onclick="afficherSection('densites', null)">Densité</button>
           <button class="nav-dropdown-item" onclick="afficherSection('contenu-site', null)">Contenu du site</button>
@@ -129,8 +129,7 @@
    <div class="section-admin" id="section-accueil">
         <div class="accueil-admin">
       <div class="accueil-gauche">
-         <p class="hero-eyebrow fade-in">Administration</p>
-            <img src="../Images/Logofinal.png" alt="Univers Caresse" class="hero-logo-img fade-in delay-2">
+                    <img src="../Images/Logofinal.png" alt="Univers Caresse" class="hero-logo-img fade-in delay-2">
             <div class="accueil-chantal fade-in delay-3">Bonjour <span class="accueil-bonjour">Chantal</span></div>
             <div class="hero-stats fade-in delay-5">
                 <div>
@@ -147,110 +146,117 @@
                 </div>
             </div>
           </div>
-
           
-          <div class="accueil-droite">
-            <button class="accueil-tuile accueil-tuile-collections" onclick="afficherSection('collections', null)">
-              <span class="tuile-icone">
-                <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="4" y="4" width="12" height="20" rx="2"/>
-                  <rect x="20" y="4" width="24" height="12" rx="2"/>
-                  <rect x="20" y="20" width="11" height="24" rx="2"/>
-                  <rect x="35" y="20" width="9" height="10" rx="2"/>
-                  <rect x="4" y="28" width="12" height="16" rx="2"/>
-                  <rect x="35" y="34" width="9" height="10" rx="2"/>
-                </svg>
-              </span>
-              <span class="tuile-nom">Collections</span>
-            </button>
-            <button class="accueil-tuile accueil-tuile-recettes" onclick="afficherSection('recettes', null)">
-              <span class="tuile-icone">
-                <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="6" y="14" width="22" height="26" rx="3"/>
-                  <line x1="10" y1="22" x2="24" y2="22"/>
-                  <line x1="10" y1="27" x2="24" y2="27"/>
-                  <line x1="10" y1="32" x2="18" y2="32"/>
-                  <path d="M26 10 C26 10 32 8 36 12 C40 16 38 22 34 24 C30 26 26 24 26 20 Z"/>
-                  <circle cx="36" cy="8" r="2"/>
-                  <circle cx="42" cy="12" r="1.5"/>
-                  <circle cx="40" cy="18" r="1"/>
-                </svg>
-              </span>
-             <span class="tuile-nom">Recettes</span>
-            </button>
-            <button class="accueil-tuile accueil-tuile-achats" onclick="afficherSection('nouvelle-facture', null)">
-              <span class="tuile-icone">
-                <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M6 18 L6 38 L42 38 L42 18 L22 18 L19 14 L6 14 Z"/>
-                  <path d="M10 14 L10 10 L24 10 L27 14"/>
-                  <path d="M28 18 L28 22 L42 22"/>
-                  <line x1="12" y1="26" x2="22" y2="26"/>
-                  <line x1="12" y1="30" x2="26" y2="30"/>
-                  <line x1="30" y1="28" x2="38" y2="28"/>
-                  <line x1="30" y1="32" x2="36" y2="32"/>
-                </svg>
-              </span>
-              <span class="tuile-nom">Achats</span>
-            </button>
-            <button class="accueil-tuile accueil-tuile-stock">
-              <span class="tuile-icone">
-                <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="8" y="20" width="14" height="20" rx="2"/>
-                  <rect x="26" y="14" width="14" height="26" rx="2"/>
-                  <line x1="4" y1="40" x2="44" y2="40"/>
-                  <line x1="12" y1="20" x2="12" y2="16"/><line x1="16" y1="20" x2="16" y2="16"/>
-                </svg>
-              </span>
-              <span class="tuile-nom">Stock</span>
-            </button>
-            <button class="accueil-tuile accueil-tuile-inventaire" onclick="afficherSection('inventaire', null)">
-              <span class="tuile-icone">
-                <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M8 16 L24 8 L40 16 L40 36 L24 44 L8 36 Z"/>
-                  <path d="M8 16 L24 24 L40 16"/>
-                  <line x1="24" y1="24" x2="24" y2="44"/>
-                  <path d="M16 12 L32 20"/>
-                </svg>
-              </span>
-              <span class="tuile-nom">Inventaire</span>
-            </button>
-            <button class="accueil-tuile accueil-tuile-factures" onclick="afficherSection('factures', null)">
-              <span class="tuile-icone">
-                <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="10" y="6" width="28" height="36" rx="2"/>
-                  <line x1="16" y1="16" x2="32" y2="16"/>
-                  <line x1="16" y1="22" x2="32" y2="22"/>
-                  <line x1="16" y1="28" x2="24" y2="28"/>
-                </svg>
-              </span>
-              <span class="tuile-nom">Factures</span>
-            </button>
-            <button class="accueil-tuile accueil-tuile-liste">
-              <span class="tuile-icone">
-                <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="14" r="2.5"/>
-                  <circle cx="12" cy="24" r="2.5"/>
-                  <circle cx="12" cy="34" r="2.5"/>
-                  <line x1="20" y1="14" x2="40" y2="14"/>
-                  <line x1="20" y1="24" x2="40" y2="24"/>
-                  <line x1="20" y1="34" x2="36" y2="34"/>
-                </svg>
-              </span>
-              <span class="tuile-nom">Liste</span>
-            </button>
-            <button class="accueil-tuile accueil-tuile-divers">
-              <span class="tuile-icone">
-                <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="24" cy="24" r="6"/>
-                  <path d="M24 6 L24 12 M24 36 L24 42 M6 24 L12 24 M36 24 L42 24 M10 10 L14 14 M34 34 L38 38 M38 10 L34 14 M14 34 L10 38"/>
-                </svg>
-              </span>
-              <span class="tuile-nom">Divers</span>
-            </button>
-          </div>
+         <div class="accueil-droite">
+  <div class="accueil-grande-tuile accueil-grande-tuile-vert">
+    <button class="accueil-tuile" onclick="afficherSection('collections', null)">
+      <span class="tuile-icone">
+        <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="4" width="12" height="20" rx="2"/>
+          <rect x="20" y="4" width="24" height="12" rx="2"/>
+          <rect x="20" y="20" width="11" height="24" rx="2"/>
+          <rect x="35" y="20" width="9" height="10" rx="2"/>
+          <rect x="4" y="28" width="12" height="16" rx="2"/>
+          <rect x="35" y="34" width="9" height="10" rx="2"/>
+        </svg>
+      </span>
+      <span class="tuile-nom">Collections</span>
+    </button>
+    <button class="accueil-tuile" onclick="afficherSection('recettes', null)">
+      <span class="tuile-icone">
+        <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="14" width="22" height="26" rx="3"/>
+          <line x1="10" y1="22" x2="24" y2="22"/>
+          <line x1="10" y1="27" x2="24" y2="27"/>
+          <line x1="10" y1="32" x2="18" y2="32"/>
+          <path d="M26 10 C26 10 32 8 36 12 C40 16 38 22 34 24 C30 26 26 24 26 20 Z"/>
+          <circle cx="36" cy="8" r="2"/>
+          <circle cx="42" cy="12" r="1.5"/>
+          <circle cx="40" cy="18" r="1"/>
+        </svg>
+      </span>
+      <span class="tuile-nom">Recettes</span>
+    </button>
+  </div>
+  <div class="accueil-grande-tuile accueil-grande-tuile-jaune">
+    <button class="accueil-tuile" onclick="afficherSection('nouvelle-facture', null)">
+      <span class="tuile-icone">
+        <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 18 L6 38 L42 38 L42 18 L22 18 L19 14 L6 14 Z"/>
+          <path d="M10 14 L10 10 L24 10 L27 14"/>
+          <path d="M28 18 L28 22 L42 22"/>
+          <line x1="12" y1="26" x2="22" y2="26"/>
+          <line x1="12" y1="30" x2="26" y2="30"/>
+          <line x1="30" y1="28" x2="38" y2="28"/>
+          <line x1="30" y1="32" x2="36" y2="32"/>
+        </svg>
+      </span>
+      <span class="tuile-nom">Achats</span>
+    </button>
+    <button class="accueil-tuile" onclick="afficherSection('factures', null)">
+      <span class="tuile-icone">
+        <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="10" y="6" width="28" height="36" rx="2"/>
+          <line x1="16" y1="16" x2="32" y2="16"/>
+          <line x1="16" y1="22" x2="32" y2="22"/>
+          <line x1="16" y1="28" x2="24" y2="28"/>
+        </svg>
+      </span>
+      <span class="tuile-nom">Factures</span>
+    </button>
+  </div>
+  <div class="accueil-grande-tuile accueil-grande-tuile-gris">
+    <button class="accueil-tuile" onclick="afficherSection('inventaire', null)">
+      <span class="tuile-icone">
+        <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 16 L24 8 L40 16 L40 36 L24 44 L8 36 Z"/>
+          <path d="M8 16 L24 24 L40 16"/>
+          <line x1="24" y1="24" x2="24" y2="44"/>
+          <path d="M16 12 L32 20"/>
+        </svg>
+      </span>
+      <span class="tuile-nom">Inventaire</span>
+    </button>
+    <button class="accueil-tuile" disabled>
+      <span class="tuile-icone">
+        <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="8" y="20" width="14" height="20" rx="2"/>
+          <rect x="26" y="14" width="14" height="26" rx="2"/>
+          <line x1="4" y1="40" x2="44" y2="40"/>
+          <line x1="12" y1="20" x2="12" y2="16"/>
+          <line x1="16" y1="20" x2="16" y2="16"/>
+        </svg>
+      </span>
+      <span class="tuile-nom">Stock</span>
+    </button>
+  </div>
+  <div class="accueil-grande-tuile accueil-grande-tuile-gris-fonce">
+    <button class="accueil-tuile" disabled>
+      <span class="tuile-icone">
+        <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="14" r="2.5"/>
+          <circle cx="12" cy="24" r="2.5"/>
+          <circle cx="12" cy="34" r="2.5"/>
+          <line x1="20" y1="14" x2="40" y2="14"/>
+          <line x1="20" y1="24" x2="40" y2="24"/>
+          <line x1="20" y1="34" x2="36" y2="34"/>
+        </svg>
+      </span>
+      <span class="tuile-nom">Liste</span>
+    </button>
+    <button class="accueil-tuile" disabled>
+      <span class="tuile-icone">
+        <svg viewBox="0 0 48 48" fill="none" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="24" cy="24" r="6"/>
+          <path d="M24 6 L24 12 M24 36 L24 42 M6 24 L12 24 M36 24 L42 24 M10 10 L14 14 M34 34 L38 38 M38 10 L34 14 M14 34 L10 38"/>
+        </svg>
+      </span>
+      <span class="tuile-nom">Divers</span>
+    </button>
+  </div>
+</div>
         </div>
       </div>
-
       <!-- COLLECTIONS -->
      <div class="section-admin" id="section-collections">
         <div class="page-entete">
@@ -267,14 +273,16 @@
               <span class="form-panel-titre" id="fiche-collection-titre"></span>
               <span class="fiche-collection-slogan" id="fiche-collection-slogan"></span>
               <div class="form-actions">
-                <button class="btn btn-primary" id="fiche-collection-modifier">Modifier la collection</button>
+            <button class="btn btn-primary" id="fiche-collection-modifier">Modifier la collection</button>
+                <button class="btn btn-danger" id="btn-supprimer-collection">Supprimer la collection</button>
                 <button class="btn btn-secondary" id="fiche-collection-ajouter-ligne">+ Ajouter une ligne</button>
-                <button class="btn btn-outline" onclick="fermerFicheCollection()">Fermer</button>
+                <button class="btn btn-outline btn-icone" onclick="fermerFicheCollection()" title="Fermer">✕</button>
               </div>
             </div>
           </div>
           <div class="form-body">
             <p class="fiche-collection-desc" id="fiche-collection-desc"></p>
+            <div id="fiche-collection-extras"></div>
             <div class="section-label">Lignes de produits</div>
             <div id="fiche-collection-lignes"></div>
           </div>
@@ -294,9 +302,9 @@
             <!-- BLOC COLLECTION -->
             <div id="fc-bloc-collection">
               <div class="form-grille">
-                <div class="form-groupe">
+                <div class="form-groupe col-petit">
                   <label class="form-label">Rang</label>
-                  <input type="text" inputmode="numeric" class="form-ctrl" id="fc-rang">
+                  <input type="text" inputmode="decimal" class="form-ctrl" id="fc-rang">
                 </div>
                 <div class="form-groupe">
                   <label class="form-label">Collection</label>
@@ -308,9 +316,9 @@
                 </div>
                 <div class="form-groupe col-plein">
                   <label class="form-label">Description collection</label>
-                  <textarea class="form-ctrl" id="fc-desc-col"></textarea>
+                 <textarea class="form-ctrl textarea-auto" id="fc-desc-col" rows="5" oninput="ajusterHauteurTextarea(this)"></textarea>
                 </div>
-                <div class="form-groupe">
+               <div class="form-groupe col-petit">
                   <label class="form-label">Couleur HEX</label>
                 <input type="text" class="form-ctrl" id="fc-couleur-hex" oninput="apercuCouleurCollection(this)"><div id="fc-couleur-apercu" class="couleur-apercu"></div>
                 </div>
@@ -344,11 +352,11 @@
                   <label class="form-label">Description ligne</label>
                   <textarea class="form-ctrl" id="fc-desc-ligne"></textarea>
                 </div>
-                <div class="form-groupe">
+               <div class="form-groupe cache">
                   <label class="form-label">Couleur HEX ligne</label>
-                  <input type="text" class="form-ctrl" id="fc-couleur-hex-ligne" oninput="apercuCouleurCollection(this)">
+                  <input type="text" class="form-ctrl" id="fc-couleur-hex-ligne" oninput="apercuCouleurCollection(this)"><div id="fc-couleur-apercu-ligne" class="couleur-apercu"></div>
                 </div>
-                <div class="form-groupe col-plein">
+              <div class="form-groupe cache">
                   <label class="form-label">Photo ligne</label>
                   <div class="cloudinary-zone">
                     <input type="text" class="form-ctrl" id="fc-photo-url-ligne">
@@ -368,6 +376,7 @@
             <div class="form-actions">
               <button class="btn btn-primary" onclick="sauvegarderCollection()">Enregistrer</button>
               <button class="btn btn-secondary" onclick="fermerFormCollection()">Annuler</button>
+              <button class="btn btn-danger cache" id="btn-supprimer-ligne">Supprimer la ligne</button>
             </div>
           </div>
         </div>
@@ -390,6 +399,7 @@
           <button class="btn btn-primary" onclick="ouvrirFormRecette()">+ Nouvelle recette</button>
         </div>
        <div class="msg-zone" id="msg-recettes"></div>
+	   
         <div class="filtres-bar">
           <select class="form-ctrl filtre-select" id="filtre-recette-collection" onchange="onFiltreCollection()">
             <option value="">Toutes les collections</option>
@@ -402,7 +412,7 @@
             <option value="test">Test</option>
             <option value="public">Public</option>
           </select>
-          <label class="filtre-label">Par nom</label><input type="text" class="form-ctrl filtre-recherche" id="filtre-recette-nom" oninput="filtrerRecettes()">
+          <input type="text" class="form-ctrl filtre-recherche" id="filtre-recette-nom" oninput="filtrerRecettes()" placeholder="Par nom">
           <button class="btn btn-outline btn-sm" onclick="reinitialiserFiltresRecettes()">Réinitialiser</button>
         </div>
         <div class="form-panel" id="fiche-recette">
@@ -416,17 +426,7 @@
           </div>
           <div class="form-body" id="fiche-recette-contenu"></div>
         </div>
-        <div class="form-panel" id="fiche-recette">
-          <div class="form-panel-header">
-            <div class="form-panel-titre" id="fiche-recette-titre"></div>
-            <div class="form-actions">
-              <button class="btn btn-sm btn-primary" onclick="basculerModeEditionRecette()">Modifier</button>
-              <button class="btn btn-sm btn-danger" onclick="supprimerRecetteActive()">Supprimer</button>
-              <button class="btn btn-sm btn-outline" onclick="fermerFicheRecette()">Fermer</button>
-            </div>
-          </div>
-          <div class="form-body" id="fiche-recette-contenu"></div>
-        </div>
+       
         <div class="form-panel" id="form-recettes">
           <div class="form-panel-header">
             <div class="form-panel-titre" id="form-recettes-titre">Nouvelle recette</div>
@@ -448,7 +448,7 @@
               </div>
               <div class="form-groupe">
                 <label class="form-label">Ligne</label>
-                <select class="form-ctrl" id="fr-ligne">
+                <select class="form-ctrl" id="fr-ligne" onchange="chargerIngredientsBaseRecette()">
                   <option value="">— Choisir collection —</option>
                 </select>
               </div>
@@ -456,17 +456,21 @@
                 <label class="form-label">Format</label>
                 <input type="text" class="form-ctrl" id="fr-format">
               </div>
+              <div class="form-groupe col-plein">
+                <label class="form-label">Collections secondaires</label>
+                <div id="fr-collections-secondaires" class="checkboxes-groupe"></div>
+              </div>
               <div class="form-groupe">
                 <label class="form-label">Nb unités / fournée</label>
-                <input type="text" inputmode="numeric" class="form-ctrl" id="fr-unites">
+                <input type="text" inputmode="decimal" class="form-ctrl" id="fr-unites">
               </div>
               <div class="form-groupe">
                 <label class="form-label">Cure (jours)</label>
-                <input type="text" inputmode="numeric" class="form-ctrl" id="fr-cure">
+                <input type="text" inputmode="decimal" class="form-ctrl" id="fr-cure">
               </div>
               <div class="form-groupe">
                 <label class="form-label">Prix de vente ($)</label>
-                <input type="text" inputmode="numeric" class="form-ctrl" id="fr-prix">
+                <input type="text" inputmode="decimal" class="form-ctrl" id="fr-prix">
               </div>
               <div class="form-groupe col-plein">
                 <label class="form-label">Description</label>
@@ -493,13 +497,26 @@
                 <div id="fr-couleur-apercu" class="couleur-apercu"></div>
               </div>
             </div>
-           <div class="form-groupe col-plein">
-              <label class="form-label">Photo</label>
+          <div class="form-groupe col-plein">
+              <label class="form-label">Photo principale</label>
               <div class="cloudinary-zone">
-                <input type="text" class="form-ctrl" id="fr-image-url" readonly>
+                <input type="text" class="form-ctrl" id="fr-image-url">
                 <button type="button" class="btn btn-secondary" onclick="ouvrirCloudinary()">Choisir une photo</button>
               </div>
               <div id="fr-image-preview"></div>
+            </div>
+           <div class="form-groupe col-plein">
+              <label class="form-label">Photo Noël</label>
+              <div class="cloudinary-zone">
+                <input type="text" class="form-ctrl" id="fr-image-url-noel">
+                <button type="button" class="btn btn-secondary" onclick="ouvrirMediaLibrary('fr-image-url-noel', 'fr-image-preview-noel')">Choisir une photo</button>
+              </div>
+              <div id="fr-image-preview-noel"></div>
+            </div>
+           <div class="form-groupe col-plein" id="zone-ingredients-recette">
+              <label class="form-label">Ingrédients</label>
+              <div id="liste-ingredients-recette"></div>
+              <button type="button" class="btn btn-secondary btn-ajouter-ingredient" onclick="ajouterIngredientRecette()">+ Ajouter un ingrédient</button>
             </div>
             <div class="form-actions">
               <button class="btn btn-primary" onclick="sauvegarderRecette()">Enregistrer</button>
@@ -578,8 +595,7 @@
             <select id="facture-fournisseur" class="form-ctrl" onchange="onChangeFournisseur()">
               <option value=""></option>
             </select>
-            <input type="text" id="facture-fournisseur-nouveau" class="form-ctrl"
-                   class="cache" autocomplete="off">
+           <input type="text" id="facture-fournisseur-nouveau" class="form-ctrl cache" autocomplete="off">
           </div>
 
         </div>
@@ -628,33 +644,26 @@
             <select id="item-ingredient" class="form-ctrl" onchange="onChangeIngredient()">
               <option value=""></option>
             </select>
-            <input type="text" id="item-ingredient-nouveau" class="form-ctrl"
-                   class="cache" autocomplete="off">
+          <input type="text" id="item-ingredient-nouveau" class="form-ctrl cache" autocomplete="off">
           </div>
-
-          <div class="form-groupe">
-            <label class="form-label">Format — quantité</label>
-            <input type="text" inputmode="numeric" id="item-format-qte" class="form-ctrl" autocomplete="off">
-          </div>
-
-          <div class="form-groupe">
-            <label class="form-label">Unité</label>
-            <select id="item-format-unite" class="form-ctrl">
-              <option value="g">g</option>
-              <option value="ml">ml</option>
-              <option value="kg">kg</option>
-              <option value="L">L</option>
+			<div class="form-groupe">
+            <label class="form-label">Format</label>
+            <select id="item-format" class="form-ctrl" onchange="onChangeFormat()">
+              <option value="">— Choisir un format —</option>
             </select>
           </div>
+          <input type="hidden" id="item-format-qte">
+          <input type="hidden" id="item-format-unite">
+          
 
           <div class="form-groupe">
             <label class="form-label">Prix unitaire ($)</label>
-            <input type="text" inputmode="numeric" id="item-prix-unitaire" class="form-ctrl" autocomplete="off">
+            <input type="text" inputmode="decimal" id="item-prix-unitaire" class="form-ctrl" autocomplete="off">
           </div>
 
           <div class="form-groupe">
             <label class="form-label">Quantité achetée</label>
-            <input type="text" inputmode="numeric" id="item-quantite" class="form-ctrl" autocomplete="off">
+            <input type="text" inputmode="decimal" id="item-quantite" class="form-ctrl" autocomplete="off">
           </div>
 
           <div class="form-groupe col-plein">
@@ -699,19 +708,19 @@
 
         <div class="form-groupe">
           <label class="form-label">Livraison ($)</label>
-          <input type="text" inputmode="numeric" id="final-livraison" class="form-ctrl"
+          <input type="text" inputmode="decimal" id="final-livraison" class="form-ctrl"
                  oninput="calculerTotalFinal()" autocomplete="off">
         </div>
 
         <div class="form-groupe">
           <label class="form-label">TPS ($)</label>
-          <input type="text" inputmode="numeric" id="final-tps" class="form-ctrl"
+          <input type="text" inputmode="decimal" id="final-tps" class="form-ctrl"
                  oninput="calculerTotalFinal()" autocomplete="off">
         </div>
 
         <div class="form-groupe">
           <label class="form-label">TVQ ($)</label>
-          <input type="text" inputmode="numeric" id="final-tvq" class="form-ctrl"
+          <input type="text" inputmode="decimal" id="final-tvq" class="form-ctrl"
                  oninput="calculerTotalFinal()" autocomplete="off">
         </div>
 
@@ -744,7 +753,9 @@
           </div>
         </div>
         <div class="msg-zone" id="msg-factures"></div>
-        <div class="filtres-bar">
+		
+		
+       <div class="filtres-bar">
           <select class="form-ctrl filtre-select" id="filtre-fournisseur" onchange="filtrerFactures()">
             <option value="">Tous les fournisseurs</option>
           </select>
@@ -753,18 +764,29 @@
             <option value="En cours">En cours</option>
             <option value="Finalisée">Finalisée</option>
           </select>
-          <button class="btn btn-sm btn-outline" onclick="reinitialiserFiltres()">Réinitialiser</button>
+          <input class="form-ctrl filtre-select" type="date" id="filtre-date-debut" onchange="filtrerFactures()">
+          <input class="form-ctrl filtre-select" type="date" id="filtre-date-fin" onchange="filtrerFactures()">
+          <button class="btn btn-sm btn-outline btn-icone" onclick="reinitialiserFiltres()" title="Réinitialiser">✕</button>
           <span id="factures-compte" class="factures-compte"></span>
         </div>
+		
+		
+		
         <div class="chargement" id="loading-factures"><span class="spinner"></span>Chargement...</div>
         <div class="tableau-wrap">
-          <table id="tableau-factures" class="cache">
+		
+		
+         <table id="tableau-factures" class="cache">
             <thead>
-              <tr><th>Numéro</th><th>Date</th><th>Fournisseur</th><th>TPS</th><th>TVQ</th><th>Total</th><th>Statut</th><th></th></tr>
+              <tr><th>Numéro</th><th>Date</th><th>Fournisseur</th><th>Total</th><th>Statut</th></tr>
             </thead>
             <tbody id="tbody-factures"></tbody>
           </table>
+          <div id="factures-total" class="inv-total cache"></div>
         </div>
+		
+		
+		
         <div class="vide cache" id="vide-factures">
           <div class="vide-titre">Aucune facture</div>
           <div class="vide-desc">Créez votre première facture</div>
@@ -816,7 +838,7 @@
         <div class="msg-zone" id="msg-contenu-site"></div>
         <div class="chargement" id="loading-contenu-site"><span class="spinner"></span>Chargement...</div>
 
-        <div id="corps-contenu-site" style="display:none">
+        <div id="corps-contenu-site" class="cache">
 
           <div class="form-panel visible">
             <div class="form-panel-header"><div class="form-panel-titre">Accueil — Hero</div></div>
@@ -932,96 +954,77 @@
             <div class="form-panel-header"><div class="form-panel-titre">Bon à savoir — Engagements</div></div>
             <div class="form-body">
               <div class="form-grille">
-                <div class="form-groupe">
-                  <label class="form-label">Engagement 01 — titre</label>
-                  <input type="text" class="form-ctrl" id="cs-bas_engagement_01_titre">
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Engagement 01 — texte</label>
-                  <textarea class="form-ctrl" id="cs-bas_engagement_01_texte" rows="2"></textarea>
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Engagement 02 — titre</label>
-                  <input type="text" class="form-ctrl" id="cs-bas_engagement_02_titre">
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Engagement 02 — texte</label>
-                  <textarea class="form-ctrl" id="cs-bas_engagement_02_texte" rows="2"></textarea>
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Engagement 03 — titre</label>
-                  <input type="text" class="form-ctrl" id="cs-bas_engagement_03_titre">
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Engagement 03 — texte</label>
-                  <textarea class="form-ctrl" id="cs-bas_engagement_03_texte" rows="2"></textarea>
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Engagement 04 — titre</label>
-                  <input type="text" class="form-ctrl" id="cs-bas_engagement_04_titre">
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Engagement 04 — texte</label>
-                  <textarea class="form-ctrl" id="cs-bas_engagement_04_texte" rows="2"></textarea>
-                </div>
-              </div>
-              <div class="form-groupe">
-                <label class="form-label">Note allergènes</label>
-                <textarea class="form-ctrl" id="cs-bas_allergenes" rows="3"></textarea>
+                <div class="form-groupe"><label class="form-label">Engagement 01 — titre</label><input type="text" class="form-ctrl" id="cs-bas_engagement_01_titre"></div>
+                <div class="form-groupe"><label class="form-label">Engagement 01 — texte</label><textarea class="form-ctrl" id="cs-bas_engagement_01_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Engagement 02 — titre</label><input type="text" class="form-ctrl" id="cs-bas_engagement_02_titre"></div>
+                <div class="form-groupe"><label class="form-label">Engagement 02 — texte</label><textarea class="form-ctrl" id="cs-bas_engagement_02_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Engagement 03 — titre</label><input type="text" class="form-ctrl" id="cs-bas_engagement_03_titre"></div>
+                <div class="form-groupe"><label class="form-label">Engagement 03 — texte</label><textarea class="form-ctrl" id="cs-bas_engagement_03_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Engagement 04 — titre</label><input type="text" class="form-ctrl" id="cs-bas_engagement_04_titre"></div>
+                <div class="form-groupe"><label class="form-label">Engagement 04 — texte</label><textarea class="form-ctrl" id="cs-bas_engagement_04_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Engagement 05 — titre</label><input type="text" class="form-ctrl" id="cs-bas_engagement_05_titre"></div>
+                <div class="form-groupe"><label class="form-label">Engagement 05 — texte</label><textarea class="form-ctrl" id="cs-bas_engagement_05_texte" rows="2"></textarea></div>
               </div>
             </div>
           </div>
 
           <div class="form-panel visible">
-            <div class="form-panel-header"><div class="form-panel-titre">Bon à savoir — Conservation et commandes</div></div>
+            <div class="form-panel-header"><div class="form-panel-titre">Bon à savoir — Notes importantes</div></div>
             <div class="form-body">
               <div class="form-grille">
-                <div class="form-groupe">
-                  <label class="form-label">Conservation — titre</label>
-                  <input type="text" class="form-ctrl" id="cs-bas_conservation_titre">
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Conservation — texte</label>
-                  <textarea class="form-ctrl" id="cs-bas_conservation_texte" rows="2"></textarea>
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Cure — titre</label>
-                  <input type="text" class="form-ctrl" id="cs-bas_cure_titre">
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Cure — texte</label>
-                  <textarea class="form-ctrl" id="cs-bas_cure_texte" rows="2"></textarea>
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Usage — titre</label>
-                  <input type="text" class="form-ctrl" id="cs-bas_usage_titre">
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Usage — texte</label>
-                  <textarea class="form-ctrl" id="cs-bas_usage_texte" rows="2"></textarea>
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Commande — titre</label>
-                  <input type="text" class="form-ctrl" id="cs-bas_commande_titre">
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Commande — texte</label>
-                  <textarea class="form-ctrl" id="cs-bas_commande_texte" rows="2"></textarea>
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Demande d'info — titre</label>
-                  <input type="text" class="form-ctrl" id="cs-bas_demande_titre">
-                </div>
-                <div class="form-groupe">
-                  <label class="form-label">Demande d'info — texte</label>
-                  <textarea class="form-ctrl" id="cs-bas_demande_texte" rows="2"></textarea>
-                </div>
+                <div class="form-groupe"><label class="form-label">Note 01 — titre</label><input type="text" class="form-ctrl" id="cs-bas_note_01_titre"></div>
+                <div class="form-groupe"><label class="form-label">Note 01 — texte</label><textarea class="form-ctrl" id="cs-bas_note_01_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Note 02 — titre</label><input type="text" class="form-ctrl" id="cs-bas_note_02_titre"></div>
+                <div class="form-groupe"><label class="form-label">Note 02 — texte</label><textarea class="form-ctrl" id="cs-bas_note_02_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Note 03 — titre</label><input type="text" class="form-ctrl" id="cs-bas_note_03_titre"></div>
+                <div class="form-groupe"><label class="form-label">Note 03 — texte</label><textarea class="form-ctrl" id="cs-bas_note_03_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Note 04 — titre</label><input type="text" class="form-ctrl" id="cs-bas_note_04_titre"></div>
+                <div class="form-groupe"><label class="form-label">Note 04 — texte</label><textarea class="form-ctrl" id="cs-bas_note_04_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Note 05 — titre</label><input type="text" class="form-ctrl" id="cs-bas_note_05_titre"></div>
+                <div class="form-groupe"><label class="form-label">Note 05 — texte</label><textarea class="form-ctrl" id="cs-bas_note_05_texte" rows="2"></textarea></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-panel visible">
+            <div class="form-panel-header"><div class="form-panel-titre">Bon à savoir — Conservation et utilisation</div></div>
+            <div class="form-body">
+              <div class="form-grille">
+                <div class="form-groupe"><label class="form-label">Conservation 01 — titre</label><input type="text" class="form-ctrl" id="cs-bas_conservation_01_titre"></div>
+                <div class="form-groupe"><label class="form-label">Conservation 01 — texte</label><textarea class="form-ctrl" id="cs-bas_conservation_01_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Conservation 02 — titre</label><input type="text" class="form-ctrl" id="cs-bas_conservation_02_titre"></div>
+                <div class="form-groupe"><label class="form-label">Conservation 02 — texte</label><textarea class="form-ctrl" id="cs-bas_conservation_02_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Conservation 03 — titre</label><input type="text" class="form-ctrl" id="cs-bas_conservation_03_titre"></div>
+                <div class="form-groupe"><label class="form-label">Conservation 03 — texte</label><textarea class="form-ctrl" id="cs-bas_conservation_03_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Conservation 04 — titre</label><input type="text" class="form-ctrl" id="cs-bas_conservation_04_titre"></div>
+                <div class="form-groupe"><label class="form-label">Conservation 04 — texte</label><textarea class="form-ctrl" id="cs-bas_conservation_04_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Conservation 05 — titre</label><input type="text" class="form-ctrl" id="cs-bas_conservation_05_titre"></div>
+                <div class="form-groupe"><label class="form-label">Conservation 05 — texte</label><textarea class="form-ctrl" id="cs-bas_conservation_05_texte" rows="2"></textarea></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-panel visible">
+            <div class="form-panel-header"><div class="form-panel-titre">Commandes et délais</div></div>
+            <div class="form-body">
+              <div class="form-grille">
+                <div class="form-groupe"><label class="form-label">Commande 01 — titre</label><input type="text" class="form-ctrl" id="cs-bas_commande_01_titre"></div>
+                <div class="form-groupe"><label class="form-label">Commande 01 — texte</label><textarea class="form-ctrl" id="cs-bas_commande_01_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Commande 02 — titre</label><input type="text" class="form-ctrl" id="cs-bas_commande_02_titre"></div>
+                <div class="form-groupe"><label class="form-label">Commande 02 — texte</label><textarea class="form-ctrl" id="cs-bas_commande_02_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Commande 03 — titre</label><input type="text" class="form-ctrl" id="cs-bas_commande_03_titre"></div>
+                <div class="form-groupe"><label class="form-label">Commande 03 — texte</label><textarea class="form-ctrl" id="cs-bas_commande_03_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Commande 04 — titre</label><input type="text" class="form-ctrl" id="cs-bas_commande_04_titre"></div>
+                <div class="form-groupe"><label class="form-label">Commande 04 — texte</label><textarea class="form-ctrl" id="cs-bas_commande_04_texte" rows="2"></textarea></div>
+                <div class="form-groupe"><label class="form-label">Commande 05 — titre</label><input type="text" class="form-ctrl" id="cs-bas_commande_05_titre"></div>
+                <div class="form-groupe"><label class="form-label">Commande 05 — texte</label><textarea class="form-ctrl" id="cs-bas_commande_05_texte" rows="2"></textarea></div>
               </div>
             </div>
           </div>
 
         </div>
       </div>
+	
 
       <!-- DENSITÉS -->
       <div class="section-admin" id="section-densites">
@@ -1033,7 +1036,7 @@
           <button class="btn btn-primary" onclick="ouvrirFormDensite()">+ Nouveau type</button>
         </div>
         <div class="msg-zone" id="msg-densites"></div>
-        <div class="form-panel" id="form-densites">
+       <div class="form-panel cache" id="form-densites">
           <div class="form-panel-header">
             <div class="form-panel-titre" id="form-densites-titre">Nouveau type</div>
             <button class="btn btn-sm btn-outline" onclick="fermerFormDensite()">Fermer</button>
@@ -1041,13 +1044,14 @@
           <div class="form-body">
             <input type="hidden" id="fd-mode">
             <div class="form-grille">
-              <div class="form-groupe">
+			
+          <div class="form-groupe">
                 <label class="form-label">Type d'ingrédient</label>
                 <input type="text" class="form-ctrl" id="fd-type" placeholder="">
               </div>
               <div class="form-groupe">
                 <label class="form-label">Densité (g/ml)</label>
-                <input type="text" inputmode="numeric" class="form-ctrl" id="fd-densite" placeholder="">
+                <input type="text" inputmode="decimal" class="form-ctrl" id="fd-densite" placeholder="">
               </div>
               <div class="form-groupe">
                 <label class="form-label">Unité source</label>
@@ -1058,9 +1062,11 @@
                   <option value="kg">kg</option>
                 </select>
               </div>
+			  
+			  
               <div class="form-groupe">
                 <label class="form-label">Marge de perte (%)</label>
-                <input type="text" inputmode="numeric" class="form-ctrl" id="fd-marge-perte">
+                <input type="text" inputmode="decimal" class="form-ctrl" id="fd-marge-perte">
               </div>
             </div>
             <div class="form-actions">
@@ -1070,21 +1076,22 @@
           </div>
         </div>
         <div class="chargement" id="loading-densites"><span class="spinner"></span>Chargement...</div>
-        <table id="tableau-densites" style="display:none">
+        <table id="tableau-densites" class="cache">
           <thead>
             <tr><th>Type d'ingrédient</th><th>Densité (g/ml)</th><th>Unité source</th><th>Marge perte (%)</th><th></th></tr>
           </thead>
           <tbody id="tbody-densites"></tbody>
         </table>
-        <div class="vide" id="vide-densites" style="display:none">
+       <div class="vide cache" id="vide-densites">
           <div class="vide-titre">Aucune densité</div>
         </div>
       </div>
 
+
     </main>
   </div>
 
- <script src="https://upload-widget.cloudinary.com/global/all.js"></script>
+ <script src="https://media-library.cloudinary.com/global/all.js"></script>
 <script src="../js/main.js"></script>
   <script src="../js/admin.js"></script>
     
@@ -1095,6 +1102,19 @@
   <input type="password" id="input-mdp-admin" class="form-ctrl">
       <p id="erreur-mdp-admin" class="connexion-erreur"></p>
       <button class="btn btn-primary" onclick="validerConnexionAdmin()">Entrer</button>
+    </div>
+  </div>
+
+
+ <div class="modal-admin-overlay" id="modal-confirm">
+    <div class="modal-admin">
+      <div class="modal-admin-header">
+        <div class="modal-admin-titre" id="modal-confirm-message"></div>
+      </div>
+      <div class="modal-admin-body" style="display:flex;gap:12px;justify-content:flex-end;padding:16px">
+        <button class="btn btn-outline btn-sm" onclick="fermerModalConfirm()">Annuler</button>
+        <button class="btn btn-danger btn-sm" id="modal-confirm-btn">Confirmer</button>
+      </div>
     </div>
   </div>
 </body>

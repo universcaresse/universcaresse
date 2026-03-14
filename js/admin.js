@@ -748,6 +748,8 @@ function ouvrirFicheRecette(id) {
     </div>
     <div class="fiche-grille">
       <div class="fiche-champ"><span class="fiche-label">Collection</span><span class="fiche-valeur">${rec.collection || '—'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label">Collections secondaires</span><span class="fiche-valeur">${Array.isArray(rec.collections_secondaires) && rec.collections_secondaires.length ? rec.collections_secondaires.join(', ') : '—'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label">Ligne</span><span class="fiche-valeur">${rec.ligne || '—'}</span></div>
       <div class="fiche-champ"><span class="fiche-label">Ligne</span><span class="fiche-valeur">${rec.ligne || '—'}</span></div>
       <div class="fiche-champ"><span class="fiche-label">Format</span><span class="fiche-valeur">${rec.format || '—'}</span></div>
       <div class="fiche-champ"><span class="fiche-label">Statut</span><span class="fiche-valeur">${rec.statut || 'test'}</span></div>
