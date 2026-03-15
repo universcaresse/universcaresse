@@ -486,7 +486,15 @@ async function chargerContenu() {
     // S7
     setEdu('edu-s7-surtitre', c.edu_s7_surtitre); setTitreEdu('edu-s7-titre-bloc', c.edu_s7_titre || '', c.edu_s7_titre_em);
     setEdu('edu-s7-accroche', c.edu_s7_accroche); setEdu('edu-s7-section1-titre', c.edu_s7_section1_titre);
-    setEdu('edu-s7-astuce
+setEdu('edu-s7-astuce', c.edu_s7_astuce); setEdu('edu-s7-section2-titre', c.edu_s7_section2_titre); setEdu('edu-s7-section3-titre', c.edu_s7_section3_titre);
+    [1,2,3,4,5].forEach(n => { setEdu(`edu-s7-peau${n}-titre`, c[`edu_s7_peau${n}_titre`]); setEdu(`edu-s7-peau${n}-signes`, c[`edu_s7_peau${n}_signes`]); setEdu(`edu-s7-peau${n}-aime`, c[`edu_s7_peau${n}_aime`]); });
+    [1,2,3,4,5].forEach(n => { setEdu(`edu-s7-usage${n}-titre`, c[`edu_s7_usage${n}_titre`]); setEdu(`edu-s7-usage${n}-texte`, c[`edu_s7_usage${n}_texte`]); });
+    [1,2,3,4].forEach(n => { setEdu(`edu-s7-ok${n}`, c[`edu_s7_ok${n}`]); setEdu(`edu-s7-non${n}`, c[`edu_s7_non${n}`]); });
+
+  } catch (err) {
+    console.error('Erreur chargerContenu:', err);
+  }
+}
 
 // ─── CONTACT ───
 async function envoyerFormulaire() {
