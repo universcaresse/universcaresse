@@ -15,6 +15,7 @@
   <ul class="nav-links" id="nav-links">
     <li><a href="#accueil" class="active" onclick="naviguer('accueil')">Accueil</a></li>
     <li><a href="#catalogue" onclick="naviguer('catalogue')">Catalogue</a></li>
+    <li><a href="#educatif" onclick="naviguer('educatif')">Le savon artisanal</a></li>
     <li><a href="#bon-a-savoir" onclick="naviguer('bon-a-savoir')">Bon à savoir</a></li>
     <li><a href="#contact" onclick="naviguer('contact')">Contact</a></li>
   </ul>
@@ -201,7 +202,246 @@
   <!-- ══════════════════════════════════
        SECTION BON À SAVOIR
   ══════════════════════════════════ -->
-  <section id="section-bon-a-savoir" class="page-section">
+  <section id="section-educatif" class="page-section">
+
+  <!-- SOUS-SECTIONS ÉDUCATIVES : affichées une à la fois -->
+  <div class="edu-sous-section-panel active" id="edu-1">
+
+    <div class="page-entete">
+      <div class="page-entete-gauche">
+        <div class="page-entete-eyebrow">Le savon artisanal — 1 / 7</div>
+        <h1 class="page-entete-titre">La saponification <em>à froid</em></h1>
+      </div>
+      <p style="font-family:'Playfair Display',serif; font-size:1.1rem; font-style:italic; color:var(--gris); max-width:320px; text-align:right;">Quand la chimie devient une caresse</p>
+    </div>
+
+    <div class="page-hero">
+      <div>
+        <p class="page-hero-texte" style="margin-top:0;">La saponification à froid, c'est l'alchimie douce qui transforme des huiles végétales en savon sans jamais les brutaliser par la chaleur. Contrairement aux savons industriels chauffés à haute température, cette méthode ancestrale préserve toute la richesse des ingrédients. Le processus est simple : des huiles rencontrent de l'hydroxyde de sodium dans l'eau, et ensemble, ils se transforment lentement en un savon pur et doux.</p>
+        <p class="page-hero-texte">Cette transformation prend son temps. Les molécules s'enlacent à température ambiante, créant naturellement de la glycérine — cette substance précieuse que les savons industriels extraient pour la revendre. Ici, elle reste. Elle hydrate, elle protège, elle caresse la peau à chaque usage.</p>
+        <p class="page-hero-texte">Le résultat ? Un savon vivant, riche, généreux. Chaque barre conserve les vertus intactes des huiles qui la composent : vitamines, acides gras essentiels, bienfaits naturels que la chaleur aurait détruits.</p>
+      </div>
+      <div class="page-hero-visuel">
+        <div class="page-hero-visuel-bg">
+          <div class="edu-photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span class="edu-photo-legende">Processus de fabrication,<br>huiles végétales,<br>texture crémeuse de la pâte</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bonne-section">
+      <h2 class="bonne-section-titre">Pourquoi choisir un savon saponifié à froid</h2>
+      <div class="items-grille">
+        <div class="info-card">
+          <div class="info-card-titre">Glycérine naturelle préservée</div>
+          <div class="info-card-texte">Hydratation profonde à chaque usage — cette substance précieuse reste dans le savon au lieu d'être extraite et revendue.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-titre">Huiles intactes</div>
+          <div class="info-card-texte">Vitamines et nutriments non dégradés par la chaleur. Les acides gras essentiels restent actifs, prêts à prendre soin de votre peau.</div>
+        </div>
+        <div class="info-card accent">
+          <div class="info-card-titre">Surgraissage</div>
+          <div class="info-card-texte">Un excès d'huile nourrissante reste libre dans le savon pour nourrir votre peau à chaque usage. <a href="#" onclick="afficherEduSection(3)">En savoir plus →</a></div>
+        </div>
+        <div class="info-card neutre">
+          <div class="info-card-titre">Fabrication artisanale</div>
+          <div class="info-card-texte">Chaque barre est unique, faite à la main en petites séries. Aucun raccourci industriel, aucun compromis sur la qualité.</div>
+        </div>
+      </div>
+      <div class="edu-liens">
+        <a href="#" onclick="naviguer('catalogue')" class="edu-lien">Collection SAPONICA</a>
+        <a href="#" onclick="naviguer('catalogue')" class="edu-lien">Collection CAPRIN</a>
+        <a href="#" onclick="naviguer('catalogue')" class="edu-lien">Collection ÉPURE</a>
+      </div>
+    </div>
+
+    <div class="edu-nav">
+      <span></span>
+      <button class="edu-nav-btn suivant" onclick="afficherEduSection(2)">La cure : patience et transformation <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></button>
+    </div>
+
+  </div><!-- /edu-1 -->
+
+  <div class="edu-sous-section-panel" id="edu-2">
+
+    <div class="page-entete">
+      <div class="page-entete-gauche">
+        <div class="page-entete-eyebrow">Le savon artisanal — 2 / 7</div>
+        <h1 class="page-entete-titre">La cure : <em>patience et transformation</em></h1>
+      </div>
+      <p style="font-family:'Playfair Display',serif; font-size:1.1rem; font-style:italic; color:var(--gris); max-width:320px; text-align:right;">Le temps comme ingrédient essentiel</p>
+    </div>
+
+    <div class="section-texte">
+      <div class="texte-principal">
+        <p>Quand un savon sort du moule, il n'est pas encore prêt. Il est tendre, encore humide, en pleine métamorphose. C'est là que commence la cure — cette période de repos essentielle où le savon devient vraiment lui-même. Entre quatre et six semaines, selon la recette, il sèche lentement à l'air libre, perdant son excès d'eau tout en complétant sa transformation chimique.</p>
+        <p>Durant ces semaines de patience, la saponification se finalise. Les dernières molécules d'huile et de soude trouvent leur équilibre parfait. Le pH se stabilise, s'adoucit, devient aussi doux qu'une caresse. L'eau s'évapore progressivement, et le savon durcit, se concentre, devient plus dense.</p>
+        <p>On ne peut pas précipiter ce processus. Les savons riches en huile d'olive demandent plus de temps. Ceux chargés en beurre de karité atteignent leur douceur optimale après six semaines. C'est une leçon de patience que nous offre la matière : les meilleures choses ne se forcent pas, elles mûrissent.</p>
+        <div class="edu-liens" style="margin-top:32px;">
+          <a href="#" onclick="naviguer('catalogue')" class="edu-lien">Collection SAPONICA</a>
+          <a href="#" onclick="naviguer('catalogue')" class="edu-lien">Collection CAPRIN</a>
+          <a href="#" onclick="naviguer('catalogue')" class="edu-lien">Collection ÉPURE</a>
+          <a href="#" onclick="naviguer('catalogue')" class="edu-lien">Collection PETIT NUAGE</a>
+        </div>
+      </div>
+      <div>
+        <div class="valeur-item">
+          <div class="valeur-titre">pH optimal</div>
+          <div class="valeur-desc">Passage de caustique à doux, parfaitement équilibré pour la peau. Aucune trace de soude libre à la fin de la cure.</div>
+        </div>
+        <div class="valeur-item">
+          <div class="valeur-titre">Dureté accrue</div>
+          <div class="valeur-desc">Un savon bien curé dure 2 à 3 fois plus longtemps qu'un savon industriel. Il ne fond pas à la première goutte d'eau.</div>
+        </div>
+        <div class="valeur-item">
+          <div class="valeur-titre">Concentration maximale</div>
+          <div class="valeur-desc">L'évaporation de l'eau concentre les ingrédients actifs. Chaque gramme de savon est plus riche, plus généreux.</div>
+        </div>
+        <div class="valeur-item">
+          <div class="valeur-titre">Mousse onctueuse</div>
+          <div class="valeur-desc">La texture finale se développe pleinement après la cure. Une mousse crémeuse qui transforme chaque lavage en rituel.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bandeau-citation">
+      <p class="citation-texte">C'est pour cette raison que nos savons portent une date de fabrication. Chaque barre vous arrive après avoir complété sa cure, prête à vous offrir le meilleur d'elle-même.</p>
+      <div class="citation-source">Notre engagement envers la qualité</div>
+    </div>
+
+    <div class="edu-nav">
+      <button class="edu-nav-btn precedent" onclick="afficherEduSection(1)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg> La saponification à froid</button>
+      <button class="edu-nav-btn suivant" onclick="afficherEduSection(3)">Le surgraissage <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></button>
+    </div>
+
+  </div><!-- /edu-2 -->
+
+  <div class="edu-sous-section-panel" id="edu-3">
+
+    <div class="page-entete">
+      <div class="page-entete-gauche">
+        <div class="page-entete-eyebrow">Le savon artisanal — 3 / 7</div>
+        <h1 class="page-entete-titre">Le surgraissage</h1>
+      </div>
+      <p style="font-family:'Playfair Display',serif; font-size:1.1rem; font-style:italic; color:var(--gris); max-width:320px; text-align:right;">L'excès qui fait toute la différence</p>
+    </div>
+
+    <div class="section-texte">
+      <div class="texte-principal">
+        <p>Le surgraissage, c'est cette générosité calculée qui transforme un savon nettoyant en véritable soin. On ajoute volontairement plus d'huile que nécessaire à la réaction chimique. Cet excédent ne se transforme pas en savon — il reste là, libre, précieux, prêt à nourrir votre peau à chaque usage.</p>
+        <p>Un savon industriel n'a pas de surgraissage. Toutes les huiles sont converties en agent nettoyant. Résultat : une peau qui tiraille, qui s'assèche, qui réclame une crème immédiatement après. Nos savons, eux, contiennent entre 5% et 10% d'huiles non saponifiées — un film protecteur invisible qui hydrate et préserve l'équilibre naturel.</p>
+        <p>Le pourcentage n'est jamais choisi au hasard. Il s'adapte à l'usage, à la peau, à la saison.</p>
+      </div>
+      <div>
+        <div class="page-hero-visuel-bg">
+          <div class="edu-photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span class="edu-photo-legende">Huiles végétales dorées,<br>texture crémeuse,<br>peau hydratée après utilisation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bonne-section">
+      <h2 class="bonne-section-titre">Les trois niveaux de surgraissage</h2>
+      <div class="edu-niveaux">
+        <div class="edu-niveau">
+          <div>
+            <div class="edu-niveau-pct">5%</div>
+            <div class="edu-niveau-label">Normale à grasse</div>
+          </div>
+          <div>
+            <p class="edu-niveau-texte">Nettoie efficacement sans laisser de film gras. Idéal pour les mains et le visage des peaux qui produisent naturellement du sébum. Léger, rafraîchissant, parfaitement équilibré.</p>
+            <a href="#" onclick="naviguer('catalogue')" class="edu-lien">Collection ÉPURE</a>
+          </div>
+        </div>
+        <div class="edu-niveau">
+          <div>
+            <div class="edu-niveau-pct">8%</div>
+            <div class="edu-niveau-label">Normale à sèche</div>
+          </div>
+          <div>
+            <p class="edu-niveau-texte">Le juste équilibre entre nettoyage et hydratation. Parfait pour un usage quotidien sur tout le corps. Nourrit sans alourdir, protège sans graisser.</p>
+            <a href="#" onclick="naviguer('catalogue')" class="edu-lien">Collection SAPONICA</a>
+          </div>
+        </div>
+        <div class="edu-niveau">
+          <div>
+            <div class="edu-niveau-pct">10%</div>
+            <div class="edu-niveau-label">Très sèche et délicate</div>
+          </div>
+          <div>
+            <p class="edu-niveau-texte">Une générosité d'huiles nourrissantes pour les peaux fragiles, réactives ou assoiffées. Les bébés, les peaux matures, les épidermes sensibles trouvent ici une douceur incomparable.</p>
+            <a href="#" onclick="naviguer('catalogue')" class="edu-lien">Collection PETIT NUAGE</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-allergenes">
+      <div class="note-allergenes-texte">
+        <strong>💡 Astuce saisonnière</strong>
+        L'hiver québécois, avec son chauffage électrique et son air sec, peut assoiffer même les peaux habituellement grasses. Si vous sentez votre peau tirailler de novembre à mars, n'hésitez pas à passer temporairement à un surgraissage plus élevé. Votre peau d'été n'est pas votre peau d'hiver — écoutez-la.
+      </div>
+    </div>
+
+    <div class="edu-nav">
+      <button class="edu-nav-btn precedent" onclick="afficherEduSection(2)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg> La cure</button>
+      <button class="edu-nav-btn suivant" onclick="afficherEduSection(4)">Les huiles et leurs vertus <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></button>
+    </div>
+
+  </div><!-- /edu-3 -->
+
+  <div class="edu-sous-section-panel" id="edu-4">
+
+    <div class="page-entete">
+      <div class="page-entete-gauche">
+        <div class="page-entete-eyebrow">Le savon artisanal — 4 / 7</div>
+        <h1 class="page-entete-titre">Les huiles <em>et leurs vertus</em></h1>
+      </div>
+      <p style="font-family:'Playfair Display',serif; font-size:1.1rem; font-style:italic; color:var(--gris); max-width:320px; text-align:right;">Chaque goutte a son histoire</p>
+    </div>
+
+    <div class="page-hero" style="grid-template-columns:1fr 1fr;">
+      <div class="page-hero-visuel">
+        <div class="page-hero-visuel-bg">
+          <div class="edu-photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span class="edu-photo-legende">Huiles végétales dans des flacons,<br>tournesol, olives, noix de coco,<br>karité brut</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="page-hero-texte" style="margin-top:0;">Dans un savon saponifié à froid, les huiles ne sont pas de simples ingrédients. Ce sont les âmes du savon, celles qui lui donnent sa personnalité, sa texture, ses bienfaits. Chaque huile apporte quelque chose d'unique : l'une crée une mousse généreuse, l'autre nourrit en profondeur, une troisième protège et apaise.</p>
+        <p class="page-hero-texte">Contrairement aux savons industriels où les huiles sont chauffées à haute température, la saponification à froid préserve toute leur richesse. Les acides gras essentiels, les vitamines A et E, les antioxydants naturels restent intacts, prêts à prendre soin de votre peau à chaque usage.</p>
+      </div>
+    </div>
+
+    <div class="bonne-section">
+      <h2 class="bonne-section-titre">Les huiles que nous choisissons</h2>
+      <div class="items-grille">
+        <div class="info-card">
+          <div class="info-card-titre">Tournesol — La généreuse</div>
+          <div class="info-card-texte">Riche en vitamines E, elle nourrit sans alourdir. Légère pour les peaux grasses, nourrissante pour les peaux normales. Mousse fine et crémeuse, toucher soyeux.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-titre">Coco — L'alliée de la mousse</div>
+          <div class="info-card-texte">Crée une mousse abondante et onctueuse. Nettoie en profondeur, donne de la fermeté au savon. Dosée avec précision pour ne pas assécher.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-titre">Olive — La douceur méditerranéenne</div>
+          <div class="info-card-texte">Utilisée depuis l'Antiquité. Nourrit profondément, forme un film protecteur. Sa mousse lactée demande une longue cure — récompensée par une douceur incomparable.</div>
+        </div>
+        <div class="info-card accent">
+          <div class="info-card-titre">Karité — La caresse nourrissante</div>
+          <div class="info-card-texte">Vitamines A, E, F, acides gras essentiels : une source de nutrition pure. Apaise, répare, protège les épidermes fragilisés. Texture veloutée qui perdure après le rinçage.</div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-titre">Amande douce — La délicate</div>
+          <div class="info-card-texte">Pour les peaux fragiles et réactives. Apaise les démangeaisons, calme les rougeu
 
     <div class="page-entete fade-in">
       <div class="page-entete-gauche">

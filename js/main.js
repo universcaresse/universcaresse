@@ -140,6 +140,12 @@ function naviguer(id) {
   window.location.hash = id;
 }
 
+function afficherEduSection(num) {
+  document.querySelectorAll('.edu-sous-section-panel').forEach(p => p.classList.remove('active'));
+  const cible = document.getElementById('edu-' + num);
+  if (cible) cible.classList.add('active');
+  window.scrollTo(0, 0);
+}
 // ─── SESSION ADMIN ───
 function verifierSession() {
   const session = sessionStorage.getItem('uc_admin');
