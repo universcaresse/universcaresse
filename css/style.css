@@ -1099,6 +1099,7 @@ tr.cliquable { cursor: pointer; }
   .hero { grid-template-columns: 1fr; }
   .hero-right { min-height: 280px; }
  .hero-left { padding: 48px var(--padding-mobile); align-items: center; }
+.hero-eyebrow { text-align: left; }
   .hero-cta { width: 500px; max-width: 100%; justify-content: center; }
   .hero-left::after { display: none; }
 
