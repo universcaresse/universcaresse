@@ -951,6 +951,7 @@
 // ─── CATALOGUE — données et logique ───
 let donneescatalogue = [];
 let collectionsOrdre = [];
+let infoCollectionsData = {};
 let catalogueCharge = false;
 let collectionEnAttente = null;
 
@@ -964,6 +965,7 @@ async function chargerCatalogue() {
     if (!data || !data.success || !data.produits) { afficherErreurCatalogue('Impossible de charger le catalogue.'); return; }
     donneescatalogue = data.produits;
     collectionsOrdre = data.collections || [];
+    infoCollectionsData = data.infoCollections || {};
     construireCatalogue();
   } catch (err) {
     afficherErreurCatalogue('Erreur de connexion.');
@@ -1013,7 +1015,14 @@ if (body) body.classList.remove('cache');
   ordre.forEach(col => {
     if (!parCollection[col]) return;
     const produits = parCollection[col];
-    const infos = produits.find(p => p.collection === col) || produits[0];
+    const infoCol = infoCollectionsData[col] || {};
+    const infoProduit = produits.find(p => p.collection === col) || produits[0];
+    const infos = {
+      slogan:           infoCol.slogan       || infoProduit.slogan           || '',
+      desc_collection:  infoCol.desc         || infoProduit.desc_collection  || '',
+      couleur_hex:      infoCol.couleur_hex  || infoProduit.couleur_hex      || '',
+      image_collection: infoCol.photo_url    || infoProduit.image_collection || ''
+    };
     const section = document.createElement('div');
     section.className = 'collection-section';
     section.dataset.collection = col;
