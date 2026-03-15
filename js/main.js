@@ -444,10 +444,49 @@ async function chargerContenu() {
       set(`contenu-bas-commande-${nn}-texte`, c[`bas_commande_${nn}_texte`]);
       if (c[`bas_commande_${nn}_titre`]) document.getElementById(`card-bas-commande-${nn}`)?.classList.remove('cache');
     });
-  } catch (err) {
-    console.error('Erreur chargerContenu:', err);
-  }
-}
+// ─── SECTIONS ÉDUCATIVES ───
+    const setEdu = (id, val) => { const el = document.getElementById(id); if (el && val !== undefined) el.textContent = val; };
+    const setTitreEdu = (id, titre, titreEm) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = titre + (titreEm ? ' <em>' + titreEm + '</em>' : '');
+    };
+    // S1
+    setEdu('edu-s1-surtitre', c.edu_s1_surtitre); setTitreEdu('edu-s1-titre-bloc', c.edu_s1_titre || '', c.edu_s1_titre_em);
+    setEdu('edu-s1-accroche', c.edu_s1_accroche); setEdu('edu-s1-p1', c.edu_s1_p1); setEdu('edu-s1-p2', c.edu_s1_p2); setEdu('edu-s1-p3', c.edu_s1_p3);
+    setEdu('edu-s1-photo-legende', c.edu_s1_photo_legende); setEdu('edu-s1-section-titre', c.edu_s1_section_titre);
+    [1,2,3,4,5].forEach(n => { setEdu(`edu-s1-card${n}-titre`, c[`edu_s1_card${n}_titre`]); setEdu(`edu-s1-card${n}-texte`, c[`edu_s1_card${n}_texte`]); });
+    // S2
+    setEdu('edu-s2-surtitre', c.edu_s2_surtitre); setTitreEdu('edu-s2-titre-bloc', c.edu_s2_titre || '', c.edu_s2_titre_em);
+    setEdu('edu-s2-accroche', c.edu_s2_accroche); setEdu('edu-s2-p1', c.edu_s2_p1); setEdu('edu-s2-p2', c.edu_s2_p2); setEdu('edu-s2-p3', c.edu_s2_p3);
+    setEdu('edu-s2-section-titre', c.edu_s2_section_titre); setEdu('edu-s2-citation', c.edu_s2_citation); setEdu('edu-s2-citation-source', c.edu_s2_citation_source);
+    [1,2,3,4].forEach(n => { setEdu(`edu-s2-val${n}-titre`, c[`edu_s2_val${n}_titre`]); setEdu(`edu-s2-val${n}-texte`, c[`edu_s2_val${n}_texte`]); });
+    // S3
+    setEdu('edu-s3-surtitre', c.edu_s3_surtitre); setTitreEdu('edu-s3-titre-bloc', c.edu_s3_titre || '', c.edu_s3_titre_em);
+    setEdu('edu-s3-accroche', c.edu_s3_accroche); setEdu('edu-s3-p1', c.edu_s3_p1); setEdu('edu-s3-p2', c.edu_s3_p2); setEdu('edu-s3-p3', c.edu_s3_p3);
+    setEdu('edu-s3-photo-legende', c.edu_s3_photo_legende); setEdu('edu-s3-section-titre', c.edu_s3_section_titre); setEdu('edu-s3-astuce', c.edu_s3_astuce);
+    [1,2,3].forEach(n => { setEdu(`edu-s3-niv${n}-pct`, c[`edu_s3_niv${n}_pct`]); setEdu(`edu-s3-niv${n}-label`, c[`edu_s3_niv${n}_label`]); setEdu(`edu-s3-niv${n}-texte`, c[`edu_s3_niv${n}_texte`]); });
+    // S4
+    setEdu('edu-s4-surtitre', c.edu_s4_surtitre); setTitreEdu('edu-s4-titre-bloc', c.edu_s4_titre || '', c.edu_s4_titre_em);
+    setEdu('edu-s4-accroche', c.edu_s4_accroche); setEdu('edu-s4-p1', c.edu_s4_p1); setEdu('edu-s4-p2', c.edu_s4_p2);
+    setEdu('edu-s4-photo-legende', c.edu_s4_photo_legende); setEdu('edu-s4-section-titre', c.edu_s4_section_titre);
+    setEdu('edu-s4-citation', c.edu_s4_citation); setEdu('edu-s4-citation-source', c.edu_s4_citation_source);
+    [1,2,3,4,5,6].forEach(n => { setEdu(`edu-s4-h${n}-titre`, c[`edu_s4_h${n}_titre`]); setEdu(`edu-s4-h${n}-texte`, c[`edu_s4_h${n}_texte`]); });
+    // S5
+    setEdu('edu-s5-surtitre', c.edu_s5_surtitre); setTitreEdu('edu-s5-titre-bloc', c.edu_s5_titre || '', c.edu_s5_titre_em);
+    setEdu('edu-s5-accroche', c.edu_s5_accroche); setEdu('edu-s5-p1', c.edu_s5_p1); setEdu('edu-s5-p2', c.edu_s5_p2);
+    setEdu('edu-s5-photo-legende', c.edu_s5_photo_legende); setEdu('edu-s5-section1-titre', c.edu_s5_section1_titre); setEdu('edu-s5-section2-titre', c.edu_s5_section2_titre);
+    [1,2,3,4,5].forEach(n => { setEdu(`edu-s5-a${n}-titre`, c[`edu_s5_a${n}_titre`]); setEdu(`edu-s5-a${n}-texte`, c[`edu_s5_a${n}_texte`]); });
+    [1,2,3].forEach(n => { setEdu(`edu-s5-ad${n}-titre`, c[`edu_s5_ad${n}_titre`]); setEdu(`edu-s5-ad${n}-texte`, c[`edu_s5_ad${n}_texte`]); });
+    // S6
+    setEdu('edu-s6-surtitre', c.edu_s6_surtitre); setTitreEdu('edu-s6-titre-bloc', c.edu_s6_titre || '', c.edu_s6_titre_em);
+    setEdu('edu-s6-accroche', c.edu_s6_accroche); setEdu('edu-s6-p1', c.edu_s6_p1); setEdu('edu-s6-p2', c.edu_s6_p2);
+    setEdu('edu-s6-photo-legende', c.edu_s6_photo_legende); setEdu('edu-s6-section-titre', c.edu_s6_section_titre); setEdu('edu-s6-precautions', c.edu_s6_precautions);
+    [1,2,3,4,5,6,7,8,9,10,11].forEach(n => { setEdu(`edu-s6-he${n}-titre`, c[`edu_s6_he${n}_titre`]); setEdu(`edu-s6-he${n}-texte`, c[`edu_s6_he${n}_texte`]); });
+    // S7
+    setEdu('edu-s7-surtitre', c.edu_s7_surtitre); setTitreEdu('edu-s7-titre-bloc', c.edu_s7_titre || '', c.edu_s7_titre_em);
+    setEdu('edu-s7-accroche', c.edu_s7_accroche); setEdu('edu-s7-section1-titre', c.edu_s7_section1_titre);
+    setEdu('edu-s7-astuce
 
 // ─── CONTACT ───
 async function envoyerFormulaire() {
