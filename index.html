@@ -256,20 +256,22 @@
         <a href="#" onclick="naviguer('catalogue')" class="edu-lien">Collection ÉPURE</a>
       </div>
     </div>
-    <div class="edu-nav">
-      <span></span>
-      <button class="edu-nav-btn suivant" onclick="afficherEduSection(2)" id="edu-s1-nav-suivant">La cure : patience et transformation <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></button>
-    </div>
+  
   </div><!-- /edu-1 -->
 
   <!-- ── SECTION 2 — LA CURE ── -->
   <div class="edu-sous-section-panel" id="edu-2">
-    <div class="page-entete">
+   <div class="page-entete fade-in">
       <div class="page-entete-gauche">
-        <div class="page-entete-eyebrow" id="edu-s2-surtitre"></div>
+        <p class="page-entete-eyebrow" id="edu-s2-surtitre"></p>
         <h1 class="page-entete-titre" id="edu-s2-titre-bloc"></h1>
+        <p class="edu-accroche" id="edu-s2-accroche"></p>
       </div>
-      <p class="edu-accroche" id="edu-s2-accroche"></p>
+      <div class="edu-pager">
+        <button class="edu-pager-btn" onclick="afficherEduSection(1)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg></button>
+        <span class="edu-pager-num">2 / 7</span>
+        <button class="edu-pager-btn" onclick="afficherEduSection(3)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></button>
+      </div>
     </div>
     <div class="section-texte">
       <div class="texte-principal">
@@ -294,20 +296,22 @@
       <p class="citation-texte"><span class="citation-guillemet">«&nbsp;</span><span id="edu-s2-citation"></span><span class="citation-guillemet">&nbsp;»</span></p>
       <span class="citation-source" id="edu-s2-citation-source"></span>
     </div>
-    <div class="edu-nav">
-      <button class="edu-nav-btn precedent" onclick="afficherEduSection(1)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg> La saponification à froid</button>
-      <button class="edu-nav-btn suivant" onclick="afficherEduSection(3)">Le surgraissage <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></button>
-    </div>
+    
   </div><!-- /edu-2 -->
 
   <!-- ── SECTION 3 — LE SURGRAISSAGE ── -->
   <div class="edu-sous-section-panel" id="edu-3">
-    <div class="page-entete">
+    <div class="page-entete fade-in">
       <div class="page-entete-gauche">
-        <div class="page-entete-eyebrow" id="edu-s3-surtitre"></div>
+        <p class="page-entete-eyebrow" id="edu-s3-surtitre"></p>
         <h1 class="page-entete-titre" id="edu-s3-titre-bloc"></h1>
+        <p class="edu-accroche" id="edu-s3-accroche"></p>
       </div>
-      <p class="edu-accroche" id="edu-s3-accroche"></p>
+      <div class="edu-pager">
+        <button class="edu-pager-btn" onclick="afficherEduSection(2)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg></button>
+        <span class="edu-pager-num">3 / 7</span>
+        <button class="edu-pager-btn" onclick="afficherEduSection(4)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></button>
+      </div>
     </div>
     <div class="section-texte">
       <div class="texte-principal">
@@ -344,10 +348,7 @@
     <div class="note-allergenes">
       <div class="note-allergenes-texte"><strong>💡 Astuce saisonnière</strong> <span id="edu-s3-astuce"></span></div>
     </div>
-    <div class="edu-nav">
-      <button class="edu-nav-btn precedent" onclick="afficherEduSection(2)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg> La cure</button>
-      <button class="edu-nav-btn suivant" onclick="afficherEduSection(4)">Les huiles et leurs vertus <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></button>
-    </div>
+    
   </div><!-- /edu-3 -->
 
   <!-- ── SECTION 4 — LES HUILES ── -->
@@ -388,10 +389,7 @@
       <p class="citation-texte"><span class="citation-guillemet">«&nbsp;</span><span id="edu-s4-citation"></span><span class="citation-guillemet">&nbsp;»</span></p>
       <span class="citation-source" id="edu-s4-citation-source"></span>
     </div>
-    <div class="edu-nav">
-      <button class="edu-nav-btn precedent" onclick="afficherEduSection(3)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg> Le surgraissage</button>
-      <button class="edu-nav-btn suivant" onclick="afficherEduSection(5)">Les argiles et additifs <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></button>
-    </div>
+    
   </div><!-- /edu-4 -->
 
   <!-- ── SECTION 5 — ARGILES ET ADDITIFS ── -->
@@ -440,10 +438,7 @@
         <a href="#" onclick="naviguer('catalogue')" class="edu-lien">Toutes nos collections</a>
       </div>
     </div>
-    <div class="edu-nav">
-      <button class="edu-nav-btn precedent" onclick="afficherEduSection(4)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg> Les huiles</button>
-      <button class="edu-nav-btn suivant" onclick="afficherEduSection(6)">Les huiles essentielles <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></button>
-    </div>
+    
   </div><!-- /edu-5 -->
 
   <!-- ── SECTION 6 — HUILES ESSENTIELLES ── -->
@@ -488,10 +483,7 @@
     <div class="note-allergenes">
       <div class="note-allergenes-texte"><strong>Précautions d'usage</strong> <span id="edu-s6-precautions"></span></div>
     </div>
-    <div class="edu-nav">
-      <button class="edu-nav-btn precedent" onclick="afficherEduSection(5)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg> Les argiles et additifs</button>
-      <button class="edu-nav-btn suivant" onclick="afficherEduSection(7)">Connaître sa peau <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></button>
-    </div>
+  
   </div><!-- /edu-6 -->
 
   <!-- ── SECTION 7 — CONNAÎTRE SA PEAU ── -->
@@ -588,10 +580,7 @@
         <a href="#" onclick="naviguer('contact')" class="edu-lien">Nous contacter pour des conseils</a>
       </div>
     </div>
-    <div class="edu-nav">
-      <button class="edu-nav-btn precedent" onclick="afficherEduSection(6)"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 3L5 8l5 5"/></svg> Les huiles essentielles</button>
-      <button class="edu-nav-btn suivant" onclick="afficherEduSection(1)">Retour au début <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 3l5 5-5 5"/></svg></button>
-    </div>
+    
   </div><!-- /edu-7 -->
 
   </section>
