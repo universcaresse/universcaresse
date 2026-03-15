@@ -177,6 +177,7 @@
    ═══════════════════════════════════════ */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+html { overflow-x: hidden; }
 body {
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
@@ -184,7 +185,6 @@ body {
   color: var(--gris-fonce);
   overflow-x: hidden;
 }
-
 /* ═══════════════════════════════════════
    TYPOGRAPHIE
    ═══════════════════════════════════════ */
