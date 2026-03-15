@@ -137,6 +137,7 @@ function afficherSection(id) {
 }
 
 function naviguer(id) {
+  if (id === 'educatif') afficherEduSection(1);
   window.location.hash = id;
 }
 
