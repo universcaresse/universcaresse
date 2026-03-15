@@ -55,7 +55,7 @@
       <div class="hero-left">
         <p class="hero-eyebrow fade-in" id="contenu-accueil-eyebrow"></p>
         <img src="Images/Logofinal.png" alt="Univers Caresse" class="hero-logo-img fade-in delay-3">
-        <a href="#catalogue" class="hero-cta fade-in delay-4" onclick="naviguer('catalogue')">
+        <a href="#catalogue" class="hero-cta fade-in delay-6" onclick="naviguer('catalogue')">
           <span id="contenu-accueil-cta"></span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
@@ -1037,7 +1037,7 @@ if (body) body.classList.remove('cache');
     if (!parCollection[col]) return;
     const produits = parCollection[col];
     const infos = (data.infoCollections && data.infoCollections[col]) ? data.infoCollections[col] : produits[0];
-    const section = document.createElement('div');
+	    const section = document.createElement('div');
     section.className = 'collection-section';
     section.dataset.collection = col;
 
