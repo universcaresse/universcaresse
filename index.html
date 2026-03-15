@@ -952,6 +952,7 @@
 let donneescatalogue = [];
 let collectionsOrdre = [];
 let catalogueCharge = false;
+let infoCollectionsMap = {};
 let collectionEnAttente = null;
 
 async function chargerCatalogue() {
@@ -963,7 +964,8 @@ async function chargerCatalogue() {
     const data = await response.json();
     if (!data || !data.success || !data.produits) { afficherErreurCatalogue('Impossible de charger le catalogue.'); return; }
     donneescatalogue = data.produits;
-    collectionsOrdre = data.collections || [];
+  collectionsOrdre = data.collections || [];
+    infoCollectionsMap = data.infoCollections || {};
     construireCatalogue();
   } catch (err) {
     afficherErreurCatalogue('Erreur de connexion.');
@@ -1013,7 +1015,7 @@ if (body) body.classList.remove('cache');
   ordre.forEach(col => {
     if (!parCollection[col]) return;
     const produits = parCollection[col];
-    const infos = (data.infoCollections && data.infoCollections[col]) ? data.infoCollections[col] : produits[0];
+    const infos = (infoCollectionsMap && infoCollectionsMap[col]) ? infoCollectionsMap[col] : produits[0];
 	    const section = document.createElement('div');
     section.className = 'collection-section';
     section.dataset.collection = col;
