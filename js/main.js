@@ -139,6 +139,7 @@ function afficherSection(id) {
 function naviguer(id) {
   if (id === 'educatif') afficherEduSection(1);
   window.location.hash = id;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function afficherEduSection(num) {
@@ -617,6 +618,7 @@ function filtrer(collection) {
 
 
 function ouvrirModal(produit) {
+  document.getElementById('modal-produit').style.setProperty('--col-hex', produit.couleur_hex);
   document.getElementById('modal-nom').textContent = produit.nom;
   document.getElementById('modal-collection').textContent = produit.collection;
   document.getElementById('modal-ligne').textContent = produit.ligne;
