@@ -698,7 +698,7 @@ footer > * { position: relative; z-index: 1; }
 .carte-couleur { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; transition: transform 0.5s; position: relative; background: var(--col-hex); }
 .carte-produit:hover .carte-couleur { transform: scale(1.04); }
 .carte-couleur img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-.carte-couleur-dot { position: absolute; top: 12px; right: 12px; width: 24px; height: 24px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.6); background: var(--col-hex); }
+.carte-couleur-dot { position: absolute; top: 12px; right: 12px; width: 24px; height: 24px; border-radius: 50%; background: var(--col-hex); }
 
 .carte-infos { padding: 16px 16px 18px; background: color-mix(in srgb, var(--col-hex) 90%, transparent); }
 .carte-photo-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: rgba(255,255,255,0.5); font-family: 'DM Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; }
