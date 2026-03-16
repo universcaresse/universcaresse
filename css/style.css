@@ -1103,7 +1103,7 @@ tr.cliquable { cursor: pointer; }
   .section-collections { padding: 48px var(--padding-mobile); }
 .page-entete { padding: 48px var(--padding-mobile) 40px; flex-direction: column; gap: 16px; align-items: flex-start; }
  
-  .collection-tile { aspect-ratio: 4/3; }
+  .collection-tile { aspect-ratio: 19/9; }
   .page-entete-plume { display: none; }
   .page-hero { grid-template-columns: 1fr; padding: 48px var(--padding-mobile); gap: 40px; }
   .page-hero-visuel-bg { aspect-ratio: 3/2; }
