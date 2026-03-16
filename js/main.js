@@ -605,9 +605,10 @@ function filtrer(collection) {
     ? document.getElementById('catalogue-body')
     : document.querySelector(`.collection-section[data-collection="${collection}"]`);
   if (cible) {
-    const filtresH = document.getElementById('filtres-bar').offsetHeight;
+   const filtresH = document.getElementById('filtres-bar').offsetHeight;
     const navH = document.getElementById('nav').offsetHeight;
-    const offset = cible.getBoundingClientRect().top + window.scrollY - navH - filtresH - 16;
+    const enteteH = document.querySelector('#section-catalogue .page-entete')?.offsetHeight || 0;
+    const offset = cible.getBoundingClientRect().top + window.scrollY - navH - filtresH - enteteH - 16;
     window.scrollTo({ top: offset, behavior: 'smooth' });
   }
 }
