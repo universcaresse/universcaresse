@@ -242,6 +242,16 @@ function toggleMenu() {
   if (liens) liens.classList.toggle('ouvert');
 }
 
+document.addEventListener('click', function(e) {
+  const liens = document.getElementById('nav-links');
+  const burger = document.getElementById('burger');
+  if (liens && liens.classList.contains('ouvert')) {
+    if (!liens.contains(e.target) && !burger.contains(e.target)) {
+      liens.classList.remove('ouvert');
+    }
+  }
+});
+
 // ─── APPEL APPS SCRIPT ───
 async function appelAPI(action, params = {}) {
   try {
