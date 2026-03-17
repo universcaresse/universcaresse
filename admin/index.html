@@ -286,7 +286,23 @@
             <div class="section-label">Lignes de produits</div>
             <div id="fiche-collection-lignes"></div>
           </div>
-        </div> 
+       </div> 
+        <div class="form-panel" id="fiche-ligne">
+          <div class="form-panel-header">
+            <div class="fiche-collection-bandeau" id="fiche-ligne-bandeau">
+              <span class="form-panel-titre" id="fiche-ligne-titre"></span>
+              <span class="fiche-collection-slogan" id="fiche-ligne-format"></span>
+              <div class="form-actions">
+                <button class="btn btn-primary" id="fiche-ligne-modifier">Modifier la ligne</button>
+                <button class="btn btn-danger" id="btn-supprimer-ligne-fiche">Supprimer la ligne</button>
+                <button class="btn btn-outline btn-icone" onclick="fermerFicheLigne()" title="Fermer">✕</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-body">
+            <p class="fiche-collection-desc" id="fiche-ligne-desc"></p>
+          </div>
+        </div>
       <div class="form-panel" id="form-collections">
           <div class="form-panel-header">
             <div class="form-panel-titre" id="form-collections-titre">Nouvelle collection</div>

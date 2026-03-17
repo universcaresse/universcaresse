@@ -201,7 +201,7 @@ function ouvrirFicheCollection(col) {
   const couleurs = couleurCollection(col, groupe.info.couleur_hex);
   const lignesHtml = (groupe.lignes || []).map(item => `
   
- <div class="fiche-ligne-item" onclick="modifierLigneProduit(${item.rowIndex})">
+ <div class="fiche-ligne-item" onclick="ouvrirFicheLigne(${item.rowIndex})">
       <div class="fiche-ligne-info">
         <span class="fiche-ligne-nom">${item.ligne.toUpperCase()}</span>
         ${item.format ? `<span class="fiche-ligne-format">${item.format}</span>` : ''}
@@ -293,6 +293,28 @@ function fermerModalConfirm() {
 function fermerFormCollection() {
   document.getElementById('contenu-collections').classList.remove('cache');
   document.getElementById('form-collections').classList.remove('visible');
+}
+
+function ouvrirFicheLigne(rowIndex) {
+  const item = donneesCollections.find(i => i.rowIndex === rowIndex);
+  if (!item) return;
+  document.getElementById('fiche-ligne-titre').textContent = item.ligne.toUpperCase();
+  document.getElementById('fiche-ligne-format').textContent = item.format || '';
+  document.getElementById('fiche-ligne-desc').textContent = item.description_ligne || '';
+  document.getElementById('fiche-ligne-modifier').onclick = () => {
+    fermerFicheLigne();
+    modifierLigneProduit(rowIndex);
+  };
+  document.getElementById('btn-supprimer-ligne-fiche').onclick = () => supprimerLigne(rowIndex, item.collection, item.ligne);
+  document.getElementById('fiche-collection').classList.remove('visible');
+  document.getElementById('fiche-ligne').classList.add('visible');
+  document.getElementById('contenu-collections').classList.add('cache');
+  window.scrollTo(0, 0);
+}
+
+function fermerFicheLigne() {
+  document.getElementById('fiche-ligne').classList.remove('visible');
+  document.getElementById('fiche-collection').classList.add('visible');
 }
 
 async function modifierLigneProduit(rowIndex) {
