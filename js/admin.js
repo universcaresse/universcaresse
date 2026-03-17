@@ -295,17 +295,30 @@ function fermerFormCollection() {
   document.getElementById('form-collections').classList.remove('visible');
 }
 
-function ouvrirFicheLigne(rowIndex) {
+async function ouvrirFicheLigne(rowIndex) {
   const item = donneesCollections.find(i => i.rowIndex === rowIndex);
   if (!item) return;
   document.getElementById('fiche-ligne-titre').textContent = item.ligne.toUpperCase();
   document.getElementById('fiche-ligne-format').textContent = item.format || '';
-  document.getElementById('fiche-ligne-desc').textContent = item.description_ligne || '';
+  document.getElementById('fiche-ligne-collection').textContent = item.collection || '';
+  document.getElementById('fiche-ligne-format-detail').textContent = item.format || '—';
+  document.getElementById('fiche-ligne-desc').textContent = item.description_ligne || '—';
   document.getElementById('fiche-ligne-modifier').onclick = () => {
     fermerFicheLigne();
     modifierLigneProduit(rowIndex);
   };
   document.getElementById('btn-supprimer-ligne-fiche').onclick = () => supprimerLigne(rowIndex, item.collection, item.ligne);
+  const resBase = await appelAPI('getRecettesBase');
+  const ings = (resBase && resBase.items ? resBase.items : [])
+    .filter(i => i.collection === item.collection && i.ligne === item.ligne);
+  const listeEl = document.getElementById('fiche-ligne-ingredients');
+  if (ings.length === 0) {
+    listeEl.innerHTML = '<span class="form-valeur">—</span>';
+  } else {
+    listeEl.innerHTML = ings.map(i =>
+      `<div class="fp-ing-row"><span>${i.ingredient_type}</span><span>${i.ingredient_nom}</span><span>${i.quantite_g} g</span></div>`
+    ).join('');
+  }
   document.getElementById('fiche-collection').classList.remove('visible');
   document.getElementById('fiche-ligne').classList.add('visible');
   document.getElementById('contenu-collections').classList.add('cache');
