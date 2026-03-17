@@ -68,7 +68,7 @@ function initScrollAnimations() {
     });
   }, { threshold: 0.15 });
 
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+document.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => observer.observe(el));
 
   const mosaicObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
