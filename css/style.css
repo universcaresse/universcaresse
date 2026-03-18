@@ -1110,6 +1110,8 @@ tr.cliquable { cursor: pointer; }
   .collection-tile { aspect-ratio: 19/9; }
   .page-entete-plume { display: none; }
   .page-hero { grid-template-columns: 1fr; padding: 48px var(--padding-mobile); gap: 40px; }
+  .edu-sous-section-panel .page-hero { padding: 48px var(--padding-mobile); }
+  .edu-sous-section-panel .section-texte { padding: 48px var(--padding-mobile); }
   .page-hero-visuel-bg { aspect-ratio: 3/2; }
   .section-texte { grid-template-columns: 1fr; padding: 48px var(--padding-mobile); gap: 48px; }
   .bandeau-citation { padding: 48px var(--padding-mobile); }
