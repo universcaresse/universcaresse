@@ -1163,7 +1163,7 @@ tr.cliquable { cursor: pointer; }
 @media (orientation: landscape) and (max-width: 1180px) {
   .modal-produit { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; max-height: 90vh; width: 85%; overflow-y: auto; }
   .modal-visuel-photo { min-height: 300px; grid-column: 1; grid-row: 1; }
-  .modal-visuel-hex { min-height: 40px; grid-column: 1; grid-row: 2; display: block; }
+  .modal-visuel-hex { min-height: 300px; grid-column: 1; grid-row: 2; display: block; }
   .modal-contenu { grid-column: 2; grid-row: 1 / -1; overflow-y: auto; }
 }
 
