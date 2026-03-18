@@ -1134,10 +1134,10 @@ tr.cliquable { cursor: pointer; }
 
 .modal-produit { grid-template-columns: 1fr; grid-template-rows: auto auto; max-height: 85vh; width: 85%; overflow-y: auto; }
   .modal-nom { font-size: 1.3rem; }
-  .modal-visuel-hex { display: none; }
+  .modal-visuel-hex { min-height: 40px; grid-column: 1; grid-row: 2; }
   .modal-visuel-photo { min-height: 260px; grid-column: 1; grid-row: 1; }
   .modal-visuel-photo img { object-fit: cover; object-position: center center; }
-  .modal-contenu { grid-column: 1; grid-row: 2; }
+  .modal-contenu { grid-column: 1; grid-row: 3; }
 
   .admin-contenu { padding: 24px var(--padding-mobile); }
   .accueil-admin { grid-template-columns: 1fr; margin: -24px calc(-1 * var(--padding-mobile)); }
