@@ -1154,17 +1154,17 @@ tr.cliquable { cursor: pointer; }
 
 @media (min-width: 600px) and (max-width: 900px) {
   .modal-produit { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; max-height: 90vh; width: 90%; }
-  .modal-visuel-hex { grid-column: 1; grid-row: 1; min-height: 200px; display: block; }
-  .modal-visuel-photo { min-height: 200px; grid-column: 2; grid-row: 1; }
+  .modal-visuel-hex { grid-column: 1; grid-row: 1; min-height: 300px; display: block; }
+  .modal-visuel-photo { min-height: 300px; grid-column: 2; grid-row: 1; }
   .modal-contenu { grid-column: 1 / -1; grid-row: 2; }
   .modal-nom { font-size: 1.3rem; }
 }
 
 @media (orientation: landscape) and (max-width: 1180px) {
-  .modal-produit { grid-template-columns: 1fr 1fr; max-height: 100vh; overflow-y: auto; }
-  .modal-visuel-hex { min-height: 100vh; grid-column: 1; grid-row: 1; }
-  .modal-visuel-photo { min-height: 100vh; grid-column: 1; grid-row: 1; }
-  .modal-contenu { grid-column: 2; grid-row: 1; overflow-y: auto; max-height: 100vh; }
+  .modal-produit { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; max-height: 90vh; width: 85%; overflow-y: auto; }
+  .modal-visuel-photo { min-height: 300px; grid-column: 1; grid-row: 1; }
+  .modal-visuel-hex { min-height: 40px; grid-column: 1; grid-row: 2; display: block; }
+  .modal-contenu { grid-column: 2; grid-row: 1 / -1; overflow-y: auto; }
 }
 
 @media (max-width: 480px) {
