@@ -1105,7 +1105,7 @@ tr.cliquable { cursor: pointer; }
 
   .section-collections { padding: 48px var(--padding-mobile); }
 .page-entete { padding: 48px var(--padding-mobile) 40px; flex-direction: column; gap: 16px; align-items: flex-start; }
-.edu-pager { align-self: flex-end; }
+.edu-pager { align-self: flex-end; margin-left: auto; }
  
   .collection-tile { aspect-ratio: 19/9; }
   .page-entete-plume { display: none; }
