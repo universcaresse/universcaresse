@@ -1115,6 +1115,9 @@ tr.cliquable { cursor: pointer; }
   .bandeau-citation { padding: 48px var(--padding-mobile); }
   .section-cta { padding: 48px var(--padding-mobile); }
   .bonne-section { padding: 48px var(--padding-mobile); }
+  .edu-pager-sticky { padding: 12px var(--padding-mobile); }
+  .edu-sous-section-panel .page-hero { padding: 48px var(--padding-mobile); }
+  .edu-sous-section-panel .section-texte { padding: 48px var(--padding-mobile); }
   .note-allergenes { margin: 0 var(--padding-mobile) 48px; }
   .contact-grille { grid-template-columns: 1fr; padding: 48px var(--padding-mobile); gap: 48px; }
   .form-row-2 { grid-template-columns: 1fr; }
@@ -1251,7 +1254,7 @@ tr.cliquable { cursor: pointer; }
 .edu-photo-legende { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gris); opacity: 0.6; line-height: 1.6; }
 
 .edu-pager { display: flex; align-items: center; gap: 16px; }
-.edu-pager-sticky { position: sticky; top: var(--nav-h); z-index: 50; background: var(--blanc); padding: 12px var(--padding-page); border-bottom: 1px solid var(--beige); display: flex; justify-content: flex-end; }
+.edu-pager-sticky { position: sticky; top: var(--nav-h); z-index: 50; background: var(--blanc); padding: 12px var(--padding-page); border-bottom: 1px solid var(--beige); display: flex; justify-content: flex-end; width: 100%; }
 .edu-pager-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--primary); font-weight: 600; letter-spacing: 0; line-height: 1; }
 .edu-pager-total { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--accent); font-weight: 400; letter-spacing: 0.08em; vertical-align: middle; }
 .edu-pager-btn { background: none; border: none; cursor: pointer; color: var(--primary); display: flex; align-items: center; padding: 4px; transition: color 0.2s; }
