@@ -411,7 +411,8 @@ async function chargerContenu() {
 
     set('contenu-accueil-eyebrow', c.accueil_eyebrow);
    set('contenu-accueil-cta', c.accueil_cta);
-document.querySelector('.hero-cta')?.classList.remove('invisible');
+const cta = document.querySelector('.hero-cta');
+if (cta) { cta.classList.remove('invisible'); cta.classList.add('fade-in-doux'); }
     set('contenu-accueil-stat-label', c.accueil_stat_label);
     set('contenu-accueil-stat-valeur', c.accueil_stat_valeur);
     set('contenu-qui-eyebrow', c.qui_eyebrow);
