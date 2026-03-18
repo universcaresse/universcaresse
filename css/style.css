@@ -686,7 +686,7 @@ footer > * { position: relative; z-index: 1; }
 .collection-entete-nom { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 400; color: var(--gris-fonce); margin-bottom: 4px; }
 .collection-entete-slogan { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-style: italic; color: var(--accent); margin-bottom: 14px; }
 .collection-entete-desc { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; line-height: 1.8; color: var(--gris); font-weight: 300; max-width: 560px; }
-.collection-entete-visuel { aspect-ratio: 4/5; overflow: hidden; position: relative; }
+.collection-entete-visuel { aspect-ratio: 4/5; overflow: hidden; position: relative; max-height: 300px; }
 .collection-entete-bg { width: 100%; aspect-ratio: 4/5; background: linear-gradient(135deg, color-mix(in srgb, var(--col-hex) 80%, transparent), color-mix(in srgb, var(--col-hex) 53%, transparent)); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
 .collection-entete-bg img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
 .entete-visuel-placeholder { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: rgba(255,255,255,0.6); font-style: italic; letter-spacing: 0.06em; text-align: center; position: relative; z-index: 1; }
