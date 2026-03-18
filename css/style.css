@@ -1116,8 +1116,6 @@ tr.cliquable { cursor: pointer; }
   .section-cta { padding: 48px var(--padding-mobile); }
   .bonne-section { padding: 48px var(--padding-mobile); }
   .edu-pager-sticky { padding: 12px var(--padding-mobile); }
-  .edu-sous-section-panel .page-hero { padding: 48px var(--padding-mobile); }
-  .edu-sous-section-panel .section-texte { padding: 48px var(--padding-mobile); }
   .note-allergenes { margin: 0 var(--padding-mobile) 48px; }
   .contact-grille { grid-template-columns: 1fr; padding: 48px var(--padding-mobile); gap: 48px; }
   .form-row-2 { grid-template-columns: 1fr; }
