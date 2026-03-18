@@ -1133,6 +1133,7 @@ tr.cliquable { cursor: pointer; }
   .collection-entete-visuel { aspect-ratio: 4/5; overflow: hidden; position: relative; }
 
 .modal-produit { grid-template-columns: 1fr; grid-template-rows: auto auto; max-height: 85vh; width: 85%; overflow-y: auto; }
+  .modal-nom { font-size: 1.3rem; }
   .modal-visuel-hex { display: none; }
   .modal-visuel-photo { min-height: 260px; grid-column: 1; grid-row: 1; }
   .modal-visuel-photo img { object-fit: cover; object-position: center center; }
@@ -1197,7 +1198,7 @@ tr.cliquable { cursor: pointer; }
 .section-label { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--beige); }
 .section-texte-photo-16-9 { width: 100%; aspect-ratio: 16/9; position: relative; overflow: hidden; margin-top: 32px; }
 .section-texte-photo-3-4 { width: 100%; aspect-ratio: 3/4; position: relative; overflow: hidden; margin-top: 32px; }
-.section-texte-photo-auto { width: 100%; position: relative; overflow: hidden; align-self: stretch; min-height: 350px; }
+.section-texte-photo-auto { width: 100%; position: relative; overflow: hidden; align-self: stretch; min-height: 400px; }
 .section-texte-photo-auto img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
 .section-texte-photo-3-4 img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
 .section-texte-photo-16-9 img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
