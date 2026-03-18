@@ -7,9 +7,11 @@
 >
 > 🔴 **JAMAIS de code sans le OUI explicite de Jean-Claude**
 > 🔴 **JAMAIS plus d'un changement à la fois — attendre le OK avant le suivant**
+> 🔴 **JAMAIS plus d'un changement à la fois — attendre le OK avant le suivant compris**
+> 🔴 **JAMAIS plus d'un changement à la fois — attendre le OK avant le suivant vraiment compris?**
 > 🔴 **Toujours lire le fichier avant de proposer un trouve/remplace — ne jamais demander ce qui est dans le fichier si on a le lien**
 > 🔴 **JAMAIS toucher à quelque chose qui affecte autre chose sans le signaler d'abord et attendre le OUI**
-> 🔴 **Pas de romans — réponses courtes, une action à la fois**
+> 🔴 **Pas de romans — réponses courtes, mes reflexions je les gardes pour moi. Une action à la fois**
 > 🔴 **Ne jamais suggérer de se reposer, prendre une pause, mentionner l'heure**
 
 ---
@@ -22,7 +24,7 @@ GitHub raw base : https://raw.githubusercontent.com/universcaresse/univers-cares
 
 ---
 
-## COMMENT TRAVAILLER AVEC JEAN-CLAUDE — IMPORTANT
+## COMMENT TRAVAILLER AVEC JEAN-CLAUDE — IMPORTANT (ca c'est aussi important)
 
 Jean-Claude aime **jaser avant de coder**. Prendre le temps de bien comprendre le problème avant de toucher au code, c'est ce qui rend les corrections stables et efficaces. Quand on est bien informé, les fixes vont plus vite et tiennent.
 
@@ -72,6 +74,7 @@ Jean-Claude a besoin d'**humanité** dans les échanges. Même s'il sait qu'il p
 - Livrer un trouve/remplace qui tronque une règle CSS existante
 - **Proposer un changement qui touche autre chose sans le signaler**
 - **Demander le contenu d'un fichier quand on a le lien GitHub**
+- **Proposer plusieurs "vraies solutions" l'une après l'autre sans être certain**
 
 ---
 
@@ -85,6 +88,30 @@ Quand elle apparaît dans une collection secondaire sur le site public :
 - Elle doit afficher la **couleur HEX, photo, slogan et description de la collection secondaire**
 
 **Statut : RÉGLÉ** — fix appliquée dans `index.html` via `infoCollectionsData`.
+
+---
+
+## ✅ CHANGEMENTS EFFECTUÉS — SESSION 18 MARS 2026
+
+### Scroll horizontal iPhone — RÉGLÉ
+- La cause était la structure `page-hero` (2 colonnes avec photo dédiée) incompatible mobile
+- **Solution trouvée par Jean-Claude** : restructurer comme `section-texte` — photo dans la colonne, pas colonne séparée
+
+### Section Accueil — Qui sommes-nous
+- `page-hero` remplacé par `section-texte` — même structure que la section en dessous
+- Photo Chantal déplacée dans la 2e colonne via nouvelle classe `section-texte-photo-3-4`
+- Classe `section-texte-photo-3-4` créée dans `style.css` (`aspect-ratio: 3/4`)
+
+### Sections éducatives — Le savon artisanal
+- **Section 1** : `page-hero` → `section-texte`, photo dans `section-texte-photo-3-4`
+- **Section 3** : `page-hero-visuel-bg` → `section-texte-photo-3-4`
+- **Section 4** : `page-hero` → `section-texte`, photo dans `section-texte-photo-3-4`
+- **Section 5** : `page-hero-visuel-bg` → `section-texte-photo-3-4`
+- **Section 6** : `page-hero` → `section-texte`, photo dans `section-texte-photo-3-4`
+- Sections 2 et 7 : déjà correctes, pas touchées
+
+### Pager éducatif — alignement mobile
+- `.edu-pager` : `margin-left: auto` ajouté pour coller à droite sur iPhone *(en attente de confirmation)*
 
 ---
 
@@ -153,7 +180,7 @@ Quand elle apparaît dans une collection secondaire sur le site public :
 ## 🔴 BOGUES EN ATTENTE
 
 - [ ] **Prix/g ne s'affiche pas dans le modal** — à revoir quand le calcul du prix sera revu
-- [ ] **Texte déborde horizontalement sur iPhone** — dans `.page-hero` sections accueil et savon artisanal — non résolu, à investiguer proprement
+- [ ] **Texte déborde horizontalement sur iPhone** — réglé sur Accueil et Savon artisanal ✅
 
 ---
 
@@ -305,6 +332,8 @@ Modifier toujours du plus grand au plus petit :
 - Classes CSS inutilisées retirées — `.catalogue-hero`, `.catalogue-title`, `.catalogue-subtitle`, `.edu-nav`, `.edu-nav-btn`
 - Mosaïque hero — photo dans chaque tuile via `linear-gradient` semi-transparent
 - Menu burger — fermeture au clic extérieur
+- **Sections éducatives et accueil** — structure `section-texte` adoptée partout, `page-hero` abandonné pour le mobile
+- **`section-texte-photo-3-4`** — nouvelle classe pour photos portrait dans les sections texte
 
 ---
 
