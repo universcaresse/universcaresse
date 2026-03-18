@@ -1110,6 +1110,7 @@ tr.cliquable { cursor: pointer; }
   .collection-tile { aspect-ratio: 19/9; }
   .page-entete-plume { display: none; }
   .page-hero { grid-template-columns: 1fr; padding: 48px var(--padding-mobile); gap: 40px; }
+  .page-hero-titre { font-size: clamp(1.8rem, 8vw, 2.5rem); }
   .page-hero-texte { max-width: 100%; }
   .page-entete-gauche { max-width: 100%; }
   .page-hero-visuel { max-width: 100%; width: 100%; }
