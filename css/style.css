@@ -1250,7 +1250,8 @@ tr.cliquable { cursor: pointer; }
 .edu-photo svg { width: 32px; height: 32px; color: var(--gris); opacity: 0.4; }
 .edu-photo-legende { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gris); opacity: 0.6; line-height: 1.6; }
 
-.edu-pager { display: flex; align-items: center; gap: 16px; position: sticky; top: calc(var(--nav-h) + 16px); z-index: 50; background: var(--blanc); padding: 8px 16px; }
+.edu-pager { display: flex; align-items: center; gap: 16px; }
+.edu-pager-sticky { position: sticky; top: var(--nav-h); z-index: 50; background: var(--blanc); padding: 12px var(--padding-page); border-bottom: 1px solid var(--beige); display: flex; justify-content: flex-end; }
 .edu-pager-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--primary); font-weight: 600; letter-spacing: 0; line-height: 1; }
 .edu-pager-total { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--accent); font-weight: 400; letter-spacing: 0.08em; vertical-align: middle; }
 .edu-pager-btn { background: none; border: none; cursor: pointer; color: var(--primary); display: flex; align-items: center; padding: 4px; transition: color 0.2s; }
