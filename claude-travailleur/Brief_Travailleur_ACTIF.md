@@ -1,5 +1,5 @@
 # BRIEF — UNIVERS CARESSE
-*Mis à jour : 17 mars 2026*
+*Mis à jour : 18 mars 2026*
 
 ---
 
@@ -112,19 +112,57 @@ Quand elle apparaît dans une collection secondaire sur le site public :
 - `.modal-visuel-hex` masqué sur mobile/tablette
 - `max-height: 85vh` et `width: 85%` pour voir le fond derrière le modal
 
+### Photo section accueil — qui sommes-nous
+- `.page-hero-visuel-bg` : `min-height: 400px` ajouté pour que la photo soit visible sur desktop
+
+### Photo section texte accueil
+- Nouvelle classe `.section-texte-photo-16-9` créée dans `style.css`
+- Photo `savonnerie.png` ajoutée sous les paragraphes dans `.texte-principal`
+
+### Pager sections éducatives
+- `.edu-pager-num` : redesign en Playfair vert, plus grand (1.6rem)
+- `.edu-pager-btn` : flèches plus grandes (20px) en vert primary
+- Nouvelle classe `.edu-pager-total` : `/ 7` en accent 1.1rem
+- HTML mis à jour pour les 7 sections — chiffre courant séparé du total
+
+### Pager sections éducatives — sticky
+- Pager sorti du `.page-entete` et placé dans `.edu-pager-sticky` — frère indépendant
+- `.edu-pager-sticky` : `position: sticky`, `top: var(--nav-h)`, fond blanc, bordure bas
+- HTML mis à jour pour les 7 sections éducatives
+
+### Scraping PureArome
+- `scrapePurearome()` — 576 produits récupérés dans `Purearome_Test`
+- `lancerScrapingInci()` + `scrapeInciPurearome()` — auto-relance toutes les 5 min, auto-suppression trigger
+- URL : `https://www.purearome.com/fr/produit/{slug}`
+- ⚠️ Regex INCI attrape du HTML sur certains produits — à corriger
+
+---
+
+## 🎯 PRIORITÉS — ORDRE DE TRAVAIL
+
+1. **Site public fonctionnel et joli** *(en cours)*
+2. **Photos** — sections Accueil et Savon artisanal — pas d'interface admin pour ça encore
+3. **Informer les visiteurs comment acheter**
+4. **Textes avec le Scripteur** — prévoir accordéons / contenu masquable avant de finaliser
+5. **Module Vente**
+6. **Outils de production** — scan factures d'achat, bonification recettes, vérification recettes, INCI
+7. **Admin — Contenu du site WYSIWYG** — système évolutif géré depuis la Sheet
+
 ---
 
 ## 🔴 BOGUES EN ATTENTE
 
 - [ ] **Prix/g ne s'affiche pas dans le modal** — à revoir quand le calcul du prix sera revu
+- [ ] **Texte déborde horizontalement sur iPhone** — dans `.page-hero` sections accueil et savon artisanal — non résolu, à investiguer proprement
 
 ---
 
 ## 🟡 AMÉLIORATIONS EN ATTENTE — PUBLIC
 
-- [ ] Mosaïque hero — alimenter dynamiquement avec 3 tuiles *(pas assez d'info)*
+- [ ] Mosaïque hero — alimenter dynamiquement avec 3 tuiles
 - [ ] Textes Sheet → page publique — supporter le Markdown simplifié
-- [ ] Réviser les textes — revoir avec Chantal
+- [ ] Accordéons ou mécanisme de contenu masquable — sections Savon artisanal et Bon à savoir
+- [ ] Contenu évolutif — ex: huiles dans Savon artisanal, chaque huile a sa fiche texte dans la Sheet
 - [ ] Liste INCI sur fiche recette — présentation élégante
 - [ ] Informer les visiteurs comment acheter
 - [ ] Actualités — générées automatiquement depuis le Sheet
@@ -132,7 +170,7 @@ Quand elle apparaît dans une collection secondaire sur le site public :
 - [ ] **Sections éducatives — tester sur toutes les plateformes**
 - [ ] **Affichage avec les délais** — à définir
 - [ ] **Affichage avec les filtres** — à investiguer
-- [ ] **Taille du texte mobile** — à revoir en fin de projet quand tout le contenu sera écrit
+- [ ] **Taille du texte** — certains textes trop petits sur mobile, à ajuster section par section sans détruire le look
 - [ ] **Menu burger** — fermeture au clic extérieur — à valider sur iPhone
 - [ ] **Modal tablette (iPad)** — à valider visuellement sur vrai appareil
 
@@ -140,9 +178,17 @@ Quand elle apparaît dans une collection secondaire sur le site public :
 
 ## 🟡 AMÉLIORATIONS EN ATTENTE — ADMIN
 
+### Photos saisonnières
+- [ ] **Mode saisonnier** — toggle dans l'admin (ex: "afficher photos Noël") appliqué partout — collections ET recettes — même logique que mode maintenance via clé dans Sheet Contenu
+
+### Sauvegarde automatique
+- [ ] **Sheet** — sauvegarde automatique des données via Google Apps Script
+- [ ] **GitHub** — sauvegarde automatique du code via GitHub Actions ou autre
+
 ### Contenu du site — PRIORITÉ
+- [ ] **Système de contenu évolutif** — Sheet comme base de données, admin pour gérer, site public affiche dynamiquement
 - [ ] **Nouvelle section "Contenu du site"** dans le menu admin avec sous-sections par page
-- [ ] **Le savon artisanal** — interface visuelle WYSIWYG — première sous-section à construire
+- [ ] **Le savon artisanal** — interface visuelle WYSIWYG — photos gérables ici
 - [ ] **Accueil** — interface visuelle WYSIWYG
 - [ ] **Qui sommes-nous / valeurs / citation** — interface visuelle WYSIWYG
 
@@ -161,8 +207,11 @@ Quand elle apparaît dans une collection secondaire sur le site public :
 - [ ] Calculateur SAF — intégré à la fiche recette
 - [ ] Générateur INCI — nécessite champ `nom_inci` sur chaque ingrédient
 - [ ] Coût de revient — séparer ingrédients / emballages / amortissement
+- [ ] Bonification des recettes
+- [ ] Vérification des recettes
 
 ### Factures
+- [ ] Scan automatique des factures d'achat
 - [ ] Bouton Modifier dans le modal facture
 - [ ] Formats — aucune gestion possible — à construire
 - [ ] Page factures — filtre "Par produit"
@@ -283,4 +332,4 @@ Quand Jean-Claude demande le brief en fin de session :
 
 ---
 
-*Univers Caresse — Confidentiel — 17 mars 2026*
+*Univers Caresse — Confidentiel — 18 mars 2026*
