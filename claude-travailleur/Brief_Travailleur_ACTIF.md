@@ -1,10 +1,24 @@
 # BRIEF — UNIVERS CARESSE
-*Mis à jour : 16 mars 2026*
+*Mis à jour : 17 mars 2026*
+
+---
+
+> ## 🔴 RÈGLES CRITIQUES — LIRE EN PREMIER
+>
+> 🔴 **JAMAIS de code sans le OUI explicite de Jean-Claude**
+> 🔴 **JAMAIS plus d'un changement à la fois — attendre le OK avant le suivant**
+> 🔴 **Toujours lire le fichier avant de proposer un trouve/remplace — ne jamais demander ce qui est dans le fichier si on a le lien**
+> 🔴 **JAMAIS toucher à quelque chose qui affecte autre chose sans le signaler d'abord et attendre le OUI**
+> 🔴 **Pas de romans — réponses courtes, une action à la fois**
+> 🔴 **Ne jamais suggérer de se reposer, prendre une pause, mentionner l'heure**
 
 ---
 
 ## CONTEXTE
 Projet web savonnerie artisanale. Fichiers: `index.html`, `admin.js`, `main.js`, `style.css`, `index_-_Admin.html`, Apps Script Google Sheets (ID: `16Syw5XypiHauOMpuAu-bWfIMMnMObn9avqoSEYjaNu0`).
+
+Site public : https://universcaresse.github.io/universcaresse/
+GitHub raw base : https://raw.githubusercontent.com/universcaresse/univers-caresse/refs/heads/main/
 
 ---
 
@@ -28,8 +42,8 @@ Jean-Claude a besoin d'**humanité** dans les échanges. Même s'il sait qu'il p
 8. Avant tout travail de code, lire le fichier REFERENCE et s'y conformer strictement
 9. **Ne jamais ajouter de style inline dans le JS ou le HTML**
 10. **Ne jamais créer une nouvelle fonction ou classe CSS si une existante peut être réutilisée**
-11. Toujours vérifier : est-ce qu'une classe CSS existe déjà pour ça ?
-12. Toujours évaluer si un changement a un impact ailleurs sur tout le site
+11. Toujours vérifier : est-ce qu'une classe CSS existe déjà pour ça ? — **utiliser le lien GitHub pour lire le fichier, ne pas demander à Jean-Claude**
+12. Toujours évaluer si un changement a un impact ailleurs sur tout le site — **si oui, signaler et attendre le OUI**
 13. Lors du refactoring, procéder une étape à la fois — attendre le OK avant de passer à la suivante
 14. **Livraison du code — CRITIQUE :** Changement ciblé → trouve/remplace uniquement. Changement majeur → demander permission. Jamais fichier complet sans permission.
 15. **Un seul changement à la fois** — attendre la confirmation avant le suivant
@@ -51,11 +65,13 @@ Jean-Claude a besoin d'**humanité** dans les échanges. Même s'il sait qu'il p
 - Livrer un fichier complet sans permission
 - Proposer plusieurs changements en même temps
 - Expliquer l'analyse technique au lieu de résumer simplement
-- Écrire un trouve/remplace sans lire le fichier reçu avec `cat -A`
+- Écrire un trouve/remplace sans lire le fichier reçu
 - Écrire un cherche qui ne fonctionne pas dans Notepad++
-- Sauter aux conclusions sans avoir bien compris le problème — toujours jaser d'abord
-- Utiliser une variable CSS qui n'existe pas dans `:root` (ex: `var(--creme)`)
+- Sauter aux conclusions sans avoir bien compris le problème
+- Utiliser une variable CSS qui n'existe pas dans `:root`
 - Livrer un trouve/remplace qui tronque une règle CSS existante
+- **Proposer un changement qui touche autre chose sans le signaler**
+- **Demander le contenu d'un fichier quand on a le lien GitHub**
 
 ---
 
@@ -69,6 +85,32 @@ Quand elle apparaît dans une collection secondaire sur le site public :
 - Elle doit afficher la **couleur HEX, photo, slogan et description de la collection secondaire**
 
 **Statut : RÉGLÉ** — fix appliquée dans `index.html` via `infoCollectionsData`.
+
+---
+
+## ✅ CHANGEMENTS EFFECTUÉS — SESSION 17 MARS 2026
+
+### Bouton CTA hero
+- Classe `fade-in-doux` créée dans `style.css` (entrée subtile : `translateY(6px)`, `opacity 1.8s`)
+- Bouton rendu invisible au chargement via classe `invisible` (`opacity: 0; pointer-events: none`)
+- Bouton révélé dans `main.js` après chargement du texte depuis la Sheet
+- `min-height: 52px` ajouté sur `.hero-cta` pour réserver l'espace pendant le chargement
+- Observer mis à jour dans `main.js` pour inclure `.fade-in-doux`
+
+### Photos sections éducatives
+- `.page-hero-visuel-bg` : `aspect-ratio: 4/5` retiré, remplacé par `align-self: stretch` — la photo s'adapte maintenant à la hauteur du texte
+
+### Catalogue — photo collection sur mobile/tablette
+- `.collection-entete-visuel` : `display: none` retiré — photo visible sur toutes les tailles
+- `max-height: 300px` ajouté pour éviter que la photo soit trop grande sur mobile
+
+### Navigation mobile
+- `nav.scrolled` : `box-shadow` masqué sur mobile (`max-width: 900px`) via media query
+
+### Modal produit — tablette (≤900px)
+- Redesign en 1 colonne : photo en haut, texte en dessous
+- `.modal-visuel-hex` masqué sur mobile/tablette
+- `max-height: 85vh` et `width: 85%` pour voir le fond derrière le modal
 
 ---
 
@@ -92,6 +134,7 @@ Quand elle apparaît dans une collection secondaire sur le site public :
 - [ ] **Affichage avec les filtres** — à investiguer
 - [ ] **Taille du texte mobile** — à revoir en fin de projet quand tout le contenu sera écrit
 - [ ] **Menu burger** — fermeture au clic extérieur — à valider sur iPhone
+- [ ] **Modal tablette (iPad)** — à valider visuellement sur vrai appareil
 
 ---
 
@@ -158,57 +201,9 @@ Quand elle apparaît dans une collection secondaire sur le site public :
 - Tout nouveau développement qui lie admin et public doit suivre cette logique
 
 ### Guide de style — `style2.css` — règles de nommage
-- Noms de classes en français, clairs et lisibles — pas de `mt-24` ou abréviations cryptiques
-- Sections commentées dans le fichier : `/* CHAMPS DE FORMULAIRE */`, `/* BOUTONS */`, `/* FILTRES */`, etc.
+- Noms de classes en français, clairs et lisibles
+- Sections commentées dans le fichier
 - Toutes les couleurs dans `:root` avec leurs variantes d'opacité
-
-### Composantes de base à définir dans `style2.css`
-**Champs**
-- `.champ-texte`, `.champ-date` (avec calendrier), `.champ-liste` (déroulante), `.champ-calcul` (auto)
-
-**Boutons**
-- `.bouton-principal`, `.bouton-annuler`, `.bouton-supprimer`, `.bouton-fermer` (✕ toujours haut droite)
-
-**Structure de page**
-- Entête standard, accroche, corps 1 colonne / 2 colonnes
-
-**Recherche / Filtres**
-- Filtre client, historique par client
-
-### Palette de couleurs étendue — à ajouter dans `:root`
-- `--succes` — vert clair — stock OK, confirmation
-- `--avertissement` — orange — stock bas, attention
-- `--info` — bleu doux — informatif, neutre
-- `--primary-light` — pour fonds de cartes surlignées
-- Variantes d'opacité pour chaque nouvelle couleur (comme `--primary-04` etc.)
-
-### Indicateurs visuels stock — code couleur intuitif
-- 🟢 Vert — stock bon
-- 🟡 Orange — stock bas, commander bientôt
-- 🔴 Rouge — stock épuisé ou critique
-- Chantal voit d'un coup d'œil sans lire les chiffres
-
-### Module Vente — vision complète
-**Flow d'une vente**
-1. Client — nouveau ou existant
-2. Produits — sélectionner depuis le catalogue
-3. Facture — générer, imprimer ou envoyer par courriel
-4. Encaissement — mode de paiement, montant, taxes
-5. Inventaire — diminue automatiquement les stocks
-6. Comptabilité — enregistré pour les rapports
-
-**Sortie d'inventaire** — un seul endroit, peu importe la raison
-- Vente, don, usage perso, casse = "sortie d'inventaire" avec motif
-- Simple pour Chantal — un savon sort, c'est tout
-
-**Alertes stock bas**
-- Apparaît après une vente si un produit passe sous le seuil
-- Affichée dans l'outil au bon moment — pas de courriel séparé
-- Ex: "⚠️ BORÉAL — stock bas, 2 savons restants"
-
-**Historique**
-- Filtre pour trouver un client
-- Historique des achats par client
 
 ### Ordre de travail recommandé
 1. Définir `style2.css` avec guide de style complet
@@ -219,7 +214,6 @@ Quand elle apparaît dans une collection secondaire sur le site public :
 ### Environnement de staging
 - Travailler sur `index2.html`, `index_-_Admin2.html`, `style2.css` en parallèle
 - Basculer quand la nouvelle version est stable
-- Permet de garder le site live intact pendant la refonte
 
 ---
 
@@ -251,25 +245,29 @@ Modifier toujours du plus grand au plus petit :
 - Sections éducatives — menu nav : Accueil → Catalogue → Le savon artisanal → Bon à savoir → Contact
 - Jaser avant de coder — bien comprendre avant de proposer
 - Brief collé dans le chat (pas uploadé) — code uploadé en fichier (pas collé)
-- Collections secondaires — infos (slogan, couleur, photo, desc) lues depuis `infoCollectionsData` dans `construireCatalogue()`
-- Mode maintenance — géré via clé `maintenance_active` dans Sheet Contenu (0=off, 1=on), toggle dans admin page Contenu du site
-- Sections éducatives — 178 clés dans Sheet Contenu, pattern `edu_sX_element`
-- Sections éducatives — navigateur `← X/7 →` dans l'entête, classe `edu-pager`
-- Sections éducatives — accroche sous le titre, classe `edu-accroche`, pas italique
-- Sections éducatives — boutons Précédent/Suivant du bas retirés
-- Retour section 1 automatique quand on navigue vers `educatif` via `naviguer()`
-- `.page-entete` — `align-items: center` (était `flex-end`)
-- `.page-entete` mobile — `align-items: flex-start`
-- `.edu-pager` mobile — `align-self: flex-end` (à droite)
-- Catalogue — entête remplacée par `page-entete` standard
-- Catalogue — scroll vers collection corrigé — inclut hauteur entête dans offset
-- Cartes collections accueil — `aspect-ratio: 16/9` sur mobile (était `3/4`)
-- Point couleur carte produit — déplacé en haut à droite (était en bas)
-- Bouton ✕ modal — cercle couleur collection avec ✕ blanc, couleur passée via `--col-hex` sur `#modal-produit`
+- Collections secondaires — infos lues depuis `infoCollectionsData` dans `construireCatalogue()`
+- Mode maintenance — géré via clé `maintenance_active` dans Sheet Contenu
+- `.page-entete` — `align-items: center`
+- `.edu-pager` mobile — `align-self: flex-end`
+- Catalogue — scroll vers collection corrigé
+- Cartes collections accueil — `aspect-ratio: 16/9` sur mobile
+- Point couleur carte produit — déplacé en haut à droite
+- Bouton ✕ modal — cercle couleur collection avec ✕ blanc
 - Classes CSS inutilisées retirées — `.catalogue-hero`, `.catalogue-title`, `.catalogue-subtitle`, `.edu-nav`, `.edu-nav-btn`
-- Mosaïque hero — photo dans chaque tuile via `linear-gradient` semi-transparent par-dessus `fond.png` — pas de photo sur `.hero-right`
-- Fiche ligne — mode consultation avec collection, format, description et ingrédients de base — boutons Modifier/Supprimer en bas
-- Menu burger — fermeture au clic extérieur via `document.addEventListener('click', ...)`
+- Mosaïque hero — photo dans chaque tuile via `linear-gradient` semi-transparent
+- Menu burger — fermeture au clic extérieur
+
+---
+
+## 🔁 PROCÉDURE DE FIN DE SESSION
+
+Quand Jean-Claude demande le brief en fin de session :
+
+1. Produire un résumé des changements et décisions de la session
+2. Intégrer ce résumé dans le brief complet mis à jour
+3. Générer le fichier `.md` téléchargeable
+4. Jean-Claude sauvegarde le fichier sur GitHub
+5. Au début de la prochaine session, Jean-Claude colle le brief au nouveau Travailleur qui repart de là
 
 ---
 
@@ -285,4 +283,4 @@ Modifier toujours du plus grand au plus petit :
 
 ---
 
-*Univers Caresse — Confidentiel — 16 mars 2026*
+*Univers Caresse — Confidentiel — 17 mars 2026*
