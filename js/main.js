@@ -410,8 +410,8 @@ async function chargerContenu() {
     const setHtml = (id, val) => { const el = document.getElementById(id); if (el && val) el.innerHTML = val; };
 
     set('contenu-accueil-eyebrow', c.accueil_eyebrow);
-    set('contenu-accueil-cta', c.accueil_cta);
-	document.querySelector('.hero-cta')?.classList.remove('cache');
+   set('contenu-accueil-cta', c.accueil_cta);
+document.querySelector('.hero-cta')?.classList.remove('cache');
     set('contenu-accueil-stat-label', c.accueil_stat_label);
     set('contenu-accueil-stat-valeur', c.accueil_stat_valeur);
     set('contenu-qui-eyebrow', c.qui_eyebrow);
