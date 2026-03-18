@@ -1121,7 +1121,7 @@ tr.cliquable { cursor: pointer; }
   .filtres-bar { padding: 14px var(--padding-mobile); }
   .catalogue-body { padding: 28px var(--padding-mobile) 60px; }
   .collection-entete { grid-template-columns: 1fr; }
-  .collection-entete-visuel { display: none; }
+  .collection-entete-visuel { aspect-ratio: 4/5; overflow: hidden; position: relative; }
 
 .modal-produit { grid-template-columns: 1fr 2fr; grid-template-rows: auto auto; max-height: 90vh; overflow-y: auto; }
   .modal-visuel-hex { min-height: 320px; grid-column: 1; grid-row: 1; }
