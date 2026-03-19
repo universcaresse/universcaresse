@@ -479,7 +479,7 @@ if (cta) { cta.classList.remove('invisible'); cta.classList.add('fade-in-doux');
     setEdu('edu-s3-surtitre', c.edu_s3_surtitre); setTitreEdu('edu-s3-titre-bloc', c.edu_s3_titre || '', c.edu_s3_titre_em);
     setEdu('edu-s3-accroche', c.edu_s3_accroche); setEdu('edu-s3-p1', c.edu_s3_p1); setEdu('edu-s3-p2', c.edu_s3_p2); setEdu('edu-s3-p3', c.edu_s3_p3);
     setEdu('edu-s3-photo-legende', c.edu_s3_photo_legende); setEdu('edu-s3-section-titre', c.edu_s3_section_titre); setEdu('edu-s3-astuce', c.edu_s3_astuce);
-    [1,2,3].forEach(n => { setEdu(`edu-s3-niv${n}-pct`, c[`edu_s3_niv${n}_pct`]); setEdu(`edu-s3-niv${n}-label`, c[`edu_s3_niv${n}_label`]); setEdu(`edu-s3-niv${n}-texte`, c[`edu_s3_niv${n}_texte`]); });
+    [1,2,3].forEach(n => { const pct = c[`edu_s3_niv${n}_pct`]; const el = document.getElementById(`edu-s3-niv${n}-pct`); if (el && pct !== undefined) el.textContent = Math.round(parseFloat(pct) * 100) + '%'; setEdu(`edu-s3-niv${n}-label`, c[`edu_s3_niv${n}_label`]); setEdu(`edu-s3-niv${n}-texte`, c[`edu_s3_niv${n}_texte`]); });
     // S4
     setEdu('edu-s4-surtitre', c.edu_s4_surtitre); setTitreEdu('edu-s4-titre-bloc', c.edu_s4_titre || '', c.edu_s4_titre_em);
     setEdu('edu-s4-accroche', c.edu_s4_accroche); setEdu('edu-s4-p1', c.edu_s4_p1); setEdu('edu-s4-p2', c.edu_s4_p2);
