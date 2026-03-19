@@ -251,7 +251,7 @@ function fermerFicheCollection() {
 
 function ouvrirFormCollectionPour(col) {
   ouvrirFormCollection();
-  
+  document.getElementById('fc-collection-ligne').value = col || '';
 }
 
 function ouvrirFormCollection() {
