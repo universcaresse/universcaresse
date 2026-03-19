@@ -145,7 +145,13 @@ function naviguer(id) {
 function afficherEduSection(num) {
   document.querySelectorAll('.edu-sous-section-panel').forEach(p => p.classList.remove('active'));
   const cible = document.getElementById('edu-' + num);
-  if (cible) cible.classList.add('active');
+  if (cible) {
+    cible.classList.add('active');
+    cible.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => {
+      el.classList.remove('visible');
+      setTimeout(() => el.classList.add('visible'), 50);
+    });
+  }
   window.scrollTo(0, 0);
 }
 // ─── SESSION ADMIN ───
