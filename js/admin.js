@@ -233,6 +233,7 @@ document.getElementById('fiche-collection-ajouter-ligne').onclick = () => {
     fermerFicheCollection();
     ouvrirFormCollectionPour(col);
     basculerModeFormCollection();
+    document.getElementById('fc-collection-ligne').value = col || '';
   };
  document.getElementById('btn-supprimer-collection').onclick = () => supprimerCollection(col, groupe);
   fiche.classList.add('visible');
