@@ -515,6 +515,25 @@ setEdu('edu-s7-astuce', c.edu_s7_astuce); setEdu('edu-s7-section2-titre', c.edu_
     [1,2,3,4,5].forEach(n => { setEdu(`edu-s7-usage${n}-titre`, c[`edu_s7_usage${n}_titre`]); setEdu(`edu-s7-usage${n}-texte`, c[`edu_s7_usage${n}_texte`]); });
     [1,2,3,4].forEach(n => { setEdu(`edu-s7-ok${n}`, c[`edu_s7_ok${n}`]); setEdu(`edu-s7-non${n}`, c[`edu_s7_non${n}`]); });
 
+    // ─── GUIDE RAPIDE ───
+    setEdu('edu-guide-titre', c.edu_guide_titre);
+    [1,2,3,4,5].forEach(n => {
+      setEdu(`edu-guide-ligne${n}-peau`, c[`edu_guide_ligne${n}_peau`]);
+      setEdu(`edu-guide-ligne${n}-surgraissage`, c[`edu_guide_ligne${n}_surgraissage`]);
+      setEdu(`edu-guide-ligne${n}-huiles`, c[`edu_guide_ligne${n}_huiles`]);
+      setEdu(`edu-guide-ligne${n}-argiles`, c[`edu_guide_ligne${n}_argiles`]);
+    });
+    const accordeon = document.getElementById('edu-guide-accordeon');
+    if (accordeon) {
+      accordeon.innerHTML = [1,2,3,4,5].map(n => {
+        const peau = c[`edu_guide_ligne${n}_peau`] || '';
+        const surg = c[`edu_guide_ligne${n}_surgraissage`] || '';
+        const huil = c[`edu_guide_ligne${n}_huiles`] || '';
+        const argi = c[`edu_guide_ligne${n}_argiles`] || '';
+        return `<div class="edu-accord-item"><button class="edu-accord-btn" onclick="toggleAccord(this)">${peau}</button><div class="edu-accord-panel"><p><strong>Surgraissage :</strong> ${surg}</p><p><strong>Huiles :</strong> ${huil}</p><p><strong>Argiles / Additifs :</strong> ${argi}</p></div></div>`;
+      }).join('');
+    }
+
   document.querySelectorAll('.edu-sous-section-panel .fade-in, .edu-sous-section-panel .fade-in-doux').forEach(el => {
       setTimeout(() => el.classList.add('visible'), 100);
     });
@@ -522,6 +541,13 @@ setEdu('edu-s7-astuce', c.edu_s7_astuce); setEdu('edu-s7-section2-titre', c.edu_
   } catch (err) {
     console.error('Erreur chargerContenu:', err);
   }
+}
+
+function toggleAccord(btn) {
+  const item = btn.parentElement;
+  const isOpen = item.classList.contains('ouvert');
+  document.querySelectorAll('.edu-accord-item.ouvert').forEach(el => el.classList.remove('ouvert'));
+  if (!isOpen) item.classList.add('ouvert');
 }
 
 // ─── CONTACT ───
