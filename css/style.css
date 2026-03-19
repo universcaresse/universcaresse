@@ -1116,7 +1116,7 @@ tr.cliquable { cursor: pointer; }
   .page-hero-visuel { max-width: 100%; width: 100%; }
  
   .edu-sous-section-panel .page-hero { padding: 48px var(--padding-mobile); }
-  .edu-sous-section-panel .section-texte { padding: 48px var(--padding-mobile); align-items: start; }
+  .edu-sous-section-panel .section-texte { padding: 48px var(--padding-mobile); }
   .page-hero-visuel-bg { aspect-ratio: 3/2; max-width: 100%; }
   .section-texte { grid-template-columns: 1fr; padding: 48px var(--padding-mobile); gap: 48px; }
   .bandeau-citation { padding: 48px var(--padding-mobile); }
