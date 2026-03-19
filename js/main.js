@@ -148,8 +148,7 @@ function afficherEduSection(num) {
   if (cible) {
     cible.classList.add('active');
     cible.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => {
-      el.classList.remove('visible');
-      setTimeout(() => el.classList.add('visible'), 50);
+      if (!el.classList.contains('visible')) el.classList.add('visible');
     });
   }
   window.scrollTo(0, 0);
@@ -510,6 +509,10 @@ setEdu('edu-s7-astuce', c.edu_s7_astuce); setEdu('edu-s7-section2-titre', c.edu_
     [1,2,3,4,5].forEach(n => { setEdu(`edu-s7-peau${n}-titre`, c[`edu_s7_peau${n}_titre`]); setEdu(`edu-s7-peau${n}-signes`, c[`edu_s7_peau${n}_signes`]); setEdu(`edu-s7-peau${n}-aime`, c[`edu_s7_peau${n}_aime`]); });
     [1,2,3,4,5].forEach(n => { setEdu(`edu-s7-usage${n}-titre`, c[`edu_s7_usage${n}_titre`]); setEdu(`edu-s7-usage${n}-texte`, c[`edu_s7_usage${n}_texte`]); });
     [1,2,3,4].forEach(n => { setEdu(`edu-s7-ok${n}`, c[`edu_s7_ok${n}`]); setEdu(`edu-s7-non${n}`, c[`edu_s7_non${n}`]); });
+
+  document.querySelectorAll('.edu-sous-section-panel .fade-in, .edu-sous-section-panel .fade-in-doux').forEach(el => {
+      setTimeout(() => el.classList.add('visible'), 100);
+    });
 
   } catch (err) {
     console.error('Erreur chargerContenu:', err);
