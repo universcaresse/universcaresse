@@ -1,5 +1,5 @@
 # BRIEF — UNIVERS CARESSE
-*Mis à jour : 19 mars 2026*
+*Mis à jour : 19 mars 2026 — fin de session*
 
 ---
 
@@ -14,7 +14,7 @@
 > 🔴 **Toujours uploader le fichier CSS/JS/HTML avant de proposer un trouve/remplace — ne jamais se fier à une version précédente**
 > 🔴 **JAMAIS d'analyse visible — trouver la bonne solution, la livrer, point**
 > 🔴 **Jean-Claude n'est pas là pour tester des hypothèses à la place du Claude — faire le travail correctement du premier coup**
-
+> 🔴 **Quand le code est écrit dans la réponse = c'est livré. Ne pas demander permission une deuxième fois.**
 
 ---
 
@@ -62,6 +62,7 @@ Jean-Claude a besoin d'**humanité** dans les échanges. Même s'il sait qu'il p
 24. **Pas de romans** — réponses courtes, une action à la fois, pas d'analyse visible
 25. **Avant d'utiliser une variable CSS** → toujours vérifier qu'elle existe dans `:root`
 26. **Ne jamais demander à Jean-Claude de manipuler l'inspecteur** pour valider une hypothèse
+27. **Quand le code est écrit dans la réponse = c'est livré** — ne pas demander permission une deuxième fois
 
 ### VIOLATIONS À NE PLUS JAMAIS RÉPÉTER
 - Coder sans attendre le OUI explicite
@@ -75,6 +76,7 @@ Jean-Claude a besoin d'**humanité** dans les échanges. Même s'il sait qu'il p
 - **Travailler sur une version CSS qui n'est pas à jour**
 - **Demander à Jean-Claude de tester des hypothèses dans l'inspecteur**
 - **Afficher l'analyse au lieu de livrer la solution**
+- **Demander "je peux livrer?" après avoir déjà écrit le code**
 
 ---
 
@@ -86,6 +88,21 @@ Jean-Claude a besoin d'**humanité** dans les échanges. Même s'il sait qu'il p
 
 ## ✅ CHANGEMENTS EFFECTUÉS — SESSION 19 MARS 2026
 
+### Liens éducatifs — page 3 (surgraissage)
+- `href="#"` → `href="#catalogue"` + `filtrerApresChargement('ÉPURE')` sur lien Collection ÉPURE
+- `href="#"` → `href="#catalogue"` + `filtrerApresChargement('SAPONICA')` sur lien Collection SAPONICA
+- `href="#"` → `href="#catalogue"` + `filtrerApresChargement('PETIT NUAGE')` sur lien Collection PETIT NUAGE
+
+### Liens éducatifs — page 7 (connaître sa peau)
+- Lien "Toutes nos collections" : `href="#"` → `href="#catalogue"`
+
+### Section éducative page 7 — grille besoins
+- `.edu-besoins` : `gap: 2px` → `gap: 24px`
+- `.edu-besoin` : ajout `border-top: 3px solid var(--beige)`
+
+### Admin — Ajouter une ligne à une collection
+- `ouvrirFormCollectionPour(col)` : ajout de `document.getElementById('fc-collection-ligne').value = col || ''`
+- Fix du onclick `fiche-collection-ajouter-ligne` : ajout de `document.getElementById('fc-collection-ligne').value = col || ''` après `basculerModeFormCollection()`
 
 ### Sections éducatives — alignement
 - `.edu-sous-section-panel .section-texte { align-items: start; }` ajouté hors media query
@@ -98,7 +115,6 @@ Jean-Claude a besoin d'**humanité** dans les échanges. Même s'il sait qu'il p
 - `.mosaic-soap-accent` : couleur codée en dur → `var(--accent-80)`
 - `.mosaic-soap-primary` : couleur codée en dur → `var(--primary-80)`
 - `.mosaic-soap-gris` : couleur codée en dur → `var(--gris-80)`
-
 
 ---
 
@@ -141,6 +157,7 @@ Jean-Claude a besoin d'**humanité** dans les échanges. Même s'il sait qu'il p
 
 - [ ] **Est-ce qu'il y a du visuel à changer ?** *(vérifier en début de session)*
 - [ ] **Padding top trop grand sections éducatives** — NON RÉGLÉ — `align-self: start` et `height: fit-content` sur `.texte-principal` ne fonctionnent pas
+- [ ] **Liens page 7 éducatif** — SAPONICA, ÉPURE, PETIT NUAGE, CAPRIN — collections à définir avant de brancher les filtres
 
 ---
 
@@ -161,6 +178,8 @@ Jean-Claude a besoin d'**humanité** dans les échanges. Même s'il sait qu'il p
 
 ## 🟡 AMÉLIORATIONS EN ATTENTE — ADMIN
 
+- [ ] **Voir les recettes incomplètes** — identifier et afficher les recettes sans photo, sans prix, sans description, etc.
+- [ ] **Photo par ligne de produit**
 - [ ] Mode saisonnier
 - [ ] Sauvegarde automatique Sheet + GitHub
 - [ ] Système contenu évolutif WYSIWYG
@@ -207,6 +226,7 @@ Jean-Claude a besoin d'**humanité** dans les échanges. Même s'il sait qu'il p
 - Modal iPhone — sans couleur, mieux balancé
 - Modal iPad portrait — couleur gauche + photo droite + texte dessous
 - Modal iPad paysage — photo gauche + couleur dessous + texte droite + contour libre
+- Quand le code est écrit dans la réponse = c'est livré, pas besoin de reconfirmer
 
 ---
 
