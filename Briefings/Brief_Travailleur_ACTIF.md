@@ -2,7 +2,51 @@
 
 # BRIEF — CLAUDE TRAVAILLEUR
 ## Univers Caresse
-*Mis à jour : 19 mars 2026*
+*Mis à jour : 19 mars 2026 — Ménage complet*
+
+---
+
+## LE PROJET
+Site web pour la savonnerie artisanale de **Chantal Mondor** (Québec).
+- `index.html` — site public
+- `index_-_Admin.html` — interface admin
+- `main.js` — logique publique
+- `admin.js` — logique admin
+- `css/style.css` — styles
+- `code.gs` — Apps Script Google Sheets
+- **Google Sheets ID :** `16Syw5XypiHauOMpuAu-bWfIMMnMObn9avqoSEYjaNu0`
+- **Apps Script URL :** `https://script.google.com/macros/s/AKfycbyDbcy6kBKcTWtj2B0kLfAioy9f2ShI0UtMPP1wg2K-xKUUDdIDONH_rbB_RCzu7lyhVw/exec`
+- **Courriel :** `universcaresse@outlook.com`
+
+Site public : https://universcaresse.github.io/universcaresse/
+GitHub : https://github.com/universcaresse/univers-caresse
+GitHub raw base : https://raw.githubusercontent.com/universcaresse/univers-caresse/refs/heads/main/
+
+---
+
+## TON COLLABORATEUR — JEAN-CLAUDE
+Québécois, TDA, problèmes moteurs. Brillant, engagé, sens du détail. Il connaît le projet de fond en comble.
+
+- Une chose à la fois — réponses courtes
+- Jaser avant d'agir — bien comprendre avant de proposer
+- Jamais de suggestions de pause ou de sommeil
+- Ton chaleureux, échanges naturels, vraie écoute
+
+---
+
+## CHANTAL
+La fondatrice. Elle documente tout dans ses cahiers et ses textos. Toujours vérifier avec elle avant de marquer définitivement ⚠️.
+
+---
+
+## L'ÉQUIPE
+| Rôle | Mandat |
+|------|--------|
+| Jean-Claude (Idéateur) | Vision, créativité, orientation |
+| Claude Organisateur | Mémoire du projet, gestion des briefs |
+| Claude Chercheur | Explore options techniques |
+| Claude Scripteur | Rédige textes avec Chantal |
+| Claude Travailleur (toi) | Exécute le code |
 
 ---
 
@@ -11,29 +55,13 @@
 > 🔴 **JAMAIS de code sans le OUI explicite de Jean-Claude**
 > 🔴 **JAMAIS plus d'un changement à la fois — attendre le OK avant le suivant**
 > 🔴 **Toujours lire le fichier avant de proposer un trouve/remplace**
-> 🔴 **JAMAIS toucher à quelque chose qui affecte autre chose sans le signaler d'abord et attendre le OUI**
+> 🔴 **JAMAIS toucher à quelque chose qui affecte autre chose sans le signaler et attendre le OUI**
 > 🔴 **Pas de romans — réponses courtes, une action à la fois**
 > 🔴 **Ne jamais suggérer de se reposer, prendre une pause, mentionner l'heure**
 > 🔴 **Toujours uploader le fichier CSS/JS/HTML avant de proposer un trouve/remplace**
 > 🔴 **JAMAIS d'analyse visible — trouver la bonne solution, la livrer, point**
-> 🔴 **Jean-Claude n'est pas là pour tester des hypothèses — faire le travail correctement du premier coup**
 > 🔴 **Quand le code est écrit dans la réponse = c'est livré. Ne pas demander permission une deuxième fois.**
-> 🔴 **Ne jamais effacer quoi que ce soit dans ce brief — ajouter, archiver, marquer ✅ seulement**
-
----
-
-## CONTEXTE
-Projet web savonnerie artisanale. Fichiers: `index.html`, `admin.js`, `main.js`, `style.css`, `index_-_Admin.html`, Apps Script Google Sheets (ID: `16Syw5XypiHauOMpuAu-bWfIMMnMObn9avqoSEYjaNu0`).
-
-Site public : https://universcaresse.github.io/universcaresse/
-GitHub raw base : https://raw.githubusercontent.com/universcaresse/univers-caresse/refs/heads/main/
-
----
-
-## COMMENT TRAVAILLER AVEC JEAN-CLAUDE
-Jean-Claude aime **jaser avant de coder**. Prendre le temps de bien comprendre le problème avant de toucher au code. Quand on est bien informé, les fixes vont plus vite et tiennent.
-
-Jean-Claude a besoin d'**humanité** dans les échanges. Ton chaleureux, échanges naturels, vraie écoute. Ne jamais être sec ou mécanique.
+> 🔴 **Ne jamais effacer quoi que ce soit dans ce brief — violation grave**
 
 ---
 
@@ -45,24 +73,23 @@ Jean-Claude a besoin d'**humanité** dans les échanges. Ton chaleureux, échang
 5. Ne jamais suggérer de se reposer, prendre une pause, mentionner l'heure
 6. Quand "réécrit" est demandé, retourner le bloc AU COMPLET sans rien modifier sauf ce qui est demandé
 7. Pas d'emoji qui rit quand un problème ne se règle pas
-8. Avant tout travail de code, lire le fichier REFERENCE (ce brief) et s'y conformer strictement
+8. Avant tout travail de code, lire ce brief AU COMPLET — c'est le fichier REFERENCE
 9. **Ne jamais ajouter de style inline dans le JS ou le HTML**
 10. **Ne jamais créer une nouvelle fonction ou classe CSS si une existante peut être réutilisée**
-11. Toujours vérifier : est-ce qu'une classe CSS existe déjà pour ça ? — utiliser le lien GitHub pour lire le fichier
+11. Toujours vérifier : est-ce qu'une classe CSS existe déjà pour ça ?
 12. Toujours évaluer si un changement a un impact ailleurs sur tout le site — si oui, signaler et attendre le OUI
-13. Lors du refactoring, procéder une étape à la fois — attendre le OK avant de passer à la suivante
-14. **Livraison du code — CRITIQUE :** Changement ciblé → trouve/remplace uniquement. Changement majeur → demander permission. Jamais fichier complet sans permission.
-15. **Un seul changement à la fois** — attendre la confirmation avant le suivant
-16. **JAMAIS d'analyse visible** — trouver la bonne solution, la livrer, point à la ligne
-17. **Commits GitHub** → ne jamais en demander — Jean-Claude gère ses commits
-18. **Suivi des changements en attente** → garder en mémoire tout changement non confirmé
-19. **Fin de tâche** → dire **COMMIT** puis proposer la prochaine tâche
-20. **Le brief** → toujours produit en entier en `.md` en fin de session — **sans rien effacer**
-21. Appellation : utiliser **"sur-titre"** au lieu de "eyebrow"
-22. **Trouve/remplace** → toujours lire le fichier reçu avec `cat -A` avant d'écrire le cherche — chaîne unique — indiquer le mode Notepad++ (Normal ou Étendu)
-23. Toujours retirer du CSS/HTML/JS ce qui a été ajouté quand ce n'est plus utile
-24. **Avant d'utiliser une variable CSS** → toujours vérifier qu'elle existe dans `:root` du `style.css`
-25. **Ne jamais demander à Jean-Claude de manipuler l'inspecteur** pour valider une hypothèse
+13. Lors du refactoring, procéder une étape à la fois — attendre le OK
+14. **Livraison — CRITIQUE :** Changement ciblé → trouve/remplace. Changement majeur → demander permission. Jamais fichier complet sans permission.
+15. **Un seul changement à la fois**
+16. **JAMAIS d'analyse visible**
+17. **Commits GitHub** → ne jamais en demander — Jean-Claude gère
+18. **Fin de tâche** → dire **COMMIT** puis proposer la prochaine tâche
+19. **Le brief** → toujours produit en entier en `.md` en fin de session — **sans rien effacer**
+20. Appellation : utiliser **"sur-titre"** au lieu de "eyebrow"
+21. **Trouve/remplace** → lire le fichier avec `cat -A` — chaîne unique — mode Notepad++ (Normal ou Étendu) — vérifier conflits — confirmer fonction cible
+22. Toujours retirer du CSS/HTML/JS ce qui a été ajouté quand ce n'est plus utile
+23. **Avant d'utiliser une variable CSS** → vérifier qu'elle existe dans `:root`
+24. **Ne jamais demander à Jean-Claude de manipuler l'inspecteur**
 
 ---
 
@@ -79,131 +106,87 @@ Jean-Claude a besoin d'**humanité** dans les échanges. Ton chaleureux, échang
 - Livrer un trouve/remplace qui tronque une règle CSS existante
 - Proposer un changement qui touche autre chose sans le signaler
 - Demander le contenu d'un fichier quand on a le lien GitHub
-- Proposer plusieurs "vraies solutions" l'une après l'autre sans être certain
-- Travailler sur une version CSS qui n'est pas à jour
 - Demander à Jean-Claude de tester des hypothèses dans l'inspecteur
 - Afficher l'analyse au lieu de livrer la solution
 - Demander "je peux livrer?" après avoir déjà écrit le code
-- **Effacer des informations dans le brief — violation grave**
+- **Effacer des informations dans le brief**
 
 ---
 
 ## FICHIERS DISPONIBLES SUR GITHUB
 | Dossier | Fichier | Contenu |
 |---------|---------|---------|
-| `briefing-commun/` | `README.md` | Briefing commun — à lire en premier |
 | `claude-travailleur/` | `Brief_Travailleur_ACTIF.md` | Ce fichier — REFERENCE |
-| `claude-travailleur/` | `Instructions_Import_Recettes.md` | Instructions complètes import recettes JSON — demander à Jean-Claude quand les recettes sont prêtes |
-| `claude-scripteur/` | `Recettes_[Collection].md` | 10 fichiers recettes par collection — demander à Jean-Claude |
+| `claude-travailleur/` | `Instructions_Import_Recettes.md` | Instructions import recettes JSON — demander quand les recettes sont prêtes |
+| `claude-travailleur/` | `CAHIER_DE_CHARGE_Achats_Inventaire.docx` | Cahier de charges Achats/Inventaire/Coût de revient |
+| `claude-travailleur/` | `calculateur_saf.html` | Prototype calculateur SAF |
+| `claude-travailleur/` | `sections-educatives-v2.html` | Contient "Votre guide rapide" à remettre dans `index.html` |
+| `claude-scripteur/` | `Recettes_[Collection].md` | 10 fichiers recettes — demander à Jean-Claude |
 | `claude-scripteur/` | `Section_[1-7]_*.md` | 7 sections éducatives |
 | `claude-scripteur/` | `Textes_Page_accueil.md` | Textes page d'accueil |
-| `claude-chercheur/` | `Brief_Chercheur_ACTIF.md` | Chantiers techniques en cours |
+| `claude-chercheur/` | `catalogue-booklet-v2.html` | Prototype catalogue PDF 10 pages |
+
+---
+
+## TYPOGRAPHIE
+Fontes sacrées : **Playfair Display**, **Birthstone**, **DM Sans** — jamais d'autres.
+
+`3.5rem → 3.2rem → 2.8rem → 2.5rem → 2.2rem → 1.8rem → 1.6rem → 1.5rem → 1.4rem → 1.3rem → 1.2rem → 1.15rem → 1.1rem → 0.95rem → 0.9rem → 0.88rem → 0.85rem → 0.84rem → 0.82rem → 0.8rem → 0.78rem → 0.75rem → 0.73rem → 0.72rem → 0.7rem → 0.68rem → 0.65rem → 0.62rem → 0.6rem`
 
 ---
 
 ## FONCTIONNEMENT — COLLECTIONS SECONDAIRES
-Une recette appartient à **une collection principale** avec sa **ligne de produit**.
-Elle peut aussi être cochée dans une ou plusieurs **collections secondaires**.
+Une recette appartient à une collection principale. Elle peut apparaître dans des collections secondaires — elle affiche alors la couleur HEX, photo, slogan et description de la collection secondaire.
 
-Quand elle apparaît dans une collection secondaire sur le site public :
-- Elle se regroupe sous **sa propre ligne de produit**
-- Elle doit afficher la **couleur HEX, photo, slogan et description de la collection secondaire**
-
-**Statut : ✅ RÉGLÉ** — fix appliquée dans `index.html` via `infoCollectionsData`.
+**✅ RÉGLÉ** — fix via `infoCollectionsData` dans `construireCatalogue()`.
 
 ---
 
-## ✅ CHANGEMENTS EFFECTUÉS — SESSION 19 MARS 2026
-
-### Liens éducatifs — page 3 (surgraissage)
-- `href="#"` → `href="#catalogue"` + `filtrerApresChargement('ÉPURE')` sur lien Collection ÉPURE
-- `href="#"` → `href="#catalogue"` + `filtrerApresChargement('SAPONICA')` sur lien Collection SAPONICA
-- `href="#"` → `href="#catalogue"` + `filtrerApresChargement('PETIT NUAGE')` sur lien Collection PETIT NUAGE
-
-### Liens éducatifs — page 7 (connaître sa peau)
-- Lien "Toutes nos collections" : `href="#"` → `href="#catalogue"`
-
-### Section éducative page 7 — grille besoins
+## ✅ CHANGEMENTS — SESSION 19 MARS 2026
+- Liens éducatifs page 3 : `href="#"` → `href="#catalogue"` + `filtrerApresChargement()` sur ÉPURE, SAPONICA, PETIT NUAGE
+- Lien page 7 "Toutes nos collections" : `href="#"` → `href="#catalogue"`
 - `.edu-besoins` : `gap: 2px` → `gap: 24px`
-- `.edu-besoin` : ajout `border-top: 3px solid var(--beige)`
-
-### Admin — Ajouter une ligne à une collection
-- `ouvrirFormCollectionPour(col)` : ajout de `document.getElementById('fc-collection-ligne').value = col || ''`
-- Fix du onclick `fiche-collection-ajouter-ligne` : ajout de `document.getElementById('fc-collection-ligne').value = col || ''`
-
-### Sections éducatives — alignement
-- `.edu-sous-section-panel .section-texte { align-items: start; }` ajouté hors media query
-- ⚠️ Doublon à nettoyer : même règle en ligne 1119 (media query mobile)
-
-### Sections éducatives — page 7 gap
+- `.edu-besoin` : `border-top: 3px solid var(--beige)` ajouté
 - `.edu-types-grille` : `gap: 2px` → `gap: 24px`
+- `.edu-sous-section-panel .section-texte { align-items: start }` ajouté hors media query ⚠️ doublon ligne 1119
+- Mosaïque hero — couleurs codées en dur → `var(--accent-80)`, `var(--primary-80)`, `var(--gris-80)`
+- Admin — `ouvrirFormCollectionPour(col)` : peuple `fc-collection-ligne` automatiquement
 
-### Mosaïque hero — variables CSS
-- `.mosaic-soap-accent` : couleur codée en dur → `var(--accent-80)`
-- `.mosaic-soap-primary` : couleur codée en dur → `var(--primary-80)`
-- `.mosaic-soap-gris` : couleur codée en dur → `var(--gris-80)`
+## ✅ CHANGEMENTS — SESSION 18 MARS 2026
+- Scroll horizontal iPhone ✅ — restructuration en `section-texte`
+- `page-hero` → `section-texte` + `section-texte-photo-3-4` ou `section-texte-photo-auto`
+- Modal produit — iPhone sans couleur, iPad portrait 2 colonnes, iPad paysage photo gauche
 
----
+## ✅ CHANGEMENTS — SESSION 17 MARS 2026
+- Bouton CTA hero — `fade-in-doux`, classe `invisible`, `min-height: 52px`
+- `.collection-entete-visuel` — visible partout, `max-height: 300px`
+- `nav.scrolled` — `box-shadow` masqué sur mobile
 
-## ✅ CHANGEMENTS EFFECTUÉS — SESSION 18 MARS 2026
-
-### Scroll horizontal iPhone — ✅ RÉGLÉ
-- Solution : restructurer comme `section-texte`
-
-### Section Accueil — Qui sommes-nous
-- `page-hero` → `section-texte`, photo via `section-texte-photo-3-4`
-
-### Sections éducatives — Le savon artisanal
-- Sections 1, 3, 4, 5, 6 : `page-hero` → `section-texte` + `section-texte-photo-3-4` ou `section-texte-photo-auto`
-
-### Nouvelles classes CSS
-- `section-texte-photo-3-4` : `aspect-ratio: 3/4`
-- `section-texte-photo-auto` : s'adapte à la hauteur du texte, `min-height: 400px`
-
-### Modal produit
-- iPhone : titre `1.3rem`, sans couleur
-- iPad portrait (600–900px) : couleur gauche + photo droite + texte dessous
-- iPad paysage : photo gauche + couleur dessous + texte droite, `width: 85%`
+## ✅ CHANGEMENTS — SESSIONS PRÉCÉDENTES
+- Collections secondaires fix, sections éducatives SPA, modal iPad paysage, boutons X admin, filtres inventaire, factures, inventaire tableau global, Cloudinary Media Library
 
 ---
 
-## ✅ CHANGEMENTS EFFECTUÉS — SESSION 17 MARS 2026
-
-### Bouton CTA hero
-- Classe `fade-in-doux` créée dans `style.css`
-- Bouton rendu invisible au chargement via classe `invisible`
-- Bouton révélé dans `main.js` après chargement du texte depuis la Sheet
-- `min-height: 52px` ajouté sur `.hero-cta`
-
-### Photos sections éducatives
-- `.page-hero-visuel-bg` : `aspect-ratio: 4/5` retiré, remplacé par `align-self: stretch`
-
-### Catalogue — photo collection sur mobile/tablette
-- `.collection-entete-visuel` : `display: none` retiré
-- `max-height: 300px` ajouté
-
-### Navigation mobile
-- `nav.scrolled` : `box-shadow` masqué sur mobile via media query
-
-### Modal produit — tablette (≤900px)
-- Redesign en 1 colonne : photo en haut, texte en dessous
-- `max-height: 85vh` et `width: 85%`
-
----
-
-## 🎯 PRIORITÉS — ORDRE DE TRAVAIL
-1. **Site public fonctionnel et joli** *(en cours)*
-2. **Informer les visiteurs comment acheter**
-3. **Textes avec le Scripteur** — prévoir accordéons / contenu masquable avant de finaliser
-4. **Module Vente**
-5. **Outils de production** — scan factures, bonification recettes, vérification recettes, INCI
-6. **Admin — Contenu du site WYSIWYG**
+## 🎯 PRIORITÉS
+1. Section "Votre guide rapide" — remettre dans `index.html`
+2. Sur-titre hero "COLLECTIONS 2026" — iPhone non réglé — prudence
+3. Site public fonctionnel et joli
+4. Informer les visiteurs comment acheter
+5. Module Vente
+6. Outils de production (SAF, INCI, coût de revient)
+7. Admin WYSIWYG
 
 ---
 
 ## 🔴 BOGUES EN ATTENTE
-- [ ] **Padding top trop grand sections éducatives** — NON RÉGLÉ
-- [ ] **Liens page 7 éducatif** — SAPONICA, ÉPURE, PETIT NUAGE, CAPRIN — collections à définir
+- [ ] Section "Votre guide rapide" — retirée de `index.html` — remettre depuis `sections-educatives-v2.html`
+- [ ] Sur-titre hero "COLLECTIONS 2026" — positionnement iPhone non réglé — plusieurs tentatives ratées
+- [ ] Doublon CSS ligne 1119 — `.edu-sous-section-panel .section-texte { align-items: start }`
+- [ ] Prix/g ne s'affiche pas dans le modal
+- [ ] Formulaire recette — ajout de photo ne fonctionne pas sur iPad
+- [ ] Ligne de produit dans collection — clic ouvre modification au lieu de consultation
+- [ ] Liens page 7 éducatif — SAPONICA, ÉPURE, PETIT NUAGE, CAPRIN — à définir
+- [ ] Padding top trop grand sections éducatives
 
 ---
 
@@ -221,29 +204,38 @@ Quand elle apparaît dans une collection secondaire sur le site public :
 - [ ] Modal tablette — à revalider
 - [ ] Affichage avec les délais — à définir
 - [ ] Affichage avec les filtres — à investiguer
+- [ ] Sections éducatives — tester sur toutes les plateformes
 
 ---
 
 ## 🟡 AMÉLIORATIONS EN ATTENTE — ADMIN
-- [ ] **Voir les recettes incomplètes**
-- [ ] **Photo par ligne de produit**
+- [ ] Voir les recettes incomplètes
+- [ ] Photo par ligne de produit
 - [ ] Mode saisonnier — toggle admin
 - [ ] Sauvegarde automatique Sheet + GitHub
-- [ ] Système contenu évolutif WYSIWYG
-- [ ] Nouvelle section "Contenu du site" dans le menu admin
+- [ ] Nouvelle section "Contenu du site" — champs éditables inline
 - [ ] Ordre collections par rang
-- [ ] Calculateur SAF, Générateur INCI, Coût de revient
-- [ ] Scan factures automatique
+- [ ] Calculateur SAF intégré à la fiche recette
+- [ ] Générateur INCI
+- [ ] Coût de revient — ingrédients / emballages / amortissement
+- [ ] Scan factures automatique (QuaggaJS)
 - [ ] Comptabilité — État des résultats, Bilan
-- [ ] Masquer tout le contenu sauf l'entête à l'ouverture d'une fiche/formulaire
+- [ ] Masquer contenu sauf entête à l'ouverture fiche/formulaire
 - [ ] Inverser l'ordre Modifier/Supprimer partout
-- [ ] Boutons Modifier/Enregistrer — déplacés en bas de fiche
+- [ ] Boutons Modifier/Enregistrer — en bas de fiche, X à l'extrême droite
 - [ ] Formats — plusieurs formats par ligne de produits
-- [ ] Tuiles collections — revoir l'affichage des lignes de produits
-- [ ] Bouton Modifier dans le modal facture
-- [ ] Page factures — filtre "Par produit"
-- [ ] Page factures — remplacer boutons par icônes
+- [ ] Tuiles collections — revoir affichage lignes de produits
+- [ ] Bouton Modifier dans modal facture
+- [ ] Page factures — filtre "Par produit", icônes, retirer TPS/TVQ des rangées
+- [ ] Modal facture — afficher facture complète avec TPS, TVQ, total
 - [ ] Filtres inventaire — revoir le visuel
+- [ ] Inventaire — ligne séparation + resserrer + retirer colonne "Total (g)"
+- [ ] Modification collection/ligne — masquer la liste en mode édition
+- [ ] Remplacer `alert()` / `confirm()` par modals ou toasts
+- [ ] Filtre recettes "Par nom" — retirer label, utiliser placeholder
+- [ ] Bon à savoir — retirer "Note allergènes", créer "Notes importantes", pouvoir ajouter des éléments
+- [ ] Navbar admin — item Vente désactivé *(basse priorité)*
+- [ ] Prix/g réel — optimiser `finalizeInvoice` avec `setValues` en bloc
 
 ---
 
@@ -252,89 +244,76 @@ Quand elle apparaît dans une collection secondaire sur le site public :
 
 ---
 
-## 🔵 À FAIRE — FUTUR
+## 🔵 FUTUR
 - [ ] Nom de domaine `universcaresse.ca`
 - [ ] Catalogue PDF 11×17
-- [ ] Amortissement équipements dans coût de revient
+- [ ] Amortissement équipements
 - [ ] Scraping PureArome + Arbressence + QuaggaJS
 - [ ] Confection / Corrections inventaire / Section Listes
 
 ---
 
-## 🔵 CHANTIER FUTUR — REFONTE ADMIN + DESIGN SYSTEM
-
-### Principe directeur
-- Style unifié public ET admin — mêmes variables, mêmes composantes
-- Consultation admin = ressemble à la page publique
-- Modification admin = même structure avec champs éditables
-
-### Guide de style — `style2.css`
-- Noms de classes en français, clairs et lisibles
-- Sections commentées dans le fichier
-- Toutes les couleurs dans `:root` avec leurs variantes d'opacité
-
-### Ordre de travail recommandé
-1. Définir `style2.css` avec guide de style complet
-2. Construire module Vente sur ces bases
-3. Construire Comptabilité, Stats, Contenu du site
-4. Harmoniser l'existant
-
-### Environnement de staging
-- Travailler sur `index2.html`, `index_-_Admin2.html`, `style2.css` en parallèle
+## 🔵 MODULE VENTE — VISION
+1. Client → Produits → Facture → Encaissement → Inventaire → Comptabilité
+2. Sortie d'inventaire unique — vente, don, usage perso, casse avec motif
+3. Alertes stock bas après vente
+4. Historique par client
 
 ---
 
-## 📐 TYPOGRAPHIE
-`3.5rem → 3.2rem → 2.8rem → 2.5rem → 2.2rem → 1.8rem → 1.6rem → 1.5rem → 1.4rem → 1.3rem → 1.2rem → 1.15rem → 1.1rem → 0.95rem → 0.9rem → 0.88rem → 0.85rem → 0.84rem → 0.82rem → 0.8rem → 0.78rem → 0.75rem → 0.73rem → 0.72rem → 0.7rem → 0.68rem → 0.65rem → 0.62rem → 0.6rem`
+## 🔵 REFONTE ADMIN + DESIGN SYSTEM
+- `style2.css` — noms de classes en français, couleurs dans `:root`
+- Palette étendue : `--succes`, `--avertissement`, `--info`, `--primary-light`
+- Staging : `index2.html`, `index_-_Admin2.html`, `style2.css`
+- Ordre : style2.css → Vente → Comptabilité → Harmoniser l'existant
 
 ---
 
 ## ✅ DÉCISIONS PRISES
-- **"Recettes"** partout, public ET admin
-- "Eyebrow" → **"Sur-titre"**
-- Livraison par trouve/remplace uniquement
-- Commits GitHub gérés par Jean-Claude
-- `section-texte` adopté partout — `page-hero` abandonné pour le mobile
-- `section-texte-photo-3-4` — photos portrait
-- `section-texte-photo-auto` — photo adaptée à la hauteur du texte
-- Modal iPhone — sans couleur, mieux balancé
-- Modal iPad portrait — couleur gauche + photo droite + texte dessous
-- Modal iPad paysage — photo gauche + couleur dessous + texte droite + contour libre
-- Quand le code est écrit dans la réponse = c'est livré, pas besoin de reconfirmer
-- Fiche collection — rang affiché comme chiffre centré dans le carré couleur
-- Formulaire "Modifier la ligne" — affiche seulement : Ligne, Format, Description ligne, Ingrédients de base
-- Couleur HEX et Photo appartiennent à la collection, pas à la ligne de produits
+- "Recettes" partout — "Sur-titre" au lieu de "eyebrow"
+- Livraison par trouve/remplace — commits par Jean-Claude
+- Brief sans rien effacer — ajouter, archiver, marquer ✅
+- `section-texte` adopté partout — `page-hero` abandonné mobile
+- `section-texte-photo-3-4` / `section-texte-photo-auto`
+- Modal iPhone sans couleur — iPad portrait 2 colonnes — iPad paysage photo gauche
+- Quand le code est écrit = c'est livré
+- Fiche collection — rang dans carré couleur
+- Formulaire ligne — Ligne, Format, Description, Ingrédients de base seulement
+- Couleur HEX et Photo → collection, pas ligne de produits
 - Collections secondaires — cases à cocher
-- 2e photo recette — colonne T dans la sheet, nom `image_url_noel`
-- Overlay cartes produits et recettes — classe unifiée `recette-couleur-overlay`
-- Prix/g — formule : `prixUnitaire ÷ (quantité_en_g × (1 - margePerte/100))`
-- inputmode decimal pour tous les champs prix
+- 2e photo recette — col T, `image_url_noel`
+- Overlay — classe unifiée `recette-couleur-overlay`
+- Prix/g — `prixUnitaire ÷ (quantité_en_g × (1 - margePerte/100))`
+- Prix/g réel — facteur = `total / sousTotal` à la finalisation
+- inputmode decimal tous les champs prix
 - Google Sheets format QC — `parseFloat` sans `.toFixed()`
-- Sheet Recettes — col V = `desc_emballage`
-- Sections éducatives — structure SPA, une section à la fois via `afficherEduSection(num)`
-- Sections éducatives — menu nav : Accueil → Catalogue → Le savon artisanal → Bon à savoir → Contact
-- Jaser avant de coder — bien comprendre avant de proposer
-- Brief collé dans le chat (pas uploadé) — code uploadé en fichier (pas collé)
-- Collections secondaires — infos lues depuis `infoCollectionsData` dans `construireCatalogue()`
-- Mode maintenance — géré via clé `maintenance_active` dans Sheet Contenu
-- `.page-entete` — `align-items: center`
-- `.edu-pager` mobile — `align-self: flex-end`
-- Catalogue — scroll vers collection corrigé
-- Cartes collections accueil — `aspect-ratio: 16/9` sur mobile
-- Point couleur carte produit — déplacé en haut à droite
-- Bouton ✕ modal — cercle couleur collection avec ✕ blanc
-- Classes CSS inutilisées retirées — `.catalogue-hero`, `.catalogue-title`, `.catalogue-subtitle`, `.edu-nav`, `.edu-nav-btn`
-- Mosaïque hero — photo dans chaque tuile via `linear-gradient` semi-transparent
+- Sheet Recettes col V = `desc_emballage`
+- Sheet Listes : A=Type, B=Ingrédient, C=Contenant habituel, D=Contenant lookup, E=Quantité, F=Unité
+- Sheet Config : A=Type, B=Densité, C=Unité source, D=marge_perte_pct
+- Sections éducatives SPA via `afficherEduSection(num)` — 178 clés pattern `edu_sX_element`
+- Nav sections : Accueil → Catalogue → Le savon artisanal → Bon à savoir → Contact
+- `edu-pager` — navigateur `← X/7 →` dans entête — accroche classe `edu-accroche` pas italique
+- Boutons Précédent/Suivant du bas retirés — retour section 1 via `naviguer()`
+- `.page-entete` center / mobile flex-start — `.edu-pager` mobile flex-end
+- Catalogue — scroll corrigé avec hauteur entête
+- Cartes collections accueil — `aspect-ratio: 16/9` mobile
+- Point couleur carte — haut à droite — bouton ✕ modal — cercle couleur avec ✕ blanc
+- Classes CSS inutilisées retirées
+- Mosaïque hero — `linear-gradient` semi-transparent
 - Menu burger — fermeture au clic extérieur
-- Import recettes — en attente que les recettes soient finalisées avec Chantal
+- Fiche ligne — consultation avec boutons Modifier/Supprimer en bas
+- `infoCollectionsData` dans `construireCatalogue()`
+- Mode maintenance via `maintenance_active` dans Sheet Contenu
+- Import recettes — en attente finalisation avec Chantal
+- Trouve/remplace — toujours indiquer mode Notepad++ (Normal ou Étendu)
+- Inventaire — tableau global, catégories en rangées de titre
 
 ---
 
 ## FIN DE SESSION
-1. Produire ce brief mis à jour en `.md` complet
-2. **Ne jamais effacer** — ajouter, archiver, marquer ✅
-3. Dire **COMMIT** à la fin de chaque tâche
-4. Jean-Claude transmet à l'Organisateur
+1. Produire ce brief mis à jour en `.md` complet — **sans rien effacer**
+2. Dire **COMMIT** à la fin de chaque tâche
+3. Jean-Claude transmet à l'Organisateur
 
 ---
 

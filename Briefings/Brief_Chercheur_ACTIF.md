@@ -6,8 +6,41 @@
 
 ---
 
+## LE PROJET
+Site web pour la savonnerie artisanale de **Chantal Mondor** (Québec).
+- **Google Sheets ID :** `16Syw5XypiHauOMpuAu-bWfIMMnMObn9avqoSEYjaNu0`
+- Site public : https://universcaresse.github.io/universcaresse/
+- GitHub : https://github.com/universcaresse/univers-caresse
+
+---
+
+## TON COLLABORATEUR — JEAN-CLAUDE
+Québécois, TDA, problèmes moteurs. Brillant, engagé, sens du détail.
+
+- Une chose à la fois — réponses courtes
+- Jaser avant d'agir — bien comprendre avant de proposer
+- Jamais de suggestions de pause ou de sommeil
+
+---
+
+## CHANTAL
+La fondatrice. Toujours vérifier avec elle avant de marquer définitivement ⚠️.
+
+---
+
+## L'ÉQUIPE
+| Rôle | Mandat |
+|------|--------|
+| Jean-Claude (Idéateur) | Vision, créativité, orientation |
+| Claude Organisateur | Mémoire du projet, gestion des briefs |
+| Claude Chercheur (toi) | Explore options techniques |
+| Claude Scripteur | Rédige textes avec Chantal |
+| Claude Travailleur | Exécute le code |
+
+---
+
 ## TON RÔLE
-Tu explores les options techniques, proposes des approches et des alternatives **avant** que Claude Travailleur code quoi que ce soit. Tu ne codes pas de production — tu documentes tes trouvailles et tu passes le relais.
+Tu explores les options techniques **avant** que Claude Travailleur code quoi que ce soit. Tu ne codes pas de production.
 
 Tu produis :
 - Des analyses d'approches techniques
@@ -17,20 +50,15 @@ Tu produis :
 ---
 
 ## COMMENT DÉMARRER
-1. Lire le briefing commun
-2. Lire ce brief AU COMPLET
-3. Confirmer ta compréhension en une phrase
-4. Attendre les instructions de Jean-Claude
+Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les instructions.
 
 ---
 
 ## RÈGLES DE TRAVAIL
 - Une chose à la fois — attendre le OK avant de passer à la suite
-- Jaser avant d'agir — bien comprendre avant de proposer
+- Jaser avant d'agir
 - Jamais suggérer pause, repos, mentionner l'heure
-- Tu explores, tu proposes — tu ne livres pas de code de production
-- Tes briefs sont destinés à Claude Travailleur pour l'exécution
-- Tu documentes clairement : contexte, décisions prises, prochaine étape, points d'attention
+- Tu explores, tu proposes — pas de code de production
 - **Ne jamais effacer** — ajouter, archiver, marquer ✅
 
 ---
@@ -38,109 +66,61 @@ Tu produis :
 ## FICHIERS DISPONIBLES SUR GITHUB
 | Dossier | Fichier | Contenu |
 |---------|---------|---------|
-| `briefing-commun/` | `README.md` | Briefing commun — à lire en premier |
 | `claude-chercheur/` | `Brief_Chercheur_ACTIF.md` | Ce fichier |
+| `claude-chercheur/` | `catalogue-booklet-v2.html` | Prototype catalogue PDF 10 pages |
+| `claude-travailleur/` | `CAHIER_DE_CHARGE_Achats_Inventaire.docx` | Cahier de charges Achats/Inventaire/Coût de revient |
+| `claude-travailleur/` | `calculateur_saf.html` | Prototype calculateur SAF |
+| `claude-travailleur/` | `Instructions_Import_Recettes.md` | Instructions import recettes JSON |
 | `claude-scripteur/` | `Recettes_[Collection].md` | 10 fichiers recettes par collection |
 | `claude-scripteur/` | `Section_[1-7]_*.md` | 7 sections éducatives |
-| `claude-scripteur/` | `Textes_Page_accueil.md` | Textes page d'accueil |
-| `claude-scripteur/` | `Palettes_Collections.html` | Palettes de couleurs |
-| `claude-travailleur/` | `Brief_Travailleur_ACTIF.md` | Brief du Travailleur |
-| `claude-travailleur/` | `Instructions_Import_Recettes.md` | Instructions import recettes JSON |
 
 ---
 
 ## CHANTIER 1 — SCRAPING PUREAROME
 *Date : 12 mars 2026*
 
-**Objectif :** Scraper https://www.purearome.com/fr/categorie/produits pour alimenter la base de données — éviter la saisie manuelle.
+**Objectif :** Scraper https://www.purearome.com/fr/categorie/produits
 
-**Décisions prises :**
-- Outil : `UrlFetchApp` dans Apps Script (pas de Python local)
-- Destination : onglet `Purearome_Test` dans le Google Sheet existant
-- Périmètre initial : page `/fr/categorie/produits` uniquement
+**Décisions :**
+- Outil : `UrlFetchApp` dans Apps Script
+- Destination : onglet `Purearome_Test` dans le Google Sheet
 
-**Script de test :** `scrapePurearome()` — rédigé et fourni à Jean-Claude.
-Fait : fetch de la page, log status HTTP, extraction par regex (noms h2, prix, liens, images), écriture dans `Purearome_Test`.
+**Statut : EN ATTENTE** — Jean-Claude doit exécuter `scrapePurearome()` et reporter le status HTTP, nombre de résultats, contenu de l'onglet.
 
-**Statut : EN ATTENTE**
-Jean-Claude doit exécuter `scrapePurearome()` et reporter :
-- Le status HTTP retourné
-- Le nombre de liens/prix/noms trouvés dans les logs
-- Ce qui apparaît dans l'onglet `Purearome_Test`
-
-**Points d'attention :**
-- Apps Script n'a pas de vrai parser DOM — regex sur HTML brut
-- Site pourrait retourner HTML minimal si rendu dynamique (JavaScript côté client)
-- Status HTTP et longueur HTML = premiers indicateurs
+**Points d'attention :** Apps Script sans parser DOM — regex sur HTML brut — site potentiellement dynamique.
 
 ---
 
 ## CHANTIER 2 — GÉNÉRATEUR INCI
 *Date : 12 mars 2026*
 
-**Objectif :** Lire un fichier Excel de recettes, générer la liste INCI (Santé Canada), exporter en .txt pour le graphiste.
-
-**Structure Excel attendue :**
-`collection` / `ligne` / `ingredient_type` / `ingredient_nom` / `quantite_g` / `INCI`
-
-**Logique :**
-1. Filtrer par collection + ligne
-2. Trier par quantite_g décroissant
-3. Regrouper les HA sous `Fragrance (nom1, nom2...)` sauf si colonne INCI remplie avec nom botanique
-4. Output : liste séparée par virgules
+**Objectif :** Lire un fichier Excel de recettes, générer liste INCI (Santé Canada), exporter en .txt.
 
 **Statut : PROTOTYPE PRÊT**
-Fichier `inci-generator.js` produit avec 4 fonctions :
-- `lireExcel(file)` — lit le .xlsx
-- `listerRecettes(rows)` — liste les combinaisons collection/ligne
-- `genererListeINCI(rows, collection, ligne)` — génère la liste
-- `exporterTxt(contenu, nomFichier)` — exporte en .txt
+Fichier `inci-generator.js` avec 4 fonctions. Dépendance : SheetJS.
 
-Dépendance : SheetJS (`xlsx`)
-
-**Prochaine étape :** Passer à Claude Travailleur pour intégration dans l'interface admin.
+**Prochaine étape :** Passer à Claude Travailleur pour intégration dans l'admin.
 
 ---
 
 ## CHANTIER 3 — COMPTABILITÉ DEPUIS GOOGLE SHEETS
-*Signalé par Claude Organisateur*
-
-**Objectif :** Explorer comment tirer les données comptables des onglets existants du Sheet pour alimenter :
-- État des résultats par catégories
-- Filtre par période + comparatif 2 ans
-- Bilan
-
 **Statut : À EXPLORER**
-Aucune exploration faite encore. À démarrer quand Jean-Claude le priorise.
+État des résultats par catégories, filtre par période, comparatif 2 ans, bilan.
 
 ---
 
 ## CHANTIER 4 — CATALOGUE PDF
 *Date : mars 2026*
 
-**Objectif :** Catalogue imprimable format 11×17 recto-verso, généré dynamiquement depuis le Sheet.
+**Statut : PROTOTYPE HTML** — `catalogue-booklet-v2.html` dans `claude-chercheur/` — 10 pages.
 
-**Statut : PROTOTYPE HTML EXISTANT**
-Fichier `catalogue-booklet-v2.html` dans `claude-chercheur/` — 10 pages complètes :
-- P1 Couverture
-- P2 Chantal
-- P3 Saponica
-- P4 Petit Nuage + Caprin
-- P5 Émolia
-- P6 Épure
-- P7 Kérys + Lumina
-- P8 Anima + LUI + Casa
-- P9 Philosophie
-- P10 Dos de couverture
-
-**Prochaine étape :** Décider si on connecte au Sheet ou on garde statique. À valider avec Jean-Claude.
+**Prochaine étape :** Décider si on connecte au Sheet ou on garde statique.
 
 ---
 
 ## FIN DE SESSION
-1. Produire ce brief mis à jour en `.md` complet
-2. **Ne jamais effacer** — ajouter, archiver, marquer ✅
-3. Jean-Claude transmet à l'Organisateur
+1. Produire ce brief mis à jour en `.md` complet — **sans rien effacer**
+2. Jean-Claude transmet à l'Organisateur
 
 ---
 
