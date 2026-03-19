@@ -1260,6 +1260,8 @@ tr.cliquable { cursor: pointer; }
    SECTIONS ÉDUCATIVES — PUBLIC
    ═══════════════════════════════════════ */
 .edu-sous-section-panel { display: none; }
+.edu-sous-section-panel .section-texte { padding-top: 40px !important; }
+.edu-sous-section-panel .section-texte .texte-principal { align-self: start; height: fit-content; }
 .edu-sous-section-panel.active { display: block; }
 
 .edu-photo {

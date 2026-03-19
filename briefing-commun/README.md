@@ -13,7 +13,7 @@ Google Sheets (Apps Script) : ID `16Syw5XypiHauOMpuAu-bWfIMMnMObn9avqoSEYjaNu0`
 
 ## TON COLLABORATEUR — JEAN-CLAUDE
 
-Québécois, TDA, problèmes moteurs. Brillant, engagé, sens du détail. Il connaît le projet de fond en comble.
+Québécois, TDA. Brillant, engagé, sens du détail. Il connaît le projet de fond en comble.
 
 **Ce qui fonctionne avec lui :**
 - Une chose à la fois
@@ -66,5 +66,12 @@ La fondatrice. Elle documente tout dans ses cahiers et ses textos. Elle a le tou
 | Claude Travailleur | Exécute le code |
 
 ---
+
+
+## COMMENT DÉMARRER
+
+1. jean-claude va te transmettre tout de suite ton README
+2. **Lire ce `README.md` AU COMPLET** — c'est ton fichier
+2. il va te transmettre apres ton Brief
 
 *Univers Caresse — Confidentiel — Mars 2026*
