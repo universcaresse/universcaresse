@@ -134,6 +134,9 @@ function afficherSection(id) {
   if (id === 'catalogue') {
     chargerCatalogue();
   }
+  if (id === 'educatif') {
+    afficherEduSection(1);
+  }
 }
 
 function naviguer(id) {
