@@ -2,7 +2,7 @@
 
 # BRIEF — CLAUDE CHERCHEUR
 ## Univers Caresse
-*Mis à jour : 20 mars 2026 — 13h00*
+*Mis à jour : 20 mars 2026 — 10h15*
 
 ---
 
@@ -36,7 +36,6 @@ La fondatrice. Toujours vérifier avec elle avant de marquer définitivement ⚠
 | Claude Chercheur (toi) | Explore options techniques |
 | Claude Scripteur | Rédige textes avec Chantal |
 | Claude Travailleur | Exécute le code |
-| Claude Brouillon | Reçoit idées en vrac, trie, enrichit, anticipe |
 
 ---
 
@@ -75,7 +74,7 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 | Fichier | Contenu |
 |---------|---------|
 | `Brief_Chercheur_ACTIF.md` | Ce fichier |
-| `Brief_Univers_Caresse_ARCHIVES.md` | Archives sessions précédentes |
+| `Brief_Univers_Caresse_ARCHIVES.md` | Archives sessions 13-14 mars |
 
 ### Dossier claude-chercheur/
 | Fichier | Contenu |
@@ -85,7 +84,7 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 ### Dossier claude-travailleur/
 | Fichier | Contenu |
 |---------|---------|
-| `CAHIER_DE_CHARGE_Achats_Inventaire.docx` | Cahier de charges Achats/Inventaire |
+| `CAHIER_DE_CHARGE_Achats_Inventaire.docx` | Cahier de charges Achats/Inventaire/Coût de revient |
 | `calculateur_saf.html` | Prototype calculateur SAF |
 | `Instructions_Import_Recettes.md` | Instructions import recettes JSON |
 
@@ -93,20 +92,25 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 | Fichier | Contenu |
 |---------|---------|
 | `Recettes_[Collection].md` | 9 fichiers recettes actifs |
-| `Ingredients_A_Clarifier.md` | Liste ingrédients à valider avec INCI |
+| `Ingredients_A_Clarifier.md` | Liste ingrédients à valider avec INCI proposés |
 
 ---
 
 ## CHANTIER 1 — SCRAPING PUREAROME
 *Date : 12 mars 2026*
+
 **Statut : EN ATTENTE** — Jean-Claude doit exécuter `scrapePurearome()` et reporter résultats.
+
+**Décisions :** `UrlFetchApp` dans Apps Script — destination onglet `Purearome_Test`.
 
 ---
 
 ## CHANTIER 2 — GÉNÉRATEUR INCI
 *Date : 12 mars 2026*
-**Statut : PROTOTYPE PRÊT** — `inci-generator.js` — Dépendance : SheetJS.
-**Prochaine étape :** Passer à Travailleur pour intégration admin.
+
+**Statut : PROTOTYPE PRÊT** — `inci-generator.js` avec 4 fonctions. Dépendance : SheetJS.
+
+**Prochaine étape :** Passer à Claude Travailleur pour intégration dans l'admin.
 
 ---
 
@@ -117,30 +121,25 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 
 ## CHANTIER 4 — CATALOGUE PDF
 *Date : mars 2026*
+
 **Statut : PROTOTYPE HTML** — `catalogue-booklet-v2.html` — 10 pages.
-⚠️ Lumina à remplacer par Casa.
+⚠️ Incluait Lumina — à mettre à jour pour Casa à la place.
+
+**Prochaine étape :** Décider si on connecte au Sheet ou on garde statique.
 
 ---
 
 ## CHANTIER 5 — API EU CosIng — RECHERCHE INCI AUTOMATIQUE
-*Signalé : 20 mars 2026*
-**Objectif :** Recherche automatique nom INCI lors de l'ajout d'un ingrédient dans l'admin.
-**Statut : À EXPLORER** — vérifier accessibilité API, endpoint, format réponse, approche intégration.
+*Signalé par Scripteur — 20 mars 2026*
 
----
+**Objectif :** Lors de l'ajout d'un nouvel ingrédient dans l'admin, rechercher automatiquement son nom INCI via l'API EU CosIng.
 
-## CHANTIER 6 — SYSTÈME DE COMMANDE LÉGER
-*Signalé : 20 mars 2026*
-**Objectif :** Système de commande sans panier — formulaire → confirmation → notification → suivi.
-**Contexte :** Chantal vend en petites quantités sur commande. Pas besoin d'un panier e-commerce complet.
-**Statut : À EXPLORER** — valider avec Chantal les specs d'expédition avant de commencer.
+**Contexte :** `Ingredients_A_Clarifier.md` dans `claude-scripteur/` contient la liste à valider.
 
----
-
-## CHANTIER 7 — COULEURS HEX SUR BOUTONS CTA
-*Signalé : 20 mars 2026*
-**Objectif :** Vérifier si toutes les couleurs hex signature sont définies partout. Explorer utilisation des hex sur les boutons CTA (fond plein vs accent/hover).
 **Statut : À EXPLORER**
+- Vérifier si l'API EU CosIng est accessible publiquement
+- Documenter l'endpoint, les paramètres, le format de réponse
+- Proposer une approche d'intégration pour Travailleur
 
 ---
 
@@ -150,4 +149,4 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 
 ---
 
-*Univers Caresse — Confidentiel — 20 mars 2026 — 13h00*
+*Univers Caresse — Confidentiel — 20 mars 2026 — 10h15*

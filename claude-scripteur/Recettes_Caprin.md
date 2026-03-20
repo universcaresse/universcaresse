@@ -1,7 +1,7 @@
 # RECETTES CAPRIN — UNIVERS CARESSE
 
-**Date :** 16 mars 2026
-**Ligne :** Savon au lait de chèvre | **Cure :** 42 jours (6 semaines) | **Nb unités :** ⚠️ à confirmer | **Statut :** public
+**Date :** 19 mars 2026
+**Ligne :** Savon au lait de chèvre | **Cure :** 42 jours | **Nb unités :** 12 | **Statut :** public
 
 ---
 
@@ -13,21 +13,20 @@
 - 70g huile d'amande douce
 - 98g NaOH
 - 235g eau glacée
-- 40g lait de chèvre en poudre
-
-### ⚠️ NOTE POUR CHANTAL
-Deux versions de la recette ont été trouvées — l'ancienne indiquait 110g de lait de chèvre en poudre, la nouvelle indique 40g. Confirmer si le lait de chèvre en poudre remplace l'eau glacée ou s'y ajoute.
+- 70g lait de chèvre en poudre
 
 ---
 
 ## CAPRICE FRAISÉ
 
-**Couleur :** #A2414D
+**HEX :** #A2414D
 
 **Recette :**
 - Recette de base Caprin
-- 1 c. à table argile blanche
+- 15g argile blanche
 - 30g fraise huile aromatique
+
+**Notes :** 1 c. à table argile blanche = 15g
 
 **Version courte :** L'alliance gourmande du lait onctueux et de la fraise sucrée.
 
@@ -37,12 +36,14 @@ Deux versions de la recette ont été trouvées — l'ancienne indiquait 110g de
 
 ## CERISE DE VELOURS
 
-**Couleur :** #BF0E24
+**HEX :** #BF0E24
 
 **Recette :**
 - Recette de base Caprin
-- 1 c. à table argile blanche
+- 15g argile blanche
 - 30g cerise huile aromatique
+
+**Notes :** 1 c. à table argile blanche = 15g
 
 **Version courte :** Savon gourmand au lait de chèvre et cerises, douceur fruitée et peau satinée.
 
@@ -52,13 +53,15 @@ Deux versions de la recette ont été trouvées — l'ancienne indiquait 110g de
 
 ## ÉCLOSION DE SOIE
 
-**Couleur :** #476B33
+**HEX :** #476B33
 
 **Recette :**
 - Recette de base Caprin
 - 6g spiruline
 - 18g thé vert huile aromatique
 - 12g jasmin huile aromatique
+
+**Notes :**
 
 **Version courte :** Un savon velouté où le jasmin s'ouvre doucement sur un fond de thé vert et de lait crémeux. Une caresse soyeuse, presque textile.
 
@@ -68,12 +71,14 @@ Deux versions de la recette ont été trouvées — l'ancienne indiquait 110g de
 
 ## FRAÎCHEUR DE MELON
 
-**Couleur :** #BF705E
+**HEX :** #BF705E
 
 **Recette :**
 - Recette de base Caprin
-- 1 c. à table argile blanche
+- 15g argile blanche
 - 30g melon d'eau huile aromatique
+
+**Notes :** 1 c. à table argile blanche = 15g
 
 **Version courte :** La douceur crémeuse du lait de chèvre épouse la légèreté rafraîchissante du melon d'eau.
 
@@ -83,7 +88,7 @@ Deux versions de la recette ont été trouvées — l'ancienne indiquait 110g de
 
 ## ORANGE SAUVAGE
 
-**Couleur :** #C67D26
+**HEX :** #C67D26
 
 **Recette :**
 - Recette de base Caprin
@@ -95,6 +100,8 @@ Deux versions de la recette ont été trouvées — l'ancienne indiquait 110g de
 - 1g argile blanche
 - 1g clou de girofle moulu
 
+**Notes :**
+
 **Version courte :** Éclat d'agrume et souffle d'épices, comme une chaleur libre qui danse sur la peau.
 
 **Version longue :** L'orange douce s'embrase au contact de la cannelle, du gingembre et du clou de girofle. Le curcuma illumine, l'écorce d'orange texturise légèrement. Dans ce savon au lait de chèvre aux épices chaleureuses, chaque geste devient une danse aromatique qui réveille les sens et réchauffe la peau. Généreux, vivifiant, profondément naturel.
@@ -103,14 +110,15 @@ Deux versions de la recette ont été trouvées — l'ancienne indiquait 110g de
 
 ## POMME D'ÉMERAUDE
 
-**Couleur :** #51EB4E
-**Cure :** 6 semaines
+**HEX :** #51EB4E
 
 **Recette :**
 - Recette de base Caprin
 - Mica vert
 - 30g pomme verte huile aromatique
-- 1 c. à table argile blanche
+- 15g argile blanche
+
+**Notes :** 1 c. à table argile blanche = 15g
 
 **Version courte :** Savon délicat au lait de chèvre et pomme verte, fraîcheur et douceur en un seul geste.
 

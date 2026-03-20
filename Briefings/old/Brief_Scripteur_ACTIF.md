@@ -2,7 +2,7 @@
 
 # BRIEF — CLAUDE SCRIPTEUR
 ## Univers Caresse
-*Mis à jour : 20 mars 2026 — 13h00*
+*Mis à jour : 20 mars 2026 — 10h15*
 
 ---
 
@@ -22,7 +22,7 @@ Québécois, TDA, problèmes moteurs. Brillant, engagé, sens du détail.
 ---
 
 ## CHANTAL
-La fondatrice. Elle a le tour avec les mots. Toujours vérifier avec elle avant de marquer définitivement ⚠️.
+La fondatrice. Elle a le tour avec les mots. Elle documente tout dans ses cahiers et textos. Toujours vérifier avec elle avant de marquer définitivement ⚠️.
 
 ---
 
@@ -34,7 +34,6 @@ La fondatrice. Elle a le tour avec les mots. Toujours vérifier avec elle avant 
 | Claude Chercheur | Explore options techniques |
 | Claude Scripteur (toi) | Rédige textes avec Chantal |
 | Claude Travailleur | Exécute le code |
-| Claude Brouillon | Reçoit idées en vrac, trie, enrichit, anticipe |
 
 ---
 
@@ -49,7 +48,7 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 ---
 
 ## RÈGLES DE TRAVAIL
-- Le guide de style est la bible
+- Le guide de style est la bible — tout texte doit le respecter
 - Les textes validés sont validés — ne pas remettre en question
 - Toujours vérifier avec Chantal avant de marquer définitivement ⚠️
 - Une chose à la fois — attendre le OK
@@ -60,23 +59,23 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 ## RÈGLE DE CONVERSION — c. à thé / c. à table → grammes
 **1 c. à thé = 5ml — 1 c. à table = 15ml**
 
-| Type | Densité (g/ml) |
-|------|---------------|
-| Huile essentielle | 0.9 |
-| Huile | 0.92 |
-| Hydrolat | 1.0 |
-| Fragrance | 0.9 |
-| Beurre | 1.0 |
-| Argile | 1.0 |
-| Additif | 1.0 |
-| Colorants et pigments | 1.0 |
-| Herbes et fleurs | 1.0 |
-| Cire | 0.95 |
-| Saveurs naturelles | 0.9 |
-| Emballage | 1.0 |
-| Eau | 0.8 |
+| Type | Densité (g/ml) | Unité source |
+|------|---------------|--------------|
+| Huile essentielle | 0.9 | ml |
+| Huile | 0.92 | ml |
+| Hydrolat | 1.0 | ml |
+| Fragrance | 0.9 | ml |
+| Beurre | 1.0 | g |
+| Argile | 1.0 | g |
+| Additif | 1.0 | g |
+| Colorants et pigments | 1.0 | g |
+| Herbes et fleurs | 1.0 | g |
+| Cire | 0.95 | g |
+| Saveurs naturelles | 0.9 | ml |
+| Emballage | 1.0 | g |
+| Eau | 0.8 | ml |
 
-**Important :** Conserver la mesure originale en note ex: `*(1 c. à thé)*`. Faire valider par Chantal.
+**Important :** Toujours conserver la mesure originale en note ex: `*(1 c. à thé)*` avant de modifier. Faire valider par Chantal.
 
 ---
 
@@ -86,26 +85,32 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 | Fichier | Contenu |
 |---------|---------|
 | `Brief_Scripteur_ACTIF.md` | Ce fichier |
-| `Brief_Univers_Caresse_ARCHIVES.md` | Archives sessions précédentes |
+| `Brief_Univers_Caresse_ARCHIVES.md` | Archives sessions 13-14 mars |
 
 ### Dossier claude-scripteur/
 | Fichier | Contenu |
 |---------|---------|
-| `Recettes_Anima.md` | Recettes Anima |
-| `Recettes_Caprin.md` | Recettes Caprin |
-| `Recettes_Casa.md` | Recettes Casa (inclut Lumina fusionnée) |
-| `Recettes_Emolia.md` | Recettes Émolia |
-| `Recettes_Epure.md` | Recettes Épure |
-| `Recettes_Kerys.md` | Recettes Kérys |
-| `Recettes_Lui.md` | Recettes LUI |
-| `Recettes_Lumina.md` | ⚠️ Collection retirée — fusionnée dans Casa |
-| `Recettes_Petit_Nuage.md` | Recettes Petit Nuage |
-| `Recettes_Saponica.md` | Recettes Saponica |
-| `Section_[1-7]_*.md` | 7 sections éducatives |
+| `Recettes_Anima.md` | Recettes collection Anima |
+| `Recettes_Caprin.md` | Recettes collection Caprin |
+| `Recettes_Casa.md` | Recettes collection Casa (inclut Lumina fusionnée) |
+| `Recettes_Emolia.md` | Recettes collection Émolia |
+| `Recettes_Epure.md` | Recettes collection Épure |
+| `Recettes_Kerys.md` | Recettes collection Kérys |
+| `Recettes_Lui.md` | Recettes collection LUI |
+| `Recettes_Lumina.md` | ⚠️ Collection retirée — contenu fusionné dans Casa |
+| `Recettes_Petit_Nuage.md` | Recettes collection Petit Nuage |
+| `Recettes_Saponica.md` | Recettes collection Saponica |
+| `Section_1_Saponification_a_froid.md` | Section éducative 1 |
+| `Section_2_La_cure.md` | Section éducative 2 |
+| `Section_3_Le_surgraissage.md` | Section éducative 3 |
+| `Section_4_Les_huiles.md` | Section éducative 4 |
+| `Section_5_Les_argiles_et_additifs.md` | Section éducative 5 |
+| `Section_6_Les_huiles_essentielles.md` | Section éducative 6 |
+| `Section_7_Connaitre_sa_peau_et_choisir.md` | Section éducative 7 |
 | `Textes_Page_accueil.md` | Textes page d'accueil |
 | `Textes_Collections.md` | Textes de présentation de toutes les collections |
 | `Textes_Etiquettes.md` | Textes étiquettes |
-| `Ingredients_A_Clarifier.md` | Liste ingrédients à valider avec INCI |
+| `Ingredients_A_Clarifier.md` | Liste ingrédients à valider avec INCI proposés |
 | `Palettes_Collections.html` | Palettes de couleurs |
 | `Prompts_Ideogram_Collections.md` | Prompts images collections |
 | `Prompts_Ideogram_Site.md` | Prompts images site |
@@ -118,15 +123,17 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 ---
 
 ## ✅ COMPLÉTÉ ET VALIDÉ
-- 7 sections éducatives révisées
+- 7 sections éducatives révisées (session 16 mars 2026)
 - Page d'accueil révisée et validée
-- 9 fichiers recettes mis à jour
-- Collection Lumina fusionnée dans Casa
-- L'Instant du Barbier et L'Élixir du matin migrés vers Émolia
-- Conversions c. à thé/table → grammes appliquées
-- Champ Notes + renommage HEX appliqués partout
-- Textes Émolia et Casa réécrits
-- `Textes_Collections.md` et `Ingredients_A_Clarifier.md` créés
+- 9 fichiers recettes mis à jour (20 mars 2026)
+- Collection Lumina fusionnée dans Casa (ligne Bougie Lumina)
+- L'Instant du Barbier et L'Élixir du matin migrés de LUI vers Émolia
+- Conversions c. à thé/table → grammes appliquées à toutes les collections
+- Champ Notes ajouté à toutes les recettes
+- Champ Couleur renommé HEX dans toutes les collections
+- Textes de collection Émolia et Casa réécrits
+- Fichier Textes_Collections.md créé avec tous les textes à jour
+- Fichier Ingredients_A_Clarifier.md créé
 
 ---
 
@@ -136,29 +143,15 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 - Kérys : couleur Brise matinale — #2387FF ou #6787FF ?
 - Saponica : texte imprimé Éclat de mer
 - Saponica : valider texte personnel Jardin d'Aurore
-- Émolia : Menthe poivrée — vérifier nom
-- Émolia : Brume de rosée — quantité micas à fleurs bleues
+- Émolia : Menthe poivrée — vérifier nom (Menthe poivrée ou Frisson de menthe ?)
+- Émolia : Brume de rosée — quantité micas à fleurs bleues à confirmer
 - Kérys : Douceur des îles — eau ou hydrolat ?
-- Approche hex sur les boutons CTA — esthétique et cohérence de marque
-- Specs d'expédition : format boîtes, méthode emballage, poids produit + emballage
-- Ouverture compte de banque + Canada Post
-- Pages FAQ, conditions de vente, retours/livraison — après politique de vente définie
 
 ---
 
 ## 🔴 TEXTES À CRÉER (quand recettes confirmées)
 - Caprin versions longues : Cerise de velours, Fraîcheur de melon, Pomme d'émeraude, Orange Sauvage
 - LUI : Automne
-
----
-
-## 🔴 TEXTES À CRÉER (quand politique de vente définie)
-- Page FAQ — évolutive, style Univers Caresse
-- Page conditions de vente
-- Page retours + livraison
-- Courriel de confirmation automatique à la réception d'une commande
-- Réécrire citation page Cure — même sujet, ton vrai, sans exagération
-- Réécrire "Petites quantités et sur commande"
 
 ---
 
@@ -173,9 +166,11 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 ## 🔴 POUR L'INTÉGRATEUR (Travailleur)
 - Remplacer tous les [LIEN: ...] dans les 7 sections éducatives
 - Créer ou décider des liens "Savons surgraissés 3-5%", "5-8%", "8-10%"
-- Importer les recettes mises à jour (format JSON)
-- Créer fonction recherche automatique INCI via API EU CosIng
-- Valider liste ingrédients — voir `Ingredients_A_Clarifier.md`
+- Décider du sort de "Nos formulations par type de peau"
+- Ajouter navigation Section 7 depuis fiches produits
+- Importer les recettes mises à jour (format JSON) — voir `Instructions_Import_Recettes.md`
+- Créer une fonction de recherche automatique INCI via l'API EU CosIng
+- Valider et compléter la liste des ingrédients — voir `Ingredients_A_Clarifier.md`
 
 ---
 
@@ -185,4 +180,4 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 
 ---
 
-*Univers Caresse — Confidentiel — 20 mars 2026 — 13h00*
+*Univers Caresse — Confidentiel — 20 mars 2026 — 10h15*

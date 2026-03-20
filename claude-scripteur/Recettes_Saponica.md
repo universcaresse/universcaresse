@@ -1,6 +1,6 @@
 # RECETTES SAPONICA — UNIVERS CARESSE
 
-**Date :** 16 mars 2026
+**Date :** 19 mars 2026
 **Ligne :** Savon | **Cure :** 28 jours | **Nb unités :** 9 | **Statut :** public
 
 ---
@@ -17,7 +17,7 @@
 
 ## BORÉAL
 
-**Couleur :** #7F6811
+**HEX :** #7F6811
 **Collections secondaires :** LUI
 
 **Fragrances :**
@@ -31,6 +31,8 @@
 - 11g charbon activé (entre les deux couches)
 - Moitié sunset yellow et moitié matcha
 
+**Notes :** 10g argile jaune = 3 c. à thé / 11g charbon activé = 1 c. à thé
+
 **Version courte :** C'est la rencontre entre la fraîcheur des grands espaces et la chaleur intime du foyer.
 
 **Version longue :** Un savon qui semble né entre la lumière pâle du Nord et la respiration profonde des forêts anciennes. Le petitgrain apporte sa fraîcheur verte, le cèdre ancre dans le boisé, la palmarosa adoucit sans alourdir. L'argile jaune illumine, le charbon crée ses marbrures sombres comme des ombres de sapins. Boréal, c'est le grand air capturé dans une barre de savon.
@@ -39,7 +41,7 @@
 
 ## BOIS DE CARACTÈRE
 
-**Couleur :** #363636
+**HEX :** #363636
 **Collections secondaires :** LUI
 
 **Fragrances :**
@@ -47,8 +49,10 @@
 
 **Additifs :**
 - ¼ blanc
-- ¾ → 1 à 2 c. à thé charbon actif
+- ¾ → charbon actif
 - Couleur gris foncé et blanc, effet graphique
+
+**Notes :** ¾ charbon actif = 1 à 2 c. à thé
 
 **Version courte :** L'élégance brute de la forêt. Notes boisées et épicées pour une force tranquille.
 
@@ -58,7 +62,8 @@
 
 ## BRISE DES LAGUNES
 
-**Couleur :** #3EAF85
+**HEX :** #3EAF85
+**Collections secondaires :** LUI
 
 **Fragrances :**
 - 10g brise de mer
@@ -68,6 +73,8 @@
 - 10.5g argile blanche
 - ½ sarcelle, ½ argile blanche
 
+**Notes :** Huile aromatique Jasmin, Huile aromatique Lotus, HE Christe marine, Huile aromatique Bois de santal, HE Romarin, HE Bois de Hô, HE Citron
+
 **Version courte :** La fraîcheur des eaux secrètes, la caresse des vents marins.
 
 **Version longue :** Il y a des endroits qu'on ne visite qu'en rêve, des eaux turquoise entre les herbes folles, un vent tiède chargé de sel et de cèdre. Brise des lagunes capture cet instant suspendu. L'argile blanche purifie en douceur tandis que la brise marine et le cèdre bleu s'enlacent dans une mousse soyeuse, fraîche et apaisante. Ferme les yeux. Tu y es presque.
@@ -76,7 +83,7 @@
 
 ## CLUB PRIVÉ
 
-**Couleur :** #6B5229
+**HEX :** #6B5229
 **Collections secondaires :** LUI
 
 **Fragrances :**
@@ -84,6 +91,8 @@
 - 7.8g vanille
 
 **Instructions :** Travailler la pâte à 34°C. Garder de côté un peu de pâte pour marbrage crème et chocolat. Le reste va brunir avec le temps. Mélanger les fragrances à la main. Ajouter un peu de charbon activé dans une couche.
+
+**Notes :**
 
 **Version courte :** Une vanille suave traversée d'un souffle de cigare.
 
@@ -93,7 +102,7 @@
 
 ## DÉLICAT
 
-**Couleur :** #AF99A4
+**HEX :** #AF99A4
 
 **Fragrances :**
 - 8g huile aromatique pivoine
@@ -105,6 +114,8 @@
 - 5 gouttes Pink
 - Fleurs de lavande sur le dessus
 
+**Notes :**
+
 **Version courte :** Pivoine et Lavande. L'élégance d'un voile parfumé.
 
 **Version longue :** Pivoine et lavande se rencontrent dans une danse florale toute en délicatesse. L'argile blanche purifie en douceur, le thé vert protège, et ensemble ils créent une mousse soyeuse qui enveloppe la peau d'un voile parfumé. Délicat, c'est le savon des matins tranquilles et des peaux qui méritent qu'on prenne soin d'elles.
@@ -113,16 +124,18 @@
 
 ## DOUCE PENSÉE
 
-**Couleur :** #E76877
+**HEX :** #E76877
 
 **Fragrances :**
 - 10g HE géranium rosat
 - 5g ylang ylang
 
 **Additifs :**
-- 17.5g argile rose (5 c. à thé)
+- 17.5g argile rose
 - Pétales de roses sur le dessus
-- Fond blanc moins de 2 pouces
+- ¼ blanc, ¾ rose, mélanger à la main
+
+**Notes :** 17.5g argile rose = 5 c. à thé
 
 **Version courte :** Savon qui apaise l'esprit autant qu'il embellit la peau, un bouquet délicat déposé sur le cœur.
 
@@ -132,7 +145,7 @@
 
 ## ÉCLAT DE MER
 
-**Couleur :** #32EDFF — Couleur sarcelle
+**HEX :** #32EDFF
 
 **Fragrances :**
 - 10g brise de mer
@@ -141,9 +154,11 @@
 
 **Additifs :**
 - ~300g éclats de savon Brise des lagunes
-- 11g argile blanche (1 c. à table)
+- 11g argile blanche
 
-**Version courte :** ⚠️ À vérifier avec Chantal — texte imprimé à confirmer
+**Notes :** Couleur sarcelle / 11g argile blanche = 1 c. à table
+
+**Version courte :** Une mousse claire qui réveille la peau comme un matin au bord de l'océan.
 
 **Version longue :** Fraîcheur marine et citronnée, relevée d'un souffle de menthe poivrée. Un savon qui respire l'air salin, la clarté de l'horizon et la liberté des vagues.
 
@@ -151,11 +166,13 @@
 
 ## ÉCLAT FLORAL
 
-**Couleur :** #FFB400
+**HEX :** #FFB400
 
 **Additifs :**
-- 17.5g argile Multani mutti (5 c. à thé)
+- 17.5g argile Multani mutti
 - Fleurs confettis sur le dessus
+
+**Notes :** 17.5g argile Multani mutti = 5 c. à thé
 
 **Version courte :** Un savon mosaïque, doré d'argile jaune et parsemé de fleurs, où chaque fragment renaît en douceur.
 
@@ -165,20 +182,22 @@
 
 ## ÉCLAT TROPICAL
 
-**Couleur :** #FF6735
+**HEX :** #FF6735
 
 **Fragrances :**
-- 6g mandarine
-- 4g orange douce
-- 4g pêche
-- 1.5g jasmin
+- 6g HE mandarine
+- 4g HE orange douce
+- 4g HE pêche
+- 1.5g HE jasmin
 - 1g ylang-ylang
-- 1g basilic doux
+- 1g HE basilic doux
 - 2g mangue-coco
 
 **Additifs :**
-- 10.5g argile blanche (3 c. à thé)
+- 10.5g argile blanche
 - Restes de savon coco-mangue en petits morceaux
+
+**Notes :** 10.5g argile blanche = 3 c. à thé
 
 **Version courte :** Mangue, pêche, mandarine. Un été qui ne finit jamais.
 
@@ -188,15 +207,17 @@
 
 ## ÉTREINTE GOURMANDE
 
-**Couleur :** #A4894A
+**HEX :** #A4894A
 
 **Additifs :**
-- 22g avoine moulue (2 c. à table)
-- 22g amande moulue (2 c. à table)
-- 22g miel (2 c. à table)
+- 22g avoine moulue
+- 22g amande moulue
+- 22g miel
 - 10g amande amère
 - Flocons d'avoine et amande sur le dessus
 - Moitié blanc, moitié or
+
+**Notes :** 22g avoine moulue = 2 c. à table / 22g amande moulue = 2 c. à table / 22g miel = 2 c. à table
 
 **Version courte :** La transparence d'une caresse. Avoine et miel enlacés, l'amande en lumière.
 
@@ -206,16 +227,18 @@
 
 ## FEU D'AUTOMNE
 
-**Couleur :** #FC6B33
+**HEX :** #FC6B33
 
 **Fragrances :**
 - 10g canneberge
-- 2g romarin
-- 3g pin blanc
+- 2g HE romarin
+- 3g HE pin blanc
 
 **Additifs :**
 - 5 gouttes colorant rouge
 - Romarin sur le dessus en petite quantité
+
+**Notes :**
 
 **Version courte :** Teintes cuivrées de canneberge, résine de pin blanc et essence de romarin. L'âme des forêts automnales dans un savon vibrant et vivifiant.
 
@@ -225,12 +248,12 @@
 
 ## JARDIN D'AURORE
 
-**Couleur :** #65791A
+**HEX :** #65791A
 
 **Recette (variante) :**
 - 260g huile de coco
 - 65g beurre de karité
-- 325g huile de tournesol
+- 225g huile de tournesol
 - 100g huile de calendula
 - 184g eau
 - 92g hydroxyde de sodium
@@ -242,9 +265,9 @@
 **Additifs :**
 - 6 gouttes colorant vert kiwi
 
-**Note :** Un p'tit clin d'œil à ma grand-mère que j'aurais voulu connaître.
+**Notes :** Un p'tit clin d'œil à ma grand-mère que j'aurais voulu connaître.
 
-**Version courte :** ⚠️ À confirmer avec Chantal — texte personnel en attente de validation
+**Version courte :** Fraîcheur de concombre, souffle de menthe, un jardin qui respire entre les mains.
 
 **Version longue :** Le concombre frais du potager s'unit à la menthe qui borde les allées, comme un hommage aux mains qui ont cultivé ces merveilles.
 
@@ -252,13 +275,15 @@
 
 ## JARDIN DE ROSES
 
-**Couleur :** #9E3E3E
+**HEX :** #9E3E3E
 
 **Additifs :**
 - 16g huile de rose
-- 6-12g pétales de rose en poudre (1-2 c. à table)
-- 11-22g argile rouge (1-2 c. à table)
+- 6-12g pétales de rose en poudre
+- 11-22g argile rouge
 - Une rose à ajouter à chaque savon à la fin
+
+**Notes :** 6-12g pétales de rose en poudre = 1-2 c. à table / 11-22g argile rouge = 1-2 c. à table
 
 **Version courte :** L'essence même de la rose dans sa plus belle simplicité. Délicate et envoûtante.
 
@@ -268,14 +293,16 @@
 
 ## NUAGE DE LAVANDE
 
-**Couleur :** #7F68CA
+**HEX :** #7F68CA
 
 **Fragrances :**
 - 15g HE lavande
 
 **Additifs :**
-- 14g argile blanche (4 c. à thé)
+- 14g argile blanche
 - Moitié blanc et moitié lavande
+
+**Notes :** 14g argile blanche = 4 c. à thé
 
 **Version courte :** Un champ de lavande, le soir. Rien de plus, rien de moins.
 
@@ -285,11 +312,13 @@
 
 ## SOLEIL DE PROVENCE
 
-**Couleur :** #FD791A — Orange
+**HEX :** #FD791A
 
 **Fragrances :**
 - 15g agrumes et romarin
-- 5g citron
+- 5g HE citron
+
+**Notes :** Orange
 
 **Version courte :** Agrumes et romarin sauvage. Le sud de la France dans chaque mousse.
 
@@ -299,16 +328,18 @@
 
 ## VOILE DE POIRE
 
-**Couleur :** #91D129 — Vert kiwi
+**HEX :** #91D129
 
 **Fragrances :**
-- 11g poire
+- 14g poire
 - 3g thé vert
-- 2g bergamote
+- 2g HE bergamote
 - Quelques gouttes musk blanc
 
 **Additifs :**
-- 11g argile blanche (1 c. à table)
+- 11g argile blanche
+
+**Notes :** Vert kiwi / 11g argile blanche = 1 c. à table
 
 **Version courte :** Poire juteuse, thé vert, bergamote. Une douceur qui glisse.
 

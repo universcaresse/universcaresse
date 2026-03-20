@@ -1,7 +1,7 @@
 # RECETTES PETIT NUAGE — UNIVERS CARESSE
 
-**Date :** 16 mars 2026
-**Ligne :** Savon | **Cure :** ⚠️ à confirmer | **Nb unités :** ⚠️ à confirmer | **Statut :** public
+**Date :** 19 mars 2026
+**Ligne :** Savon | **Cure :** 28 jours | **Nb unités :** 9 | **Statut :** public
 
 ---
 
@@ -11,20 +11,24 @@
 - 50g huile d'amande douce
 - 100g huile de coco
 - 100g beurre de karité
-- 1 c. à thé argile blanche ou rose (selon variété)
+- 5g argile blanche ou rose (selon variété)
 - 59g NaOH
 - 130g eau distillée
+
+**Notes :** 1 c. à thé argile blanche ou rose = 5g
 
 ---
 
 ## PETIT NUAGE BONBON
 
-**Couleur :** Orange
+**HEX :** #B64679
 
 **Additifs :**
-- 1 c. à thé argile blanche
+- 5g argile blanche
 - 5 gouttes orange
 - 5g gomme balloune (fragrance)
+
+**Notes :** Orange / 1 c. à thé argile blanche = 5g
 
 **Version courte :** Un nuage espiègle et sucré, gomme balloune et rires d'enfants dans une mousse joyeuse.
 
@@ -34,27 +38,31 @@
 
 ## PETIT NUAGE CÂLIN
 
-**Couleur :** #B7DCC4
+**HEX :** #B7DCC4
 
 **Additifs :**
-- 1 c. à thé argile blanche
+- 5g argile blanche
 - 5 gouttes bleu
 - 5g poudre de bébé (fragrance)
 
+**Notes :** 1 c. à thé argile blanche = 5g
+
 **Version courte :** Un savon tendre comme une étreinte, pensé pour envelopper la peau d'une douceur rassurante.
 
-**Version longue :** Un savon tendre comme une étreinte, pensé pour envelopper la peau d'une douceur rassurante. Sa mousse légère rappelle le parfum délicat du linge frais, une senteur poudrée qui apaise et réconforte. Petit nuage câlin est une bulle de tendresse, un moment de calme suspendu.
+**Version longue :** Sa mousse légère rappelle le parfum délicat du linge frais, une senteur poudrée qui apaise et réconforte. Petit nuage câlin est une bulle de tendresse, un moment de calme suspendu.
 
 ---
 
 ## PETIT NUAGE DOUCE BAIE
 
-**Couleur :** Rose foncé
+**HEX :** #5A4657
 
 **Additifs :**
-- 1 c. à thé argile rose
+- 5g argile rose
 - 5 gouttes rose foncé
 - 5g smoothie aux mûres (fragrance)
+
+**Notes :** Rose foncé / 1 c. à thé argile rose = 5g
 
 **Version courte :** Un souffle mauve et fruité, velouté comme un smoothie d'été, doux comme une caresse de mûre.
 
@@ -64,26 +72,30 @@
 
 ## PETIT NUAGE FLEURI
 
-**Couleur :** #F8E7A1
+**HEX :** #F8E7A1
 
 **Additifs :**
-- 1 c. à thé argile jaune
+- 5g argile jaune
 - 5 gouttes jaune
 - 5g pois de senteur (fragrance)
 
+**Notes :** 1 c. à thé argile jaune = 5g
+
 **Version courte :** Un savon lumineux et joyeux, comme un matin de printemps.
 
-**Version longue :** Un savon lumineux et joyeux, comme un matin de printemps. Sa mousse douce s'imprègne de la fraîcheur du pois de senteur, une odeur naturelle, légère et florale qui évoque les bouquets d'enfance. Une touche d'argile jaune illumine le savon d'un éclat doré. Petit nuage fleuri est une invitation à la joie simple, un souffle de lumière sur la peau.
+**Version longue :** Sa mousse douce s'imprègne de la fraîcheur du pois de senteur, une odeur naturelle, légère et florale qui évoque les bouquets d'enfance. Une touche d'argile jaune illumine le savon d'un éclat doré. Petit nuage fleuri est une invitation à la joie simple, un souffle de lumière sur la peau.
 
 ---
 
 ## PETIT NUAGE ROSÉ
 
-**Couleur :** #F7DDE6
+**HEX :** #F7DDE6
 
 **Additifs :**
-- 1 c. à thé argile rose
+- 5g argile rose
 - 5 gouttes rose
+
+**Notes :** 1 c. à thé argile rose = 5g
 
 **Version courte :** Une bulle de tendresse, une invitation à la douceur quotidienne.
 

@@ -1,9 +1,9 @@
 # PROMPTS IDEOGRAM — UNIVERS CARESSE
 ## Images de collections
 
-**Date :** 16 mars 2026
+**Date :** 19 mars 2026
 **Outil :** ideogram.ai
-**Compte à utiliser :** Compte Univers Caresse (plus de crédits)
+**Compte à utiliser :** Compte Univers Caresse
 
 ---
 
@@ -18,6 +18,34 @@
 
 ---
 
+## 🔴 À TESTER — NOUVEAUX PROMPTS
+
+### COUVERTURE CATALOGUE — Saison régulière
+*Rustic pine wood shelving units filled with rows of curing handcrafted soap bars, glass bottles of oils, transparent containers of colorful clays and botanicals, quiet artisan soap workshop, warm golden light, stainless steel work surface in foreground, organized abundance, shallow depth of field, no people, no text*
+
+### COUVERTURE CATALOGUE — Hiver / Noël
+*Rustic pine wood shelving units filled with rows of curing handcrafted soap bars, glass bottles of oils, transparent containers of colorful clays and botanicals, quiet artisan soap workshop, soft cool winter light, stainless steel work surface in foreground, a few sprigs of pine and dried orange slices as subtle seasonal accents, organized abundance, shallow depth of field, no people, no text*
+
+### CASA — Saison régulière
+*Soft morning light filtering through a window onto a linen surface, soft sage green tones, peaceful and natural atmosphere, blurred botanical elements in background, artisan craftsmanship feel, minimal, no text, no products, a natural sea sponge and a small amber glass candle as decorative elements*
+
+### CASA — Hiver / Noël
+*Soft winter light filtering through a frosted window onto natural linen fabric, soft sage green and white tones, peaceful winter atmosphere, blurred evergreen branches in background, artisan craftsmanship feel, minimal, no text, no products, a natural sea sponge and a small amber glass candle beside a sprig of holly as decorative elements*
+
+### ÉMOLIA — Saison régulière
+*Soft morning light filtering through a window onto a linen surface, warm honey tones, peaceful and natural atmosphere, blurred botanical elements in background, artisan craftsmanship feel, minimal, no text, no products, a small white ceramic jar, a safety razor and a smooth plain unmarked lip balm tube as decorative elements, no labels, no text on objects, plain objects*
+
+### ÉMOLIA — Hiver / Noël
+*Soft winter light filtering through a frosted window onto natural linen fabric, warm honey and amber tones, peaceful winter atmosphere, blurred evergreen branches in background, artisan craftsmanship feel, minimal, no text, no products, a small white ceramic jar, a safety razor and a smooth plain unmarked lip balm tube beside holly berries as decorative elements, no labels, no text on objects, plain objects*
+
+### ATELIER — Moment 1 : La trace
+*Wide shot of artisan soap workshop, stainless steel work table with a large stainless steel mixing pot containing thin creamy soap batter at light trace, immersion blender resting in the batter, pine wood shelving with soap molds and ingredient jars visible in background, warm workshop light, portrait orientation, no people, no text*
+
+### ATELIER — Moment 2 : Le coulage
+*Wide shot of artisan soap workshop, long rectangular wooden loaf soap molds with smooth pink silicone liners being filled with freshly poured creamy artisan soap batter, pine wood shelving with ingredient jars visible in background, stainless steel work surface, warm workshop light, portrait orientation, no people, no text*
+
+---
+
 ## PROMPTS SAISON RÉGULIÈRE
 
 ### SAPONICA ✅ FAIT
@@ -29,65 +57,57 @@
 ### CAPRIN ✅ FAIT
 *Soft morning light filtering through a window onto a linen surface, warm creamy tones, peaceful and natural atmosphere, blurred botanical elements in background, artisan craftsmanship feel, minimal, no text, no products, a small ceramic goat figurine as single decorative element*
 
-### ÉMOLIA
-*Soft morning light filtering through a window onto a linen surface, warm honey tones, peaceful and natural atmosphere, blurred botanical elements in background, artisan craftsmanship feel, minimal, no text, no products, a small ceramic cream jar as single decorative element*
+### ÉMOLIA ⬜ À tester
+*Voir section À TESTER ci-dessus*
 
-### ÉPURE
+### ÉPURE ⬜ À faire
 *Soft morning light filtering through a window onto a linen surface, neutral earth tones, peaceful and natural atmosphere, blurred botanical elements in background, artisan craftsmanship feel, minimal, no text, no products, a rustic nail brush as single decorative element*
 
-### KÉRYS
+### KÉRYS ⬜ À faire
 *Soft morning light filtering through a window onto a linen surface, cool fresh green tones, peaceful and natural atmosphere, blurred botanical elements in background, artisan craftsmanship feel, minimal, no text, no products, a wooden hair comb as single decorative element*
 
-### LUMINA
-*Soft morning light filtering through a window onto a linen surface, warm amber tones, peaceful and natural atmosphere, blurred botanical elements in background, artisan craftsmanship feel, minimal, no text, no products, a single lit candle as single decorative element*
+### CASA ⬜ À tester
+*Voir section À TESTER ci-dessus*
 
-### CASA
-*Soft morning light filtering through a window onto a linen surface, soft sage green tones, peaceful and natural atmosphere, blurred botanical elements in background, artisan craftsmanship feel, minimal, no text, no products, a natural sea sponge as single decorative element*
-
-### ANIMA
+### ANIMA ⬜ À faire
 *Soft morning light filtering through a window onto a linen surface, warm neutral tones, peaceful and natural atmosphere, blurred botanical elements in background, artisan craftsmanship feel, minimal, no text, no products, a single dog paw print as single decorative element*
 
-### LUI
+### LUI ⬜ À faire
 *Soft morning light filtering through a window onto a linen surface, deep indigo and warm wood tones, peaceful and natural atmosphere, blurred botanical elements in background, artisan craftsmanship feel, minimal, no text, no products, a shaving brush as single decorative element*
 
 ---
 
 ## PROMPTS HIVER / NOËL
 
-**Note :** Même décor épuré que la saison régulière — lin, lumière froide bleue — neige visible dehors par la fenêtre, éléments Noël discrets. Pas de neige à l'intérieur. Pas surchargé.
+### GÉNÉRAL ⬜ À faire
+*Soft winter light filtering through a frosted window onto natural linen fabric, cool silver and white tones, peaceful and serene winter atmosphere, blurred evergreen branches in background, artisan craftsmanship feel, minimal, no text, no products*
 
-### GÉNÉRAL
-*Cool blue winter light filtering through a window with snow visible outside, natural linen fabric on wooden surface, peaceful cold atmosphere, a single pine branch and one matte Christmas ornament, artisan craftsmanship feel, minimal, no text, no products, no snow indoors, realistic photography*
+### SAPONICA — HIVER ⬜ À faire
+*Soft winter light filtering through a frosted window onto natural linen fabric, warm ivory and gold tones, peaceful winter atmosphere, blurred evergreen branches in background, artisan craftsmanship feel, minimal, no text, no products, a smooth river stone dusted with snow as single decorative element*
 
-### SAPONICA — HIVER
-*Cool blue winter light filtering through a window with snow visible outside, natural linen fabric, warm ivory tones, a smooth river stone beside a pine cone and a pine branch, artisan craftsmanship feel, minimal, no text, no products, no snow indoors, realistic photography*
+### PETIT NUAGE — HIVER ⬜ À faire
+*Soft winter light filtering through a frosted window onto natural linen fabric, soft pastel blue and white tones, peaceful winter atmosphere, blurred evergreen branches in background, artisan craftsmanship feel, minimal, no text, no products, a small yellow rubber duck wearing a tiny Santa hat as single decorative element*
 
-### PETIT NUAGE — HIVER
-*Cool blue winter light filtering through a window with snow visible outside, natural linen fabric, soft pastel blue tones, a small yellow rubber duck beside a tiny pine branch and one small matte ornament, artisan craftsmanship feel, minimal, no text, no products, no snow indoors, realistic photography*
+### CAPRIN — HIVER ⬜ À faire
+*Soft winter light filtering through a frosted window onto natural linen fabric, warm cream and ivory tones, peaceful winter atmosphere, blurred evergreen branches in background, artisan craftsmanship feel, minimal, no text, no products, a small ceramic goat figurine beside a tiny pine cone as single decorative element*
 
-### CAPRIN — HIVER
-*Cool blue winter light filtering through a window with snow visible outside, natural linen fabric, warm cream tones, a small ceramic goat figurine beside a pine cone and a cinnamon stick, artisan craftsmanship feel, minimal, no text, no products, no snow indoors, realistic photography*
+### ÉMOLIA — HIVER ⬜ À tester
+*Voir section À TESTER ci-dessus*
 
-### ÉMOLIA — HIVER
-*Cool blue winter light filtering through a window with snow visible outside, natural linen fabric, warm honey and amber tones, a small ceramic cream jar beside a pine branch and a dried orange slice, artisan craftsmanship feel, minimal, no text, no products, no snow indoors, realistic photography*
+### ÉPURE — HIVER ⬜ À faire
+*Soft winter light filtering through a frosted window onto natural linen fabric, cool grey and white tones, peaceful winter atmosphere, blurred evergreen branches in background, artisan craftsmanship feel, minimal, no text, no products, a rustic nail brush beside a sprig of pine as single decorative element*
 
-### ÉPURE — HIVER
-*Cool blue winter light filtering through a window with snow visible outside, natural linen fabric, cool grey tones, a rustic nail brush beside a pine cone and a sprig of holly, artisan craftsmanship feel, minimal, no text, no products, no snow indoors, realistic photography*
+### KÉRYS — HIVER ⬜ À faire
+*Soft winter light filtering through a frosted window onto natural linen fabric, cool fresh green and white tones, peaceful winter atmosphere, blurred evergreen branches in background, artisan craftsmanship feel, minimal, no text, no products, a wooden hair comb beside frosted eucalyptus leaves as single decorative element*
 
-### KÉRYS — HIVER
-*Cool blue winter light filtering through a window with snow visible outside, natural linen fabric, fresh green and white tones, a wooden hair comb beside a pine branch and one matte ornament, artisan craftsmanship feel, minimal, no text, no products, no snow indoors, realistic photography*
+### CASA — HIVER ⬜ À tester
+*Voir section À TESTER ci-dessus*
 
-### LUMINA — HIVER
-*Cool blue winter light filtering through a window with snow visible outside, natural linen fabric, warm amber and gold tones, a single lit candle beside pine cones and a cinnamon stick, artisan craftsmanship feel, minimal, no text, no products, no snow indoors, realistic photography*
+### ANIMA — HIVER ⬜ À faire
+*Soft winter light filtering through a frosted window onto natural linen fabric, warm neutral and white tones, peaceful winter atmosphere, blurred evergreen branches in background, artisan craftsmanship feel, minimal, no text, no products, a single dog paw print in fresh snow as single decorative element*
 
-### CASA — HIVER
-*Cool blue winter light filtering through a window with snow visible outside, natural linen fabric, soft sage green tones, a natural sea sponge beside a sprig of holly and a pine cone, artisan craftsmanship feel, minimal, no text, no products, no snow indoors, realistic photography*
-
-### ANIMA — HIVER
-*Cool blue winter light filtering through a window with snow visible outside, natural linen fabric, warm neutral tones, a small ceramic dog figurine beside a pine branch and a pine cone, artisan craftsmanship feel, minimal, no text, no products, no snow indoors, realistic photography*
-
-### LUI — HIVER
-*Soft cool blue morning light filtering through a window onto natural linen fabric, deep navy and warm wood tones, cold winter atmosphere, a shaving brush beside a sprig of cedar and one matte dark ornament as subtle holiday decorative elements, artisan craftsmanship feel, minimal, no text, no products, no snow indoors, realistic photography*
+### LUI — HIVER ⬜ À faire
+*Soft winter light filtering through a frosted window onto natural linen fabric, deep navy and warm wood tones, peaceful winter atmosphere, blurred evergreen branches in background, artisan craftsmanship feel, minimal, no text, no products, a shaving brush beside a sprig of cedar as single decorative element*
 
 ---
 
@@ -95,18 +115,18 @@
 
 | Collection | Saison régulière | Hiver/Noël |
 |------------|-----------------|------------|
+| Couverture catalogue | ⬜ À tester | ⬜ À tester |
 | Saponica | ✅ Fait | ⬜ À faire |
 | Petit Nuage | ✅ Fait | ⬜ À faire |
 | Caprin | ✅ Fait | ⬜ À faire |
-| Émolia | ✅ Fait | ⬜ À faire |
-| Épure | ✅ Fait | ⬜ À faire |
-| Kérys | ✅ Fait | ⬜ À faire |
-| Lumina | ✅ Fait | ⬜ À faire |
-| Casa | ✅ Fait | ⬜ À faire |
-| Anima | ✅ Fait | ⬜ À faire |
-| Lui | ✅ Fait | ⬜ À faire |
+| Émolia | ⬜ À tester | ⬜ À tester |
+| Épure | ⬜ À faire | ⬜ À faire |
+| Kérys | ⬜ À faire | ⬜ À faire |
+| Casa | ⬜ À tester | ⬜ À tester |
+| Anima | ⬜ À faire | ⬜ À faire |
+| Lui | ⬜ À faire | ⬜ À faire |
 | Général hiver | — | ⬜ À faire |
 
 ---
 
-*Document créé le 16 mars 2026*
+*Document mis à jour le 19 mars 2026*

@@ -1,21 +1,67 @@
 # RECETTES CASA — UNIVERS CARESSE
 
-**Date :** 16 mars 2026
-**Cure :** aucune | **Nb unités :** ⚠️ à confirmer | **Statut :** public
+**Date :** 19 mars 2026
+**Cure :** aucune | **Statut :** public
 
 ---
 
 ## TEXTE DE COLLECTION
 
-Des soins pour votre intérieur pensés avec la même philosophie que pour votre peau. Parce que prendre soin de son foyer, c'est aussi prendre soin de soi. Chaque produit Casa est formulé avec des ingrédients naturels, sans compromis sur l'efficacité ni sur le respect de l'environnement.
+CASA, c'est la même philosophie que pour votre peau — appliquée à votre maison. Des produits pensés avec les mêmes exigences : ingrédients choisis, efficacité réelle, sans compromis. Parce que prendre soin de son intérieur, c'est aussi prendre soin de soi.
+
+Un cake vaisselle qui dégraisse sans agresser les mains, une eau de linge qui dépose sa douceur sur chaque fibre. Et quand le travail est fait — une bruine qui parfume l'air, une chandelle qui pose l'ambiance. Le quotidien, sublimé.
+
+---
+
+## LIGNE : BOUGIE LUMINA
+
+**Nb unités :** ⚠️ à confirmer
+
+### RECETTE DE BASE
+
+- 1000g cire de soya
+- 80g essence au choix
+
+### PARFUMS DISPONIBLES
+
+| Bougie | HEX |
+|--------|-----|
+| Club privé | #6B5229 |
+| Feu d'automne | #FC6B33 |
+| Lessive fraîche | #F1FFEF |
+| Nuage de lavande | #7F68CA |
+| Pivoine et Poire | #A26B83 |
+
+### TEXTE DE COLLECTION
+
+**P1 :** La douceur en lumière. Ces chandelles artisanales prolongent l'univers olfactif de nos savons dans une danse de flammes apaisantes. Fabriquées à partir de cire de soya, elles diffusent leurs fragrances naturelles sans fumée nocive.
+
+**P2 :** Retrouvez les parfums signature de la collection Saponica ainsi que des créations exclusives, dans deux formats pensés pour tous les moments. Coulées à la main en petites séries, ces chandelles transforment chaque pièce en un cocon sensoriel. Une lumière douce, un parfum qui caresse l'air, un instant suspendu.
 
 ---
 
 ## LIGNE : BRUINE D'AMBIANCE
 
-**Couleur :** ⚠️ à confirmer selon fragrances
-**Fragrances disponibles :** ⚠️ à confirmer avec Chantal
-**Recette :** ⚠️ à documenter avec Chantal
+**Nb unités :** 5 / format : 50 ml
+**HEX :** ⚠️ à confirmer selon fragrances
+
+### RECETTE DE BASE
+
+- 54g alcool à 70%
+- 152g eau distillée
+- 0.75g HE au choix
+
+### PARFUMS DISPONIBLES
+
+| Bruine | Fragrance |
+|--------|-----------|
+| Agrumes et romarin | |
+| Lessive fraîche | |
+| Poire | |
+| Lavande | |
+| Brise des lagunes | |
+
+**Notes :** Recette originale : 60 ml alcool 70%, 190 ml eau distillée, 15 gouttes HE
 
 **Version courte :** Un souffle délicat qui transforme l'air de votre intérieur. Fragrances naturelles sur eau distillée, pour un voile olfactif subtil et apaisant.
 
@@ -27,7 +73,8 @@ Des soins pour votre intérieur pensés avec la même philosophie que pour votre
 
 ### ÉCLAT CITRONNÉ
 
-**Couleur :** #FFF816
+**HEX :** #FFF816
+**Nb unités :** ⚠️ à confirmer
 
 **Recette pour un cake :**
 - 129g SCI
@@ -35,6 +82,8 @@ Des soins pour votre intérieur pensés avec la même philosophie que pour votre
 - 38g eau déminéralisée
 - 18g cristaux de soude
 - 2g HE citron
+
+**Notes :**
 
 **Version courte :** Un cake dégraissant au citron, efficace et naturel. Une longévité exceptionnelle qui remplace plusieurs flacons.
 
@@ -44,9 +93,35 @@ Des soins pour votre intérieur pensés avec la même philosophie que pour votre
 
 ## LIGNE : EAU DE LINGE
 
-**Couleur :** ⚠️ à confirmer selon fragrances
-**Fragrances disponibles :** ⚠️ à confirmer avec Chantal
-**Recette :** ⚠️ à documenter avec Chantal
+**Nb unités :** 1 / format : 500 ml
+**HEX :** ⚠️ à confirmer selon fragrances
+
+### RECETTE DE BASE
+
+- 99g alcool à 70%
+- 304g eau distillée
+- 4-5g HE au choix (80-100 gouttes)
+
+**Notes :** Recette originale : 110 ml alcool 70%, 380 ml eau distillée, 80-100 gouttes HE
+
+### GRAND AIR
+
+- 40 gouttes HE citron
+- 30 gouttes HE eucalyptus radiata
+- 30 gouttes HE menthe poivrée
+
+### SÉRÉNITÉ PURE
+
+- 55 gouttes fragrance lessive fraîche
+- 40 gouttes HE lavande
+
+### LESSIVE FRAÎCHE
+
+- 80g fragrance lessive fraîche
+
+### LAVANDE
+
+- 80 gouttes HE lavande
 
 **Version courte :** Une eau délicatement parfumée qui dépose sur vos tissus un sillage doux et naturel, du matin au soir.
 
@@ -58,9 +133,18 @@ Des soins pour votre intérieur pensés avec la même philosophie que pour votre
 
 ### SOUFFLE DE SAPIN
 
-**Couleur :** #4A6126
+**HEX :** #4A6126
+**Nb unités :** 30
 
-**Recette :** ⚠️ à documenter avec Chantal
+**Recette :**
+- 2500g saindoux
+- 1000g eau
+- 340g NaOH
+- 15g sel
+- 15g argile blanche
+- 40g HE sapin
+
+**Notes :** 1 c. à soupe sel = 15g / 1 c. à soupe argile blanche = 15g
 
 **Version courte :** Un savon rustique au parfum de forêt, puissant et authentique, créé pour détacher les tissus et nettoyer la maison avec la force simple du sapin.
 

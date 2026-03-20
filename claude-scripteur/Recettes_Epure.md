@@ -1,7 +1,7 @@
 # RECETTES ÉPURE — UNIVERS CARESSE
 
-**Date :** 16 mars 2026
-**Ligne :** Savon à main | **Cure :** ⚠️ à confirmer | **Nb unités :** ⚠️ à confirmer | **Statut :** public
+**Date :** 19 mars 2026
+**Ligne :** Savon à main | **Cure :** 42 jours | **Nb unités :** 10 | **Statut :** public
 
 ---
 
@@ -12,25 +12,28 @@
 - 65g beurre de karité
 - 184g eau
 - 92g hydroxyde de sodium
+- 10g sucre
+
+**Notes :** 2 c. à thé sucre = 10g
 
 ---
 
 ## GRAIN D'ACIER
 
-**Couleur :** #545454
+**HEX :** #545454
 **Collections secondaires :** LUI
 
 **Additifs :**
 - Trace de charbon
-- 7g pierre ponce (2 c. à thé)
-- 3.5g argile blanche (1 c. à thé)
+- 7g pierre ponce
+- 3.5g argile blanche
 
 **Fragrances :**
 - 9g HE pin blanc
 - 8g HE cèdre feuille
 - 2.5g HE orange douce
 
-**Note :** Savon gris pâle avec mouchette de charbon pour rappeler le métal.
+**Notes :** 7g pierre ponce = 2 c. à thé / 3.5g argile blanche = 1 c. à thé / Savon gris pâle avec mouchette de charbon pour rappeler le métal.
 
 **Version courte :** Un savon robuste et épuré, conçu pour les mains marquées d'huile et de métal. Sa mousse dense décroche la graisse et laisse la peau nette.
 
@@ -40,18 +43,19 @@
 
 ## HERBE DOUCE
 
-**Couleur :** #425B00
+**HEX :** #425B00
 
 **Additifs :**
-- 3.5g argile blanche (1 c. à thé)
+- 3.5g argile blanche
 - Vert sauge dans une petite quantité de pâte, ajouté sans trop mêler
 
 **Fragrances :**
-- 8g HE pin blanc
-- 7g poire
-- 3g mandarine
-- 1g orange douce
-- 0.5g ylang-ylang
+- 7g HE pin blanc
+- 8g poire
+- 4g orange douce
+- 1g ylang-ylang
+
+**Notes :** 3.5g argile blanche = 1 c. à thé
 
 **Version courte :** Un savon clair et apaisant, où le pin blanc et la poire se mêlent à une lumière douce. Une fraîcheur verte, simple et pure, comme un matin tranquille.
 
@@ -61,7 +65,7 @@
 
 ## MOUSSE D'ESPRESSO
 
-**Couleur :** #3F2300
+**HEX :** #3F2300
 
 **Recette (variante) :**
 - 365g café infusé
@@ -71,8 +75,10 @@
 - 200g beurre de karité
 - 136g soude caustique
 - 28g huile de café
-- 22g marc de café (2 c. à table)
-- 11g cacao en poudre (1 c. à table)
+- 22g marc de café
+- 11g cacao en poudre
+
+**Notes :** 22g marc de café = 2 c. à table / 11g cacao en poudre = 1 c. à table
 
 **Version courte :** Un parfum mocha, une mousse chaleureuse, des grains qui réveillent la peau.
 
@@ -82,7 +88,7 @@
 
 ## MURMURE D'OLIVA
 
-**Couleur :** #A2AF0E
+**HEX :** #A2AF0E
 
 **Recette (variante) :**
 - 325g huile d'olive
@@ -96,10 +102,10 @@
 - 7g HE citron
 
 **Additifs :**
-- 17.5g argile verte (5 c. à thé)
-- 10g romarin séché (5 c. à thé)
+- 17.5g argile verte
+- 10g romarin séché
 
-**Note :** Verser moules en cubes. Savon cuisine.
+**Notes :** 17.5g argile verte = 5 c. à thé / 10g romarin séché = 5 c. à thé / Verser moules en cubes avec une demie tranche de citron dans chaque cube
 
 **Version courte :** Un souffle doux venu de la Méditerranée.
 

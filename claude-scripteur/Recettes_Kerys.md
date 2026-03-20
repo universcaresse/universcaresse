@@ -1,7 +1,7 @@
 # RECETTES KÉRYS — UNIVERS CARESSE
 
-**Date :** 16 mars 2026
-**Statut :** public | **Nb unités :** ⚠️ à confirmer | **Cure :** aucune (shampoings solides)
+**Date :** 19 mars 2026
+**Statut :** public | **Nb unités :** 1 | **Cure :** aucune (shampoings solides)
 
 ---
 
@@ -13,16 +13,19 @@
 
 ### BRISE MATINALE
 
-**Couleur :** ⚠️ À confirmer avec Chantal — ancien fichier : #2387FF / notes Chantal : #6787FF
+**HEX :**
 
 **Recette :**
-- 60g SCI
+- 48g SCI
 - 10g argile blanche
-- 10g huile végétale de pépins de raisin
-- 10g hydrolat de menthe poivrée
-- 5g beurre de cacao
+- 15g huile végétale de pépins de raisin
+- 15g hydrolat de menthe poivrée
+- 8g beurre de cacao
 - 5g poudre de guimauve
-- 8-10 gouttes HE menthe ou citron
+- 6g glycérine
+- 8-10 gouttes HE menthe poivrée
+
+**Notes :** ⚠️ À confirmer avec Chantal — ancien fichier : #2387FF / notes Chantal : #6787FF / Ce savon est beige
 
 **Version courte :** Sous sa caresse, le cuir chevelu s'illumine comme au lever du jour.
 
@@ -32,18 +35,21 @@
 
 ### PURE HARMONIE
 
-**Couleur :** #2387FF
+**HEX :** #2387FF
 
 **Recette :**
-- 60g SCI
+- 48g SCI
 - 10g poudre d'avoine
-- 10g huile amande douce
-- 10g hydrolat de lavande
-- 5g beurre de karité
+- 15g huile amande douce
+- 15g hydrolat de lavande
+- 8g beurre de karité
 - 5g poudre shikakaï
+- 6g glycérine
 - 10 gouttes HE lavande vraie
 
 **Instructions :** Fondre SCI + hydrolat. Ajouter huile. Incorporer les poudres. Hors feu, ajouter les HE.
+
+**Notes :** Ce savon est brun
 
 **Version courte :** La lavande apaise, l'avoine équilibre. Un souffle de douceur pour les cheveux de tous les jours.
 
@@ -59,19 +65,21 @@
 
 ### BOTANICA
 
-**Couleur :** #547956
+**HEX :** #547956
 
 **Recette :**
-- 30g SCI
-- 10g beurre de karité
-- 10g huile de coco
+- 35g SCI
+- 12g beurre de karité
+- 12g huile de coco
 - 10g poudre de guimauve
 - 10g poudre de shikakaï
-- 10g hydrolat lavande
-- 10g glycérine végétale
+- 12g hydrolat lavande
+- 6g glycérine végétale
 - 3g provitamine B5
 - 3g phytokératine
 - 10 gouttes HE lavande vraie
+
+**Notes :** Ce savon est beige
 
 **Version courte :** Les boucles s'ancrent dans la force des plantes, retrouvant vigueur et harmonie au cœur de la nature.
 
@@ -81,14 +89,17 @@
 
 ### DOUCEUR DES ÎLES
 
-**Couleur :** #CF8E56
+**HEX :** #CF8E56
 
 **Recette :**
-- 60g SCI
+- 50g SCI
 - 20g beurre de karité
-- 10g huile de coco
-- 10g eau
+- 12g huile de coco
+- 15g eau
+- 6g glycérine
 - 20 gouttes mangue-coco
+
+**Notes :** Ce savon est crème / Vérifier si hydrolat
 
 **Version courte :** Les boucles s'imprègnent de chaleur exotique, comme caressées par des vents tropicaux et les fruits solaires.
 
@@ -104,16 +115,19 @@
 
 ### CLARTÉ VERTE
 
-**Couleur :** #78FFA3
+**HEX :** #78FFA3
 
 **Recette :**
-- 60g SCI
-- 10g argile verte
-- 10g huile végétale jojoba
+- 45g SCI
+- 8g argile blanche
+- 15g huile végétale jojoba
 - 10g hydrolat romarin
 - 5g beurre cacao
 - 5g poudre ortie
+- 6g glycérine
 - 8-10 gouttes HE tea tree
+
+**Notes :** Ce savon est vert foncé
 
 **Version courte :** La chevelure respire comme une clairière purifiée.
 
@@ -123,16 +137,19 @@
 
 ### RAYON LUMINEUX
 
-**Couleur :** #78FF3D
+**HEX :** #78FF3D
 
 **Recette :**
-- 60g SCI
+- 50g SCI
 - 10g poudre de shikakaï
-- 10g argile blanche
+- 8g argile blanche
 - 10g hydrolat de menthe
-- 5g huile végétale de pépins de raisin
+- 10g huile végétale de pépins de raisin
 - 5g poudre de bardane
+- 6g glycérine
 - 8-10 gouttes HE citron ou pamplemousse
+
+**Notes :**
 
 **Version courte :** La chevelure s'illumine d'une fraîcheur solaire et pétillante.
 

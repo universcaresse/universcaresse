@@ -1,7 +1,7 @@
 # RECETTES ANIMA — UNIVERS CARESSE
 
-**Date :** 16 mars 2026
-**Ligne :** Savon pour animaux | **Cure :** ⚠️ à confirmer | **Nb unités :** ⚠️ à confirmer | **Statut :** public
+**Date :** 19 mars 2026
+**Ligne :** Savon pour animaux | **Cure :** 42 jours | **Nb unités :** 9 | **Statut :** public
 
 ---
 
@@ -15,7 +15,7 @@
 
 ## PATTES BLANCHES
 
-**Couleur :** #E6DEDF
+**HEX :** #E6DEDF
 **Surgraissage :** 10%
 
 **Recette :**
@@ -29,6 +29,8 @@
 **Additifs :**
 - 10g argile blanche
 - 15g avoine colloïdale
+
+**Notes :**
 
 **Version courte :** Le savon des petits aventuriers, pour effacer les traces d'aventure et retrouver un pelage de velours.
 

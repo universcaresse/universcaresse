@@ -508,6 +508,7 @@ async function supprimerLigne(rowIndex, collection, ligne) {
   confirmerAction('Supprimer cette ligne ?', async () => {
     const res = await appelAPIPost('deleteCollectionItem', { rowIndex });
     if (res && res.success) {
+      fermerFicheLigne();
       fermerFicheCollection();
       afficherMsg('collections', 'Ligne supprimée.');
       await chargerCollections();
