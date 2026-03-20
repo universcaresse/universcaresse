@@ -153,11 +153,11 @@ function afficherEduSection(num) {
     cible.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => {
       el.classList.remove('visible');
     });
-    requestAnimationFrame(() => requestAnimationFrame(() => {
+    setTimeout(() => {
       cible.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => {
         el.classList.add('visible');
       });
-    }));
+    }, 50);
   }
   window.scrollTo(0, 0);
 }
