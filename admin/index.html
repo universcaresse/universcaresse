@@ -280,6 +280,7 @@
             <div id="fiche-collection-extras"></div>
             <div class="section-label">Lignes de produits</div>
             <div id="fiche-collection-lignes"></div>
+            <hr class="separateur">
             <div class="form-actions">
               <button class="btn btn-primary" id="fiche-collection-modifier">Modifier la collection</button>
               <button class="btn btn-danger" id="btn-supprimer-collection">Supprimer la collection</button>
@@ -288,13 +289,11 @@
           </div>
        </div> 
         <div class="form-panel" id="fiche-ligne">
+          <button class="btn-fermer-panneau" onclick="fermerFicheLigne()" title="Fermer">✕</button>
           <div class="form-panel-header">
             <div class="fiche-collection-bandeau" id="fiche-ligne-bandeau">
               <span class="form-panel-titre" id="fiche-ligne-titre"></span>
               <span class="fiche-collection-slogan" id="fiche-ligne-format"></span>
-              <div class="form-actions">
-                <button class="btn btn-outline btn-icone" onclick="fermerFicheLigne()" title="Fermer">✕</button>
-              </div>
             </div>
           </div>
           <div class="form-body">
@@ -316,19 +315,19 @@
               <label class="form-label">Ingrédients de base</label>
               <div id="fiche-ligne-ingredients"></div>
             </div>
+          <hr class="separateur">
           <div class="form-actions fiche-ligne-actions">
-		  
               <button class="btn btn-primary" id="fiche-ligne-modifier">Modifier la ligne</button>
               <button class="btn btn-danger" id="btn-supprimer-ligne-fiche">Supprimer la ligne</button>
             </div>
           </div>
         </div>
       <div class="form-panel" id="form-collections">
+          <button class="btn-fermer-panneau" onclick="fermerFormCollection()" title="Fermer">✕</button>
           <div class="form-panel-header">
             <div class="form-panel-titre" id="form-collections-titre">Nouvelle collection</div>
             <div class="td-actions">
               <button class="btn btn-sm btn-outline" id="fc-toggle-mode" onclick="basculerModeFormCollection()">+ Ajouter une ligne</button>
-              <button class="btn btn-sm btn-outline btn-icone" onclick="fermerFormCollection()" title="Fermer">✕</button>
             </div>
           </div>
           <div class="form-body">
@@ -409,6 +408,7 @@
             </div>
 			 
  
+            <hr class="separateur">
             <div class="form-actions">
               <button class="btn btn-primary" onclick="sauvegarderCollection()">Enregistrer</button>
               <button class="btn btn-secondary" onclick="fermerFormCollection()">Annuler</button>
@@ -452,21 +452,22 @@
           <button class="btn btn-outline btn-sm" onclick="reinitialiserFiltresRecettes()">Réinitialiser</button>
         </div>
         <div class="form-panel" id="fiche-recette">
+          <button class="btn-fermer-panneau" onclick="fermerFicheRecette()" title="Fermer">✕</button>
           <div class="form-panel-header">
             <div class="form-panel-titre" id="fiche-recette-titre"></div>
-            <div class="form-actions">
-              <button class="btn btn-sm btn-primary" onclick="basculerModeEditionRecette()">Modifier</button>
-              <button class="btn btn-sm btn-danger" onclick="supprimerRecetteActive()">Supprimer</button>
-              <button class="btn btn-sm btn-outline btn-icone" onclick="fermerFicheRecette()" title="Fermer">✕</button>
-            </div>
           </div>
           <div class="form-body" id="fiche-recette-contenu"></div>
+          <hr class="separateur">
+          <div class="form-actions" style="padding: 0 28px 28px;">
+            <button class="btn btn-primary" onclick="basculerModeEditionRecette()">Modifier</button>
+            <button class="btn btn-danger" onclick="supprimerRecetteActive()">Supprimer</button>
+          </div>
         </div>
        
         <div class="form-panel" id="form-recettes">
+          <button class="btn-fermer-panneau" onclick="fermerFormRecette()" title="Fermer">✕</button>
           <div class="form-panel-header">
             <div class="form-panel-titre" id="form-recettes-titre">Nouvelle recette</div>
-            <button class="btn btn-sm btn-outline btn-icone" onclick="fermerFormRecette()" title="Fermer">✕</button>
           </div>
           <div class="form-body">
            <input type="hidden" id="fr-id">
@@ -558,6 +559,7 @@
               <div id="liste-ingredients-recette"></div>
               <button type="button" class="btn btn-secondary btn-ajouter-ingredient" onclick="ajouterIngredientRecette()">+ Ajouter un ingrédient</button>
             </div>
+            <hr class="separateur">
             <div class="form-actions">
               <button class="btn btn-primary" onclick="sauvegarderRecette()">Enregistrer</button>
               <button class="btn btn-secondary" onclick="fermerFormRecette()">Annuler</button>
@@ -806,8 +808,8 @@
           </select>
           <input class="form-ctrl filtre-select" type="date" id="filtre-date-debut" onchange="filtrerFactures()">
           <input class="form-ctrl filtre-select" type="date" id="filtre-date-fin" onchange="filtrerFactures()">
-          <button class="btn btn-sm btn-outline btn-icone" onclick="reinitialiserFiltres()" title="Réinitialiser">✕</button>
           <span id="factures-compte" class="factures-compte"></span>
+          <button class="btn-fermer-panneau" onclick="reinitialiserFiltres()" title="Réinitialiser">✕</button>
         </div>
 		
 		
@@ -838,7 +840,7 @@
                 <div class="modal-admin-titre" id="modal-facture-titre">Facture</div>
                 <div class="modal-admin-info" id="modal-facture-info"></div>
               </div>
-              <button class="btn btn-sm btn-outline" onclick="fermerModalFacture()">Fermer</button>
+              <button class="btn-fermer-panneau" onclick="fermerModalFacture()" title="Fermer">✕</button>
             </div>
             <div class="modal-admin-body">
               <div class="chargement cache" id="loading-detail-facture"><span class="spinner"></span>Chargement...</div>
@@ -866,7 +868,7 @@
             <option value="">Tous les fournisseurs</option>
           </select>
           <input type="text" class="form-ctrl filtre-select" id="inv-recherche" placeholder="Rechercher par nom…" oninput="filtrerInventaire()">
-          <button class="btn btn-outline btn-icone" onclick="reinitialiserFiltresInventaire()" title="Réinitialiser">✕</button>
+          <button class="btn-fermer-panneau" onclick="reinitialiserFiltresInventaire()" title="Réinitialiser">✕</button>
         </div>
         <div class="chargement" id="loading-inventaire"><span class="spinner"></span>Chargement...</div>
         <div id="contenu-inventaire"></div>
@@ -1101,9 +1103,9 @@
         </div>
         <div class="msg-zone" id="msg-densites"></div>
        <div class="form-panel cache" id="form-densites">
+          <button class="btn-fermer-panneau" onclick="fermerFormDensite()" title="Fermer">✕</button>
           <div class="form-panel-header">
             <div class="form-panel-titre" id="form-densites-titre">Nouveau type</div>
-            <button class="btn btn-sm btn-outline" onclick="fermerFormDensite()">Fermer</button>
           </div>
           <div class="form-body">
             <input type="hidden" id="fd-mode">
@@ -1133,6 +1135,7 @@
                 <input type="text" inputmode="decimal" class="form-ctrl" id="fd-marge-perte">
               </div>
             </div>
+            <hr class="separateur">
             <div class="form-actions">
               <button class="btn btn-primary" onclick="sauvegarderDensite()">Enregistrer</button>
               <button class="btn btn-secondary" onclick="fermerFormDensite()">Annuler</button>

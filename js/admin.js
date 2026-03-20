@@ -256,6 +256,7 @@ function ouvrirFormCollectionPour(col) {
 }
 
 function ouvrirFormCollection() {
+  fermerFicheCollection();
   document.getElementById('form-collections-titre').textContent = 'Nouvelle collection';
   document.getElementById('fc-rowIndex').value = '';
   document.getElementById('fc-mode').value = 'collection';
