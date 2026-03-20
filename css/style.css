@@ -342,6 +342,8 @@ main { padding-top: var(--nav-h); }
 }
 .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
 .btn-icone { padding: 11px 14px; margin-left: auto !important; }
+.btn-fermer-panneau { position: absolute; top: 12px; right: 12px; background: none; border: none; cursor: pointer; font-size: 1.1rem; color: var(--gris); line-height: 1; padding: 4px 8px; }
+.btn-fermer-panneau:hover { color: var(--gris-fonce); }
 
 .btn-edit {
   background: rgba(90,138,58,0.08); color: var(--primary);
@@ -796,7 +798,7 @@ footer > * { position: relative; z-index: 1; }
 /* ═══════════════════════════════════════
    ADMIN — FORM PANEL
    ═══════════════════════════════════════ */
-.form-panel { display: none; background: white; border: 1px solid var(--beige); margin-bottom: 32px; overflow: hidden; }
+.form-panel { display: none; background: white; border: 1px solid var(--beige); margin-bottom: 32px; overflow: hidden; position: relative; }
 .form-panel.visible { display: block; }
 .form-panel-header { padding: 20px 28px 16px; border-bottom: 1px solid var(--beige); background: rgba(232,220,200,0.2); display: flex; align-items: center; gap: 16px; }
 .form-panel-titre { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; color: var(--gris-fonce); flex: 1; }

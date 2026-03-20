@@ -268,16 +268,11 @@
         </div>
         <div class="msg-zone" id="msg-collections"></div>
        <div class="form-panel" id="fiche-collection">
+          <button class="btn-fermer-panneau" onclick="fermerFicheCollection()" title="Fermer">✕</button>
           <div class="form-panel-header">
             <div class="fiche-collection-bandeau" id="fiche-collection-bandeau">
               <span class="form-panel-titre" id="fiche-collection-titre"></span>
               <span class="fiche-collection-slogan" id="fiche-collection-slogan"></span>
-              <div class="form-actions">
-            <button class="btn btn-primary" id="fiche-collection-modifier">Modifier la collection</button>
-                <button class="btn btn-danger" id="btn-supprimer-collection">Supprimer la collection</button>
-                <button class="btn btn-secondary" id="fiche-collection-ajouter-ligne">+ Ajouter une ligne</button>
-                <button class="btn btn-outline btn-icone" onclick="fermerFicheCollection()" title="Fermer">✕</button>
-              </div>
             </div>
           </div>
           <div class="form-body">
@@ -285,6 +280,11 @@
             <div id="fiche-collection-extras"></div>
             <div class="section-label">Lignes de produits</div>
             <div id="fiche-collection-lignes"></div>
+            <div class="form-actions">
+              <button class="btn btn-primary" id="fiche-collection-modifier">Modifier la collection</button>
+              <button class="btn btn-danger" id="btn-supprimer-collection">Supprimer la collection</button>
+              <button class="btn btn-secondary" id="fiche-collection-ajouter-ligne">+ Ajouter une ligne</button>
+            </div>
           </div>
        </div> 
         <div class="form-panel" id="fiche-ligne">

@@ -18,7 +18,7 @@ const COULEURS_COLLECTIONS = {
   'ÉPURE':       ['#7a8c5a', '#4a5c32'],
   'KÉRYS':       ['#9b8ea0', '#6b5d72'],
   'CASA':        ['#d4a84b', '#a67c2a'],
-  'LUMINA':      ['#5a5654', '#2e2c2a'],
+ 
   'ANIMA':       ['#c4845a', '#8a5230'],
   'LUI':         ['#8a6040', '#5a3820']
 };
@@ -358,7 +358,7 @@ function afficherCollectionsFallback() {
     { nom: 'Épure',       slogan: 'Simplement la nature qui prend soin de vos mains' },
     { nom: 'Kérys',       slogan: 'Simplement la nature qui dorlotte vos cheveux' },
     { nom: 'Casa',        slogan: 'Simplement la nature qui prend soin de votre maison' },
-    { nom: 'Lumina',      slogan: 'Simplement la nature en lumière parfumée' },
+    
     { nom: 'Anima',       slogan: 'Simplement la nature pour pattes et museaux' }
   ];
   const strip = document.getElementById('collections-strip');
