@@ -843,7 +843,6 @@ function supprimerRecetteActive() {
 
 function ouvrirFormRecette() {
   formatsRecette = [];
-  rafraichirListeFormatsRecette();
   document.getElementById('form-recettes-titre').textContent = 'Nouvelle recette';
   document.getElementById('fr-id').value = '';
  ['fr-nom','fr-couleur','fr-format','fr-unites','fr-cure','fr-prix','fr-description','fr-instructions','fr-notes']
