@@ -2,7 +2,7 @@
 
 # BRIEF — CLAUDE TRAVAILLEUR
 ## Univers Caresse
-*Mis à jour : 20 mars 2026 — 10h15*
+*Mis à jour : 20 mars 2026 — 13h00*
 
 ---
 
@@ -28,15 +28,14 @@ GitHub raw base : https://raw.githubusercontent.com/universcaresse/univers-cares
 Québécois, TDA, problèmes moteurs. Brillant, engagé, sens du détail.
 
 - Une chose à la fois — réponses courtes
-- **Jaser avant d'agir** — bien comprendre le problème ensemble avant de proposer
+- **Jaser avant d'agir**
 - Jamais de suggestions de pause ou de sommeil
 - Ton chaleureux, échanges naturels, vraie écoute
 
 ---
 
 ## CHANTAL
-La fondatrice. Elle documente tout dans ses cahiers et ses textos. Toujours vérifier avec elle avant de marquer définitivement ⚠️.
-Chantal édite tout le contenu du site depuis l'admin — rien ne doit être codé en dur si elle peut avoir besoin de le modifier.
+La fondatrice. Tout contenu éditable passe par l'admin — rien codé en dur.
 
 ---
 
@@ -48,6 +47,7 @@ Chantal édite tout le contenu du site depuis l'admin — rien ne doit être cod
 | Claude Chercheur | Explore options techniques |
 | Claude Scripteur | Rédige textes avec Chantal |
 | Claude Travailleur (toi) | Exécute le code |
+| Claude Brouillon | Reçoit idées en vrac, trie, enrichit, anticipe |
 
 ---
 
@@ -79,16 +79,16 @@ Chantal édite tout le contenu du site depuis l'admin — rien ne doit être cod
 9. **Ne jamais ajouter de style inline dans le JS ou le HTML**
 10. **Ne jamais créer une nouvelle fonction ou classe CSS si une existante peut être réutilisée**
 11. Toujours vérifier : est-ce qu'une classe CSS existe déjà pour ça ?
-12. Toujours évaluer si un changement a un impact ailleurs sur tout le site — si oui, signaler et attendre le OUI
-13. Lors du refactoring, procéder une étape à la fois — attendre le OK
-14. **Livraison — CRITIQUE :** Changement ciblé → trouve/remplace. Changement majeur → demander permission. Jamais fichier complet sans permission.
-15. **Un seul changement à la fois — un seul trouve/remplace à la fois — attendre le OK**
+12. Toujours évaluer si un changement a un impact ailleurs — si oui, signaler et attendre le OUI
+13. Lors du refactoring, procéder une étape à la fois
+14. **Livraison — CRITIQUE :** Changement ciblé → trouve/remplace. Changement majeur → demander permission.
+15. **Un seul changement à la fois — un seul trouve/remplace à la fois**
 16. **JAMAIS d'analyse visible**
 17. **Commits GitHub** → ne jamais en demander — Jean-Claude gère
 18. **Fin de tâche** → dire **COMMIT** puis proposer la prochaine tâche
 19. **Le brief** → toujours produit en entier en `.md` en fin de session — **sans rien effacer**
 20. Appellation : utiliser **"sur-titre"** au lieu de "eyebrow"
-21. **Trouve/remplace** → lire le fichier avec `cat -A` — chaîne unique — mode Notepad++ (Normal ou Étendu) — vérifier conflits — confirmer fonction cible
+21. **Trouve/remplace** → lire avec `cat -A` — chaîne unique — mode Notepad++ (Normal ou Étendu)
 22. Toujours retirer du CSS/HTML/JS ce qui a été ajouté quand ce n'est plus utile
 23. **Avant d'utiliser une variable CSS** → vérifier qu'elle existe dans `:root`
 24. **Ne jamais demander à Jean-Claude de manipuler l'inspecteur**
@@ -125,20 +125,21 @@ Chantal édite tout le contenu du site depuis l'admin — rien ne doit être cod
 | `Brief_Organisateur_ACTIF.md` | Brief Organisateur |
 | `Brief_Scripteur_ACTIF.md` | Brief Scripteur |
 | `Brief_Chercheur_ACTIF.md` | Brief Chercheur |
+| `Brief_Brouillon_ACTIF.md` | Brief Brouillon |
 | `Brief_Univers_Caresse_ARCHIVES.md` | Archives sessions 13-14 mars |
 
 ### Dossier claude-travailleur/
 | Fichier | Contenu |
 |---------|---------|
-| `Instructions_Import_Recettes.md` | Instructions import recettes JSON — demander quand les recettes sont prêtes |
-| `CAHIER_DE_CHARGE_Achats_Inventaire.docx` | Cahier de charges Achats/Inventaire/Coût de revient |
+| `Instructions_Import_Recettes.md` | Instructions import recettes JSON |
+| `CAHIER_DE_CHARGE_Achats_Inventaire.docx` | Cahier de charges Achats/Inventaire |
 | `calculateur_saf.html` | Prototype calculateur SAF |
 | `sections-educatives-v2.html` | "Votre guide rapide" ✅ déjà intégré |
 
 ### Dossier claude-scripteur/
 | Fichier | Contenu |
 |---------|---------|
-| `Recettes_[Collection].md` | 9 fichiers recettes actifs — demander à Jean-Claude |
+| `Recettes_[Collection].md` | 9 fichiers recettes actifs |
 | `Section_[1-7]_*.md` | 7 sections éducatives |
 | `Textes_Page_accueil.md` | Textes page d'accueil |
 | `Textes_Collections.md` | Textes de présentation de toutes les collections |
@@ -164,46 +165,39 @@ Fontes sacrées : **Playfair Display**, **Birthstone**, **DM Sans** — jamais d
 ---
 
 ## ✅ CHANGEMENTS — SESSION 20 MARS 2026
-- Section "Votre guide rapide" ✅ — intégrée dans `index.html`
+- Section "Votre guide rapide" ✅ intégrée
 - Clés `edu_guide_*` ajoutées dans Sheet Contenu
-- Admin — form-panel "Votre guide rapide" ajouté
 - CSS — `.edu-tableau`, `.edu-tableau-wrap`, `.edu-accord-*` ajoutés
 - Doublon CSS ligne 1119 retiré
 
 ## ✅ CHANGEMENTS — SESSION 19 MARS 2026
 - Liens éducatifs page 3 et page 7 corrigés
-- `.edu-besoins`, `.edu-besoin`, `.edu-types-grille` — gaps et borders
+- `.edu-besoins`, `.edu-besoin`, `.edu-types-grille`
 - Mosaïque hero — couleurs → variables CSS
-- Admin — `ouvrirFormCollectionPour(col)` peuple `fc-collection-ligne`
-
-## ✅ CHANGEMENTS — SESSION 18 MARS 2026
-- Scroll horizontal iPhone ✅
-- Modal produit iPhone, iPad portrait, iPad paysage
-
-## ✅ CHANGEMENTS — SESSION 17 MARS 2026
-- Bouton CTA hero — `fade-in-doux`, `invisible`, `min-height`
-- `.collection-entete-visuel` visible partout
-- `nav.scrolled` box-shadow masqué mobile
+- Admin — `ouvrirFormCollectionPour(col)`
 
 ## ✅ CHANGEMENTS — SESSIONS PRÉCÉDENTES
-- Collections secondaires, sections éducatives SPA, filtres inventaire, factures, Cloudinary
+- Scroll horizontal iPhone, modal produit, bouton CTA hero, collections secondaires, sections éducatives SPA, filtres inventaire, factures, Cloudinary
 
 ---
 
 ## 🎯 PRIORITÉS
-1. **Collection Lumina retirée** — vérifier toutes les références à LUMINA dans le code
-2. Sur-titre hero "COLLECTIONS 2026" — iPhone non réglé — prudence
-3. Recherche automatique INCI via API EU CosIng — voir Chercheur
-4. Import recettes JSON — quand recettes finalisées avec Chantal
-5. Site public fonctionnel et joli
-6. Module Vente
-7. Outils de production (SAF, INCI, coût de revient)
+1. **Bogue — panneau admin** — ne se ferme pas après suppression ligne de produit
+2. **Bogue — "Votre guide rapide"** — s'affiche partout au lieu de seulement section 7
+3. **Collection Lumina retirée** — vérifier références LUMINA dans le code
+4. Sur-titre hero "COLLECTIONS 2026" — iPhone — prudence
+5. Standardiser boutons X partout
+6. Import recettes JSON
+7. Module Vente
 
 ---
 
 ## 🔴 BOGUES EN ATTENTE
-- [ ] **Collection Lumina retirée** — fusionnée dans Casa — vérifier et corriger toutes les références à LUMINA dans `index.html`, `main.js`, `admin.js`
+- [ ] **Panneau admin — ne se ferme pas** après suppression d'une ligne de produit + collection ne se rafraîchit pas
+- [ ] **"Votre guide rapide"** — s'affiche partout dans la section éducative au lieu de seulement sur "Connaître votre peau" (section 7)
+- [ ] **Collection Lumina retirée** — vérifier et corriger toutes les références à LUMINA dans le code
 - [ ] Sur-titre hero "COLLECTIONS 2026" — positionnement iPhone non réglé — plusieurs tentatives ratées
+- [ ] Fade in cassé sur les pages éducatives — L'entête fonctionne = référence
 - [ ] Prix/g ne s'affiche pas dans le modal
 - [ ] Formulaire recette — ajout de photo ne fonctionne pas sur iPad
 - [ ] Ligne de produit dans collection — clic ouvre modification au lieu de consultation
@@ -221,7 +215,9 @@ Fontes sacrées : **Playfair Display**, **Birthstone**, **DM Sans** — jamais d
 - [ ] Liste INCI sur fiche recette
 - [ ] Informer les visiteurs comment acheter
 - [ ] Actualités automatiques depuis Sheet
-- [ ] FAQ gérable depuis l'admin
+- [ ] FAQ gérable depuis l'admin — après specs définies avec Chantal
+- [ ] Pages à créer : FAQ, conditions de vente, retours/livraison — après politique de vente arrêtée
+- [ ] Courriel de confirmation automatique à la réception d'une commande
 - [ ] Taille du texte mobile — à ajuster section par section
 - [ ] Menu burger — à valider iPhone
 - [ ] Modal tablette — à revalider
@@ -231,7 +227,11 @@ Fontes sacrées : **Playfair Display**, **Birthstone**, **DM Sans** — jamais d
 ---
 
 ## 🟡 AMÉLIORATIONS EN ATTENTE — ADMIN
+- [ ] Standardiser les boutons de fermeture (X) partout sur le site public ET admin
+- [ ] Ajouter champ "poids" dans les recettes (admin + affichage)
+- [ ] Ajouter section "Emballage" dans les recettes (admin + affichage)
 - [ ] **Recherche automatique INCI via API EU CosIng** — attendre exploration Chercheur
+- [ ] Système de commande léger sans panier — attendre exploration Chercheur
 - [ ] Voir les recettes incomplètes
 - [ ] Photo par ligne de produit
 - [ ] Mode saisonnier — toggle admin
@@ -343,4 +343,4 @@ Fontes sacrées : **Playfair Display**, **Birthstone**, **DM Sans** — jamais d
 
 ---
 
-*Univers Caresse — Confidentiel — 20 mars 2026 — 10h15*
+*Univers Caresse — Confidentiel — 20 mars 2026 — 13h00*

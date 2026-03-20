@@ -2,7 +2,7 @@
 
 # BRIEF — CLAUDE ORGANISATEUR
 ## Univers Caresse
-*Mis à jour : 20 mars 2026 — 13h00*
+*Mis à jour : 20 mars 2026 — 16h45*
 
 ---
 
@@ -77,6 +77,11 @@ Demander à Jean-Claude l'heure actuelle à Québec avant de produire les briefs
 
 ---
 
+## RÈGLE BRIEF EN .MD — CRITIQUE
+Quand Jean-Claude dit que c'est terminé et demande un brief → le produire en `.md` directement.
+
+---
+
 ## RÈGLE D'OR — NE JAMAIS EFFACER
 - Les sections ✅ restent — archives
 - Les décisions s'accumulent
@@ -88,11 +93,11 @@ Demander à Jean-Claude l'heure actuelle à Québec avant de produire les briefs
 ## BRIEFS SOUS MA RESPONSABILITÉ
 | Rôle | Fichier | Dernière mise à jour |
 |------|---------|---------------------|
-| Travailleur | `Brief_Travailleur_ACTIF.md` | 20 mars 2026 — 13h00 |
-| Scripteur | `Brief_Scripteur_ACTIF.md` | 20 mars 2026 — 13h00 |
-| Chercheur | `Brief_Chercheur_ACTIF.md` | 20 mars 2026 — 13h00 |
-| Organisateur | `Brief_Organisateur_ACTIF.md` | 20 mars 2026 — 13h00 |
-| Brouillon | `Brief_Brouillon_ACTIF.md` | 20 mars 2026 — 13h00 |
+| Travailleur | `Brief_Travailleur_ACTIF.md` | 20 mars 2026 — 16h45 |
+| Scripteur | `Brief_Scripteur_ACTIF.md` | 20 mars 2026 — 16h45 |
+| Chercheur | `Brief_Chercheur_ACTIF.md` | 20 mars 2026 — 16h45 |
+| Organisateur | `Brief_Organisateur_ACTIF.md` | 20 mars 2026 — 16h45 |
+| Brouillon | `Brief_Brouillon_ACTIF.md` | 20 mars 2026 — 16h45 |
 
 ---
 
@@ -108,7 +113,7 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 - Pages FAQ, conditions, retours/livraison — en attente politique de vente
 
 ### Chantiers Chercheur
-- Scraping PureArome — en attente test
+- Scraping Purearome — données présentes dans Sheet `Purearome_Test` mais problèmes à clarifier
 - Générateur INCI — prototype prêt
 - Comptabilité — à explorer
 - Catalogue PDF — prototype prêt (⚠️ Lumina à remplacer)
@@ -171,4 +176,4 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 
 ---
 
-*Univers Caresse — Confidentiel — 20 mars 2026 — 13h00*
+*Univers Caresse — Confidentiel — 20 mars 2026 — 16h45*
