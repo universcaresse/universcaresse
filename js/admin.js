@@ -909,7 +909,7 @@ document.getElementById('fr-collection').value   = rec.collection || '';
     });
   }
 ingredientsRecette = (rec.ingredients || []).map(i => ({ type: i.type, nom: i.nom, quantite: i.quantite_g }));
-  const resFormats = await appelAPI('getRecettesFormats', { recette_id: rec.recette_id });
+  const resFormats = await appelAPIPost('getRecettesFormats', { recette_id: rec.recette_id });
   formatsRecette = (resFormats && resFormats.formats) ? resFormats.formats.map(f => ({ poids: f.poids, unite: f.unite, prix: f.prix_vente, desc: f.desc_emballage })) : [];
   document.querySelector('#section-recettes .filtres-bar').classList.add('cache');
   document.getElementById('grille-recettes').classList.add('cache');
