@@ -153,7 +153,6 @@ function afficherEduSection(num) {
     cible.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => {
       el.classList.remove('visible');
     });
-    void cible.offsetHeight;
     requestAnimationFrame(() => requestAnimationFrame(() => {
       cible.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => {
         el.classList.add('visible');
