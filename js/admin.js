@@ -778,10 +778,15 @@ async function chargerIngredientsBaseRecette() {
 
 
 
-function ouvrirFicheRecette(id) {
+async function ouvrirFicheRecette(id) {
   const rec = donneesRecettes.find(r => r.recette_id === id);
   if (!rec) return;
   recetteActive = rec;
+  const resFormats = await appelAPIPost('getRecettesFormats', { recette_id: id });
+  const formats = (resFormats && resFormats.formats) ? resFormats.formats : [];
+  const formatsHtml = formats.length
+    ? formats.map(f => `<div class="fiche-ingredient"><span class="fiche-ing-nom">${f.poids} ${f.unite}</span><span class="fiche-ing-qte">${formaterPrix(f.prix_vente)}</span>${f.desc_emballage ? `<span class="fiche-label">${f.desc_emballage}</span>` : ''}</div>`).join('')
+    : '<div class="fiche-vide">Aucun format</div>';
   document.getElementById('fiche-recette-titre').textContent = rec.nom || '—';
   const ings = rec.ingredients && rec.ingredients.length
     ? rec.ingredients.map(i => `<div class="fiche-ingredient"><span class="fiche-ing-nom">${i.nom}</span><span class="fiche-ing-qte">${i.quantite_g} g</span></div>`).join('')
@@ -810,6 +815,8 @@ function ouvrirFicheRecette(id) {
     <div class="fiche-texte">${rec.instructions || '—'}</div>
     <div class="fiche-section-titre">Notes</div>
     <div class="fiche-texte">${rec.notes || '—'}</div>
+    <div class="fiche-section-titre">Formats disponibles</div>
+    <div class="fiche-ingredients">${formatsHtml}</div>
     <div class="fiche-section-titre">Ingrédients</div>
     <div class="fiche-ingredients">${ings}</div>
   `;
@@ -828,11 +835,12 @@ function fermerFicheRecette() {
   recetteActive = null;
 }
 
-function basculerModeEditionRecette() {
+async function basculerModeEditionRecette() {
   if (!recetteActive) return;
   const id = recetteActive.recette_id;
-  fermerFicheRecette();
-  modifierRecette(id);
+  const rec = recetteActive;
+  document.getElementById('fiche-recette').classList.remove('visible');
+  await modifierRecette(id);
 }
 
 function supprimerRecetteActive() {
