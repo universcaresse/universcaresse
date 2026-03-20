@@ -157,7 +157,7 @@ function afficherEduSection(num) {
       cible.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => {
         el.classList.add('visible');
       });
-    }, 50);
+    }, 100);
   }
   window.scrollTo(0, 0);
 }
