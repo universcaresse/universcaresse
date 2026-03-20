@@ -1135,15 +1135,30 @@ function rafraichirListeFormatsRecette() {
   if (!liste) return;
   if (formatsRecette.length === 0) { liste.innerHTML = ''; return; }
   liste.innerHTML = formatsRecette.map((f, i) => `
-    <div class="ingredient-rangee">
-      <input type="text" inputmode="decimal" class="form-ctrl" value="${f.poids||''}" placeholder="Poids" onchange="formatsRecette[${i}].poids=this.value">
-      <select class="form-ctrl" onchange="formatsRecette[${i}].unite=this.value">
-        <option value="g" ${f.unite==='g'?'selected':''}>g</option>
-        <option value="ml" ${f.unite==='ml'?'selected':''}>ml</option>
-      </select>
-      <input type="text" inputmode="decimal" class="form-ctrl" value="${f.prix||''}" placeholder="Prix ($)" onchange="formatsRecette[${i}].prix=parseFloat(this.value)||0">
-      <input type="text" class="form-ctrl" value="${f.desc||''}" placeholder="Emballage" onchange="formatsRecette[${i}].desc=this.value">
-      <button class="btn btn-sm btn-danger" onclick="supprimerFormatRecette(${i})">✕</button>
+    <div class="format-rangee">
+      <div class="format-champ-court">
+        <label class="form-label">Poids</label>
+        <input type="text" inputmode="decimal" class="form-ctrl" value="${f.poids||''}" placeholder="ex: 90" onchange="formatsRecette[${i}].poids=this.value">
+      </div>
+      <div class="format-champ-court">
+        <label class="form-label">Unité</label>
+        <select class="form-ctrl" onchange="formatsRecette[${i}].unite=this.value">
+          <option value="g" ${f.unite==='g'?'selected':''}>g</option>
+          <option value="ml" ${f.unite==='ml'?'selected':''}>ml</option>
+        </select>
+      </div>
+      <div class="format-champ-court">
+        <label class="form-label">Prix ($)</label>
+        <input type="text" inputmode="decimal" class="form-ctrl" value="${f.prix||''}" placeholder="ex: 12.50" onchange="formatsRecette[${i}].prix=parseFloat(this.value)||0">
+      </div>
+      <div class="format-champ-long">
+        <label class="form-label">Emballage</label>
+        <input type="text" class="form-ctrl" value="${f.desc||''}" placeholder="ex: Boîte kraft recyclée" onchange="formatsRecette[${i}].desc=this.value">
+      </div>
+      <div class="format-champ-action">
+        <label class="form-label">&nbsp;</label>
+        <button class="btn-fermer-panneau" onclick="supprimerFormatRecette(${i})">✕</button>
+      </div>
     </div>
   `).join('');
 }
