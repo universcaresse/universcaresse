@@ -842,6 +842,8 @@ function supprimerRecetteActive() {
 
 
 function ouvrirFormRecette() {
+  formatsRecette = [];
+  rafraichirListeFormatsRecette();
   document.getElementById('form-recettes-titre').textContent = 'Nouvelle recette';
   document.getElementById('fr-id').value = '';
  ['fr-nom','fr-couleur','fr-format','fr-unites','fr-cure','fr-prix','fr-description','fr-instructions','fr-notes']
@@ -908,10 +910,13 @@ document.getElementById('fr-collection').value   = rec.collection || '';
     });
   }
 ingredientsRecette = (rec.ingredients || []).map(i => ({ type: i.type, nom: i.nom, quantite: i.quantite_g }));
+  const resFormats = await appelAPI('getRecettesFormats&recette_id=' + rec.recette_id);
+  formatsRecette = (resFormats && resFormats.formats) ? resFormats.formats.map(f => ({ poids: f.poids, unite: f.unite, prix: f.prix_vente, desc: f.desc_emballage })) : [];
   document.querySelector('#section-recettes .filtres-bar').classList.add('cache');
   document.getElementById('grille-recettes').classList.add('cache');
   document.getElementById('form-recettes').classList.add('visible');
   rafraichirListeIngredientsRecette();
+  rafraichirListeFormatsRecette();
   window.scrollTo(0, 0);
 }
 async function sauvegarderRecette() {
@@ -941,6 +946,9 @@ async function sauvegarderRecette() {
   if (!d.nom) { afficherMsg('recettes', 'Le nom est requis.', 'erreur'); return; }
   const res = await appelAPIPost('saveRecette', d);
 if (res && res.success) {
+    for (const f of formatsRecette) {
+      await appelAPIPost('saveRecetteFormat', { recette_id: d.recette_id, poids: f.poids, unite: f.unite, prix_vente: f.prix, desc_emballage: f.desc || '' });
+    }
     if (btnSauvegarder) { btnSauvegarder.disabled = false; btnSauvegarder.innerHTML = 'Enregistrer'; }
    fermerFormRecette();
     afficherMsg('recettes', id ? 'Recette mise à jour.' : 'Recette créée.');
@@ -1106,6 +1114,37 @@ function rafraichirListeIngredientsBase() {
       </select>
       <input type="text" inputmode="decimal" class="form-ctrl" value="${ing.quantite||''}" placeholder="g" onchange="ingredientsBase[${i}].quantite=parseFloat(this.value)||0">
       <button class="btn btn-sm btn-danger" onclick="supprimerIngredientBase(${i})">✕</button>
+    </div>
+  `).join('');
+}
+
+// ─── FORMATS RECETTE ───
+let formatsRecette = [];
+
+function ajouterFormatRecette(poids='', unite='g', prix='', desc='') {
+  formatsRecette.push({ poids, unite, prix, desc });
+  rafraichirListeFormatsRecette();
+}
+
+function supprimerFormatRecette(index) {
+  formatsRecette.splice(index, 1);
+  rafraichirListeFormatsRecette();
+}
+
+function rafraichirListeFormatsRecette() {
+  const liste = document.getElementById('liste-formats-recette');
+  if (!liste) return;
+  if (formatsRecette.length === 0) { liste.innerHTML = ''; return; }
+  liste.innerHTML = formatsRecette.map((f, i) => `
+    <div class="ingredient-rangee">
+      <input type="text" inputmode="decimal" class="form-ctrl" value="${f.poids||''}" placeholder="Poids" onchange="formatsRecette[${i}].poids=this.value">
+      <select class="form-ctrl" onchange="formatsRecette[${i}].unite=this.value">
+        <option value="g" ${f.unite==='g'?'selected':''}>g</option>
+        <option value="ml" ${f.unite==='ml'?'selected':''}>ml</option>
+      </select>
+      <input type="text" inputmode="decimal" class="form-ctrl" value="${f.prix||''}" placeholder="Prix ($)" onchange="formatsRecette[${i}].prix=parseFloat(this.value)||0">
+      <input type="text" class="form-ctrl" value="${f.desc||''}" placeholder="Emballage" onchange="formatsRecette[${i}].desc=this.value">
+      <button class="btn btn-sm btn-danger" onclick="supprimerFormatRecette(${i})">✕</button>
     </div>
   `).join('');
 }
