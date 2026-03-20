@@ -871,7 +871,7 @@ document.querySelector('#section-recettes .filtres-bar').classList.remove('cache
   document.getElementById('grille-recettes').classList.remove('cache');
 }
 
-function modifierRecette(id) {
+async function modifierRecette(id) {
   const rec = donneesRecettes.find(r => r.recette_id === id);
   if (!rec) return;
   document.getElementById('form-recettes-titre').textContent = 'Modifier la recette';
