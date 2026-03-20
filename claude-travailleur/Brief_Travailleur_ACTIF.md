@@ -28,7 +28,7 @@ GitHub raw base : https://raw.githubusercontent.com/universcaresse/univers-cares
 Québécois, TDA, problèmes moteurs. Brillant, engagé, sens du détail. Il connaît le projet de fond en comble.
 
 - Une chose à la fois — réponses courtes
-- **Jaser avant d'agir** — bien comprendre le problème ensemble avant de proposer une solution
+- **Jaser avant d'agir** — bien comprendre le problème ensemble avant de proposer une solution. Jean-Claude voit le tableau complet — Claude voit souvent juste un bout. Valider la direction avant de coder.
 - Jamais de suggestions de pause ou de sommeil
 - Ton chaleureux, échanges naturels, vraie écoute
 
@@ -150,56 +150,57 @@ Une recette appartient à une collection principale. Elle peut apparaître dans 
 - Clés `edu_guide_*` ajoutées dans Sheet Contenu via `initialiserClesGuideRapide()` (Apps Script)
 - Admin — form-panel "Votre guide rapide" ajouté dans Contenu du site
 - CSS — `.edu-tableau`, `.edu-tableau-wrap`, `.edu-accord-*` ajoutés
-- Doublon CSS ligne 1119 — `align-items: start` retiré de media query mobile
+- Doublon CSS ligne 1119 — `align-items: start` retiré de `.edu-sous-section-panel .section-texte` (media query mobile) ⚠️ à remettre si problème visuel
 
 ## ✅ CHANGEMENTS — SESSION 19 MARS 2026 (matin)
-- Liens éducatifs page 3 : `filtrerApresChargement()` sur ÉPURE, SAPONICA, PETIT NUAGE
-- Lien page 7 "Toutes nos collections" : `href="#catalogue"`
-- `.edu-besoins` gap, `.edu-besoin` border-top, `.edu-types-grille` gap
-- Mosaïque hero — couleurs → variables CSS
-- Admin — `ouvrirFormCollectionPour(col)` peuple `fc-collection-ligne`
+- Liens éducatifs page 3 : `href="#"` → `href="#catalogue"` + `filtrerApresChargement()` sur ÉPURE, SAPONICA, PETIT NUAGE
+- Lien page 7 "Toutes nos collections" : `href="#"` → `href="#catalogue"`
+- `.edu-besoins` : `gap: 2px` → `gap: 24px`
+- `.edu-besoin` : `border-top: 3px solid var(--beige)` ajouté
+- `.edu-types-grille` : `gap: 2px` → `gap: 24px`
+- `.edu-sous-section-panel .section-texte { align-items: start }` ajouté hors media query ⚠️ doublon ligne 1119
+- Mosaïque hero — couleurs codées en dur → `var(--accent-80)`, `var(--primary-80)`, `var(--gris-80)`
+- Admin — `ouvrirFormCollectionPour(col)` : peuple `fc-collection-ligne` automatiquement
 
 ## ✅ CHANGEMENTS — SESSION 18 MARS 2026
-- Scroll horizontal iPhone ✅ — `section-texte`
-- Modal produit — iPhone, iPad portrait, iPad paysage
+- Scroll horizontal iPhone ✅ — restructuration en `section-texte`
+- `page-hero` → `section-texte` + `section-texte-photo-3-4` ou `section-texte-photo-auto`
+- Modal produit — iPhone sans couleur, iPad portrait 2 colonnes, iPad paysage photo gauche
 
 ## ✅ CHANGEMENTS — SESSION 17 MARS 2026
-- Bouton CTA hero — `fade-in-doux`, `invisible`, `min-height: 52px`
-- `.collection-entete-visuel` — visible partout
-- `nav.scrolled` — box-shadow masqué mobile
+- Bouton CTA hero — `fade-in-doux`, classe `invisible`, `min-height: 52px`
+- `.collection-entete-visuel` — visible partout, `max-height: 300px`
+- `nav.scrolled` — `box-shadow` masqué sur mobile
 
 ## ✅ CHANGEMENTS — SESSIONS PRÉCÉDENTES
-- Collections secondaires, sections éducatives SPA, filtres inventaire, factures, Cloudinary
+- Collections secondaires fix, sections éducatives SPA, modal iPad paysage, boutons X admin, filtres inventaire, factures, inventaire tableau global, Cloudinary Media Library
 
 ---
 
 ## 🎯 PRIORITÉS
-1. ~~Section "Votre guide rapide"~~ ✅
-2. **Collection Lumina retirée** — vérifier toutes les références à LUMINA dans `index.html`, `main.js`, `admin.js` — corriger ou retirer
-3. Sur-titre hero "COLLECTIONS 2026" — iPhone non réglé — prudence
-4. Site public fonctionnel et joli
-5. Informer les visiteurs comment acheter
-6. Module Vente
-7. Outils de production (SAF, INCI, coût de revient)
-8. Admin WYSIWYG
+1. ~~Section "Votre guide rapide" — remettre dans `index.html`~~ ✅
+2. Sur-titre hero "COLLECTIONS 2026" — iPhone non réglé — prudence
+3. Site public fonctionnel et joli
+4. Informer les visiteurs comment acheter
+5. Module Vente
+6. Outils de production (SAF, INCI, coût de revient)
+7. Admin WYSIWYG
 
 ---
 
 ## 🔴 BOGUES EN ATTENTE
-- [ ] **Collection Lumina retirée** — fusionnée dans Casa — vérifier et corriger toutes les références à LUMINA dans le code
 - [ ] Sur-titre hero "COLLECTIONS 2026" — positionnement iPhone non réglé — plusieurs tentatives ratées
 - [ ] Prix/g ne s'affiche pas dans le modal
 - [ ] Formulaire recette — ajout de photo ne fonctionne pas sur iPad
 - [ ] Ligne de produit dans collection — clic ouvre modification au lieu de consultation
 - [ ] Liens page 7 éducatif — SAPONICA, ÉPURE, PETIT NUAGE, CAPRIN — à définir
-- [ ] Padding top trop grand sections éducatives
 
 ---
 
 ## 🟡 AMÉLIORATIONS EN ATTENTE — PUBLIC
 - [ ] Guide rapide — peaufiner le visuel (tableau desktop + accordéon mobile)
-- [ ] Guide rapide — colonne "Savons recommandés" à ajouter plus tard
-- [ ] Accordéons (huiles, additifs, HE) — mobile seulement
+- [ ] Guide rapide — ajouter colonne "Savons recommandés" quand la logique sera définie (lier aux produits existants)
+- [ ] Accordéons pour sections huiles, additifs, huiles essentielles — **mobile seulement** (trop long en desktop aussi) — même pattern que le guide rapide
 - [ ] Mosaïque hero — alimenter dynamiquement avec 3 tuiles
 - [ ] Textes Sheet → Markdown simplifié
 - [ ] Contenu évolutif — huiles dans Savon artisanal
@@ -282,6 +283,7 @@ Une recette appartient à une collection principale. Elle peut apparaître dans 
 - Livraison par trouve/remplace — commits par Jean-Claude
 - Brief sans rien effacer — ajouter, archiver, marquer ✅
 - `section-texte` adopté partout — `page-hero` abandonné mobile
+- `section-texte-photo-3-4` / `section-texte-photo-auto`
 - Modal iPhone sans couleur — iPad portrait 2 colonnes — iPad paysage photo gauche
 - Quand le code est écrit = c'est livré
 - Fiche collection — rang dans carré couleur
@@ -299,7 +301,7 @@ Une recette appartient à une collection principale. Elle peut apparaître dans 
 - Sheet Config : A=Type, B=Densité, C=Unité source, D=marge_perte_pct
 - Sections éducatives SPA via `afficherEduSection(num)` — 178 clés pattern `edu_sX_element`
 - Nav sections : Accueil → Catalogue → Le savon artisanal → Bon à savoir → Contact
-- `edu-pager` — navigateur `← X/7 →` — accroche `edu-accroche` pas italique
+- `edu-pager` — navigateur `← X/7 →` dans entête — accroche classe `edu-accroche` pas italique
 - Boutons Précédent/Suivant du bas retirés — retour section 1 via `naviguer()`
 - `.page-entete` center / mobile flex-start — `.edu-pager` mobile flex-end
 - Catalogue — scroll corrigé avec hauteur entête
@@ -314,11 +316,10 @@ Une recette appartient à une collection principale. Elle peut apparaître dans 
 - Import recettes — en attente finalisation avec Chantal
 - Trouve/remplace — toujours indiquer mode Notepad++ (Normal ou Étendu)
 - Inventaire — tableau global, catégories en rangées de titre
-- Guide rapide — tableau 4 colonnes (Type de peau, Surgraissage, Huiles, Argiles/Additifs)
-- Accordéons sections éducatives (huiles, additifs, HE) — mobile seulement
-- Tout contenu éditable par Chantal passe par l'admin — rien codé en dur
-- Nouvelles clés Contenu ajoutées via Apps Script — pas manuellement
-- **Collection Lumina retirée — fusionnée dans Casa**
+- Guide rapide — tableau 4 colonnes (Type de peau, Surgraissage, Huiles, Argiles/Additifs) — colonne Collections reportée plus tard
+- Accordéons sections éducatives (huiles, additifs, HE) — mobile seulement, pas desktop
+- Tout contenu éditable par Chantal doit passer par l'admin — rien codé en dur
+- Nouvelles clés Contenu ajoutées via fonctions Apps Script (bouton dans l'éditeur) — pas manuellement
 
 ---
 

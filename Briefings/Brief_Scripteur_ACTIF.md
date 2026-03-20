@@ -2,7 +2,7 @@
 
 # BRIEF — CLAUDE SCRIPTEUR
 ## Univers Caresse
-*Mis à jour : 19 mars 2026*
+*Mis à jour : 19 mars 2026 — Session après-midi*
 
 ---
 
@@ -56,18 +56,45 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 
 ---
 
+## RÈGLE DE CONVERSION — c. à thé / c. à table → grammes
+**1 c. à thé = 5ml — 1 c. à table = 15ml**
+
+Convertir en grammes via la densité de l'ingrédient :
+
+| Type | Densité (g/ml) | Unité source |
+|------|---------------|--------------|
+| Huile essentielle | 0.9 | ml |
+| Huile | 0.92 | ml |
+| Hydrolat | 1.0 | ml |
+| Fragrance | 0.9 | ml |
+| Beurre | 1.0 | g |
+| Argile | 1.0 | g |
+| Additif | 1.0 | g |
+| Colorants et pigments | 1.0 | g |
+| Herbes et fleurs | 1.0 | g |
+| Cire | 0.95 | g |
+| Saveurs naturelles | 0.9 | ml |
+| Emballage | 1.0 | g |
+| Eau | 0.8 | ml |
+
+**Exemple :** 1 c. à thé d'argile = 5ml × 1.0 = **5g** — 1 c. à table d'huile = 15ml × 0.92 = **13.8g**
+
+**Important :** Toujours conserver la mesure originale en note ex: `*(1 c. à thé)*` avant de modifier. Faire valider par Chantal.
+
+---
+
 ## FICHIERS DISPONIBLES SUR GITHUB
 | Dossier | Fichier | Contenu |
 |---------|---------|---------|
 | `claude-scripteur/` | `Brief_Scripteur_ACTIF.md` | Ce fichier |
 | `claude-scripteur/` | `Recettes_Anima.md` | Recettes collection Anima |
 | `claude-scripteur/` | `Recettes_Caprin.md` | Recettes collection Caprin |
-| `claude-scripteur/` | `Recettes_Casa.md` | Recettes collection Casa |
+| `claude-scripteur/` | `Recettes_Casa.md` | Recettes collection Casa (inclut Lumina fusionnée) |
 | `claude-scripteur/` | `Recettes_Emolia.md` | Recettes collection Émolia |
 | `claude-scripteur/` | `Recettes_Epure.md` | Recettes collection Épure |
 | `claude-scripteur/` | `Recettes_Kerys.md` | Recettes collection Kérys |
 | `claude-scripteur/` | `Recettes_Lui.md` | Recettes collection LUI |
-| `claude-scripteur/` | `Recettes_Lumina.md` | Recettes collection Lumina |
+| `claude-scripteur/` | `Recettes_Lumina.md` | ⚠️ Collection retirée — contenu fusionné dans Casa |
 | `claude-scripteur/` | `Recettes_Petit_Nuage.md` | Recettes collection Petit Nuage |
 | `claude-scripteur/` | `Recettes_Saponica.md` | Recettes collection Saponica |
 | `claude-scripteur/` | `Section_1_Saponification_a_froid.md` | Section éducative 1 |
@@ -90,6 +117,12 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 - 7 sections éducatives révisées (session 16 mars 2026)
 - Page d'accueil révisée et validée
 - 10 fichiers recettes : SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, LUMINA, CASA, ANIMA, LUI
+- 9 fichiers recettes mis à jour (session 19 mars 2026) : Saponica, Petit Nuage, Caprin, Épure, Kérys, Casa, Anima, Émolia, LUI
+- Collection Lumina fusionnée dans Casa (ligne Bougie Lumina)
+- L'Instant du Barbier et L'Élixir du matin migrés de LUI vers Émolia
+- Conversions c. à thé/table → grammes appliquées à toutes les collections
+- Champ Notes ajouté à toutes les recettes
+- Champ Couleur renommé HEX dans toutes les collections
 
 ---
 
@@ -99,23 +132,19 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 - Kérys : couleur Brise matinale — #2387FF ou #6787FF ?
 - Saponica : texte imprimé Éclat de mer
 - Saponica : valider texte personnel Jardin d'Aurore
-- Casa : fragrances et couleurs Bruine d'ambiance et Eau de linge
-- Anima : durée de cure
-- Recettes à documenter : Frisson de menthe, Jardin apaisant, Bombes de bain adulte, Bombes de bain Petit Nuage, Bruine d'ambiance, Eau de linge, Souffle de Sapin, Automne (LUI/Savage)
+- Émolia : Menthe poivrée — vérifier nom (Menthe poivrée ou Frisson de menthe ?)
+- Émolia : Brume de rosée — quantité micas à fleurs bleues à confirmer
+- Kérys : Douceur des îles — eau ou hydrolat ?
 
 ---
 
 ## 🔴 TEXTES À CRÉER (quand recettes confirmées)
 - Caprin versions longues : Cerise de velours, Fraîcheur de melon, Pomme d'émeraude, Orange Sauvage
-- Émolia : Frisson de menthe, Jardin apaisant
 - LUI : Automne
 
 ---
 
 ## 🔴 NOUVEAUX PRODUITS À AJOUTER AU SITE
-- L'Instant du Barbier (LUI)
-- L'Élixir du matin (LUI/Émolia)
-- Souffle de Sapin (Casa)
 - Caprice Fraisé (Caprin)
 - Orange Sauvage (Caprin)
 - Esker, Lichen (LUI/Savage)
@@ -128,6 +157,7 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 - Créer ou décider des liens "Savons surgraissés 3-5%", "5-8%", "8-10%"
 - Décider du sort de "Nos formulations par type de peau"
 - Ajouter navigation Section 7 depuis fiches produits
+- Importer les recettes mises à jour (format JSON) — voir Instructions_Import_Recettes.md
 
 ---
 

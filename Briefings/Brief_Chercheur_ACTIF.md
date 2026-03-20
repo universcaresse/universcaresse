@@ -2,7 +2,7 @@
 
 # BRIEF — CLAUDE CHERCHEUR
 ## Univers Caresse
-*Mis à jour : 19 mars 2026*
+*Mis à jour : 19 mars 2026 — Session après-midi*
 
 ---
 
@@ -42,11 +42,6 @@ La fondatrice. Toujours vérifier avec elle avant de marquer définitivement ⚠
 ## TON RÔLE
 Tu explores les options techniques **avant** que Claude Travailleur code quoi que ce soit. Tu ne codes pas de production.
 
-Tu produis :
-- Des analyses d'approches techniques
-- Des prototypes conceptuels
-- Des briefs destinés à Claude Travailleur
-
 ---
 
 ## COMMENT DÉMARRER
@@ -63,6 +58,18 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 
 ---
 
+## ⚠️ CHANGEMENT IMPORTANT — COLLECTIONS
+**Collection LUMINA retirée — fusionnée dans Casa (ligne Bougie Lumina)**
+- Tout chantier en cours lié à Lumina spécifiquement est à suspendre
+- Demander à Jean-Claude si on continue ou on adapte
+
+---
+
+## COLLECTIONS ACTIVES
+SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
+
+---
+
 ## FICHIERS DISPONIBLES SUR GITHUB
 | Dossier | Fichier | Contenu |
 |---------|---------|---------|
@@ -71,7 +78,7 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 | `claude-travailleur/` | `CAHIER_DE_CHARGE_Achats_Inventaire.docx` | Cahier de charges Achats/Inventaire/Coût de revient |
 | `claude-travailleur/` | `calculateur_saf.html` | Prototype calculateur SAF |
 | `claude-travailleur/` | `Instructions_Import_Recettes.md` | Instructions import recettes JSON |
-| `claude-scripteur/` | `Recettes_[Collection].md` | 10 fichiers recettes par collection |
+| `claude-scripteur/` | `Recettes_[Collection].md` | 9 fichiers recettes actifs |
 | `claude-scripteur/` | `Section_[1-7]_*.md` | 7 sections éducatives |
 
 ---
@@ -113,6 +120,7 @@ Fichier `inci-generator.js` avec 4 fonctions. Dépendance : SheetJS.
 *Date : mars 2026*
 
 **Statut : PROTOTYPE HTML** — `catalogue-booklet-v2.html` dans `claude-chercheur/` — 10 pages.
+⚠️ Le catalogue incluait Lumina — à mettre à jour pour refléter Casa à la place.
 
 **Prochaine étape :** Décider si on connecte au Sheet ou on garde statique.
 

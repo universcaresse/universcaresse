@@ -2,7 +2,7 @@
 
 # BRIEF — CLAUDE ORGANISATEUR
 ## Univers Caresse
-*Mis à jour : 19 mars 2026 — Ménage complet*
+*Mis à jour : 19 mars 2026 — Session après-midi*
 
 ---
 
@@ -57,11 +57,25 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 ---
 
 ## CE QUE JE FAIS APRÈS UNE SESSION D'UN AUTRE RÔLE
-Jean-Claude me décrit ce qui s'est passé ou me donne le brief mis à jour. Je :
+Jean-Claude me donne le brief mis à jour du rôle. Je :
 1. Compare avec ma version maître — je signale tout ce qui a été effacé
-2. Intègre les nouveaux changements, décisions, violations
-3. Mets à jour les autres briefs si l'info les concerne
-4. Produis les 4 briefs mis à jour en `.md`
+2. **Détecte automatiquement tout changement qui impacte les autres rôles** — sans attendre que Jean-Claude me le signale
+3. Intègre les nouveaux changements, décisions, violations dans tous les briefs concernés
+4. Produis tous les briefs mis à jour en `.md`
+
+---
+
+## RÈGLE DE PROPAGATION — CRITIQUE
+**Tout changement significatif doit être propagé à TOUS les rôles concernés automatiquement.**
+
+Exemples de changements à propager partout :
+- Collection retirée ou renommée → Travailleur (vérifier le code), Chercheur (arrêter les chantiers liés), Scripteur (noter)
+- Nouveau produit ou nouvelle collection → tous les rôles
+- Décision de Chantal sur une recette → Scripteur + Travailleur si ça affecte l'import
+- Changement de structure Sheet → Travailleur + Chercheur
+- Chantier Chercheur terminé → Travailleur (prêt à intégrer)
+
+**Je ne dois jamais attendre que Jean-Claude me signale l'impact — c'est mon travail de le détecter.**
 
 ---
 
@@ -76,19 +90,24 @@ Jean-Claude me décrit ce qui s'est passé ou me donne le brief mis à jour. Je 
 ## BRIEFS SOUS MA RESPONSABILITÉ
 | Rôle | Fichier | Dernière mise à jour |
 |------|---------|---------------------|
-| Travailleur | `Brief_Travailleur_ACTIF.md` | 19 mars 2026 — ménage complet |
-| Scripteur | `Brief_Scripteur_ACTIF.md` | 19 mars 2026 |
-| Chercheur | `Brief_Chercheur_ACTIF.md` | 19 mars 2026 |
-| Organisateur | `Brief_Organisateur_ACTIF.md` | 19 mars 2026 |
+| Travailleur | `Brief_Travailleur_ACTIF.md` | 19 mars 2026 — session après-midi |
+| Scripteur | `Brief_Scripteur_ACTIF.md` | 19 mars 2026 — session après-midi |
+| Chercheur | `Brief_Chercheur_ACTIF.md` | 19 mars 2026 — session après-midi |
+| Organisateur | `Brief_Organisateur_ACTIF.md` | 19 mars 2026 — session après-midi |
 
 ---
 
 ## ÉTAT DU PROJET — MARS 2026
 
+### Collections actives
+SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
+- **⚠️ LUMINA retirée — fusionnée dans Casa (ligne Bougie Lumina)**
+
 ### Textes (Scripteur)
 - 7 sections éducatives ✅
 - Page d'accueil ✅
-- 10 fichiers recettes par collection ✅
+- 9 fichiers recettes mis à jour ✅ (Lumina fusionnée dans Casa)
+- Conversions c. à thé/table → grammes appliquées ✅
 - Plusieurs recettes en attente de confirmation avec Chantal ⚠️
 
 ### Chantiers Chercheur
@@ -110,7 +129,7 @@ Jean-Claude me décrit ce qui s'est passé ou me donne le brief mis à jour. Je 
 | `claude-chercheur/` | `Brief_Chercheur_ACTIF.md` | Brief Chercheur + 4 chantiers |
 | `claude-chercheur/` | `catalogue-booklet-v2.html` | Prototype catalogue PDF |
 | `claude-scripteur/` | `Brief_Scripteur_ACTIF.md` | Brief Scripteur |
-| `claude-scripteur/` | `Recettes_[Collection].md` | 10 fichiers recettes |
+| `claude-scripteur/` | `Recettes_[Collection].md` | 9 fichiers recettes actifs + Lumina archivé |
 | `claude-scripteur/` | `Section_[1-7]_*.md` | 7 sections éducatives |
 | `claude-scripteur/` | `Textes_Page_accueil.md` | Textes page d'accueil |
 | `claude-scripteur/` | `Textes_Etiquettes.md` | Textes étiquettes |
