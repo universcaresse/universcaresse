@@ -1082,9 +1082,10 @@ function rafraichirListeIngredientsRecette() {
         <option value="">— Type —</option>
         ${(listesDropdown.types || []).map(t => `<option value="${t}" ${ing.type===t?'selected':''}>${t}</option>`).join('')}
       </select>
-      <select class="form-ctrl" onchange="ingredientsRecette[${i}].nom=this.value; rafraichirListeIngredientsRecette()">
+      <select class="form-ctrl" onchange="if(this.value==='__nouveau__'){ajouterIngredientInci('${ing.type}',${i})}else{ingredientsRecette[${i}].nom=this.value; rafraichirListeIngredientsRecette()}">
         <option value="">— Ingrédient —</option>
         ${(listesDropdown.fullData || []).filter(d => d.type===ing.type).map(d => `<option value="${d.ingredient}" ${ing.nom===d.ingredient?'selected':''}>${d.ingredient}</option>`).join('')}
+        <option value="__nouveau__">+ Ajouter un ingrédient</option>
       </select>
       <input type="text" class="form-ctrl" readonly placeholder="INCI" value="${(listesDropdown.fullData||[]).find(d=>d.type===ing.type&&d.ingredient===ing.nom)?.inci||''}">
       <input type="text" inputmode="decimal" class="form-ctrl" value="${ing.quantite||''}" placeholder="g" onchange="ingredientsRecette[${i}].quantite=parseFloat(this.value)||0">
