@@ -1,6 +1,6 @@
 # BRIEF — CLAUDE TRAVAILLEUR
 ## Univers Caresse
-*Mis à jour : 20 mars 2026 — 21h39*
+*Mis à jour : 21 mars 2026 — 10h56*
 
 ---
 
@@ -10,6 +10,49 @@
 - **Apps Script URL :** `https://script.google.com/macros/s/AKfycbyDbcy6kBKcTWtj2B0kLfAioy9f2ShI0UtMPP1wg2K-xKUUDdIDONH_rbB_RCzu7lyhVw/exec`
 - Site public : https://universcaresse.github.io/universcaresse/
 - GitHub : https://github.com/universcaresse/univers-caresse
+
+---
+
+## ✅ CHANGEMENTS — SESSION 21 MARS 2026
+
+### Module Ingredients_INCI — suite (#24)
+
+**Bogues scraping corrigés :**
+- `scrapeInciPurearome()` — décodage unicode avant extraction regex (le site Purearome encode le HTML en `\uXXXX`)
+- Regex INCI/CAS — prend le **dernier** match sur la page (le 1er est toujours Rosa rubiginosa du bloc vedette sidebar)
+- `transfererVersIngredientsInci()` — exclut les lignes sans INCI (`if (!inciVal) continue`)
+
+**Migration `getDropdownLists()` vers `Ingredients_INCI` :**
+- Source changée de `Purearome_Test` vers `Ingredients_INCI`
+- Bug corrigé : `data` n'était pas défini depuis `listesSheet`
+- Champ `inci` ajouté dans `fullData`
+- Champ `note_olfactive` ajouté dans `fullData` (col G de `Ingredients_INCI`)
+
+**Sheet `Ingredients_INCI` :**
+- Structure : A=Catégorie, B=Nom, C=INCI, D=CAS, E=Source, F=Date ajout, G=Note olfactive
+- Col G ajoutée manuellement par Jean-Claude — sera peuplée par Chercheur
+
+**Affichage INCI dans formulaire recette :**
+- Champ INCI en lecture seule apparaît automatiquement à la sélection d'un ingrédient
+- Option "+ Ajouter un ingrédient" en bas de chaque liste déroulante d'ingrédients
+- `ajouterIngredientInci(categorie, index)` — sauvegarde dans `Ingredients_INCI` (Source=Manuel), recharge les listes
+- ⚠️ Utilise `prompt()` natif — à remplacer par vrai modal lors du chantier #46
+
+**`saveIngredientInci(data)` — `code.gs` :**
+- Sauvegarde un nouvel ingrédient dans `Ingredients_INCI` (catégorie pré-remplie, nom saisi)
+- Vérifie les doublons avant insertion
+- Branché dans `doPost`
+
+**Générateur INCI recette (#32) ✅ :**
+- `genererInci(ingredients)` — `admin.js`
+- Tri décroissant par quantité, séparation >1% / ≤1% du poids total
+- Ingrédients de type `Fragrances` regroupés en `Fragrance (note1, note2...)` via col G `Ingredients_INCI`
+- Affiché dans fiche recette consultation avec bouton "Copier INCI"
+- Bouton désactivé si INCI manquants — liste les ingrédients manquants en avertissement rouge
+
+**⚠️ Solution PA partielle — laissée au Chercheur :**
+- Regex dernier match trouvée par Travailleur — mais solution non terminée
+- Chercheur prend la relève complète pour `Scraping_PA` — doit regarder ce que Travailleur a fait et améliorer
 
 ---
 
@@ -31,7 +74,7 @@
 - Boutons action (Modifier/Supprimer/Enregistrer/Annuler) déplacés en bas avec `<hr class="separateur">`
 - Filtres factures : compteur `factures-compte` avant le ✕, ✕ à l'extrême droite
 
-### Module Formats Recettes (NOUVEAU — #22)
+### Module Formats Recettes (#22) ✅
 **Structure :** Sheet `Recettes_Formats` (col A=recette_id, B=poids, C=unite, D=prix_vente, E=desc_emballage)
 
 **code.gs ajouté :**
@@ -56,52 +99,9 @@
 
 **À faire :** visuel fiche recette consultation à revoir (noté)
 
-### Migration listes déroulantes vers Purearome_Test
-- `getDropdownLists()` — migré de Sheet `Listes` vers `Purearome_Test` (col A=catégorie, col B=nom)
+### Migration listes déroulantes
+- `getDropdownLists()` — migré de `Listes` → `Purearome_Test` → `Ingredients_INCI` (final)
 - `getIngredientsPrixMin()` — même migration
-- Impact : listes déroulantes recettes ET factures utilisent maintenant `Purearome_Test`
-
-### Module Ingredients_INCI (NOUVEAU — EN COURS — #24)
-**Architecture :**
-```
-Scraping Purearome → Purearome_Test (brut)
-                           ↓ automatique post-scraping
-                    Ingredients_INCI (propre, toutes sources)
-
-EU CosIng / Manuel → directement dans Ingredients_INCI
-                           ↓
-              Listes déroulantes + Générateur INCI
-```
-
-**Priorité des sources INCI :**
-1. Purearome — toujours prioritaire
-2. EU CosIng — fallback si pas chez Purearome
-3. Manuel — dernier recours absolu
-- Si EU CosIng a fourni un INCI et que Purearome le trouve lors d'un nouveau scraping → remplace EU par Purearome
-- Jamais remplacer Manuel par automatique sans confirmation
-
-**Fournisseurs à scraper (en plus de Purearome) :**
-- Divine Essence : https://www.divineessence.com/fr/collections/bases + https://www.divineessence.com/fr/collections/union-nature-essential-oils
-- Kamelya : https://www.kamelya.ca/fc/huiles-essentielles/categories/huiles-essentielles/
-- Arbressence : https://arbressence.ca/produits-huiles-essentielles/huiles-essentielles/
-- Les Mauvaises Herbes : https://boutique.lesmauvaisesherbes.com/collections/ingredients
-
-**code.gs ajouté :**
-- `nettoyerTexte(str)` — décode unicode `\uXXXX` + entités HTML + retire balises
-- `getIngredientsInciSheet()` — crée/retourne Sheet `Ingredients_INCI` (colonnes : Nom, Catégorie, INCI, CAS, Source, Date ajout)
-- `initialiserIngredientsInci()` — ✅ exécuté, onglet créé
-- `transfererVersIngredientsInci()` — lit `Purearome_Test` complet, transfère proprement sans écraser, appelé automatiquement à la fin de `scrapeInciPurearome()`
-- `scrapeInciPurearome()` — corrigé : applique `nettoyerTexte()` sur INCI/CAS/Description avant écriture
-
-**À faire (dans l'ordre) :**
-1. Exécuter `lancerScrapingInci()` dans Apps Script pour repeupler `Purearome_Test` proprement + transfert auto vers `Ingredients_INCI`
-2. Migrer `getDropdownLists()` pour lire `Ingredients_INCI` au lieu de `Purearome_Test`
-3. Alerte admin — ingrédients de recette sans INCI dans `Ingredients_INCI`
-4. Formulaire admin — ajout manuel d'un ingrédient dans `Ingredients_INCI`
-5. Bouton admin — lancer scraping ciblé sur les manquants
-6. Scraping Divine Essence, Kamelya, Arbressence, Les Mauvaises Herbes
-7. Fallback EU CosIng pour ingrédients introuvables partout
-8. Générateur INCI recette — ordre décroissant
 
 ---
 
@@ -123,69 +123,78 @@ EU CosIng / Manuel → directement dans Ingredients_INCI
 ---
 
 ## 🔶 EN COURS — MODULE INGREDIENTS_INCI
-Voir section "Module Ingredients_INCI" ci-dessus — prochaine étape : exécuter `lancerScrapingInci()` puis migrer `getDropdownLists()` vers `Ingredients_INCI`.
+**État :** `getDropdownLists()` migré ✅ — Générateur INCI ✅ — PA laissé au Chercheur
+
+**Reste à faire (Chercheur) :**
+1. Reprendre solution PA du Travailleur (regex dernier match) et améliorer
+2. MH ✅ déjà fait
+3. Poursuivre avec EU CosIng (fallback)
+4. Peupler col G `Note olfactive`
+5. Livrer `Ingredients_INCI` propre
+
+**Reste à faire (Travailleur — après Chercheur) :**
+- Bouton admin — lancer scraping ciblé sur les manquants
+- Visuel fiche recette consultation formats — à revoir
 
 ---
 
 ## 🎯 PRIORITÉS (liste numérotée Jean-Claude)
-1. Exécuter `lancerScrapingInci()` + migration `getDropdownLists()` vers `Ingredients_INCI` (suite module #24)
-2. Alerte admin ingrédients sans INCI + formulaire ajout manuel (suite module #24)
-3. Scraping autres fournisseurs + EU CosIng fallback (suite module #24)
-4. Générateur INCI recette ordre décroissant (#32)
-5. Voir recettes incomplètes (#26)
-6. Mode saisonnier — toggle admin (#28)
-7. Ordre collections par rang (#30)
-8. Section "Emballage" — reporté au module Achats/Inventaire (#23)
-9. Sur-titre hero "COLLECTIONS 2026" — iPhone (#1)
-10. Fade in sections éducatives — refonte (#2)
-11. Prix/g modal — refonte (#3)
-12. Filtres catalogue par type de peau (#4)
-13. Liens page 7 → catalogue filtré par ingrédient (#5)
-14. Guide rapide — peaufiner le visuel (#6)
-15. Guide rapide — colonne "Savons recommandés" (#7)
-16. Accordéons huiles/additifs/HE — mobile seulement (#8)
-17. Mosaïque hero — alimenter dynamiquement (#9)
-18. Textes Sheet → Markdown simplifié (#10)
-19. Liste INCI sur fiche recette (#11)
-20. Informer visiteurs comment acheter (#12)
-21. Actualités automatiques depuis Sheet (#13)
-22. FAQ gérable depuis admin (#14)
-23. Pages FAQ, conditions de vente, retours/livraison (#15)
-24. Courriel confirmation automatique commande (#16)
-25. Taille texte mobile — section par section (#17)
-26. Menu burger — valider iPhone (#18)
-27. Modal tablette — revalider (#19)
-28. Affichage délais — à définir (#20)
-29. Import recettes JSON (#21)
-30. Ajouter section "Emballage" — reporté (#23)
-31. Recherche INCI via API EU CosIng (#24) — en cours
-32. Système commande léger sans panier (#25)
-33. Photo par ligne de produit (#27)
-34. Sauvegarde automatique Sheet + GitHub (#29)
-35. Calculateur SAF intégré fiche recette (#31)
-36. Coût de revient (#33)
-37. Scan factures automatique (QuaggaJS) (#34)
-38. Comptabilité — État des résultats, Bilan (#35)
-39. Masquer contenu à l'ouverture fiche/formulaire (#36)
-40. Inverser ordre Modifier/Supprimer (#37)
-41. Tuiles collections — revoir affichage lignes (#39)
-42. Bouton Modifier dans modal facture (#40)
-43. Page factures — filtre "Par produit", icônes, retirer TPS/TVQ (#41)
-44. Modal facture — afficher facture complète (#42)
-45. Filtres inventaire — revoir le visuel (#43)
-46. Inventaire — ligne séparation + resserrer + retirer colonne "Total (g)" (#44)
-47. Modification collection/ligne — masquer liste en mode édition (#45)
-48. Remplacer `alert()`/`confirm()` par modals/toasts (#46)
-49. Filtre recettes "Par nom" — placeholder (#47)
-50. Bon à savoir — refaire section Notes importantes (#48)
-51. Navbar admin — item Vente désactivé (#49)
-52. Prix/g réel — optimiser `finalizeInvoice` (#50)
-53. Taille texte minimum mobile (16px → 20px) (#51)
-54. Nom de domaine `universcaresse.ca` (#52)
-55. Catalogue PDF 11×17 (#53)
-56. Amortissement équipements (#54)
-57. Module Vente complet (#55)
-58. Refonte admin + design system (#56)
+1. Attendre livraison Chercheur (`Ingredients_INCI` propre + note olfactive)
+2. Voir recettes incomplètes (#26)
+3. Mode saisonnier — toggle admin (#28)
+4. Ordre collections par rang (#30)
+5. Section "Emballage" — reporté au module Achats/Inventaire (#23)
+6. Sur-titre hero "COLLECTIONS 2026" — iPhone (#1)
+7. Fade in sections éducatives — refonte (#2)
+8. Prix/g modal — refonte (#3)
+9. Filtres catalogue par type de peau (#4)
+10. Liens page 7 → catalogue filtré par ingrédient (#5)
+11. Guide rapide — peaufiner le visuel (#6)
+12. Guide rapide — colonne "Savons recommandés" (#7)
+13. Accordéons huiles/additifs/HE — mobile seulement (#8)
+14. Mosaïque hero — alimenter dynamiquement (#9)
+15. Textes Sheet → Markdown simplifié (#10)
+16. Liste INCI sur fiche recette (#11) ✅ fait session 21 mars
+17. Informer visiteurs comment acheter (#12)
+18. Actualités automatiques depuis Sheet (#13)
+19. FAQ gérable depuis admin (#14)
+20. Pages FAQ, conditions de vente, retours/livraison (#15)
+21. Courriel confirmation automatique commande (#16)
+22. Taille texte mobile — section par section (#17)
+23. Menu burger — valider iPhone (#18)
+24. Modal tablette — revalider (#19)
+25. Affichage délais — à définir (#20)
+26. Import recettes JSON (#21)
+27. Ajouter section "Emballage" — reporté (#23)
+28. Recherche INCI via API EU CosIng (#24) — Chercheur
+29. Système commande léger sans panier (#25)
+30. Photo par ligne de produit (#27)
+31. Sauvegarde automatique Sheet + GitHub (#29)
+32. Calculateur SAF intégré fiche recette (#31)
+33. Générateur INCI recette ordre décroissant (#32) ✅ fait session 21 mars
+34. Coût de revient (#33)
+35. Scan factures automatique (QuaggaJS) (#34)
+36. Comptabilité — État des résultats, Bilan (#35)
+37. Masquer contenu à l'ouverture fiche/formulaire (#36)
+38. Inverser ordre Modifier/Supprimer (#37)
+39. Tuiles collections — revoir affichage lignes (#39)
+40. Bouton Modifier dans modal facture (#40)
+41. Page factures — filtre "Par produit", icônes, retirer TPS/TVQ (#41)
+42. Modal facture — afficher facture complète (#42)
+43. Filtres inventaire — revoir le visuel (#43)
+44. Inventaire — ligne séparation + resserrer + retirer colonne "Total (g)" (#44)
+45. Modification collection/ligne — masquer liste en mode édition (#45)
+46. Remplacer `alert()`/`confirm()` par modals/toasts (#46) — **`ajouterIngredientInci()` utilise `prompt()` natif à remplacer**
+47. Filtre recettes "Par nom" — placeholder (#47)
+48. Bon à savoir — refaire section Notes importantes (#48)
+49. Navbar admin — item Vente désactivé (#49)
+50. Prix/g réel — optimiser `finalizeInvoice` (#50)
+51. Taille texte minimum mobile (16px → 20px) (#51)
+52. Nom de domaine `universcaresse.ca` (#52)
+53. Catalogue PDF 11×17 (#53)
+54. Amortissement équipements (#54)
+55. Module Vente complet (#55)
+56. Refonte admin + design system (#56)
 
 ---
 
@@ -235,11 +244,17 @@ Voir section "Module Ingredients_INCI" ci-dessus — prochaine étape : exécute
 - Boutons action admin — en bas des panneaux avec `<hr class="separateur">`
 - Formats recettes — Sheet `Recettes_Formats` séparée (Option B) — un-à-plusieurs
 - Emballage — reporté au module Achats/Inventaire
-- Listes déroulantes recettes/factures — source migrée vers `Purearome_Test` puis vers `Ingredients_INCI` (en cours)
-- `Purearome_Test` = zone de staging brute du scraping Purearome
+- Listes déroulantes recettes/factures — source finale : `Ingredients_INCI`
+- `Purearome_Test` = ancien staging — remplacé par `Scraping_PA`
 - `Ingredients_INCI` = source de vérité propre et permanente (toutes sources)
-- Priorité INCI : Purearome > EU CosIng > Manuel
-- Fournisseurs connus : Purearome, Divine Essence, Kamelya, Arbressence, Les Mauvaises Herbes + 2 autres possibles à identifier avec Chantal
+- Structure `Ingredients_INCI` : A=Catégorie, B=Nom, C=INCI, D=CAS, E=Source, F=Date ajout, G=Note olfactive
+- Priorité INCI : Purearome > Les Mauvaises Herbes > Divine Essence (via EU CosIng) > EU CosIng direct
+- Pas de saisie manuelle dans `Ingredients_INCI` — sauf via formulaire admin avec vérification doublon
+- Fournisseurs connus : Purearome, Les Mauvaises Herbes, Divine Essence + autres à identifier avec Chantal
+- Générateur INCI — fragrances regroupées sous `Fragrance (note1, note2...)` via col G
+- Règle canadienne INCI : ordre décroissant concentration, ingrédients ≤1% peuvent être dans n'importe quel ordre après les autres
+- `ajouterIngredientInci()` utilise `prompt()` natif — à remplacer lors du chantier #46
+- Chercheur prend la relève complète pour `Scraping_PA` — doit regarder solution Travailleur (regex dernier match) et améliorer
 
 ---
 
@@ -272,4 +287,4 @@ Voir section "Module Ingredients_INCI" ci-dessus — prochaine étape : exécute
 
 ---
 
-*Univers Caresse — Confidentiel — 20 mars 2026 — 21h39*
+*Univers Caresse — Confidentiel — 21 mars 2026 — 10h56*
