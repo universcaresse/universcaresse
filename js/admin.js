@@ -817,12 +817,16 @@ async function ouvrirFicheRecette(id) {
     <div class="fiche-texte">${rec.notes || '—'}</div>
     <div class="fiche-section-titre">Formats disponibles</div>
     <div class="fiche-ingredients">${formatsHtml}</div>
-    <div class="fiche-section-titre">Ingrédients</div>
-    <div class="fiche-ingredients">${ings}</div>
     <div class="fiche-section-titre">Liste INCI</div>
-    <div class="fiche-texte" id="fiche-inci-texte">${genererInci(rec.ingredients)}</div>
-    <button class="btn btn-secondary" onclick="navigator.clipboard.writeText(document.getElementById('fiche-inci-texte').textContent)">Copier INCI</button>
-  `;
+    ${(() => {
+      const manquants = (rec.ingredients || []).filter(i => i.type !== 'Fragrances' && !(listesDropdown.fullData||[]).find(d => d.type===i.type && d.ingredient===i.nom && d.inci));
+      const avertissement = manquants.length > 0
+        ? `<div class="msg-erreur">INCI manquants : ${manquants.map(i=>i.nom).join(', ')}</div>`
+        : '';
+      const inci = genererInci(rec.ingredients);
+      const btnDisabled = manquants.length > 0 ? 'disabled' : '';
+      return `${avertissement}<div class="fiche-texte" id="fiche-inci-texte">${inci}</div><button class="btn btn-secondary" ${btnDisabled} onclick="navigator.clipboard.writeText(document.getElementById('fiche-inci-texte').textContent)">Copier INCI</button>`;
+    })()}
 fermerFormRecette();
   document.getElementById('fiche-recette').classList.add('visible');
   document.querySelector('#section-recettes .filtres-bar').classList.add('cache');
