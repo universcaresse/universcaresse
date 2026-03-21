@@ -1093,6 +1093,19 @@ function rafraichirListeIngredientsRecette() {
   `).join('');
 }
 
+async function ajouterIngredientInci(categorie, index) {
+  const nom = prompt(`Nouvel ingrédient — Catégorie : ${categorie}\n\nNom de l'ingrédient :`);
+  if (!nom || !nom.trim()) return;
+  const res = await appelAPIPost('saveIngredientInci', { nom: nom.trim(), categorie });
+  if (res && res.success) {
+    await chargerListesDeroulantes();
+    ingredientsRecette[index].nom = nom.trim();
+    rafraichirListeIngredientsRecette();
+  } else {
+    alert(res?.message || 'Erreur lors de l\'ajout.');
+  }
+}
+
 // ─── INGRÉDIENTS DE BASE ───
 let ingredientsBase = [];
 
