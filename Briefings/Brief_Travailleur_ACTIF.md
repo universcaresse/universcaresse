@@ -1,6 +1,6 @@
 # BRIEF — CLAUDE TRAVAILLEUR
 ## Univers Caresse
-*Mis à jour : 20 mars 2026 — 16h45*
+*Mis à jour : 20 mars 2026 — 21h39*
 
 ---
 
@@ -56,6 +56,53 @@
 
 **À faire :** visuel fiche recette consultation à revoir (noté)
 
+### Migration listes déroulantes vers Purearome_Test
+- `getDropdownLists()` — migré de Sheet `Listes` vers `Purearome_Test` (col A=catégorie, col B=nom)
+- `getIngredientsPrixMin()` — même migration
+- Impact : listes déroulantes recettes ET factures utilisent maintenant `Purearome_Test`
+
+### Module Ingredients_INCI (NOUVEAU — EN COURS — #24)
+**Architecture :**
+```
+Scraping Purearome → Purearome_Test (brut)
+                           ↓ automatique post-scraping
+                    Ingredients_INCI (propre, toutes sources)
+
+EU CosIng / Manuel → directement dans Ingredients_INCI
+                           ↓
+              Listes déroulantes + Générateur INCI
+```
+
+**Priorité des sources INCI :**
+1. Purearome — toujours prioritaire
+2. EU CosIng — fallback si pas chez Purearome
+3. Manuel — dernier recours absolu
+- Si EU CosIng a fourni un INCI et que Purearome le trouve lors d'un nouveau scraping → remplace EU par Purearome
+- Jamais remplacer Manuel par automatique sans confirmation
+
+**Fournisseurs à scraper (en plus de Purearome) :**
+- Divine Essence : https://www.divineessence.com/fr/collections/bases + https://www.divineessence.com/fr/collections/union-nature-essential-oils
+- Kamelya : https://www.kamelya.ca/fc/huiles-essentielles/categories/huiles-essentielles/
+- Arbressence : https://arbressence.ca/produits-huiles-essentielles/huiles-essentielles/
+- Les Mauvaises Herbes : https://boutique.lesmauvaisesherbes.com/collections/ingredients
+
+**code.gs ajouté :**
+- `nettoyerTexte(str)` — décode unicode `\uXXXX` + entités HTML + retire balises
+- `getIngredientsInciSheet()` — crée/retourne Sheet `Ingredients_INCI` (colonnes : Nom, Catégorie, INCI, CAS, Source, Date ajout)
+- `initialiserIngredientsInci()` — ✅ exécuté, onglet créé
+- `transfererVersIngredientsInci()` — lit `Purearome_Test` complet, transfère proprement sans écraser, appelé automatiquement à la fin de `scrapeInciPurearome()`
+- `scrapeInciPurearome()` — corrigé : applique `nettoyerTexte()` sur INCI/CAS/Description avant écriture
+
+**À faire (dans l'ordre) :**
+1. Exécuter `lancerScrapingInci()` dans Apps Script pour repeupler `Purearome_Test` proprement + transfert auto vers `Ingredients_INCI`
+2. Migrer `getDropdownLists()` pour lire `Ingredients_INCI` au lieu de `Purearome_Test`
+3. Alerte admin — ingrédients de recette sans INCI dans `Ingredients_INCI`
+4. Formulaire admin — ajout manuel d'un ingrédient dans `Ingredients_INCI`
+5. Bouton admin — lancer scraping ciblé sur les manquants
+6. Scraping Divine Essence, Kamelya, Arbressence, Les Mauvaises Herbes
+7. Fallback EU CosIng pour ingrédients introuvables partout
+8. Générateur INCI recette — ordre décroissant
+
 ---
 
 ## ✅ CHANGEMENTS — SESSIONS PRÉCÉDENTES
@@ -75,71 +122,70 @@
 
 ---
 
-## 🔶 EN COURS — LISTES RECETTES / PUREAROME
-- Décision : utiliser la Sheet `Purearome_Test` comme source de données pour les listes déroulantes dans les recettes (au lieu de la Sheet `Listes`)
-- La Sheet `Listes` reste en place pour autre chose — on n'y touche pas
-- Le scraping Purearome est déjà exécuté et la Sheet est peuplée — **mais il y a des problèmes avec les données** (à détailler au prochain démarrage)
-- **Prochaine étape :** Jean-Claude décrit les problèmes avec les données Purearome avant de coder quoi que ce soit
+## 🔶 EN COURS — MODULE INGREDIENTS_INCI
+Voir section "Module Ingredients_INCI" ci-dessus — prochaine étape : exécuter `lancerScrapingInci()` puis migrer `getDropdownLists()` vers `Ingredients_INCI`.
 
 ---
 
 ## 🎯 PRIORITÉS (liste numérotée Jean-Claude)
-1. Sur-titre hero "COLLECTIONS 2026" — iPhone
-2. Fade in sections éducatives — refonte
-3. Prix/g modal — refonte
-4. Filtres catalogue par type de peau
-5. Liens page 7 → catalogue filtré par ingrédient
-6. Guide rapide — peaufiner le visuel
-7. Guide rapide — colonne "Savons recommandés"
-8. Accordéons huiles/additifs/HE — mobile seulement
-9. Mosaïque hero — alimenter dynamiquement
-10. Textes Sheet → Markdown simplifié
-11. Liste INCI sur fiche recette
-12. Informer visiteurs comment acheter
-13. Actualités automatiques depuis Sheet
-14. FAQ gérable depuis admin
-15. Pages FAQ, conditions de vente, retours/livraison
-16. Courriel confirmation automatique commande
-17. Taille texte mobile — section par section
-18. Menu burger — valider iPhone
-19. Modal tablette — revalider
-20. Affichage délais — à définir
-21. Import recettes JSON
-22. ✅ Ajouter champ "poids/formats" dans recettes — FAIT (module Formats)
-23. Ajouter section "Emballage" — reporté au module Achats/Inventaire
-24. Recherche INCI via API EU CosIng — exploration Chercheur + scraping Purearome à définir
-25. Système commande léger sans panier — exploration Chercheur
-26. Voir recettes incomplètes
-27. Photo par ligne de produit
-28. Mode saisonnier — toggle admin
-29. Sauvegarde automatique Sheet + GitHub
-30. Ordre collections par rang
-31. Calculateur SAF intégré fiche recette
-32. Générateur INCI
-33. Coût de revient
-34. Scan factures automatique (QuaggaJS)
-35. Comptabilité — État des résultats, Bilan
-36. Masquer contenu à l'ouverture fiche/formulaire
-37. Inverser ordre Modifier/Supprimer
-38. ✅ Formats — plusieurs formats par ligne de produits — FAIT (via Recettes_Formats)
-39. Tuiles collections — revoir affichage lignes
-40. Bouton Modifier dans modal facture
-41. Page factures — filtre "Par produit", icônes, retirer TPS/TVQ
-42. Modal facture — afficher facture complète
-43. Filtres inventaire — revoir le visuel
-44. Inventaire — ligne séparation + resserrer + retirer colonne "Total (g)"
-45. Modification collection/ligne — masquer liste en mode édition
-46. Remplacer `alert()`/`confirm()` par modals/toasts
-47. Filtre recettes "Par nom" — placeholder
-48. Bon à savoir — refaire section Notes importantes
-49. Navbar admin — item Vente désactivé
-50. Prix/g réel — optimiser `finalizeInvoice`
-51. Taille texte minimum mobile (16px → 20px)
-52. Nom de domaine `universcaresse.ca`
-53. Catalogue PDF 11×17
-54. Amortissement équipements
-55. Module Vente complet
-56. Refonte admin + design system
+1. Exécuter `lancerScrapingInci()` + migration `getDropdownLists()` vers `Ingredients_INCI` (suite module #24)
+2. Alerte admin ingrédients sans INCI + formulaire ajout manuel (suite module #24)
+3. Scraping autres fournisseurs + EU CosIng fallback (suite module #24)
+4. Générateur INCI recette ordre décroissant (#32)
+5. Voir recettes incomplètes (#26)
+6. Mode saisonnier — toggle admin (#28)
+7. Ordre collections par rang (#30)
+8. Section "Emballage" — reporté au module Achats/Inventaire (#23)
+9. Sur-titre hero "COLLECTIONS 2026" — iPhone (#1)
+10. Fade in sections éducatives — refonte (#2)
+11. Prix/g modal — refonte (#3)
+12. Filtres catalogue par type de peau (#4)
+13. Liens page 7 → catalogue filtré par ingrédient (#5)
+14. Guide rapide — peaufiner le visuel (#6)
+15. Guide rapide — colonne "Savons recommandés" (#7)
+16. Accordéons huiles/additifs/HE — mobile seulement (#8)
+17. Mosaïque hero — alimenter dynamiquement (#9)
+18. Textes Sheet → Markdown simplifié (#10)
+19. Liste INCI sur fiche recette (#11)
+20. Informer visiteurs comment acheter (#12)
+21. Actualités automatiques depuis Sheet (#13)
+22. FAQ gérable depuis admin (#14)
+23. Pages FAQ, conditions de vente, retours/livraison (#15)
+24. Courriel confirmation automatique commande (#16)
+25. Taille texte mobile — section par section (#17)
+26. Menu burger — valider iPhone (#18)
+27. Modal tablette — revalider (#19)
+28. Affichage délais — à définir (#20)
+29. Import recettes JSON (#21)
+30. Ajouter section "Emballage" — reporté (#23)
+31. Recherche INCI via API EU CosIng (#24) — en cours
+32. Système commande léger sans panier (#25)
+33. Photo par ligne de produit (#27)
+34. Sauvegarde automatique Sheet + GitHub (#29)
+35. Calculateur SAF intégré fiche recette (#31)
+36. Coût de revient (#33)
+37. Scan factures automatique (QuaggaJS) (#34)
+38. Comptabilité — État des résultats, Bilan (#35)
+39. Masquer contenu à l'ouverture fiche/formulaire (#36)
+40. Inverser ordre Modifier/Supprimer (#37)
+41. Tuiles collections — revoir affichage lignes (#39)
+42. Bouton Modifier dans modal facture (#40)
+43. Page factures — filtre "Par produit", icônes, retirer TPS/TVQ (#41)
+44. Modal facture — afficher facture complète (#42)
+45. Filtres inventaire — revoir le visuel (#43)
+46. Inventaire — ligne séparation + resserrer + retirer colonne "Total (g)" (#44)
+47. Modification collection/ligne — masquer liste en mode édition (#45)
+48. Remplacer `alert()`/`confirm()` par modals/toasts (#46)
+49. Filtre recettes "Par nom" — placeholder (#47)
+50. Bon à savoir — refaire section Notes importantes (#48)
+51. Navbar admin — item Vente désactivé (#49)
+52. Prix/g réel — optimiser `finalizeInvoice` (#50)
+53. Taille texte minimum mobile (16px → 20px) (#51)
+54. Nom de domaine `universcaresse.ca` (#52)
+55. Catalogue PDF 11×17 (#53)
+56. Amortissement équipements (#54)
+57. Module Vente complet (#55)
+58. Refonte admin + design system (#56)
 
 ---
 
@@ -161,7 +207,7 @@
 - inputmode decimal tous les champs prix
 - Google Sheets format QC — `parseFloat` sans `.toFixed()`
 - Sheet Recettes col V = `desc_emballage`
-- Sheet Listes : A=Type, B=Ingrédient, C=Contenant habituel, D=Contenant lookup, E=Quantité, F=Unité
+- Sheet Listes : A=Type, B=Ingrédient, C=Contenant habituel, D=Contenant lookup, E=Quantité, F=Unité — **N'EST PLUS UTILISÉE pour les listes déroulantes**
 - Sheet Config : A=Type, B=Densité, C=Unité source, D=marge_perte_pct
 - Sections éducatives SPA via `afficherEduSection(num)` — 178 clés pattern `edu_sX_element`
 - Nav sections : Accueil → Catalogue → Le savon artisanal → Bon à savoir → Contact
@@ -189,9 +235,28 @@
 - Boutons action admin — en bas des panneaux avec `<hr class="separateur">`
 - Formats recettes — Sheet `Recettes_Formats` séparée (Option B) — un-à-plusieurs
 - Emballage — reporté au module Achats/Inventaire
-- Scraping Purearome — données présentes dans Sheet `Purearome_Test` mais problèmes à clarifier
-- Sheet `Listes` — on n'y touche pas pour l'instant (contient d'autres données)
-- Listes déroulantes recettes — migration prévue vers `Purearome_Test` (en attente description des problèmes)
+- Listes déroulantes recettes/factures — source migrée vers `Purearome_Test` puis vers `Ingredients_INCI` (en cours)
+- `Purearome_Test` = zone de staging brute du scraping Purearome
+- `Ingredients_INCI` = source de vérité propre et permanente (toutes sources)
+- Priorité INCI : Purearome > EU CosIng > Manuel
+- Fournisseurs connus : Purearome, Divine Essence, Kamelya, Arbressence, Les Mauvaises Herbes + 2 autres possibles à identifier avec Chantal
+
+---
+
+## ⚠️ PIÈGE DOCUMENTÉ — doGet vs doPost dans code.gs
+
+**Problème rencontré :** `getRecettesFormats` a été ajouté dans `doGet` seulement. Mais `appelAPIPost` dans `admin.js` envoie toutes les requêtes vers `doPost`. Résultat : la fonction était inaccessible depuis l'admin.
+
+**Règle à toujours respecter :**
+- `appelAPIPost` → appelle `doPost` dans `code.gs`
+- Toute fonction appelée depuis `admin.js` via `appelAPIPost` **doit être branchée dans `doPost`**
+- Si une fonction doit aussi être accessible en lecture directe (URL), la brancher dans `doGet` EN PLUS — jamais à la place
+
+**Réflexe avant tout ajout dans code.gs :**
+1. Vérifier comment la fonction est appelée dans `admin.js` (`appelAPIPost` ou `appelAPI`)
+2. `appelAPIPost` → brancher dans `doPost`
+3. `appelAPI` → brancher dans `doGet`
+4. Ne jamais retirer les branchements existants — ajouter seulement
 
 ---
 
@@ -202,8 +267,9 @@
 - Jamais de style inline dans JS/HTML
 - Jamais suggérer pause/repos
 - Fin de tâche → dire COMMIT
-- Brief produit en entier en `.md` en fin de session sans rien effacer
+- Brief produit en entier en `.md` en fin de session sans rien effacer — **JAMAIS en conversation, toujours en fichier `.md`**
+- **Avant toute proposition de solution technique : toujours cerner le problème au complet en jasant d'abord — poser des questions pour comprendre le contexte global, pas juste le symptôme immédiat — ne jamais proposer la première solution "facile" sans avoir exploré tout autour — une solution proposée sans avoir cerné le problème = violation**
 
 ---
 
-*Univers Caresse — Confidentiel — 20 mars 2026 — 16h45*
+*Univers Caresse — Confidentiel — 20 mars 2026 — 21h39*

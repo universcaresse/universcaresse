@@ -1,6 +1,6 @@
 # BRIEF — CLAUDE CHERCHEUR
 ## Univers Caresse
-*Mis à jour : 20 mars 2026 — 16h45*
+*Mis à jour : 20 mars 2026 — 21h39*
 
 ---
 
@@ -24,21 +24,50 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 ---
 
 ## ✅ CHANTIERS COMPLÉTÉS
-- Scraping Purearome — exécuté, Sheet `Purearome_Test` peuplée
+- Scraping Purearome — ✅ exécuté, Sheet `Purearome_Test` peuplée (zone staging brute)
 - Générateur INCI — prototype prêt
 - Catalogue PDF — prototype prêt (`catalogue-booklet-v2.html`) ⚠️ Lumina à remplacer par Casa
 
 ---
 
-## 🔶 EN COURS — PUREAROME / LISTES RECETTES
-- Sheet `Purearome_Test` peuplée — **mais il y a des problèmes avec les données** (à détailler par Jean-Claude au prochain démarrage)
-- Migration prévue : listes déroulantes recettes → `Purearome_Test` (en attente description des problèmes)
-- Sheet `Listes` — on n'y touche pas pour l'instant
+## 🔶 EN COURS — MODULE INGREDIENTS_INCI (#24)
+
+**Architecture :**
+```
+Scraping Purearome → Purearome_Test (brut)
+                           ↓ automatique post-scraping
+                    Ingredients_INCI (propre, toutes sources)
+
+EU CosIng / Manuel → directement dans Ingredients_INCI
+                           ↓
+              Listes déroulantes + Générateur INCI
+```
+
+**Priorité des sources INCI :**
+1. Purearome — toujours prioritaire
+2. EU CosIng — fallback si pas chez Purearome
+3. Manuel — dernier recours absolu
+- Si EU CosIng a fourni un INCI et que Purearome le trouve → remplace EU par Purearome
+- Jamais remplacer Manuel par automatique sans confirmation
+
+**Fournisseurs à scraper :**
+- Divine Essence : https://www.divineessence.com/fr/collections/bases + https://www.divineessence.com/fr/collections/union-nature-essential-oils
+- Kamelya : https://www.kamelya.ca/fc/huiles-essentielles/categories/huiles-essentielles/
+- Arbressence : https://arbressence.ca/produits-huiles-essentielles/huiles-essentielles/
+- Les Mauvaises Herbes : https://boutique.lesmauvaisesherbes.com/collections/ingredients
+- 2 autres fournisseurs possibles — à identifier avec Chantal
+
+**Prochaines étapes :**
+1. Exécuter `lancerScrapingInci()` → repeupler `Purearome_Test` + transfert auto vers `Ingredients_INCI`
+2. Migrer `getDropdownLists()` vers `Ingredients_INCI`
+3. Alerte admin ingrédients sans INCI + formulaire ajout manuel
+4. Scraping Divine Essence, Kamelya, Arbressence, Les Mauvaises Herbes
+5. Fallback EU CosIng pour introuvables
+6. Générateur INCI recette — ordre décroissant
 
 ---
 
 ## 🎯 CHANTIERS À EXPLORER
-- API EU CosIng — recherche INCI automatisée
 - Système commande léger sans panier — attendre specs Chantal
 - Couleurs hex sur boutons CTA — à explorer
 - Comptabilité — État des résultats, Bilan
@@ -51,14 +80,16 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 - Formats recettes — Sheet `Recettes_Formats` séparée — un-à-plusieurs (implémenté par Travailleur)
 - Emballage → reporté au module Achats/Inventaire
 - "Sur-titre" au lieu de "eyebrow"
+- `Purearome_Test` = zone staging brute — `Ingredients_INCI` = source de vérité permanente
+- Priorité INCI : Purearome > EU CosIng > Manuel
 
 ---
 
 ## FICHIERS PRODUITS
 | Fichier | Emplacement | État |
 |---------|-------------|------|
-| `catalogue-booklet-v2.html` | `claude-chercheur/` | ⚠️ Lumina à remplacer |
+| `catalogue-booklet-v2.html` | `claude-chercheur/` | ⚠️ Lumina à remplacer par Casa |
 
 ---
 
-*Univers Caresse — Confidentiel — 20 mars 2026 — 16h45*
+*Univers Caresse — Confidentiel — 20 mars 2026 — 21h39*

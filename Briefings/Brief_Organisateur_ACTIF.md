@@ -2,7 +2,7 @@
 
 # BRIEF — CLAUDE ORGANISATEUR
 ## Univers Caresse
-*Mis à jour : 20 mars 2026 — 16h45*
+*Mis à jour : 20 mars 2026 — 21h39*
 
 ---
 
@@ -82,6 +82,28 @@ Quand Jean-Claude dit que c'est terminé et demande un brief → le produire en 
 
 ---
 
+## RÈGLE AVANT PRODUCTION DES BRIEFS — CRITIQUE
+1. Afficher le résumé des changements détectés
+2. Demander à Jean-Claude s'il a quelque chose à ajouter
+3. Attendre sa réponse avant de produire les briefs
+
+---
+
+## RÈGLE DE COMPARAISON — CRITIQUE
+Quand le Travailleur (ou tout autre rôle) envoie son brief : comparer **section par section** avec ma version maître — pas juste les titres. Tout ce qui est absent de ma version = à intégrer immédiatement.
+
+---
+
+## PIÈGES DOCUMENTÉS — À PROPAGER
+
+### ⚠️ doGet vs doPost dans code.gs (documenté 20 mars 2026)
+- `appelAPIPost` dans `admin.js` → appelle `doPost` dans `code.gs`
+- Toute fonction appelée via `appelAPIPost` **doit être branchée dans `doPost`**
+- Si lecture directe aussi nécessaire → brancher dans `doGet` EN PLUS, jamais à la place
+- Réflexe : vérifier `appelAPIPost` ou `appelAPI` avant tout ajout dans `code.gs`
+
+---
+
 ## RÈGLE D'OR — NE JAMAIS EFFACER
 - Les sections ✅ restent — archives
 - Les décisions s'accumulent
@@ -93,10 +115,10 @@ Quand Jean-Claude dit que c'est terminé et demande un brief → le produire en 
 ## BRIEFS SOUS MA RESPONSABILITÉ
 | Rôle | Fichier | Dernière mise à jour |
 |------|---------|---------------------|
-| Travailleur | `Brief_Travailleur_ACTIF.md` | 20 mars 2026 — 16h45 |
+| Travailleur | `Brief_Travailleur_ACTIF.md` | 20 mars 2026 — 21h39 |
 | Scripteur | `Brief_Scripteur_ACTIF.md` | 20 mars 2026 — 16h45 |
 | Chercheur | `Brief_Chercheur_ACTIF.md` | 20 mars 2026 — 16h45 |
-| Organisateur | `Brief_Organisateur_ACTIF.md` | 20 mars 2026 — 16h45 |
+| Organisateur | `Brief_Organisateur_ACTIF.md` | 20 mars 2026 — 21h39 |
 | Brouillon | `Brief_Brouillon_ACTIF.md` | 20 mars 2026 — 16h45 |
 
 ---
@@ -113,11 +135,13 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 - Pages FAQ, conditions, retours/livraison — en attente politique de vente
 
 ### Chantiers Chercheur
-- Scraping Purearome — données présentes dans Sheet `Purearome_Test` mais problèmes à clarifier
+- Scraping Purearome — ✅ exécuté, Sheet `Purearome_Test` peuplée (zone staging brute)
+- Module Ingredients_INCI — EN COURS (Sheet `Ingredients_INCI` créée — source de vérité permanente toutes sources)
+- Fournisseurs à scraper : Divine Essence, Kamelya, Arbressence, Les Mauvaises Herbes
 - Générateur INCI — prototype prêt
 - Comptabilité — à explorer
-- Catalogue PDF — prototype prêt (⚠️ Lumina à remplacer)
-- API EU CosIng — à explorer
+- Catalogue PDF — prototype prêt (⚠️ Lumina à remplacer par Casa)
+- API EU CosIng — fallback INCI en cours (module #24)
 - Système commande léger — à explorer (⚠️ attendre specs Chantal)
 - Couleurs hex sur boutons CTA — à explorer
 
