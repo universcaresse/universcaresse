@@ -819,6 +819,9 @@ async function ouvrirFicheRecette(id) {
     <div class="fiche-ingredients">${formatsHtml}</div>
     <div class="fiche-section-titre">Ingrédients</div>
     <div class="fiche-ingredients">${ings}</div>
+    <div class="fiche-section-titre">Liste INCI</div>
+    <div class="fiche-texte" id="fiche-inci-texte">${genererInci(rec.ingredients)}</div>
+    <button class="btn btn-secondary" onclick="navigator.clipboard.writeText(document.getElementById('fiche-inci-texte').textContent)">Copier INCI</button>
   `;
 fermerFormRecette();
   document.getElementById('fiche-recette').classList.add('visible');
@@ -1105,6 +1108,41 @@ async function ajouterIngredientInci(categorie, index) {
   } else {
     alert(res?.message || 'Erreur lors de l\'ajout.');
   }
+}
+
+function genererInci(ingredients) {
+  if (!ingredients || ingredients.length === 0) return '';
+  const total = ingredients.reduce((s, i) => s + (parseFloat(i.quantite_g) || 0), 0);
+  if (total === 0) return '';
+
+  // Séparer fragrances et autres
+  const fragrances = ingredients.filter(i => i.type === 'Fragrances');
+  const autres = ingredients.filter(i => i.type !== 'Fragrances');
+
+  // Trier autres par quantité décroissante
+  const plusDeUnPct = autres.filter(i => (i.quantite_g / total) > 0.01).sort((a, b) => b.quantite_g - a.quantite_g);
+  const unPctOuMoins = autres.filter(i => (i.quantite_g / total) <= 0.01);
+
+  const getInci = (ing) => {
+    const found = (listesDropdown.fullData || []).find(d => d.type === ing.type && d.ingredient === ing.nom);
+    return found ? (found.inci || ing.nom) : ing.nom;
+  };
+
+  const lignes = [
+    ...plusDeUnPct.map(i => getInci(i)),
+    ...unPctOuMoins.map(i => getInci(i))
+  ];
+
+  // Ajouter fragrances regroupées
+  if (fragrances.length > 0) {
+    const notes = fragrances.map(i => {
+      const found = (listesDropdown.fullData || []).find(d => d.type === i.type && d.ingredient === i.nom);
+      return found ? (found.note_olfactive || i.nom) : i.nom;
+    }).filter(Boolean);
+    lignes.push('Fragrance' + (notes.length > 0 ? ' (' + notes.join(', ') + ')' : ''));
+  }
+
+  return lignes.join(', ');
 }
 
 // ─── INGRÉDIENTS DE BASE ───
