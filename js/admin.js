@@ -827,6 +827,7 @@ async function ouvrirFicheRecette(id) {
       const btnDisabled = manquants.length > 0 ? 'disabled' : '';
       return `${avertissement}<div class="fiche-texte" id="fiche-inci-texte">${inci}</div><button class="btn btn-secondary" ${btnDisabled} onclick="navigator.clipboard.writeText(document.getElementById('fiche-inci-texte').textContent)">Copier INCI</button>`;
     })()}
+  `;
 fermerFormRecette();
   document.getElementById('fiche-recette').classList.add('visible');
   document.querySelector('#section-recettes .filtres-bar').classList.add('cache');
