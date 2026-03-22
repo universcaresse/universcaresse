@@ -7,7 +7,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
   const session = sessionStorage.getItem('uc_admin');
   if (session !== 'true') {
-    window.location.href = '/univers-caresse/admin/login.html';
+    window.location.href = '/universcaresse/admin/login.html';
     return;
   }
   document.getElementById('ecran-connexion').classList.add('cache');

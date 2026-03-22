@@ -2,7 +2,7 @@
 
 # BRIEF — CLAUDE ORGANISATEUR
 ## Univers Caresse
-*Mis à jour : 21 mars 2026 — 10h56*
+*Mis à jour : 22 mars 2026 — 11h00*
 
 ---
 
@@ -81,7 +81,7 @@ Demander à Jean-Claude l'heure actuelle à Québec avant de produire les briefs
 ---
 
 ## RÈGLE BRIEF EN .MD — CRITIQUE
-Quand Jean-Claude dit que c'est terminé et demande un brief → le produire en `.md` directement.
+Quand Jean-Claude dit que c'est terminé et demande un brief → le produire en `.md` directement via `present_files`. **Jamais dans la conversation. Jamais en aperçu. Toujours fichier `.md` téléchargeable. Sans exception.**
 
 ---
 
@@ -118,11 +118,11 @@ Quand un rôle envoie son brief : comparer **section par section** avec ma versi
 ## BRIEFS SOUS MA RESPONSABILITÉ
 | Rôle | Fichier | Dernière mise à jour |
 |------|---------|---------------------|
-| Travailleur | `Brief_Travailleur_ACTIF.md` | 21 mars 2026 — 10h56 |
-| Scripteur | `Brief_Scripteur_ACTIF.md` | 20 mars 2026 — 16h45 |
-| Chercheur | `Brief_Chercheur_ACTIF.md` | 21 mars 2026 — 10h56 |
-| Organisateur | `Brief_Organisateur_ACTIF.md` | 21 mars 2026 — 10h56 |
-| Brouillon | `Brief_Brouillon_ACTIF.md` | 20 mars 2026 — 16h45 |
+| Travailleur | `Brief_Travailleur_ACTIF.md` | 22 mars 2026 — 11h00 |
+| Scripteur | `Brief_Scripteur_ACTIF.md` | 22 mars 2026 — 11h00 |
+| Chercheur | `Brief_Chercheur_ACTIF.md` | 22 mars 2026 — 11h00 |
+| Organisateur | `Brief_Organisateur_ACTIF.md` | 22 mars 2026 — 11h00 |
+| Brouillon | `Brief_Brouillon_ACTIF.md` | 22 mars 2026 — 11h00 |
 
 ---
 
@@ -134,12 +134,23 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 
 ### Textes (Scripteur)
 - 7 sections éducatives ✅ — page d'accueil ✅ — 9 recettes ✅
-- Textes_Collections.md ✅ — Ingredients_A_Clarifier.md ✅
+- Textes_Collections.md ✅ — Ingredients_A_Clarifier.md ✅ — Textes_Etiquettes.md ✅
 - Pages FAQ, conditions, retours/livraison — en attente politique de vente
+
+### Prompts Ideogram (Scripteur)
+- Tous les prompts Site (4 à 17) ✅
+- Couverture catalogue saison régulière et hiver ✅
+- Épure, Kérys, Anima, Lui — saison régulière et hiver ✅
+- Saponica, Petit Nuage, Caprin — hiver ✅
+- Atelier Moment 1 — La trace ✅
+- Atelier Moment 2 — Le coulage ✅
+- Émolia saison régulière — prompt révisé ✅
+- Émolia hiver — prompt révisé ✅
+- Casa saison régulière et hiver — à tester et confirmer ⚠️
 
 ### Chantiers Chercheur
 - Scraping Les Mauvaises Herbes ✅ — `Scraping_MH` peuplée (~110 produits)
-- Scraping Purearome (`Scraping_PA`) — ⚠️ à reprendre — solution Travailleur (regex dernier match) à améliorer
+- Scraping Purearome (`Scraping_PA_v2`) — ⚠️ lancé — INCI manquants à investiguer
 - Divine Essence — scraping à faire (nom botanique → EU CosIng)
 - EU CosIng — fallback à implémenter
 - `Ingredients_INCI` — à produire propre avec col G Note olfactive
@@ -151,11 +162,16 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 
 ### Module Ingredients_INCI — état
 - `Scraping_MH` ✅ peuplée
-- `Scraping_PA` ⚠️ à reprendre par Chercheur
+- `Scraping_PA_v2` ⚠️ lancée — INCI manquants à investiguer
 - `Ingredients_INCI` créée — source de vérité permanente (A=Catégorie, B=Nom, C=INCI, D=CAS, E=Source, F=Date ajout, G=Note olfactive)
 - `getDropdownLists()` migré vers `Ingredients_INCI` ✅
 - Générateur INCI ✅ livré en production
 - Chercheur prend la relève complète — PA + DE + EU CosIng + col G
+
+### Mode saisonnier ✅
+- Toggle global admin — clé `mode_saisonnier` dans Sheet Contenu
+- `photo_url_noel` col J dans Collections, `image_url_noel` col T dans Recettes
+- Si pas de 2e photo → photo régulière utilisée (jamais de trou)
 
 ### À valider avec Chantal
 - Specs d'expédition : format boîtes, poids produit + emballage
@@ -182,10 +198,10 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 ### Dossier claude-chercheur/
 | Fichier | Contenu |
 |---------|---------|
-| `catalogue-booklet-v2.html` | Prototype catalogue PDF |
+| `catalogue-booklet-v2.html` | Prototype catalogue PDF — ⚠️ Lumina à remplacer par Casa |
 | `test_scraping_mauvaisesherbes.gs` | ✅ validé |
 | `Scraping_MH.gs` | ✅ livré |
-| `Scraping_PA.gs` | ⚠️ à reprendre |
+| `Scraping_PA_v2.gs` | ⚠️ lancé — INCI manquants à investiguer |
 
 ### Dossier claude-scripteur/
 | Fichier | Contenu |
@@ -214,9 +230,9 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 1. Afficher résumé des changements
 2. Demander à Jean-Claude s'il a quelque chose à ajouter — attendre
 3. Demander l'heure actuelle à Québec
-4. Produire les 5 briefs mis à jour en `.md`
+4. Produire les 5 briefs mis à jour en `.md` via `present_files`
 5. Jean-Claude les télécharge et pousse sur GitHub
 
 ---
 
-*Univers Caresse — Confidentiel — 21 mars 2026 — 10h56*
+*Univers Caresse — Confidentiel — 22 mars 2026 — 11h00*

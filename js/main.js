@@ -189,7 +189,7 @@ function validerConnexion() {
   const mdp = document.getElementById('input-mdp').value;
   if (mdp === CONFIG.MOT_DE_PASSE) {
     sessionStorage.setItem('uc_admin', 'true');
-    window.location.href = '/univers-caresse/admin/';
+    window.location.href = '/universcaresse/admin/';
   } else {
     document.getElementById('erreur-connexion').classList.remove('cache');
     document.getElementById('input-mdp').value = '';
@@ -200,7 +200,7 @@ function validerConnexion() {
 function seDeconnecter() {
   adminConnecte = false;
   sessionStorage.removeItem('uc_admin');
-  window.location.href = '/univers-caresse/admin/';
+  window.location.href = '/universcaresse/admin/';
 }
 
 function afficherModeAdmin() {

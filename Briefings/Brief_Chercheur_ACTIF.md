@@ -1,6 +1,6 @@
 # BRIEF — CLAUDE CHERCHEUR
 ## Univers Caresse
-*Mis à jour : 21 mars 2026 — 10h56*
+*Mis à jour : 22 mars 2026 — 11h00*
 
 ---
 
@@ -14,12 +14,29 @@ Site web pour la savonnerie artisanale de **Chantal Mondor** (Québec).
 ---
 
 ## TON RÔLE
-Explorer les options techniques — prototypes, faisabilité, recherche. Tu ne codes pas en production — tu explores et remets des prototypes ou des recommandations.
+Explorer les options techniques — prototypes, faisabilité, recherche. Tu ne codes pas en production — tu explores et remets des prototypes ou des recommandations sous forme de fichiers `.gs` autonomes.
 
 ---
 
 ## COMMENT DÉMARRER
-Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les instructions.
+Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les instructions. **Je ne produis jamais un brief dans la conversation.**
+
+---
+
+## 🚨 STOP — LIS CECI AVANT DE TOUCHER AU CODE
+
+Ces deux règles ont été violées par un Claude avec mémoire fraîche. Ce n'est pas acceptable. Chaque réponse qui implique du code doit passer ce test mental avant d'être envoyée :
+
+**TEST #1 — Est-ce que j'ai le OUI ?**
+L'analyse est faite. La solution est claire. Le contexte est évident. **Ça ne compte pas.** Sans le mot OUI de Jean-Claude dans la conversation, les doigts ne bougent pas. On propose, on attend, on reçoit le OUI, alors seulement on code.
+
+**TEST #2 — Est-ce que c'est UN seul changement ?**
+Compter les blocs de code dans la réponse. Si la réponse est plus que 1 — arrêter. Couper. Livrer le premier. Attendre la confirmation. Seulement ensuite proposer le suivant.
+
+**TEST #3 — Le brief est-il livré en fichier .md ?**
+Le brief est TOUJOURS produit en entier comme fichier `.md` téléchargeable via `present_files`. **Jamais collé dans le chat. Jamais en aperçu. Sans exception.**
+
+Ces règles ne sont pas des suggestions. Un Claude qui les viole nuit directement au travail de Jean-Claude sur un vrai projet pour une vraie personne.
 
 ---
 
@@ -34,7 +51,7 @@ Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les inst
 ## 🔶 EN COURS — MODULE INGREDIENTS_INCI (#24) — CHERCHEUR PREND LA RELÈVE COMPLÈTE
 
 **Mandat clair :**
-1. **Reprendre la solution PA du Travailleur** (regex dernier match pour contourner le bloc vedette sidebar) — lire ce que Travailleur a fait et améliorer pour produire un `Scraping_PA` propre
+1. **Scraping PA** ⚠️ — `Scraping_PA_v2.gs` livré et lancé — INCI manquant sur beaucoup de produits — à investiguer
 2. **MH** ✅ déjà fait — `Scraping_MH` peuplée
 3. **Divine Essence** — scraping (nom botanique → EU CosIng pour trouver INCI)
 4. **EU CosIng** — fallback pour tout ingrédient introuvable chez les fournisseurs
@@ -48,15 +65,40 @@ Divine Essence → Scraping_DE → EU CosIng → Ingredients_INCI (priorité 3)
 EU CosIng → fallback pour tout introuvable
 ```
 
-**⚠️ Scraping PA — problème connu :**
-- Le bloc vedette sidebar contient un INCI (Rosa rubiginosa) qui pollue les résultats
-- Travailleur a trouvé : prendre le **dernier** match regex sur la page — à reprendre et améliorer
-- Ne pas partir de zéro — lire la solution Travailleur d'abord
+**Scraping PA — état et limites connues :**
+- `Scraping_PA_v2.gs` livré — fonctionne mais encore beaucoup de INCI manquants
+- Deux structures HTML coexistent sur purearome.com
+- **Ancienne structure** (`product-main__description` présent) → scraping HTML fonctionne → INCI, Parties, Origine extraits
+- **Nouvelle structure** (contenu chargé dynamiquement en JS) → `product-main__description` absent → INCI inaccessible → marquer `À valider`
+- **Nom botanique** → absent comme champ structuré chez PA — laisser vide
+- **API Panierdachat** → ne contient pas les métadonnées INCI — inutile pour ce besoin
+- **Puppeteer écarté partout** — Apps Script uniquement sur ce projet
+- INCI tronqué corrigé — `pa2_nettoyerInci()` coupe le texte descriptif après parenthèse fermante
+- Entités HTML (`&nbsp;`) nettoyées
+
+**Deux formats HTML PA :**
+- **Format A** (`<span>`) — HE et certaines huiles : `INCI : valeur` puis `Méthode d'extraction : X - Parties : Y - Origine : Z` sur une ligne
+- **Format B** (`<strong>`) — beurres, argiles : `<strong>INCI :</strong> valeur` dans des `<li>`
+
+**Prochaine investigation PA :**
+- Beaucoup de produits encore sans INCI après le scraping v2
+- Catégories concernées : Herbes et Fleurs, Huiles aromatiques, certaines HE, certaines Cires
+- Hypothèse : ces produits n'ont tout simplement pas d'INCI sur leur page PA
+- À confirmer : ouvrir manuellement 5-6 URLs `À valider` et vérifier si l'INCI est présent sur la page
+
+**Résultats debug validés (22 mars 2026) :**
+| Produit | INCI | Partie | Provenance | Nom botanique |
+|---|---|---|---|---|
+| huile-essentielle-lavande-vraie | ✅ | ✅ | ✅ | ❌ (dans INCI) |
+| beurre-karite | ✅ | ❌ | ❌ | ❌ |
+| argile-blanche-kaolin | ✅ | ❌ | ❌ | ❌ |
+| hydrolat-rose | ❌ nouvelle structure | — | — | — |
+| cire-candelilla | ❌ nouvelle structure | — | — | — |
 
 **Résultats reconnaissance fournisseurs :**
 | Fournisseur | INCI explicite | Plateforme | Statut |
 |---|---|---|---|
-| Purearome | ✅ Oui | Panierdachat API + HTML | ⚠️ PA à reprendre par Chercheur |
+| Purearome | ✅ Oui (ancienne structure) | Panierdachat API + HTML | ⚠️ v2 lancée — INCI manquants à investiguer |
 | Les Mauvaises Herbes | ✅ Oui | Shopify | ✅ Scraping_MH peuplé |
 | Divine Essence | ❌ Nom botanique seulement | Shopify | 🔜 À faire |
 | Arbressence | ❌ Non | WordPress | Écarté |
@@ -113,7 +155,11 @@ Argiles | Bases neutres | Cires | Colorants et Pigments | Herbes et Fleurs | Hui
 - Nommage onglets : `Scraping_PA`, `Scraping_MH`, `Scraping_DE`
 - Prioriser fournisseurs québécois
 - Arbressence écarté (pas d'INCI)
-- Chercheur prend la relève complète pour `Scraping_PA` — reprendre solution Travailleur (regex dernier match) et améliorer
+- Puppeteer écarté partout — Apps Script uniquement
+- PA nouvelle structure → contenu JS dynamique → inaccessible via fetch → marquer `À valider`
+- PA nom botanique → absent comme champ structuré → laisser vide
+- Chercheur produit des fichiers `.gs` autonomes — jamais de trouve/remplace dans le code Travailleur
+- **Brief = fichier `.md` uniquement via `present_files` — jamais collé dans le chat, jamais en aperçu. Sans exception.**
 
 ---
 
@@ -123,8 +169,8 @@ Argiles | Bases neutres | Cires | Colorants et Pigments | Herbes et Fleurs | Hui
 | `catalogue-booklet-v2.html` | ⚠️ Lumina à remplacer par Casa |
 | `test_scraping_mauvaisesherbes.gs` | ✅ validé |
 | `Scraping_MH.gs` | ✅ livré — feuille peuplée |
-| `Scraping_PA.gs` | ⚠️ à reprendre — INCI à améliorer |
+| `Scraping_PA_v2.gs` | ⚠️ lancé — INCI manquants à investiguer |
 
 ---
 
-*Univers Caresse — Confidentiel — 21 mars 2026 — 10h56*
+*Univers Caresse — Confidentiel — 22 mars 2026 — 11h00*
