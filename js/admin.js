@@ -1086,30 +1086,35 @@ function rafraichirListeIngredientsRecette() {
   if (ingredientsRecette.length === 0) { liste.innerHTML = ''; return; }
   liste.innerHTML = ingredientsRecette.map((ing, i) => `
     <div class="ingredient-rangee">
-      <select class="form-ctrl" onchange="ingredientsRecette[${i}].type=this.value; ingredientsRecette[${i}].nom=''; rafraichirListeIngredientsRecette()">
+      <select class="form-ctrl ing-type" onchange="ingredientsRecette[${i}].type=this.value; ingredientsRecette[${i}].nom=''; rafraichirListeIngredientsRecette()">
         <option value="">— Type —</option>
         ${(listesDropdown.types || []).map(t => `<option value="${t}" ${ing.type===t?'selected':''}>${t}</option>`).join('')}
       </select>
-      <select class="form-ctrl" onchange="if(this.value==='__nouveau__'){ajouterIngredientInci('${ing.type}',${i})}else{ingredientsRecette[${i}].nom=this.value; rafraichirListeIngredientsRecette()}">
+      <select class="form-ctrl ing-nom" onchange="if(this.value==='__nouveau__'){ajouterIngredientInci('${ing.type}',${i})}else{ingredientsRecette[${i}].nom=this.value; rafraichirListeIngredientsRecette()}">
         <option value="">— Ingrédient —</option>
         ${(listesDropdown.fullData || []).filter(d => d.type===ing.type).map(d => `<option value="${d.ingredient}" ${ing.nom===d.ingredient?'selected':''}>${d.ingredient}</option>`).join('')}
         <option value="__nouveau__">+ Ajouter un ingrédient</option>
       </select>
-      <input type="text" class="form-ctrl" readonly placeholder="INCI" value="${(listesDropdown.fullData||[]).find(d=>d.type===ing.type&&d.ingredient===ing.nom)?.inci||''}">
-      <input type="text" inputmode="decimal" class="form-ctrl" value="${ing.quantite||''}" placeholder="g" onchange="ingredientsRecette[${i}].quantite=parseFloat(this.value)||0">
+      <input type="text" class="form-ctrl ing-inci" readonly placeholder="INCI" value="${(listesDropdown.fullData||[]).find(d=>d.type===ing.type&&d.ingredient===ing.nom)?.inci||''}">
+      <input type="text" inputmode="decimal" class="form-ctrl ing-qte" value="${ing.quantite||''}" placeholder="g" onchange="ingredientsRecette[${i}].quantite=parseFloat(this.value)||0">
       <button class="btn btn-sm btn-danger" onclick="supprimerIngredientRecette(${i})">✕</button>
     </div>
   `).join('');
 }
 
-async function ajouterIngredientInci(categorie, index) {
+async function ajouterIngredientInci(categorie, index, liste = 'recette') {
   const nom = prompt(`Nouvel ingrédient — Catégorie : ${categorie}\n\nNom de l'ingrédient :`);
   if (!nom || !nom.trim()) return;
   const res = await appelAPIPost('saveIngredientInci', { nom: nom.trim(), categorie });
   if (res && res.success) {
     await chargerListesDeroulantes();
-    ingredientsRecette[index].nom = nom.trim();
-    rafraichirListeIngredientsRecette();
+    if (liste === 'base') {
+      ingredientsBase[index].nom = nom.trim();
+      rafraichirListeIngredientsBase();
+    } else {
+      ingredientsRecette[index].nom = nom.trim();
+      rafraichirListeIngredientsRecette();
+    }
   } else {
     alert(res?.message || 'Erreur lors de l\'ajout.');
   }
@@ -1130,7 +1135,7 @@ function genererInci(ingredients) {
 
   const getInci = (ing) => {
     const found = (listesDropdown.fullData || []).find(d => d.type === ing.type && d.ingredient === ing.nom);
-    return found ? (found.inci || ing.nom) : ing.nom;
+    return found ? (found.inci || '') : '';
   };
 
   const lignes = [
@@ -1167,17 +1172,19 @@ function rafraichirListeIngredientsBase() {
   const liste = document.getElementById('liste-ingredients-base');
   if (!liste) return;
   if (ingredientsBase.length === 0) { liste.innerHTML = ''; return; }
- liste.innerHTML = ingredientsBase.map((ing, i) => `
+  liste.innerHTML = ingredientsBase.map((ing, i) => `
     <div class="ingredient-rangee">
-      <select class="form-ctrl" onchange="ingredientsBase[${i}].type=this.value; ingredientsBase[${i}].nom=''; rafraichirListeIngredientsBase()">
+      <select class="form-ctrl ing-type" onchange="ingredientsBase[${i}].type=this.value; ingredientsBase[${i}].nom=''; rafraichirListeIngredientsBase()">
         <option value="">— Type —</option>
         ${(listesDropdown.types || []).map(t => `<option value="${t}" ${ing.type===t?'selected':''}>${t}</option>`).join('')}
       </select>
-      <select class="form-ctrl" onchange="ingredientsBase[${i}].nom=this.value">
+      <select class="form-ctrl ing-nom" onchange="if(this.value==='__nouveau__'){ajouterIngredientInci('${ing.type}',${i},'base')}else{ingredientsBase[${i}].nom=this.value; rafraichirListeIngredientsBase()}">
         <option value="">— Ingrédient —</option>
         ${(listesDropdown.fullData || []).filter(d => d.type===ing.type).map(d => `<option value="${d.ingredient}" ${ing.nom===d.ingredient?'selected':''}>${d.ingredient}</option>`).join('')}
+        <option value="__nouveau__">+ Ajouter un ingrédient</option>
       </select>
-      <input type="text" inputmode="decimal" class="form-ctrl" value="${ing.quantite||''}" placeholder="g" onchange="ingredientsBase[${i}].quantite=parseFloat(this.value)||0">
+      <input type="text" class="form-ctrl ing-inci" readonly placeholder="INCI" value="${(listesDropdown.fullData||[]).find(d=>d.type===ing.type&&d.ingredient===ing.nom)?.inci||''}">
+      <input type="text" inputmode="decimal" class="form-ctrl ing-qte" value="${ing.quantite||''}" placeholder="g" onchange="ingredientsBase[${i}].quantite=parseFloat(this.value)||0">
       <button class="btn btn-sm btn-danger" onclick="supprimerIngredientBase(${i})">✕</button>
     </div>
   `).join('');

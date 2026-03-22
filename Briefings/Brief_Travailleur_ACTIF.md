@@ -1,6 +1,6 @@
 # BRIEF — CLAUDE TRAVAILLEUR
 ## Univers Caresse
-*Mis à jour : 21 mars 2026 — 10h56*
+*Mis à jour : 21 mars 2026 — 11h33*
 
 ---
 
@@ -119,6 +119,8 @@
 - [ ] Sur-titre hero "COLLECTIONS 2026" — positionnement iPhone — plusieurs tentatives ratées
 - [ ] Fade in sections éducatives — refonte complète requise (`display:none` incompatible animations CSS)
 - [ ] Prix/g modal — refonte du bloc requise
+- [ ] Fiche recette modification — après sauvegarde ou annulation, revenir à la fiche consultation au lieu de fermer complètement
+- [ ] Fiche recette consultation — à la fermeture, revenir en haut de la liste des recettes au lieu du milieu
 
 ---
 
@@ -287,4 +289,4 @@
 
 ---
 
-*Univers Caresse — Confidentiel — 21 mars 2026 — 10h56*
+*Univers Caresse — Confidentiel — 21 mars 2026 — 11h33*
