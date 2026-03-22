@@ -365,14 +365,6 @@
                   </div>
                   <div id="fc-photo-preview"></div>
                 </div>
-                <div class="form-groupe col-plein">
-                  <label class="form-label">Photo collection — saisonnière</label>
-                  <div class="cloudinary-zone">
-                    <input type="text" class="form-ctrl" id="fc-photo-url-noel">
-                    <button type="button" class="btn btn-secondary" onclick="ouvrirCloudinaryCollectionNoel()">Choisir une photo</button>
-                  </div>
-                  <div id="fc-photo-preview-noel"></div>
-                </div>
               </div>
             </div>
 
@@ -898,10 +890,7 @@
             <div class="page-titre">Contenu du site</div>
             <div class="page-sous-titre">Textes affichés sur le site public</div>
           </div>
-          <div class="form-actions">
-            <button class="btn btn-primary" onclick="sauvegarderContenuSite()">Enregistrer</button>
-            <button class="btn btn-secondary" id="btn-mode-saisonnier" onclick="toggleModeSaisonnier()">🌲 Mode saisonnier OFF</button>
-          </div>
+          <button class="btn btn-primary" onclick="sauvegarderContenuSite()">Enregistrer</button>
         </div>
         <div class="msg-zone" id="msg-contenu-site"></div>
         <div class="chargement" id="loading-contenu-site"><span class="spinner"></span>Chargement...</div>

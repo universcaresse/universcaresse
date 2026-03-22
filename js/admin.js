@@ -266,7 +266,7 @@ function ouvrirFormCollection() {
   ['fc-rang','fc-collection','fc-slogan','fc-desc-col','fc-couleur-hex','fc-photo-url',
    'fc-ligne','fc-format','fc-desc-ligne','fc-couleur-hex-ligne','fc-photo-url-ligne','fc-collection-ligne']
     .forEach(id => { const e = document.getElementById(id); if (e) e.value = ''; });
-  ['fc-photo-preview','fc-photo-preview-ligne'].forEach(id => {
+  ['fc-photo-preview','fc-photo-preview-ligne','fc-photo-preview-noel'].forEach(id => {
     const e = document.getElementById(id); if (e) e.innerHTML = '';
   });
   ['fc-couleur-apercu','fc-couleur-apercu-ligne'].forEach(id => {
@@ -317,9 +317,10 @@ async function ouvrirFicheLigne(rowIndex) {
   if (ings.length === 0) {
     listeEl.innerHTML = '<span class="form-valeur">—</span>';
   } else {
-    listeEl.innerHTML = ings.map(i =>
-      `<div class="fp-ing-row"><span>${i.ingredient_type}</span><span>${i.ingredient_nom}</span><span>${i.quantite_g} g</span></div>`
-    ).join('');
+    listeEl.innerHTML = ings.map(i => {
+      const inci = (listesDropdown.fullData||[]).find(d => d.type===i.ingredient_type && d.ingredient===i.ingredient_nom)?.inci || '';
+      return `<div class="fp-ing-row"><span>${i.ingredient_type}</span><span>${i.ingredient_nom}</span><span class="fp-ing-inci">${inci}</span><span>${i.quantite_g} g</span></div>`;
+    }).join('');
   }
   document.getElementById('fiche-collection').classList.remove('visible');
   document.getElementById('fiche-ligne').classList.add('visible');
@@ -384,6 +385,9 @@ document.getElementById('fc-couleur-hex').value       = item.couleur_hex || 'var
   document.getElementById('fc-photo-url').value         = item.photo_url || '';
   const preview = document.getElementById('fc-photo-preview');
   if (preview) preview.innerHTML = item.photo_url ? `<img src="${item.photo_url}" class="photo-preview">` : '';
+  document.getElementById('fc-photo-url-noel').value    = item.photo_url_noel || '';
+  const previewNoel = document.getElementById('fc-photo-preview-noel');
+  if (previewNoel) previewNoel.innerHTML = item.photo_url_noel ? `<img src="${item.photo_url_noel}" class="photo-preview">` : '';
   const res = await appelAPI('getRecettesBase');
   ingredientsBase = (res && res.items ? res.items : [])
     .filter(i => i.collection === item.collection && i.ligne === item.ligne)
@@ -448,6 +452,7 @@ async function sauvegarderCollection() {
     description_collection: document.getElementById('fc-desc-col').value,
     couleur_hex:            document.getElementById('fc-couleur-hex').value,
     photo_url:              document.getElementById('fc-photo-url').value,
+    photo_url_noel:         document.getElementById('fc-photo-url-noel').value,
   };
   if (!d.collection) {
     if (btnSauvegarder) { btnSauvegarder.disabled = false; btnSauvegarder.innerHTML = 'Enregistrer'; }
@@ -1022,7 +1027,8 @@ function fermerMediaLibrary() {
 }
 
 function ouvrirCloudinary()           { ouvrirMediaLibrary('fr-image-url',     'fr-image-preview');       }
-function ouvrirCloudinaryCollection() { ouvrirMediaLibrary('fc-photo-url',     'fc-photo-preview');       }
+function ouvrirCloudinaryCollection()      { ouvrirMediaLibrary('fc-photo-url',      'fc-photo-preview');      }
+function ouvrirCloudinaryCollectionNoel()  { ouvrirMediaLibrary('fc-photo-url-noel', 'fc-photo-preview-noel'); }
 function ouvrirCloudinaryLigne()      { ouvrirMediaLibrary('fc-photo-url-ligne','fc-photo-preview-ligne'); }
 
 function basculerModeFormCollection() {
@@ -2174,15 +2180,36 @@ async function chargerContenuSite() {
   const corps = document.getElementById('corps-contenu-site');
   if (loading) loading.classList.remove('cache');
   if (corps) corps.classList.add('cache');
- const data = await appelAPI('getContenu');
-if (loading) loading.classList.add('cache');
+  const data = await appelAPI('getContenu');
+  if (loading) loading.classList.add('cache');
   if (!data || !data.success || !data.contenu) { afficherMsg('msg-contenu-site', 'Erreur de chargement.', 'erreur'); return; }
   const c = data.contenu;
   Object.keys(c).forEach(cle => {
     const el = document.getElementById('cs-' + cle);
     if (el) el.value = c[cle];
   });
+  const btnSaisonnier = document.getElementById('btn-mode-saisonnier');
+  if (btnSaisonnier) {
+    const actif = c.mode_saisonnier === 'oui';
+    btnSaisonnier.textContent = actif ? '🌲 Mode saisonnier ON' : '🌲 Mode saisonnier OFF';
+    btnSaisonnier.classList.toggle('btn-primary', actif);
+    btnSaisonnier.classList.toggle('btn-secondary', !actif);
+  }
   if (corps) corps.classList.remove('cache');
+}
+
+async function toggleModeSaisonnier() {
+  const res = await appelAPI('getContenu');
+  if (!res || !res.success) return;
+  const actuel = res.contenu.mode_saisonnier || 'non';
+  const nouveau = actuel === 'oui' ? 'non' : 'oui';
+  const data = await appelAPIPost('updateContenu', { contenu: { mode_saisonnier: nouveau } });
+  if (data && data.success) {
+    document.getElementById('btn-mode-saisonnier').textContent = nouveau === 'oui' ? '🌲 Mode saisonnier ON' : '🌲 Mode saisonnier OFF';
+    document.getElementById('btn-mode-saisonnier').classList.toggle('btn-primary', nouveau === 'oui');
+    document.getElementById('btn-mode-saisonnier').classList.toggle('btn-secondary', nouveau !== 'oui');
+    afficherMsg('contenu-site', nouveau === 'oui' ? 'Mode saisonnier activé.' : 'Mode saisonnier désactivé.');
+  }
 }
 
 async function sauvegarderContenuSite() {

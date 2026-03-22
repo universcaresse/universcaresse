@@ -419,6 +419,7 @@ async function chargerContenu() {
     if (!data || !data.success || !data.contenu) return;
     const c = data.contenu;
     if (String(c.maintenance_active) === '1') { afficherMaintenance(); return; }
+    window.modeSaisonnier = String(c.mode_saisonnier) === 'oui';
     const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.textContent = val; };
     const setHtml = (id, val) => { const el = document.getElementById(id); if (el && val) el.innerHTML = val; };
 
@@ -608,7 +609,8 @@ function couleurTexteContraste(hex) {
 function carteProduit(p) {
   const prix = p.prix_vente ? parseFloat(p.prix_vente).toFixed(2).replace('.', ',') + ' $' : '—';
   const formats = Array.isArray(p.formats) ? p.formats : (p.format ? [p.format] : []);
-  const image = p.image_url ? `<img src="${p.image_url}" alt="${p.nom}" onerror="this.style.display='none'">` : '';
+  const photoUrl = (window.modeSaisonnier && p.image_url_noel) ? p.image_url_noel : p.image_url;
+  const image = photoUrl ? `<img src="${photoUrl}" alt="${p.nom}" onerror="this.style.display='none'">` : '';
   return `
     <div class="carte-produit" data-produit="${btoa(unescape(encodeURIComponent(JSON.stringify(p))))}" onclick="ouvrirModalFromCard(this)" style="--col-hex: ${p.couleur_hex};">
       <div class="carte-visuel">
@@ -683,12 +685,13 @@ function ouvrirModal(produit) {
   const imgExistante = photo.querySelector('img');
   if (imgExistante) imgExistante.remove();
 
-  if (produit.image_url) {
+  const photoModal = (window.modeSaisonnier && produit.image_url_noel) ? produit.image_url_noel : produit.image_url;
+  if (photoModal) {
     hex.style.background = `linear-gradient(145deg, ${produit.couleur_hex}dd, ${produit.couleur_hex}88)`;
     hex.classList.remove('cache');
     photo.style.background = '';
     const img = document.createElement('img');
-    img.src = produit.image_url;
+    img.src = photoModal;
     img.onerror = () => img.remove();
     photo.appendChild(img);
   } else {
