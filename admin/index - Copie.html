@@ -61,7 +61,6 @@
       <li class="nav-admin-item">
         <button class="nav-admin-btn" onclick="toggleDropdownAdmin(this)">Système <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-item" onclick="afficherSection('inci', null)">INCI</button>
           <button class="nav-dropdown-item" onclick="afficherSection('densites', null)">Densité</button>
           <button class="nav-dropdown-item" onclick="afficherSection('contenu-site', null)">Contenu du site</button>
           <button class="nav-dropdown-item bientot">Corrections inventaire</button>
@@ -110,7 +109,6 @@
       <div class="sidebar-sep"></div>
      <div class="sidebar-groupe">
         <div class="sidebar-titre">Système</div>
-        <button class="sidebar-lien" onclick="afficherSection('inci', this)">INCI</button>
         <button class="sidebar-lien" onclick="afficherSection('densites', this)">Densité</button>
         <button class="sidebar-lien" onclick="afficherSection('contenu-site', this)">Contenu du site</button>
      <button class="sidebar-lien bientot">Corrections inventaire</button>
@@ -1109,31 +1107,6 @@
         </div>
       </div>
 	
-
-      <!-- INCI -->
-      <div class="section-admin" id="section-inci">
-        <div class="page-entete">
-          <div>
-            <div class="page-titre">Ingrédients INCI</div>
-            <div class="page-sous-titre">Validation des sources — Purearome et Les Mauvaises Herbes</div>
-          </div>
-        </div>
-        <div class="msg-zone" id="msg-inci"></div>
-
-        <div class="filtres-bar" id="inci-filtres">
-          <span class="filtre-label">Statut</span>
-          <button class="filtre-btn actif" data-filtre-statut="tout" onclick="inciAppliquerFiltres()">Tout</button>
-          <button class="filtre-btn" data-filtre-statut="a-valider" onclick="inciAppliquerFiltres()">À valider</button>
-          <button class="filtre-btn" data-filtre-statut="valide" onclick="inciAppliquerFiltres()">Validé</button>
-          <span class="filtre-label" style="margin-left:16px">Source</span>
-          <button class="filtre-btn actif" data-filtre-source="tout" onclick="inciAppliquerFiltres()">Tout</button>
-          <button class="filtre-btn" data-filtre-source="PA" onclick="inciAppliquerFiltres()">Purearome</button>
-          <button class="filtre-btn" data-filtre-source="MH" onclick="inciAppliquerFiltres()">Les Mauvaises Herbes</button>
-        </div>
-
-        <div class="chargement" id="loading-inci"><span class="spinner"></span>Chargement...</div>
-        <div id="inci-accordeons"></div>
-      </div>
 
       <!-- DENSITÉS -->
       <div class="section-admin" id="section-densites">
