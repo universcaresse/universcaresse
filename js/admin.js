@@ -1882,27 +1882,55 @@ function inciRendreLigne(l, cat, uid) {
 }
 
 function inciRendreCorrespondance() {
+  const categoriesPA = [
+    'Argiles', 'Bases neutres', 'Cires', 'Colorants et Pigments',
+    'Herbes et Fleurs', 'Huiles aromatiques naturelle', 'Huiles essentielles',
+    'Huiles et Beurres', 'Hydrolats', 'Ingrédients Liquides',
+    'Ingrédients Secs', 'Fragrances', 'Saveurs naturelles'
+  ];
+
+  const optionsPA = categoriesPA.map(c => `<option value="${c}">${c}</option>`).join('');
+
   if (inciCorrespondance.length === 0) {
     return `<p class="form-valeur">Aucune correspondance définie.</p>
       <button class="btn btn-sm btn-secondary" onclick="inciAjouterCorrespondance()">+ Ajouter une correspondance</button>`;
   }
+
   return `
-    <div class="form-grille">
-      ${inciCorrespondance.map((r, i) => `
-        <div class="form-groupe">
-          <label class="form-label">Catégorie source</label>
-          <input type="text" class="form-ctrl" id="corresp-src-${i}" value="${r.categorieSource}">
-        </div>
-        <div class="form-groupe">
-          <label class="form-label">Catégorie maître</label>
-          <input type="text" class="form-ctrl" id="corresp-mai-${i}" value="${r.categorieMaitre}">
-        </div>
-      `).join('')}
-    </div>
+    <table class="tableau-admin">
+      <thead>
+        <tr>
+          <th>Catégorie source</th>
+          <th>Catégorie maître</th>
+          <th>Statut</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        ${inciCorrespondance.map((r, i) => {
+          const valide = r.categorieMaitre && r.categorieMaitre.trim() !== '';
+          const statutClass = valide ? 'badge-statut-ok' : 'badge-statut-cours';
+          const statutLabel = valide ? '✅ Confirmé' : '🔴 À confirmer';
+          return `
+            <tr>
+              <td><strong>${r.categorieSource}</strong></td>
+              <td>
+                <select class="form-ctrl" id="corresp-mai-${i}" onchange="inciToggleNouvelleCategorie(${i})">
+                  <option value="">— Choisir —</option>
+                  ${categoriesPA.map(c => `<option value="${c}" ${r.categorieMaitre === c ? 'selected' : ''}>${c}</option>`).join('')}
+                  <option value="__nouveau__">+ Nouvelle catégorie…</option>
+                </select>
+                <input type="text" class="form-ctrl cache" id="corresp-mai-new-${i}" placeholder="Nom de la nouvelle catégorie">
+              </td>
+              <td><span class="${statutClass}">${statutLabel}</span></td>
+              <td><button class="btn btn-sm btn-primary" onclick="inciConfirmerCorrespondance(${i})">Confirmer</button></td>
+            </tr>`;
+        }).join('')}
+      </tbody>
+    </table>
     <hr class="separateur">
     <div class="form-actions">
-      <button class="btn btn-sm btn-secondary" onclick="inciAjouterCorrespondance()">+ Ajouter</button>
-      <button class="btn btn-sm btn-primary" onclick="inciSauvegarderCorrespondance()">Enregistrer</button>
+      <button class="btn btn-sm btn-secondary" onclick="inciAjouterCorrespondance()">+ Ajouter une source</button>
     </div>`;
 }
 
@@ -1934,6 +1962,49 @@ async function inciValider(id, nom, cat, source) {
 function inciAjouterCorrespondance() {
   inciCorrespondance.push({ categorieSource: '', categorieMaitre: '' });
   document.getElementById('inci-corresp-body').innerHTML = inciRendreCorrespondance();
+}
+
+function inciToggleNouvelleCategorie(i) {
+  const select   = document.getElementById(`corresp-mai-${i}`);
+  const inputNew = document.getElementById(`corresp-mai-new-${i}`);
+  if (!inputNew) return;
+  inputNew.classList.toggle('cache', select.value !== '__nouveau__');
+  if (select.value === '__nouveau__') inputNew.focus();
+}
+
+async function inciConfirmerCorrespondance(i) {
+  const select = document.getElementById(`corresp-mai-${i}`);
+  const inputNew = document.getElementById(`corresp-mai-new-${i}`);
+  let valeur = select.value;
+
+  if (valeur === '__nouveau__') {
+    valeur = (inputNew?.value || '').trim();
+    if (!valeur) {
+      afficherMsg('inci', 'Entre un nom de catégorie.', 'erreur');
+      return;
+    }
+  }
+
+  if (!valeur) {
+    afficherMsg('inci', 'Choisis une catégorie maître.', 'erreur');
+    return;
+  }
+
+  inciCorrespondance[i].categorieMaitre = valeur;
+
+  const res = await appelAPIPost('sauvegarderCorrespondanceInci', {
+    correspondance: inciCorrespondance.map(r => ({
+      categorieSource: r.categorieSource,
+      categorieMaitre: r.categorieMaitre
+    }))
+  });
+
+  if (res && res.success) {
+    afficherMsg('inci', `✅ Correspondance confirmée.`);
+    await chargerInci();
+  } else {
+    afficherMsg('inci', 'Erreur lors de la sauvegarde.', 'erreur');
+  }
 }
 
 async function inciSauvegarderCorrespondance() {
