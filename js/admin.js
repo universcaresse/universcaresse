@@ -1889,8 +1889,6 @@ function inciRendreCorrespondance() {
     'Ingrédients Secs', 'Fragrances', 'Saveurs naturelles'
   ];
 
-  const optionsPA = categoriesPA.map(c => `<option value="${c}">${c}</option>`).join('');
-
   if (inciCorrespondance.length === 0) {
     return `<p class="form-valeur">Aucune correspondance définie.</p>
       <button class="btn btn-sm btn-secondary" onclick="inciAjouterCorrespondance()">+ Ajouter une correspondance</button>`;
@@ -1901,6 +1899,7 @@ function inciRendreCorrespondance() {
       <thead>
         <tr>
           <th>Catégorie source</th>
+          <th>Provenance</th>
           <th>Catégorie maître</th>
           <th>Statut</th>
           <th></th>
@@ -1908,12 +1907,12 @@ function inciRendreCorrespondance() {
       </thead>
       <tbody>
         ${inciCorrespondance.map((r, i) => {
-          const valide = r.categorieMaitre && r.categorieMaitre.trim() !== '';
-          const statutClass = valide ? 'badge-statut-ok' : 'badge-statut-cours';
-          const statutLabel = valide ? '✅ Confirmé' : '🔴 À confirmer';
+          const statutClass = r.confirme ? 'badge-statut-ok' : 'badge-statut-cours';
+          const statutLabel = r.confirme ? '✅ Confirmé' : '🔴 À confirmer';
           return `
             <tr>
               <td><strong>${r.categorieSource}</strong></td>
+              <td><span class="badge-collection">${r.sourceProvenance || '—'}</span></td>
               <td>
                 <select class="form-ctrl" id="corresp-mai-${i}" onchange="inciToggleNouvelleCategorie(${i})">
                   <option value="">— Choisir —</option>
@@ -1991,11 +1990,14 @@ async function inciConfirmerCorrespondance(i) {
   }
 
   inciCorrespondance[i].categorieMaitre = valeur;
+  inciCorrespondance[i].confirme = true;
 
   const res = await appelAPIPost('sauvegarderCorrespondanceInci', {
     correspondance: inciCorrespondance.map(r => ({
-      categorieSource: r.categorieSource,
-      categorieMaitre: r.categorieMaitre
+      categorieSource:  r.categorieSource,
+      categorieMaitre:  r.categorieMaitre,
+      sourceProvenance: r.sourceProvenance || '',
+      confirme:         r.confirme || false
     }))
   });
 
