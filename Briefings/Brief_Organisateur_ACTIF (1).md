@@ -81,7 +81,7 @@ Demander à Jean-Claude l'heure actuelle à Québec avant de produire les briefs
 ---
 
 ## RÈGLE BRIEF EN .MD — CRITIQUE
-Quand Jean-Claude dit que c'est terminé et demande un brief → le produire en `.md` directement via `present_files`. **Jamais dans la conversation. Jamais en aperçu. Toujours fichier `.md` téléchargeable. Sans exception.**
+Quand Jean-Claude dit que c'est terminé et demande un brief → le produire en `.md` directement.
 
 ---
 
@@ -151,7 +151,7 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 ### Chantiers Chercheur
 - Scraping Les Mauvaises Herbes ✅ — `Scraping_MH` peuplée (~110 produits)
 - PA v4/v5/v6 ✅ — 577 produits, tous les cas couverts
-- `construireIngredientsINCI.gs` ✅ — 488 lignes, PA + MH, dédup, statuts
+- `construireIngredientsINCI.gs` ✅ — 488 lignes (474 PA + 96 MH, dédup, statuts)
 - `CosIng_Cache` ✅ — 24 774 entrées — pour usage futur
 - Divine Essence — **écarté définitivement**
 - EU CosIng — écarté comme source de lookup — gardé en cache
@@ -182,8 +182,6 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 - Toggle global admin — clé `mode_saisonnier` dans Sheet Contenu
 - `photo_url_noel` col J dans Collections, `image_url_noel` col T dans Recettes
 - Si pas de 2e photo → photo régulière utilisée (jamais de trou)
-
-### À valider avec Chantal
 - Specs d'expédition : format boîtes, poids produit + emballage
 - Ouverture compte de banque + Canada Post
 - Politique de vente — avant de rédiger FAQ, conditions, retours/livraison
@@ -208,16 +206,10 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 ### Dossier claude-chercheur/
 | Fichier | Contenu |
 |---------|---------|
-| `catalogue-booklet-v2.html` | Prototype catalogue PDF — ⚠️ Lumina à remplacer par Casa |
+| `catalogue-booklet-v2.html` | Prototype catalogue PDF |
 | `test_scraping_mauvaisesherbes.gs` | ✅ validé |
-| `Scraping_MH.gs` | ✅ livré — feuille peuplée |
-| `cosing_lookup_v1.gs` | ✅ base pour enrichissement futur |
-| `pa_brut_v1.gs` | ✅ test texte brut |
-| `pa_v3.gs` | ✅ lookup CosIng via nom botanique |
-| `pa_v4.gs` | ✅ catalogue complet + texte brut |
-| `pa_v5.gs` | ✅ texte nettoyé + extraction |
-| `pa_v6.gs` | ✅ tous les cas couverts |
-| `construireIngredientsINCI.gs` | ✅ livré — 488 lignes, PA + MH, dédup, statuts |
+| `Scraping_MH.gs` | ✅ livré |
+| `Scraping_PA.gs` | ⚠️ à reprendre |
 
 ### Dossier claude-scripteur/
 | Fichier | Contenu |
@@ -246,7 +238,7 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 1. Afficher résumé des changements
 2. Demander à Jean-Claude s'il a quelque chose à ajouter — attendre
 3. Demander l'heure actuelle à Québec
-4. Produire les 5 briefs mis à jour en `.md` via `present_files`
+4. Produire les 5 briefs mis à jour en `.md`
 5. Jean-Claude les télécharge et pousse sur GitHub
 
 ---

@@ -1,6 +1,6 @@
 # BRIEF — CLAUDE TRAVAILLEUR
 ## Univers Caresse
-*Mis à jour : 22 mars 2026 — 11h00*
+*Mis à jour : 22 mars 2026 — 21h30*
 
 ---
 
@@ -17,6 +17,20 @@
 - **Toujours indiquer le fichier concerné avant chaque trouve/remplace**
 - Changement ciblé → trouve/remplace uniquement, jamais le fichier complet
 - Un seul changement à la fois — attendre la confirmation avant le suivant
+
+---
+
+## 🔮 CHANTIERS À VENIR
+
+### Page admin — correction INCI
+Créer une page dans l'admin pour que Chantal puisse corriger les INCI manuellement sur les lignes marquées 🔴 À compléter dans `Ingredients_INCI`.
+
+**Requis :**
+- Afficher les lignes 🔴 À compléter
+- Champ INCI modifiable
+- Champ Source (qui a corrigé / d'où vient l'info)
+- Champ Date de correction
+- **Lien cliquable vers la page web du produit fournisseur** — pour que Chantal puisse ouvrir la page source et aller chercher le INCI directement sur le site
 
 ---
 
@@ -94,8 +108,8 @@
 - Champ `note_olfactive` ajouté (col G de `Ingredients_INCI`)
 
 **Sheet `Ingredients_INCI` :**
-- Structure : A=Catégorie, B=Nom, C=INCI, D=CAS, E=Source, F=Date ajout, G=Note olfactive
-- Col G ajoutée manuellement par Jean-Claude — sera peuplée par Chercheur
+- Structure : A=Catégorie, B=Nom, C=INCI, D=Source, E=Date ajout, F=Note olfactive, G=Statut
+- ⚠️ CAS retiré — Statut ajouté en col G
 
 **Affichage INCI dans formulaire recette :**
 - Champ INCI en lecture seule apparaît automatiquement à la sélection d'un ingrédient
@@ -113,10 +127,6 @@
 - Fragrances regroupées en `Fragrance (note1, note2...)` via col G `Ingredients_INCI`
 - Affiché dans fiche recette consultation avec bouton "Copier INCI"
 - Bouton désactivé si INCI manquants — liste les ingrédients manquants en avertissement rouge
-
-**⚠️ Solution PA partielle — laissée au Chercheur :**
-- Regex dernier match trouvée par Travailleur — mais solution non terminée
-- Chercheur prend la relève complète pour `Scraping_PA` — doit regarder ce que Travailleur a fait et améliorer
 
 ---
 
@@ -145,40 +155,44 @@
 | `Recettes` | Les recettes (nom, ingrédients, instructions, prix, statut public/test, photo régulière col R, photo saisonnière col T) |
 | `Recettes_Formats` | Les formats de vente d'une recette (poids, unité, prix, emballage) — une recette peut avoir plusieurs formats |
 | `Recettes_base` | Les ingrédients de base d'une ligne de produits — copiés automatiquement dans toute nouvelle recette de cette ligne |
-| `Ingredients_INCI` | La liste de référence de tous les ingrédients avec leur nom INCI, numéro CAS, source et note olfactive |
+| `Ingredients_INCI` | La liste de référence de tous les ingrédients avec leur nom INCI, source, date ajout, note olfactive et statut |
 | `Factures` | Les factures d'achat de matières premières |
 | `Achats` | Le détail de chaque item dans chaque facture |
 | `Inventaire_ingredients` | Le stock actuel de chaque ingrédient |
 | `Config` | Les densités et marges de perte par type d'ingrédient |
 | `Contenu` | Tous les textes éditables du site public (titres, descriptions, sections éducatives, `mode_saisonnier`, `maintenance_active`) |
+| `Scraping_PA_v4` | Catalogue Purearome — 577 produits, texte brut, 5 qualités |
+| `Scraping_MH` | Catalogue Les Mauvaises Herbes — ~110 produits |
+| `CosIng_Cache` | Cache EU CosIng — 24 774 entrées — pour usage futur |
 
 ---
 
 ### Le chemin d'un ingrédient — de l'achat à l'étiquette INCI
 
 1. Chantal entre une facture d'achat → l'ingrédient est ajouté à l'inventaire
-2. L'ingrédient doit exister dans `Ingredients_INCI` pour avoir son INCI (nom latin normalisé pour les étiquettes)
-3. Le Chercheur peuple `Ingredients_INCI` via scraping (Purearome, Les Mauvaises Herbes) ou manuellement
-4. Quand Chantal crée une recette et choisit un ingrédient, le champ INCI s'affiche automatiquement en lecture seule
-5. Le générateur INCI de la recette lit les INCI de tous les ingrédients et produit la liste réglementaire triée par concentration décroissante
+2. L'ingrédient doit exister dans `Ingredients_INCI` pour avoir son INCI
+3. Le Chercheur peuple `Ingredients_INCI` via scraping (Purearome, Les Mauvaises Herbes)
+4. Les lignes sans INCI sont marquées 🔴 À compléter — Chantal les corrige via la page admin correction INCI
+5. Quand Chantal crée une recette et choisit un ingrédient, le champ INCI s'affiche automatiquement en lecture seule
+6. Le générateur INCI de la recette produit la liste réglementaire triée par concentration décroissante
 
 ---
 
 ### Les listes déroulantes — d'où viennent-elles
 
-Toutes les listes déroulantes d'ingrédients dans l'admin (recettes, factures, ingrédients de base) viennent de `Ingredients_INCI` via `code.gs`. Elles sont chargées au démarrage dans une variable globale et réutilisées partout. Source unique = pas de doublon possible.
+Toutes les listes déroulantes d'ingrédients dans l'admin (recettes, factures, ingrédients de base) viennent de `Ingredients_INCI` via `code.gs`. Source unique = pas de doublon possible.
 
 ---
 
 ### Les ingrédients de base d'une ligne — comment ça marche
 
-Quand Chantal crée ou modifie une ligne de produits (ex : SAVON dans la collection SAPONICA), elle peut y attacher des ingrédients de base avec leurs quantités. Ces ingrédients sont sauvegardés dans la Sheet `Recettes_base`. Quand elle crée ensuite une **nouvelle recette** dans cette ligne, ces ingrédients de base sont automatiquement copiés dans la recette comme point de départ. Elle peut ensuite les modifier.
+Quand Chantal crée ou modifie une ligne de produits, elle peut y attacher des ingrédients de base avec leurs quantités. Sauvegardés dans `Recettes_base`. Copiés automatiquement dans toute nouvelle recette de cette ligne.
 
 ---
 
 ### Le mode saisonnier — comment ça marche
 
-Un toggle dans la section "Contenu du site" de l'admin bascule la clé `mode_saisonnier` dans la Sheet Contenu entre `oui` et `non`. Quand le site public charge, il lit cette clé. Si elle vaut `oui`, toutes les photos affichées (cartes produits, modals) utilisent la 2e photo saisonnière si elle existe — sinon la photo régulière. Quand le mode est désactivé, seules les photos régulières sont affichées.
+Toggle dans l'admin → bascule `mode_saisonnier` dans Sheet Contenu entre `oui` et `non`. Si `oui`, photos saisonnières utilisées partout (cartes, modals) si elles existent — sinon photo régulière.
 
 ---
 
@@ -227,29 +241,23 @@ Un toggle dans la section "Contenu du site" de l'admin bascule la clé `mode_sai
 - Formats recettes — Sheet `Recettes_Formats` séparée — un-à-plusieurs
 - Emballage — reporté au module Achats/Inventaire
 - Listes déroulantes recettes/factures — source finale : `Ingredients_INCI`
-- `Purearome_Test` = ancien staging — remplacé par `Scraping_PA`
-- `Ingredients_INCI` = source de vérité propre et permanente (toutes sources)
-- Structure `Ingredients_INCI` : A=Catégorie, B=Nom, C=INCI, D=CAS, E=Source, F=Date ajout, G=Note olfactive
-- Priorité INCI : Purearome > Les Mauvaises Herbes > Divine Essence (via EU CosIng) > EU CosIng direct
-- Pas de saisie manuelle dans `Ingredients_INCI` — sauf via formulaire admin avec vérification doublon
-- Fournisseurs connus : Purearome, Les Mauvaises Herbes, Divine Essence + autres à identifier avec Chantal
-- Générateur INCI — fragrances regroupées sous `Fragrance (note1, note2...)` via col G
+- `Ingredients_INCI` = source de vérité propre et permanente
+- Structure `Ingredients_INCI` : A=Catégorie, B=Nom, C=INCI, D=Source, E=Date ajout, F=Note olfactive, G=Statut
+- Priorité INCI : Purearome > Les Mauvaises Herbes
+- Saisie manuelle INCI uniquement via page admin correction INCI
+- Générateur INCI — fragrances regroupées sous `Fragrance (note1, note2...)` via col F
 - Règle canadienne INCI : ordre décroissant concentration, ingrédients ≤1% peuvent être dans n'importe quel ordre après les autres
-- Ajout ingrédient INCI utilise `prompt()` natif — à remplacer lors du chantier #46
-- Chercheur prend la relève complète pour `Scraping_PA` — doit regarder solution Travailleur (regex dernier match) et améliorer
-- `.ingredient-rangee` — classes dédiées `.ing-type`, `.ing-nom`, `.ing-inci`, `.ing-qte` au lieu de ciblage positionnel
-- INCI dans fiche consultation ligne — lu à la volée depuis les données chargées, pas sauvegardé dans `Recettes_base`
+- Chercheur prend la relève complète pour scraping — PA v4/v5/v6 + construireIngredientsINCI complétés
+- `.ingredient-rangee` — classes dédiées `.ing-type`, `.ing-nom`, `.ing-inci`, `.ing-qte`
+- INCI dans fiche consultation ligne — lu à la volée depuis les données chargées
 - Toujours indiquer le fichier concerné avant chaque trouve/remplace
-- Mode saisonnier — clé `mode_saisonnier` dans Sheet Contenu, toggle dans section Contenu du site admin
-- Photos saisonnières — `photo_url_noel` col J dans Collections, `image_url_noel` col T dans Recettes
-- Si pas de 2e photo → utiliser la photo régulière (jamais de trou)
-- Photos en double à prévoir partout quand les photos en dur migreront vers Sheet Contenu
+- Mode saisonnier — `photo_url_noel` col J Collections, `image_url_noel` col T Recettes
+- Si pas de 2e photo → photo régulière (jamais de trou)
+- Photos en double à prévoir quand les photos en dur migreront vers Sheet Contenu
 
 ---
 
 ## ⚠️ PIÈGE DOCUMENTÉ — doGet vs doPost dans code.gs
-
-**Problème rencontré :** une fonction a été ajoutée dans `doGet` seulement, mais appelée depuis l'admin via `appelAPIPost` qui envoie vers `doPost`. Résultat : la fonction était inaccessible depuis l'admin.
 
 **Règle à toujours respecter :**
 - `appelAPIPost` → appelle `doPost` dans `code.gs`
@@ -273,8 +281,8 @@ Un toggle dans la section "Contenu du site" de l'admin bascule la clé `mode_sai
 - Jamais suggérer pause/repos
 - Fin de tâche → dire COMMIT
 - **Brief produit en entier en `.md` via `present_files` — JAMAIS dans la conversation, JAMAIS en aperçu, TOUJOURS fichier téléchargeable. Sans exception.**
-- **Avant toute proposition de solution technique : toujours cerner le problème au complet en jasant d'abord — poser des questions pour comprendre le contexte global, pas juste le symptôme immédiat — ne jamais proposer la première solution "facile" sans avoir exploré tout autour — une solution proposée sans avoir cerné le problème = violation**
+- **Avant toute proposition de solution technique : toujours cerner le problème au complet en jasant d'abord — une solution proposée sans avoir cerné le problème = violation**
 
 ---
 
-*Univers Caresse — Confidentiel — 22 mars 2026 — 11h00*
+*Univers Caresse — Confidentiel — 22 mars 2026 — 21h30*

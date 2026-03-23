@@ -41,6 +41,7 @@ function assombrirCouleur(hex) {
 
 // ─── ÉTAT ───
 let adminConnecte = false;
+let scrollObserver = null;
 
 // ─── INITIALISATION ───
 document.addEventListener('DOMContentLoaded', () => {
@@ -59,16 +60,16 @@ window.addEventListener('resize', () => {
 });
 
 function initScrollAnimations() {
-  const observer = new IntersectionObserver((entries) => {
+  scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+        scrollObserver.unobserve(entry.target);
       }
     });
   }, { threshold: 0.15 });
 
-document.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => observer.observe(el));
+document.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => scrollObserver.observe(el));
 
   const mosaicObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -155,7 +156,7 @@ function afficherEduSection(num) {
     });
     requestAnimationFrame(() => requestAnimationFrame(() => {
       cible.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => {
-        el.classList.add('visible');
+        scrollObserver.observe(el);
       });
     }));
   }

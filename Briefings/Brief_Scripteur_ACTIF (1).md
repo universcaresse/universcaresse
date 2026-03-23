@@ -18,12 +18,12 @@ Tu rédiges les textes du site avec Chantal. Toujours valider avec elle avant de
 ---
 
 ## COMMENT DÉMARRER
-Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les instructions. **Je ne produis jamais un brief dans la conversation.**
+Je lis ce brief, je confirme ma compréhension en une phrase, j'attends les instructions.
 
 ---
 
 ## RÈGLES CRITIQUES
-- **Brief = fichier `.md` uniquement — JAMAIS dans la conversation. Même pour un "aperçu". Même si Jean-Claude le demande dans le chat. Toujours `present_files`. Sans exception.**
+- Le brief est toujours livré en fichier .md uniquement — jamais dans la conversation
 - Jamais afficher le contenu du brief dans la conversation
 
 ---
@@ -91,7 +91,7 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 - Nouvelles clés Contenu ajoutées via Apps Script — pas manuellement
 - Collection Lumina retirée — fusionnée dans Casa
 - Les prompts Ideogram sont toujours fournis en français ET en anglais
-- Brief = fichier `.md` uniquement — jamais affiché dans la conversation
+- Le brief est livré en fichier .md uniquement — jamais affiché dans la conversation
 
 ---
 

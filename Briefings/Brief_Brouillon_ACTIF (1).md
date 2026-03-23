@@ -42,21 +42,20 @@ SAPONICA, PETIT NUAGE, CAPRIN, ÉMOLIA, ÉPURE, KÉRYS, CASA, ANIMA, LUI
 - Site public fonctionnel avec catalogue, sections éducatives, mode saisonnier
 - Admin complet : collections, lignes, recettes, formats, inventaire, factures
 - Générateur INCI opérationnel
-- Scraping Les Mauvaises Herbes ✅ — PA v4/v5/v6 ✅ — `construireIngredientsINCI.gs` ✅ — `Ingredients_INCI` peuplée
+- Scraping Les Mauvaises Herbes ✅
 - Tous les textes du site ✅ — prompts Ideogram avancés ✅
 
 ### Ce qui est en cours
 - pa_v7 — derniers cas À valider
-- col F Note olfactive — à peupler
+- col G Note olfactive — à peupler
 
 ### Ce qui attend Chantal
 - Politique de vente → FAQ, conditions, retours/livraison
 - Specs expédition
 - Ouverture compte bancaire + Canada Post
 - Table de correspondance catégories MH
-- Correction manuelle INCI lignes 🔴 À compléter (via page admin à venir)
 
-### Chantiers à explorer (Chercheur / Travailleur)
+### Chantiers à explorer (Chercheur)
 - Système commande léger — attendre specs Chantal
 - Couleurs hex sur boutons CTA
 - Comptabilité
