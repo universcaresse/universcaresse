@@ -44,6 +44,7 @@ function afficherSection(id, bouton) {
 if (id === 'accueil')        chargerStatsAccueil();
 if (id === 'collections')    { chargerCollections(); chargerListesFournisseurs(); }
  if (id === 'recettes')       { chargerRecettes(); chargerListesFournisseurs(); }
+  if (id === 'inci')           chargerInci();
   if (id === 'densites')       chargerDensites();
   if (id === 'inventaire')     chargerInventaire();
   if (id === 'factures')       chargerFactures();
@@ -1727,6 +1728,230 @@ function reinitialiserFiltresInventaire() {
   document.getElementById('inv-filtre-type').value = '';
   document.getElementById('inv-filtre-fourn').value = '';
   filtrerInventaire();
+}
+
+/* ════════════════════════════════
+   PAGE INCI
+════════════════════════════════ */
+
+let inciDonnees = [];
+let inciCorrespondance = [];
+
+async function chargerInci() {
+  document.getElementById('loading-inci').classList.remove('cache');
+  document.getElementById('inci-accordeons').innerHTML = '';
+
+  const res = await appelAPI('getSourcesInci');
+  document.getElementById('loading-inci').classList.add('cache');
+
+  if (!res || !res.success) {
+    afficherMsg('inci', 'Erreur de chargement.', 'erreur');
+    return;
+  }
+
+  inciDonnees = res.lignes || [];
+  inciCorrespondance = res.correspondance || [];
+  inciConstruireAccordeons();
+}
+
+function inciAppliquerFiltres() {
+  const btn = event.currentTarget;
+  if (btn.dataset.filtreStatut !== undefined) {
+    document.querySelectorAll('[data-filtre-statut]').forEach(b => b.classList.remove('actif'));
+  } else {
+    document.querySelectorAll('[data-filtre-source]').forEach(b => b.classList.remove('actif'));
+  }
+  btn.classList.add('actif');
+  inciConstruireAccordeons();
+}
+
+function inciGetFiltres() {
+  const btnStatut = document.querySelector('[data-filtre-statut].actif');
+  const btnSource = document.querySelector('[data-filtre-source].actif');
+  return {
+    statut: btnStatut ? btnStatut.dataset.filtreStatut : 'tout',
+    source: btnSource ? btnSource.dataset.filtreSource : 'tout'
+  };
+}
+
+function inciConstruireAccordeons() {
+  const { statut, source } = inciGetFiltres();
+  const container = document.getElementById('inci-accordeons');
+  container.innerHTML = '';
+
+  let donnees = inciDonnees.filter(l => {
+    if (source !== 'tout' && l.source !== source) return false;
+    if (statut === 'a-valider' && l.inci) return false;
+    if (statut === 'valide' && !l.inci) return false;
+    return true;
+  });
+
+  // Accordéon table de correspondance
+  const blocCorr = document.createElement('div');
+  blocCorr.className = 'form-panel visible';
+  blocCorr.innerHTML = `
+    <div class="form-panel-header" onclick="inciToggleAccordeon(this)" style="cursor:pointer">
+      <div class="form-panel-titre">Table de correspondance des catégories</div>
+      <span class="inci-accord-chevron">▶</span>
+    </div>
+    <div class="form-body inci-accord-body cache" id="inci-corresp-body">
+      ${inciRendreCorrespondance()}
+    </div>`;
+  container.appendChild(blocCorr);
+
+  // Grouper par catégorie maître
+  const parCat = {};
+  donnees.forEach(l => {
+    const cat = l.categorMaitre || l.categorie || 'Sans catégorie';
+    if (!parCat[cat]) parCat[cat] = [];
+    parCat[cat].push(l);
+  });
+
+  const cats = Object.keys(parCat).sort();
+  if (cats.length === 0) {
+    const vide = document.createElement('div');
+    vide.className = 'vide';
+    vide.innerHTML = '<div class="vide-titre">Aucun ingrédient à afficher</div>';
+    container.appendChild(vide);
+    return;
+  }
+
+  cats.forEach((cat, idx) => {
+    const lignes     = parCat[cat];
+    const nbTotal    = lignes.length;
+    const nbValides  = lignes.filter(l => l.inci).length;
+    const nbRestants = nbTotal - nbValides;
+
+    const bloc = document.createElement('div');
+    bloc.className = 'form-panel visible';
+    bloc.dataset.cat = cat;
+    bloc.innerHTML = `
+      <div class="form-panel-header" onclick="inciToggleAccordeon(this)" style="cursor:pointer">
+        <div class="form-panel-titre">${cat}</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          ${nbRestants > 0 ? `<span class="badge-statut-cours">${nbRestants} à valider</span>` : ''}
+          <span class="badge-statut-ok">${nbValides} validés</span>
+          <span class="inci-accord-chevron">▶</span>
+        </div>
+      </div>
+      <div class="form-body inci-accord-body cache">
+        <div class="tableau-wrap">
+          <table class="tableau-admin">
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Nom botanique</th>
+                <th>INCI</th>
+                <th>Note olfactive</th>
+                <th>Source</th>
+                <th>Texte brut</th>
+                <th>Lien</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              ${lignes.map((l, i) => inciRendreLigne(l, cat, `${idx}-${i}`)).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>`;
+    container.appendChild(bloc);
+  });
+}
+
+function inciRendreLigne(l, cat, uid) {
+  const statutClass = l.inci ? 'badge-statut-ok' : 'badge-statut-cours';
+  const statutLabel = l.inci ? '✅ Validé' : '🔴 À valider';
+  const id = `inci-${uid}`;
+  const nomSafe = l.nom.replace(/'/g, "\\'");
+  const catSafe = cat.replace(/'/g, "\\'");
+  return `
+    <tr>
+      <td>${l.nom}</td>
+      <td><input type="text" class="form-ctrl" id="${id}-bot" value="${(l.nomBotanique || '').replace(/"/g, '&quot;')}"></td>
+      <td><input type="text" class="form-ctrl" id="${id}-inci" value="${(l.inci || '').replace(/"/g, '&quot;')}"></td>
+      <td><input type="text" class="form-ctrl" id="${id}-note" value="${(l.noteOlfactive || '').replace(/"/g, '&quot;')}"></td>
+      <td><span class="badge-collection">${l.source}</span></td>
+      <td title="${(l.texteBrut || '').replace(/"/g, '&quot;')}">${(l.texteBrut || '').substring(0, 60)}${l.texteBrut && l.texteBrut.length > 60 ? '…' : ''}</td>
+      <td>${l.url ? `<a href="${l.url}" target="_blank" class="btn btn-sm btn-outline">↗</a>` : ''}</td>
+      <td>
+        <span class="${statutClass}">${statutLabel}</span>
+        <button class="btn btn-sm btn-primary" onclick="inciValider('${id}','${nomSafe}','${catSafe}','${l.source}')">Valider</button>
+      </td>
+    </tr>`;
+}
+
+function inciRendreCorrespondance() {
+  if (inciCorrespondance.length === 0) {
+    return `<p class="form-valeur">Aucune correspondance définie.</p>
+      <button class="btn btn-sm btn-secondary" onclick="inciAjouterCorrespondance()">+ Ajouter une correspondance</button>`;
+  }
+  return `
+    <div class="form-grille">
+      ${inciCorrespondance.map((r, i) => `
+        <div class="form-groupe">
+          <label class="form-label">Catégorie source</label>
+          <input type="text" class="form-ctrl" id="corresp-src-${i}" value="${r.categorieSource}">
+        </div>
+        <div class="form-groupe">
+          <label class="form-label">Catégorie maître</label>
+          <input type="text" class="form-ctrl" id="corresp-mai-${i}" value="${r.categorieMaitre}">
+        </div>
+      `).join('')}
+    </div>
+    <hr class="separateur">
+    <div class="form-actions">
+      <button class="btn btn-sm btn-secondary" onclick="inciAjouterCorrespondance()">+ Ajouter</button>
+      <button class="btn btn-sm btn-primary" onclick="inciSauvegarderCorrespondance()">Enregistrer</button>
+    </div>`;
+}
+
+function inciToggleAccordeon(header) {
+  const body    = header.nextElementSibling;
+  const chevron = header.querySelector('.inci-accord-chevron');
+  const estOuvert = !body.classList.contains('cache');
+  body.classList.toggle('cache', estOuvert);
+  if (chevron) chevron.textContent = estOuvert ? '▶' : '▼';
+}
+
+async function inciValider(id, nom, cat, source) {
+  const inci          = document.getElementById(`${id}-inci`)?.value  || '';
+  const nomBotanique  = document.getElementById(`${id}-bot`)?.value   || '';
+  const noteOlfactive = document.getElementById(`${id}-note`)?.value  || '';
+
+  const res = await appelAPIPost('validerIngredientInci', {
+    nom, categorie: cat, inci, source, nomBotanique, noteOlfactive
+  });
+
+  if (res && res.success) {
+    afficherMsg('inci', `✅ ${nom} validé.`);
+    await chargerInci();
+  } else {
+    afficherMsg('inci', 'Erreur lors de la validation.', 'erreur');
+  }
+}
+
+function inciAjouterCorrespondance() {
+  inciCorrespondance.push({ categorieSource: '', categorieMaitre: '' });
+  document.getElementById('inci-corresp-body').innerHTML = inciRendreCorrespondance();
+}
+
+async function inciSauvegarderCorrespondance() {
+  const inputs = document.querySelectorAll('[id^="corresp-src-"]');
+  const correspondance = [];
+  inputs.forEach((el, i) => {
+    const src = el.value.trim();
+    const mai = document.getElementById(`corresp-mai-${i}`)?.value.trim() || '';
+    if (src) correspondance.push({ categorieSource: src, categorieMaitre: mai });
+  });
+
+  const res = await appelAPIPost('sauvegarderCorrespondanceInci', { correspondance });
+  if (res && res.success) {
+    afficherMsg('inci', 'Correspondances sauvegardées.');
+    await chargerInci();
+  } else {
+    afficherMsg('inci', 'Erreur lors de la sauvegarde.', 'erreur');
+  }
 }
 
 /* ════════════════════════════════
