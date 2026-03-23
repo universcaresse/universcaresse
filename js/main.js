@@ -127,6 +127,14 @@ function afficherSection(id) {
   // Scroller vers le haut
   window.scrollTo(0, 0);
 
+  // Rejouer les animations fade-in
+  if (cible && scrollObserver) {
+    cible.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => {
+      el.classList.remove('visible');
+      scrollObserver.observe(el);
+    });
+  }
+
   // Charger le contenu dynamique selon la section
   if (id === 'accueil') {
     chargerCollections();
