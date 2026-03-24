@@ -1783,7 +1783,7 @@ function inciGetFiltres() {
 }
 
 function inciConstruireAccordeons() {
-  const { statut, source } = inciGetFiltres();
+  const { statut, source, recherche } = inciGetFiltres();
   const container = document.getElementById('inci-accordeons');
   container.innerHTML = '';
 
