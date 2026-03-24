@@ -1980,7 +1980,7 @@ async function inciSupprimerUC(rowIndex) {
 }
 
 function inciRendreCorrespondance() {
-  const categoriesPA = inciCategoriesUC.map(c => c.categorie);
+  const categoriesPA = inciCategoriesUC.map(c => c.categorie).sort((a, b) => a.localeCompare(b, 'fr'));
 
   if (inciCorrespondance.length === 0) {
     return `<p class="form-valeur">Aucune correspondance définie.</p>
@@ -2022,7 +2022,7 @@ function inciRendreCorrespondance() {
     </table>
     <hr class="separateur">
     <div class="form-actions">
-      <button class="btn btn-sm btn-secondary" onclick="inciAjouterCorrespondance()">+ Ajouter une source</button>
+      <button class="btn btn-sm btn-primary" onclick="inciSauvegarderToutesCorrespondances()">Enregistrer toutes</button>
     </div>`;
 }
 
