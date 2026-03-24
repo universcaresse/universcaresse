@@ -1774,9 +1774,11 @@ function inciAppliquerFiltres() {
 function inciGetFiltres() {
   const btnStatut = document.querySelector('[data-filtre-statut].actif');
   const btnSource = document.querySelector('[data-filtre-source].actif');
+  const recherche = document.getElementById('inci-recherche');
   return {
     statut: btnStatut ? btnStatut.dataset.filtreStatut : 'tout',
-    source: btnSource ? btnSource.dataset.filtreSource : 'tout'
+    source: btnSource ? btnSource.dataset.filtreSource : 'tout',
+    recherche: recherche ? recherche.value.trim().toLowerCase() : ''
   };
 }
 
@@ -1789,6 +1791,7 @@ function inciConstruireAccordeons() {
     if (source !== 'tout' && l.source !== source) return false;
     if (statut === 'a-valider' && l.inci) return false;
     if (statut === 'valide' && !l.inci) return false;
+    if (recherche && !l.nom.toLowerCase().includes(recherche)) return false;
     return true;
   });
 

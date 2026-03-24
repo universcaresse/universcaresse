@@ -1114,23 +1114,31 @@
       <div class="section-admin" id="section-inci">
         <div class="page-entete">
           <div>
-            <div class="page-titre">Ingrédients INCI</div>
-            <div class="page-sous-titre">Validation des sources — Purearome et Les Mauvaises Herbes</div>
+            <div class="page-titre">Ingrédients <em>INCI</em></div>
+            <div class="page-sous-titre">Validation des sources</div>
           </div>
         </div>
         <div class="msg-zone" id="msg-inci"></div>
 
         <div class="filtres-bar" id="inci-filtres">
-          <span class="filtre-label">Statut</span>
-          <button class="filtre-btn actif" data-filtre-statut="tout" onclick="inciAppliquerFiltres()">Tout</button>
-          <button class="filtre-btn" data-filtre-statut="a-valider" onclick="inciAppliquerFiltres()">À valider</button>
-          <button class="filtre-btn" data-filtre-statut="valide" onclick="inciAppliquerFiltres()">Validé</button>
-          <span class="filtre-label" style="margin-left:16px">Source</span>
-          <button class="filtre-btn actif" data-filtre-source="tout" onclick="inciAppliquerFiltres()">Tout</button>
-          <button class="filtre-btn" data-filtre-source="PA" onclick="inciAppliquerFiltres()">Purearome</button>
-          <button class="filtre-btn" data-filtre-source="MH" onclick="inciAppliquerFiltres()">Les Mauvaises Herbes</button>
-          <button class="filtre-btn" data-filtre-source="Arbressence" onclick="inciAppliquerFiltres()">Arbressence</button>
-          <button class="filtre-btn" data-filtre-source="DE" onclick="inciAppliquerFiltres()">Divine Essence</button>
+          <div class="filtres-ligne">
+            <span class="filtre-label">Statut</span>
+            <button class="filtre-btn actif" data-filtre-statut="tout" onclick="inciAppliquerFiltres()">Tout</button>
+            <button class="filtre-btn" data-filtre-statut="a-valider" onclick="inciAppliquerFiltres()">À valider</button>
+            <button class="filtre-btn" data-filtre-statut="valide" onclick="inciAppliquerFiltres()">Validé</button>
+          </div>
+          <div class="filtres-ligne">
+            <span class="filtre-label">Source</span>
+            <button class="filtre-btn actif" data-filtre-source="tout" onclick="inciAppliquerFiltres()">Tout</button>
+            <button class="filtre-btn" data-filtre-source="PA" onclick="inciAppliquerFiltres()">Purearome</button>
+            <button class="filtre-btn" data-filtre-source="MH" onclick="inciAppliquerFiltres()">Les Mauvaises Herbes</button>
+            <button class="filtre-btn" data-filtre-source="Arbressence" onclick="inciAppliquerFiltres()">Arbressence</button>
+            <button class="filtre-btn" data-filtre-source="DE" onclick="inciAppliquerFiltres()">Divine Essence</button>
+          </div>
+          <div class="filtres-ligne">
+            <span class="filtre-label">Recherche</span>
+            <input type="text" class="form-ctrl" id="inci-recherche" placeholder="Nom d'ingrédient…" oninput="inciAppliquerFiltres()">
+          </div>
         </div>
 
         <div class="chargement" id="loading-inci"><span class="spinner"></span>Chargement...</div>
