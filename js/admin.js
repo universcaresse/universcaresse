@@ -1862,12 +1862,8 @@ function inciConstruireAccordeons() {
             <thead>
               <tr>
                 <th>Nom</th>
-                <th>Nom botanique</th>
                 <th>INCI</th>
-                <th>Note olfactive</th>
-                <th>Source</th>
-                <th>Texte brut</th>
-                <th>Lien</th>
+                <th>Catégorie UC</th>
                 <th></th>
               </tr>
             </thead>
@@ -1887,18 +1883,44 @@ function inciRendreLigne(l, cat, uid) {
   const id = `inci-${uid}`;
   const nomSafe = l.nom.replace(/'/g, "\\'");
   const catSafe = cat.replace(/'/g, "\\'");
+  const ligneValideeClass = l.inci ? 'ligne-validee' : '';
   return `
-    <tr>
+    <tr class="${ligneValideeClass}">
       <td>${l.nom}</td>
-      <td><input type="text" class="form-ctrl" id="${id}-bot" value="${(l.nomBotanique || '').replace(/"/g, '&quot;')}"></td>
       <td><input type="text" class="form-ctrl" id="${id}-inci" value="${(l.inci || '').replace(/"/g, '&quot;')}"></td>
-      <td><input type="text" class="form-ctrl" id="${id}-note" value="${(l.noteOlfactive || '').replace(/"/g, '&quot;')}"></td>
-      <td><span class="badge-collection">${l.source}</span></td>
-      <td title="${(l.texteBrut || '').replace(/"/g, '&quot;')}">${(l.texteBrut || '').substring(0, 60)}${l.texteBrut && l.texteBrut.length > 60 ? '…' : ''}</td>
-      <td>${l.url ? `<a href="${l.url}" target="_blank" class="btn btn-sm btn-outline">↗</a>` : ''}</td>
+      <td>
+        <select class="form-ctrl" id="${id}-cat">
+          <option value="">— Choisir —</option>
+          ${inciCategoriesUC.map(c => `<option value="${c.categorie}" ${(l.categorMaitre === c.categorie) ? 'selected' : ''}>${c.categorie}</option>`).join('')}
+        </select>
+      </td>
       <td>
         <span class="${statutClass}">${statutLabel}</span>
+        <button class="btn btn-sm btn-outline" onclick="inciToggleDetail('${id}')">▼</button>
         <button class="btn btn-sm btn-primary" onclick="inciValider('${id}','${nomSafe}','${catSafe}','${l.source}')">Valider</button>
+      </td>
+    </tr>
+    <tr class="accordeon-detail cache" id="${id}-detail">
+      <td colspan="4">
+        <div class="form-grille">
+          <div class="form-groupe">
+            <label class="form-label">Catégorie fournisseur</label>
+            <div class="form-valeur">${l.categorie || '—'}</div>
+          </div>
+          <div class="form-groupe">
+            <label class="form-label">Nom botanique</label>
+            <input type="text" class="form-ctrl" id="${id}-bot" value="${(l.nomBotanique || '').replace(/"/g, '&quot;')}">
+          </div>
+          <div class="form-groupe">
+            <label class="form-label">Note olfactive</label>
+            <input type="text" class="form-ctrl" id="${id}-note" value="${(l.noteOlfactive || '').replace(/"/g, '&quot;')}">
+          </div>
+          <div class="form-groupe">
+            <label class="form-label">Texte brut</label>
+            <div class="texte-brut">${(l.texteBrut || '—')}</div>
+          </div>
+          ${l.url ? `<div class="form-groupe"><label class="form-label">Lien fournisseur</label><a href="${l.url}" target="_blank" class="btn btn-sm btn-outline">↗ Voir fiche</a></div>` : ''}
+        </div>
       </td>
     </tr>`;
 }
@@ -2027,6 +2049,11 @@ function inciRendreCorrespondance() {
     </div>`;
 }
 
+function inciToggleDetail(id) {
+  const detail = document.getElementById(`${id}-detail`);
+  if (detail) detail.classList.toggle('cache');
+}
+
 function inciToggleAccordeon(header) {
   const body    = header.nextElementSibling;
   const chevron = header.querySelector('.inci-accord-chevron');
@@ -2039,9 +2066,10 @@ async function inciValider(id, nom, cat, source) {
   const inci          = document.getElementById(`${id}-inci`)?.value  || '';
   const nomBotanique  = document.getElementById(`${id}-bot`)?.value   || '';
   const noteOlfactive = document.getElementById(`${id}-note`)?.value  || '';
+  const categorieUC   = document.getElementById(`${id}-cat`)?.value   || cat;
 
   const res = await appelAPIPost('validerIngredientInci', {
-    nom, categorie: cat, inci, source, nomBotanique, noteOlfactive
+    nom, categorie: categorieUC, inci, source, nomBotanique, noteOlfactive
   });
 
   if (res && res.success) {
