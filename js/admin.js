@@ -1980,12 +1980,7 @@ async function inciSupprimerUC(rowIndex) {
 }
 
 function inciRendreCorrespondance() {
-  const categoriesPA = [
-    'Argiles', 'Bases neutres', 'Cires', 'Colorants et Pigments',
-    'Herbes et Fleurs', 'Huiles aromatiques naturelle', 'Huiles essentielles',
-    'Huiles et Beurres', 'Hydrolats', 'Ingrédients Liquides',
-    'Ingrédients Secs', 'Fragrances', 'Saveurs naturelles'
-  ];
+  const categoriesPA = inciCategoriesUC.map(c => c.categorie);
 
   if (inciCorrespondance.length === 0) {
     return `<p class="form-valeur">Aucune correspondance définie.</p>
