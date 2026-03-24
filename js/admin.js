@@ -1761,13 +1761,14 @@ async function chargerInci() {
 }
 
 function inciAppliquerFiltres() {
-  const btn = event.currentTarget;
-  if (btn.dataset.filtreStatut !== undefined) {
+  const btn = event && event.currentTarget;
+  if (btn && btn.dataset.filtreStatut !== undefined) {
     document.querySelectorAll('[data-filtre-statut]').forEach(b => b.classList.remove('actif'));
-  } else {
+    btn.classList.add('actif');
+  } else if (btn && btn.dataset.filtreSource !== undefined) {
     document.querySelectorAll('[data-filtre-source]').forEach(b => b.classList.remove('actif'));
+    btn.classList.add('actif');
   }
-  btn.classList.add('actif');
   inciConstruireAccordeons();
 }
 
