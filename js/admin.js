@@ -1789,8 +1789,8 @@ function inciConstruireAccordeons() {
 
   let donnees = inciDonnees.filter(l => {
     if (source !== 'tout' && l.source !== source) return false;
-    if (statut === 'a-valider' && l.inci) return false;
-    if (statut === 'valide' && !l.inci) return false;
+    if (statut === 'a-valider' && l.valide) return false;
+    if (statut === 'valide' && !l.valide) return false;
     if (recherche && !l.nom.toLowerCase().includes(recherche)) return false;
     return true;
   });
@@ -1881,12 +1881,12 @@ function inciConstruireAccordeons() {
 }
 
 function inciRendreLigne(l, cat, uid) {
-  const statutClass = l.inci ? 'badge-statut-ok' : 'badge-statut-cours';
-  const statutLabel = l.inci ? '✅ Validé' : '🔴 À valider';
+  const statutClass = l.valide ? 'badge-statut-ok' : 'badge-statut-cours';
+  const statutLabel = l.valide ? '✅ Validé' : '🔴 À valider';
   const id = `inci-${uid}`;
   const nomSafe = l.nom.replace(/'/g, "\\'");
   const catSafe = cat.replace(/'/g, "\\'");
-  const ligneValideeClass = l.inci ? 'ligne-validee' : '';
+  const ligneValideeClass = l.valide ? 'ligne-validee' : '';
   return `
     <tr class="${ligneValideeClass}">
       <td>${l.nom}</td>
