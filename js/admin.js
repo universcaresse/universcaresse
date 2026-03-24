@@ -1742,7 +1742,10 @@ async function chargerInci() {
   document.getElementById('loading-inci').classList.remove('cache');
   document.getElementById('inci-accordeons').innerHTML = '';
 
-  const res = await appelAPI('getSourcesInci');
+  const [res, resUC] = await Promise.all([
+    appelAPI('getSourcesInci'),
+    appelAPI('getCategoriesUC')
+  ]);
   document.getElementById('loading-inci').classList.add('cache');
 
   if (!res || !res.success) {
@@ -1752,8 +1755,6 @@ async function chargerInci() {
 
   inciDonnees = res.lignes || [];
   inciCorrespondance = res.correspondance || [];
-
-  const resUC = await appelAPI('getCategoriesUC');
   inciCategoriesUC = (resUC && resUC.success) ? resUC.categories : [];
 
   inciConstruireAccordeons();
