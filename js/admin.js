@@ -1844,7 +1844,7 @@ function inciConstruireAccordeons() {
   cats.forEach((cat, idx) => {
     const lignes     = parCat[cat];
     const nbTotal    = lignes.length;
-    const nbValides  = lignes.filter(l => l.inci).length;
+    const nbValides  = lignes.filter(l => l.valide).length;
     const nbRestants = nbTotal - nbValides;
 
     const bloc = document.createElement('div');
@@ -1882,7 +1882,7 @@ function inciConstruireAccordeons() {
 
 function inciRendreLigne(l, cat, uid) {
   const statutClass = l.valide ? 'badge-statut-ok' : 'badge-statut-cours';
-  const statutLabel = l.valide ? '✅ Validé' : '🔴 À valider';
+  const statutLabel = l.valide ? '✅' : '🔴';
   const id = `inci-${uid}`;
   const nomSafe = l.nom.replace(/'/g, "\\'");
   const catSafe = cat.replace(/'/g, "\\'");
