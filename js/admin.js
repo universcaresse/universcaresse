@@ -1736,6 +1736,7 @@ function reinitialiserFiltresInventaire() {
 
 let inciDonnees = [];
 let inciCorrespondance = [];
+let inciCategoriesUC = [];
 
 async function chargerInci() {
   document.getElementById('loading-inci').classList.remove('cache');
@@ -1751,6 +1752,10 @@ async function chargerInci() {
 
   inciDonnees = res.lignes || [];
   inciCorrespondance = res.correspondance || [];
+
+  const resUC = await appelAPI('getCategoriesUC');
+  inciCategoriesUC = (resUC && resUC.success) ? resUC.categories : [];
+
   inciConstruireAccordeons();
 }
 
@@ -1785,6 +1790,22 @@ function inciConstruireAccordeons() {
     if (statut === 'valide' && !l.inci) return false;
     return true;
   });
+
+  // Accordéon Catégories UC
+  const blocUC = document.createElement('div');
+  blocUC.className = 'form-panel visible';
+  blocUC.innerHTML = `
+    <div class="form-panel-header" onclick="inciToggleAccordeon(this)" style="cursor:pointer">
+      <div class="form-panel-titre">Catégories Univers Caresse</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span class="badge-statut-ok">${inciCategoriesUC.length} catégories</span>
+        <span class="inci-accord-chevron">▶</span>
+      </div>
+    </div>
+    <div class="form-body inci-accord-body cache" id="inci-uc-body">
+      ${inciRendreUC()}
+    </div>`;
+  container.appendChild(blocUC);
 
   // Accordéon table de correspondance
   const blocCorr = document.createElement('div');
@@ -1879,6 +1900,83 @@ function inciRendreLigne(l, cat, uid) {
         <button class="btn btn-sm btn-primary" onclick="inciValider('${id}','${nomSafe}','${catSafe}','${l.source}')">Valider</button>
       </td>
     </tr>`;
+}
+
+function inciRendreUC() {
+  if (inciCategoriesUC.length === 0) {
+    return `<p class="form-valeur">Aucune catégorie définie.</p>
+      <button class="btn btn-sm btn-secondary" onclick="inciAjouterUC()">+ Ajouter une catégorie</button>`;
+  }
+  return `
+    <table class="tableau-admin">
+      <thead>
+        <tr>
+          <th>Catégorie</th>
+          <th>Date ajout</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        ${inciCategoriesUC.map((c, i) => `
+          <tr>
+            <td><input type="text" class="form-ctrl" id="uc-cat-${i}" value="${c.categorie.replace(/"/g,'&quot;')}"></td>
+            <td>${c.dateAjout || '—'}</td>
+            <td>
+              <div class="td-actions">
+                <button class="btn-edit" onclick="inciModifierUC(${i}, ${c.rowIndex})">Modifier</button>
+                <button class="btn-suppr" onclick="inciSupprimerUC(${c.rowIndex})">Supprimer</button>
+              </div>
+            </td>
+          </tr>`).join('')}
+      </tbody>
+    </table>
+    <hr class="separateur">
+    <div class="form-actions">
+      <button class="btn btn-sm btn-secondary" onclick="inciAjouterUC()">+ Ajouter une catégorie</button>
+    </div>`;
+}
+
+function inciAjouterUC() {
+  inciCategoriesUC.push({ rowIndex: null, categorie: '', dateAjout: '' });
+  document.getElementById('inci-uc-body').innerHTML = inciRendreUC();
+  const dernierIndex = inciCategoriesUC.length - 1;
+  const input = document.getElementById(`uc-cat-${dernierIndex}`);
+  if (input) input.focus();
+}
+
+async function inciModifierUC(i, rowIndex) {
+  const input = document.getElementById(`uc-cat-${i}`);
+  const val   = (input?.value || '').trim();
+  if (!val) { afficherMsg('inci', 'Le nom est requis.', 'erreur'); return; }
+
+  if (!rowIndex) {
+    const res = await appelAPIPost('ajouterCategorieUC', { categorie: val });
+    if (res && res.success) {
+      afficherMsg('inci', `✅ Catégorie "${val}" ajoutée.`);
+      await chargerInci();
+    } else {
+      afficherMsg('inci', res?.message || 'Erreur.', 'erreur');
+    }
+  } else {
+    const res = await appelAPIPost('modifierCategorieUC', { rowIndex, categorie: val });
+    if (res && res.success) {
+      afficherMsg('inci', `✅ Catégorie mise à jour.`);
+      await chargerInci();
+    } else {
+      afficherMsg('inci', res?.message || 'Erreur.', 'erreur');
+    }
+  }
+}
+
+async function inciSupprimerUC(rowIndex) {
+  if (!rowIndex) { await chargerInci(); return; }
+  const res = await appelAPIPost('supprimerCategorieUC', { rowIndex });
+  if (res && res.success) {
+    afficherMsg('inci', 'Catégorie supprimée.');
+    await chargerInci();
+  } else {
+    afficherMsg('inci', res?.message || 'Erreur.', 'erreur');
+  }
 }
 
 function inciRendreCorrespondance() {
