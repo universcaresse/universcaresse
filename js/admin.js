@@ -1865,9 +1865,9 @@ function inciConstruireAccordeons() {
           <table class="tableau-admin">
             <thead>
               <tr>
-                <th>Nom</th>
-                <th>INCI</th>
-                <th>Catégorie UC</th>
+                <th style="width:25%">Nom</th>
+                <th style="width:35%">INCI</th>
+                <th style="width:25%">Catégorie UC</th>
                 <th></th>
               </tr>
             </thead>

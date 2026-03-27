@@ -1331,6 +1331,8 @@ tr.cliquable { cursor: pointer; }
 .edu-tableau tbody tr:last-child td { border-bottom: none; }
 .edu-tableau tbody tr:hover td { background: var(--primary-04); }
 .filtres-ligne { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; width: 100%; }
+.tableau-admin { width: 100%; table-layout: fixed; border-collapse: collapse; }
+.tableau-admin th, .tableau-admin td { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 10px 12px; border-bottom: 1px solid var(--beige); }
 .accordeon-detail { background: var(--beige-15); }
 .accordeon-detail td { padding: 12px 16px; vertical-align: top; }
 .ligne-validee td { background: var(--primary-06); }
