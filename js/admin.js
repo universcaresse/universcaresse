@@ -1906,25 +1906,23 @@ function inciRendreLigne(l, cat, uid) {
     </tr>
     <tr class="accordeon-detail cache" id="${id}-detail">
       <td colspan="4">
-        <div class="form-grille">
-          <div class="form-groupe">
-            <label class="form-label">Catégorie fournisseur</label>
-            <div class="form-valeur">${l.categorie || '—'}</div>
-          </div>
-          <div class="form-groupe">
-            <label class="form-label">Nom botanique</label>
-            <input type="text" class="form-ctrl" id="${id}-bot" value="${(l.nomBotanique || '').replace(/"/g, '&quot;')}">
-          </div>
-          <div class="form-groupe">
-            <label class="form-label">Note olfactive</label>
-            <input type="text" class="form-ctrl" id="${id}-note" value="${(l.noteOlfactive || '').replace(/"/g, '&quot;')}">
-          </div>
-          <div class="form-groupe">
-            <label class="form-label">Texte brut</label>
-            <div class="texte-brut">${(l.texteBrut || '—')}</div>
-          </div>
-          ${l.url ? `<div class="form-groupe"><label class="form-label">Lien fournisseur</label><a href="${l.url}" target="_blank" class="btn btn-sm btn-outline">↗ Voir fiche</a></div>` : ''}
+        <div class="form-groupe">
+          <label class="form-label">Catégorie fournisseur</label>
+          <div class="form-valeur">${l.categorie || '—'}</div>
         </div>
+        <div class="form-groupe">
+          <label class="form-label">Nom botanique</label>
+          <input type="text" class="form-ctrl" id="${id}-bot" value="${(l.nomBotanique || '').replace(/"/g, '&quot;')}">
+        </div>
+        <div class="form-groupe">
+          <label class="form-label">Note olfactive</label>
+          <input type="text" class="form-ctrl" id="${id}-note" value="${(l.noteOlfactive || '').replace(/"/g, '&quot;')}">
+        </div>
+        <div class="form-groupe">
+          <label class="form-label">Texte brut</label>
+          <div class="texte-brut">${(l.texteBrut || '—')}</div>
+        </div>
+        ${l.url ? `<div class="form-groupe"><label class="form-label">Lien fournisseur</label><a href="${l.url}" target="_blank" class="btn btn-sm btn-outline">↗ Voir fiche</a></div>` : ''}
       </td>
     </tr>`;
 }
