@@ -266,7 +266,7 @@
             <div class="page-titre">Collections <em>&amp; Lignes</em></div>
             <div class="page-sous-titre">Gérer les collections et leurs lignes de produits</div>
           </div>
-          <button class="btn btn-primary" onclick="ouvrirFormCollection()">+ Nouvelle entrée</button>
+          <button class="btn btn-primary" onclick="ouvrirFormCollection()">+ Nouvelle collection</button>
         </div>
         <div class="msg-zone" id="msg-collections"></div>
        <div class="form-panel" id="fiche-collection">
@@ -284,8 +284,8 @@
             <div id="fiche-collection-lignes"></div>
             <hr class="separateur">
             <div class="form-actions">
-              <button class="btn btn-primary" id="fiche-collection-modifier">Modifier la collection</button>
-              <button class="btn btn-danger" id="btn-supprimer-collection">Supprimer la collection</button>
+              <button class="btn btn-primary" id="fiche-collection-modifier">Modifier la ligne</button>
+              <button class="btn btn-danger" id="btn-supprimer-collection">Supprimer la ligne</button>
               <button class="btn btn-secondary" id="fiche-collection-ajouter-ligne">+ Ajouter une ligne</button>
             </div>
           </div>
@@ -440,7 +440,7 @@
         <div class="page-entete">
           <div>
             <div class="page-titre">Recettes</div>
-            <div class="page-sous-titre">Gérer les formulations de savons</div>
+            <div class="page-sous-titre">Gérer les formulations de recettes</div>
           </div>
           <button class="btn btn-primary" onclick="ouvrirFormRecette()">+ Nouvelle recette</button>
         </div>
@@ -508,11 +508,11 @@
                 <div id="fr-collections-secondaires" class="checkboxes-groupe"></div>
               </div>
               <div class="form-groupe">
-                <label class="form-label">Nb unités / fournée</label>
+                <label class="form-label">Nb unités par recette</label>
                 <input type="text" inputmode="decimal" class="form-ctrl" id="fr-unites">
               </div>
               <div class="form-groupe">
-                <label class="form-label">Cure (jours)</label>
+                <label class="form-label">Cure (en jours)</label>
                 <input type="text" inputmode="decimal" class="form-ctrl" id="fr-cure">
               </div>
               <div class="form-groupe">
@@ -524,7 +524,7 @@
                 <textarea class="form-ctrl" id="fr-description" rows="3"></textarea>
               </div>
               <div class="form-groupe col-plein">
-                <label class="form-label">Description emballage</label>
+                <label class="form-label">Description pour emballage</label>
                 <textarea class="form-ctrl" id="fr-desc-emballage" rows="2"></textarea>
               </div>
               <div class="form-groupe col-plein">
@@ -557,7 +557,7 @@
               <div id="fr-image-preview"></div>
             </div>
            <div class="form-groupe col-plein">
-              <label class="form-label">Photo Noël</label>
+              <label class="form-label">Photo secondaire</label>
               <div class="cloudinary-zone">
                 <input type="text" class="form-ctrl" id="fr-image-url-noel">
                 <button type="button" class="btn btn-secondary" onclick="ouvrirMediaLibrary('fr-image-url-noel', 'fr-image-preview-noel')">Choisir une photo</button>
@@ -902,7 +902,7 @@
           </div>
           <div class="form-actions">
             <button class="btn btn-primary" onclick="sauvegarderContenuSite()">Enregistrer</button>
-            <button class="btn btn-secondary" id="btn-mode-saisonnier" onclick="toggleModeSaisonnier()">🌲 Mode saisonnier OFF</button>
+            <button class="btn btn-secondary" id="btn-mode-saisonnier" onclick="toggleModeSaisonnier()">🌲 Mode saisonnier est OFF</button>
           </div>
         </div>
         <div class="msg-zone" id="msg-contenu-site"></div>
