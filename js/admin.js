@@ -1885,7 +1885,7 @@ function inciRendreLigne(l, cat, uid) {
   const catSafe = cat.replace(/'/g, "\\'");
   const ligneValideeClass = l.valide ? 'ligne-validee' : '';
   return `
-    <tr class="${ligneValideeClass}">
+    <tr class="${ligneValideeClass} ligne-cliquable" onclick="inciToggleDetail('${id}')">
       <td>${l.nom}</td>
       <td></td>
       <td></td>
@@ -2067,6 +2067,11 @@ function inciToggleAccordeon(header) {
   });
 
   body.classList.toggle('cache', estOuvert);
+
+  // Scroll vers l'accordéon ouvert
+  if (estOuvert === false) {
+    setTimeout(() => header.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
 }
 
 async function inciValider(id, nom, cat, source) {
