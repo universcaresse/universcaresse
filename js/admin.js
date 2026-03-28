@@ -2049,7 +2049,7 @@ function inciRendreUC() {
     const ingredientsValides = (listesDropdown.fullData || []).filter(d => d.type === c.categorie);
     const utilise = ingredientsValides.length > 0;
     const listeHtml = utilise
-      ? ingredientsValides.map(d => `<div class="form-valeur">${d.ingredient}</div>`).join('')
+      ? ingredientsValides.map(d => `<div class="form-valeur">${d.ingredient}${d.inci ? ` — <span class="texte-secondaire">${d.inci}</span>` : ''}</div>`).join('')
       : '';
     return `
       <div class="carte-admin">
