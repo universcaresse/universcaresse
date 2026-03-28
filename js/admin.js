@@ -1936,7 +1936,7 @@ function inciRendreUC() {
     return `<p class="form-valeur">Aucune catégorie définie.</p>
       <button class="btn btn-sm btn-secondary" onclick="inciAjouterUC()">+ Ajouter une catégorie</button>`;
   }
-  const cartes = inciCategoriesUC.map((c, i) => {
+  const cartes = [...inciCategoriesUC].sort((a, b) => a.categorie.localeCompare(b.categorie, 'fr')).map((c, i) => {
     const ingredientsValides = (listesDropdown.fullData || []).filter(d => d.type === c.categorie);
     const utilise = ingredientsValides.length > 0;
     const listeHtml = utilise
@@ -1946,10 +1946,10 @@ function inciRendreUC() {
       <div class="carte-admin">
         <div class="carte-admin-entete">
           <input type="text" class="form-ctrl" id="uc-cat-${i}" value="${c.categorie.replace(/"/g,'&quot;')}">
-          <div class="td-actions">
+          ${!utilise ? `<div class="td-actions">
             <button class="btn-edit" onclick="inciModifierUC(${i}, ${c.rowIndex})">Modifier</button>
-            <button class="btn-suppr" onclick="inciSupprimerUC(${c.rowIndex})" ${utilise ? 'disabled title="Catégorie utilisée dans les ingrédients"' : ''}>Supprimer</button>
-          </div>
+            <button class="btn-suppr" onclick="inciSupprimerUC(${c.rowIndex})">Supprimer</button>
+          </div>` : ''}
         </div>
         ${listeHtml}
       </div>`;
