@@ -2054,7 +2054,19 @@ function inciRendreCorrespondance() {
 
 function inciToggleDetail(id) {
   const detail = document.getElementById(`${id}-detail`);
-  if (detail) detail.classList.toggle('cache');
+  if (!detail) return;
+  const estOuvert = !detail.classList.contains('cache');
+
+  // Fermer tous les autres panneaux détail
+  document.querySelectorAll('.accordeon-detail').forEach(d => {
+    if (d !== detail) d.classList.add('cache');
+  });
+
+  detail.classList.toggle('cache', estOuvert);
+
+  if (!estOuvert === false) {
+    setTimeout(() => detail.previousElementSibling.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  }
 }
 
 function inciToggleAccordeon(header) {

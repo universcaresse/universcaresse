@@ -1346,6 +1346,9 @@ tr.cliquable { cursor: pointer; }
 .carte-admin-entete .form-ctrl { flex: 1; }
 .ligne-cliquable { cursor: pointer; }
 .ligne-cliquable:hover { background: var(--beige-15); }
+.champ-avec-reset { position: relative; flex: 1; }
+.champ-avec-reset .form-ctrl { width: 100%; padding-right: 32px; }
+.btn-reset-champ { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--gris); font-size: 1rem; line-height: 1; padding: 0; }
 .edu-guide-accordeon { display: none; }
 .edu-accord-item { border-bottom: 1px solid var(--beige); }
 .edu-accord-btn { width: 100%; text-align: left; padding: 16px 0; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; color: var(--gris-fonce); background: none; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
