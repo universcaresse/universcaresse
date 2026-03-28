@@ -1117,6 +1117,7 @@
             <div class="page-titre">Ingrédients <em>INCI</em></div>
             <div class="page-sous-titre">Validation des sources</div>
           </div>
+          <button class="btn btn-outline btn-sm cache" id="btn-retour-recette" onclick="retourRecetteDepuisInci()">← Retour à la recette</button>
         </div>
         <div class="msg-zone" id="msg-inci"></div>
 
@@ -1228,6 +1229,31 @@
     </div>
   </div>
 
+
+ <div class="modal-admin-overlay" id="modal-ajouter-inci">
+    <div class="modal-admin">
+      <div class="modal-admin-header">
+        <div class="modal-admin-titre" id="modal-ajouter-inci-titre">Nouvel ingrédient</div>
+      </div>
+      <div class="modal-admin-body">
+        <div class="form-groupe">
+          <label class="form-label">Nom de l'ingrédient</label>
+          <input type="text" class="form-ctrl" id="modal-inci-nom" placeholder="Ex: Huile de coco">
+        </div>
+        <div class="form-groupe">
+          <label class="form-label">URL du fournisseur</label>
+          <input type="text" class="form-ctrl" id="modal-inci-url" placeholder="https://www.purearome.com/fr/produit/...">
+        </div>
+        <div id="modal-inci-statut" class="form-valeur cache"></div>
+      </div>
+      <div class="modal-admin-body">
+        <div class="form-actions">
+          <button class="btn btn-outline btn-sm" onclick="fermerModalAjouterInci()">Annuler</button>
+          <button class="btn btn-primary btn-sm" id="modal-inci-btn-go" onclick="modalInciGo()">Go</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
  <div class="modal-admin-overlay" id="modal-confirm">
     <div class="modal-admin">

@@ -1109,22 +1109,119 @@ function rafraichirListeIngredientsRecette() {
   `).join('');
 }
 
-async function ajouterIngredientInci(categorie, index, liste = 'recette') {
-  const nom = prompt(`Nouvel ingrédient — Catégorie : ${categorie}\n\nNom de l'ingrédient :`);
-  if (!nom || !nom.trim()) return;
-  const res = await appelAPIPost('saveIngredientInci', { nom: nom.trim(), categorie });
-  if (res && res.success) {
-    await chargerListesDeroulantes();
-    if (liste === 'base') {
-      ingredientsBase[index].nom = nom.trim();
-      rafraichirListeIngredientsBase();
+let _modalInciCtx = { categorie: '', index: 0, liste: 'recette' };
+
+function ajouterIngredientInci(categorie, index, liste = 'recette') {
+  _modalInciCtx = { categorie, index, liste };
+  document.getElementById('modal-ajouter-inci-titre').textContent = `Nouvel ingrédient — ${categorie}`;
+  document.getElementById('modal-inci-nom').value = '';
+  document.getElementById('modal-inci-url').value = '';
+  document.getElementById('modal-inci-statut').textContent = '';
+  document.getElementById('modal-inci-statut').classList.add('cache');
+  document.getElementById('modal-inci-btn-go').disabled = false;
+  document.getElementById('modal-ajouter-inci').classList.add('ouvert');
+}
+
+function fermerModalAjouterInci() {
+  document.getElementById('modal-ajouter-inci').classList.remove('ouvert');
+}
+
+async function modalInciGo() {
+  const nom = document.getElementById('modal-inci-nom').value.trim();
+  const url = document.getElementById('modal-inci-url').value.trim();
+  const { categorie, index, liste } = _modalInciCtx;
+
+  if (!nom) { afficherStatutModalInci('Le nom est requis.'); return; }
+
+  const btn = document.getElementById('modal-inci-btn-go');
+  btn.disabled = true;
+  afficherStatutModalInci('Sauvegarde de la recette…');
+
+  // 1. Sauvegarder la recette au point actuel (silencieux)
+  const id = document.getElementById('fr-id')?.value;
+  if (id) {
+    const d = {
+      recette_id:   id,
+      nom:          document.getElementById('fr-nom').value.toUpperCase(),
+      couleur_hex:  document.getElementById('fr-couleur').value,
+      collection:   document.getElementById('fr-collection').value,
+      ligne:        document.getElementById('fr-ligne').value,
+      format:       document.getElementById('fr-format').value,
+      nb_unites:    parseInt(document.getElementById('fr-unites').value) || 1,
+      cure:         parseInt(document.getElementById('fr-cure').value) || 0,
+      prix_vente:   parseFloat(document.getElementById('fr-prix').value) || 0,
+      description:  document.getElementById('fr-description').value,
+      desc_emballage: document.getElementById('fr-desc-emballage').value,
+      instructions: document.getElementById('fr-instructions').value,
+      notes:        document.getElementById('fr-notes').value,
+      statut:       document.getElementById('fr-statut').value || 'test',
+      image_url:         document.getElementById('fr-image-url').value,
+      image_url_noel:    document.getElementById('fr-image-url-noel').value,
+      collections_secondaires: Array.from(document.getElementById('fr-collections-secondaires')?.querySelectorAll('input[type="checkbox"]:checked') || []).map(cb => cb.value),
+      ingredients:  ingredientsRecette.map(i => ({ type: i.type, nom: i.nom, quantite_g: i.quantite }))
+    };
+    await appelAPIPost('saveRecette', d);
+  }
+
+  // 2. Scraper si URL fournie
+  if (url) {
+    afficherStatutModalInci('Scraping en cours…');
+    const resScraper = await appelAPIPost('scraperIngredientUrl', { url });
+    if (resScraper) {
+      afficherStatutModalInci('Écriture dans le scraping…');
+      await appelAPIPost('saveIngredientInci', { nom, categorie, url, scraped: resScraper });
     } else {
-      ingredientsRecette[index].nom = nom.trim();
-      rafraichirListeIngredientsRecette();
+      afficherStatutModalInci('Fournisseur non reconnu — ingrédient ajouté sans scraping.');
+      await appelAPIPost('saveIngredientInci', { nom, categorie });
     }
   } else {
-    alert(res?.message || 'Erreur lors de l\'ajout.');
+    await appelAPIPost('saveIngredientInci', { nom, categorie });
   }
+
+  // 3. Recharger les listes déroulantes
+  await chargerListesDeroulantes();
+
+  // 4. Fermer le modal
+  fermerModalAjouterInci();
+
+  // 5. Mettre à jour la ligne dans la recette
+  if (liste === 'base') {
+    ingredientsBase[index].nom = nom;
+    rafraichirListeIngredientsBase();
+  } else {
+    ingredientsRecette[index].nom = nom;
+    rafraichirListeIngredientsRecette();
+  }
+
+  // 6. Si URL → rediriger vers page INCI avec ingrédient pré-ouvert
+  if (url) {
+    afficherStatutModalInci('Redirection vers la page INCI…');
+    setTimeout(() => {
+      afficherSection('inci');
+      inciRechercher(nom);
+    }, 800);
+  }
+}
+
+function afficherStatutModalInci(msg) {
+  const el = document.getElementById('modal-inci-statut');
+  el.textContent = msg;
+  el.classList.remove('cache');
+}
+
+function inciRechercher(nom) {
+  const champ = document.getElementById('inci-recherche');
+  if (champ) {
+    champ.value = nom;
+    inciAppliquerFiltres();
+  }
+  // Afficher le bouton retour
+  document.getElementById('btn-retour-recette')?.classList.remove('cache');
+}
+
+function retourRecetteDepuisInci() {
+  document.getElementById('btn-retour-recette')?.classList.add('cache');
+  afficherSection('recettes');
 }
 
 function genererInci(ingredients) {
