@@ -1941,29 +1941,26 @@ function inciRendreUC() {
     return `<p class="form-valeur">Aucune catégorie définie.</p>
       <button class="btn btn-sm btn-secondary" onclick="inciAjouterUC()">+ Ajouter une catégorie</button>`;
   }
+  const cartes = inciCategoriesUC.map((c, i) => {
+    const ingredientsValides = (listesDropdown.fullData || []).filter(d => d.type === c.categorie);
+    const utilise = ingredientsValides.length > 0;
+    const listeHtml = utilise
+      ? ingredientsValides.map(d => `<div class="form-valeur">${d.ingredient}</div>`).join('')
+      : '';
+    return `
+      <div class="carte-admin">
+        <div class="carte-admin-entete">
+          <input type="text" class="form-ctrl" id="uc-cat-${i}" value="${c.categorie.replace(/"/g,'&quot;')}">
+          <div class="td-actions">
+            <button class="btn-edit" onclick="inciModifierUC(${i}, ${c.rowIndex})">Modifier</button>
+            <button class="btn-suppr" onclick="inciSupprimerUC(${c.rowIndex})" ${utilise ? 'disabled title="Catégorie utilisée dans les ingrédients"' : ''}>Supprimer</button>
+          </div>
+        </div>
+        ${listeHtml}
+      </div>`;
+  }).join('');
   return `
-    <table class="tableau-admin">
-      <thead>
-        <tr>
-          <th>Catégorie</th>
-          <th>Date ajout</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        ${inciCategoriesUC.map((c, i) => `
-          <tr>
-            <td><input type="text" class="form-ctrl" id="uc-cat-${i}" value="${c.categorie.replace(/"/g,'&quot;')}"></td>
-            <td>${c.dateAjout || '—'}</td>
-            <td>
-              <div class="td-actions">
-                <button class="btn-edit" onclick="inciModifierUC(${i}, ${c.rowIndex})">Modifier</button>
-                <button class="btn-suppr" onclick="inciSupprimerUC(${c.rowIndex})">Supprimer</button>
-              </div>
-            </td>
-          </tr>`).join('')}
-      </tbody>
-    </table>
+    ${cartes}
     <hr class="separateur">
     <div class="form-actions">
       <button class="btn btn-sm btn-secondary" onclick="inciAjouterUC()">+ Ajouter une catégorie</button>
