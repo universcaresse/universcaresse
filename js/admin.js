@@ -2062,9 +2062,19 @@ function inciToggleDetail(id) {
 }
 
 function inciToggleAccordeon(header) {
-  const body    = header.nextElementSibling;
-  const chevron = header.querySelector('.inci-accord-chevron');
+  const body     = header.nextElementSibling;
+  const chevron  = header.querySelector('.inci-accord-chevron');
   const estOuvert = !body.classList.contains('cache');
+
+  // Fermer tous les autres accordéons
+  document.querySelectorAll('.inci-accord-body').forEach(b => {
+    if (b !== body) {
+      b.classList.add('cache');
+      const chev = b.previousElementSibling?.querySelector('.inci-accord-chevron');
+      if (chev) chev.textContent = '▶';
+    }
+  });
+
   body.classList.toggle('cache', estOuvert);
   if (chevron) chevron.textContent = estOuvert ? '▶' : '▼';
 }
