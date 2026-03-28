@@ -1834,6 +1834,7 @@ function reinitialiserFiltresInventaire() {
 let inciDonnees = [];
 let inciCorrespondance = [];
 let inciCategoriesUC = [];
+let inciIngredientsUC = [];
 
 async function chargerInci() {
   document.getElementById('loading-inci').classList.remove('cache');
@@ -1859,6 +1860,8 @@ async function chargerInci() {
   inciDonnees = res.lignes || [];
   inciCorrespondance = res.correspondance || [];
   inciCategoriesUC = (resUC && resUC.success) ? resUC.categories : [];
+  const resIngrUC = await appelAPI('getIngredientsUC');
+  inciIngredientsUC = (resIngrUC && resIngrUC.success) ? resIngrUC.items : [];
 
   inciConstruireAccordeons();
 }
@@ -1996,16 +1999,25 @@ function inciRendreLigne(l, cat, uid) {
           <label class="form-label">INCI</label>
           <textarea class="form-ctrl" id="${id}-inci" rows="3">${(l.inci || '').replace(/</g, '&lt;')}</textarea>
         </div>
-        <div class="form-groupe">
-          <label class="form-label">Catégorie UC</label>
-          <select class="form-ctrl" id="${id}-cat">
-            <option value="">— Choisir —</option>
-            ${inciCategoriesUC.map(c => `<option value="${c.categorie}" ${(l.categorMaitre === c.categorie) ? 'selected' : ''}>${c.categorie}</option>`).join('')}
-          </select>
+        <div class="form-groupe form-grille-2">
+          <div>
+            <label class="form-label">Catégorie fournisseur</label>
+            <div class="form-valeur">${l.categorie || '—'}</div>
+          </div>
+          <div>
+            <label class="form-label">Catégorie UC</label>
+            <select class="form-ctrl" id="${id}-cat">
+              <option value="">— Choisir —</option>
+              ${inciCategoriesUC.map(c => `<option value="${c.categorie}" ${(l.categorMaitre === c.categorie) ? 'selected' : ''}>${c.categorie}</option>`).join('')}
+            </select>
+          </div>
         </div>
         <div class="form-groupe">
-          <label class="form-label">Catégorie fournisseur</label>
-          <div class="form-valeur">${l.categorie || '—'}</div>
+          <label class="form-label">Nom UC <button class="btn btn-sm btn-outline" onclick="inciAjouterNomUC('${id}')">+</button></label>
+          <select class="form-ctrl" id="${id}-nomuc">
+            <option value="">— Choisir —</option>
+            ${inciIngredientsUC.map(i => `<option value="${i.ingredient}" ${(l.nomUC === i.ingredient) ? 'selected' : ''}>${i.ingredient}</option>`).join('')}
+          </select>
         </div>
         <div class="form-groupe">
           <label class="form-label">Nom botanique</label>
@@ -2188,9 +2200,10 @@ async function inciValider(id, nom, cat, source) {
   const nomBotanique  = document.getElementById(`${id}-bot`)?.value   || '';
   const noteOlfactive = document.getElementById(`${id}-note`)?.value  || '';
   const categorieUC   = document.getElementById(`${id}-cat`)?.value   || cat;
+  const nomUC         = document.getElementById(`${id}-nomuc`)?.value || '';
 
   const res = await appelAPIPost('validerIngredientInci', {
-    nom, categorie: categorieUC, inci, source, nomBotanique, noteOlfactive
+    nom, categorie: categorieUC, inci, source, nomBotanique, noteOlfactive, nomUC
   });
 
   if (res && res.success) {
@@ -2198,6 +2211,28 @@ async function inciValider(id, nom, cat, source) {
     await chargerInci();
   } else {
     afficherMsg('inci', 'Erreur lors de la validation.', 'erreur');
+  }
+}
+
+async function inciAjouterNomUC(id) {
+  const nom = prompt('Nouveau nom UC :');
+  if (!nom || !nom.trim()) return;
+  const cat = document.getElementById(`${id}-cat`)?.value || '';
+  const res = await appelAPIPost('ajouterIngredientUC', { ingredient: nom.trim(), categorie: cat });
+  if (res && res.success) {
+    const resIngrUC = await appelAPI('getIngredientsUC');
+    inciIngredientsUC = (resIngrUC && resIngrUC.success) ? resIngrUC.items : [];
+    const select = document.getElementById(`${id}-nomuc`);
+    if (select) {
+      const option = document.createElement('option');
+      option.value = nom.trim();
+      option.textContent = nom.trim();
+      option.selected = true;
+      select.appendChild(option);
+    }
+    afficherMsg('inci', `✅ "${nom.trim()}" ajouté.`);
+  } else {
+    afficherMsg('inci', res?.message || 'Erreur.', 'erreur');
   }
 }
 
