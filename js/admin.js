@@ -1810,7 +1810,6 @@ function inciConstruireAccordeons() {
       <div class="form-panel-titre">Catégories Univers Caresse</div>
       <div style="display:flex;gap:8px;align-items:center">
         <span class="badge-statut-ok">${inciCategoriesUC.length} catégories</span>
-        <span class="inci-accord-chevron">▶</span>
       </div>
     </div>
     <div class="form-body inci-accord-body cache" id="inci-uc-body">
@@ -1824,7 +1823,6 @@ function inciConstruireAccordeons() {
   blocCorr.innerHTML = `
     <div class="form-panel-header" onclick="inciToggleAccordeon(this)" style="cursor:pointer">
       <div class="form-panel-titre">Table de correspondance des catégories</div>
-      <span class="inci-accord-chevron">▶</span>
     </div>
     <div class="form-body inci-accord-body cache" id="inci-corresp-body">
       ${inciRendreCorrespondance()}
@@ -1863,7 +1861,6 @@ function inciConstruireAccordeons() {
         <div style="display:flex;gap:8px;align-items:center">
           ${nbRestants > 0 ? `<span class="badge-statut-cours">${nbRestants} à valider</span>` : ''}
           <span class="badge-statut-ok">${nbValides} validés</span>
-          <span class="inci-accord-chevron">▶</span>
         </div>
       </div>
       <div class="form-body inci-accord-body cache">
@@ -1893,8 +1890,7 @@ function inciRendreLigne(l, cat, uid) {
       <td></td>
       <td></td>
       <td>
-        <span class="${statutClass}">${statutLabel}</span>
-        <button class="btn btn-sm btn-outline" onclick="inciToggleDetail('${id}')">▼</button>
+        <span>${statutLabel}</span>
       </td>
     </tr>
     <tr class="accordeon-detail cache" id="${id}-detail">
@@ -2062,21 +2058,15 @@ function inciToggleDetail(id) {
 }
 
 function inciToggleAccordeon(header) {
-  const body     = header.nextElementSibling;
-  const chevron  = header.querySelector('.inci-accord-chevron');
+  const body = header.nextElementSibling;
   const estOuvert = !body.classList.contains('cache');
 
   // Fermer tous les autres accordéons
   document.querySelectorAll('.inci-accord-body').forEach(b => {
-    if (b !== body) {
-      b.classList.add('cache');
-      const chev = b.previousElementSibling?.querySelector('.inci-accord-chevron');
-      if (chev) chev.textContent = '▶';
-    }
+    if (b !== body) b.classList.add('cache');
   });
 
   body.classList.toggle('cache', estOuvert);
-  if (chevron) chevron.textContent = estOuvert ? '▶' : '▼';
 }
 
 async function inciValider(id, nom, cat, source) {
