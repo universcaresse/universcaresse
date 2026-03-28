@@ -1742,10 +1742,16 @@ async function chargerInci() {
   document.getElementById('loading-inci').classList.remove('cache');
   document.getElementById('inci-accordeons').innerHTML = '';
 
-  const [res, resUC] = await Promise.all([
-    appelAPI('getSourcesInci'),
-    appelAPI('getCategoriesUC')
-  ]);
+  const promises = [appelAPI('getSourcesInci'), appelAPI('getCategoriesUC')];
+  if (!listesDropdown.fullData || listesDropdown.fullData.length === 0) {
+    promises.push(appelAPI('getDropdownLists'));
+  }
+  const [res, resUC, resDrop] = await Promise.all(promises);
+  if (resDrop) {
+    listesDropdown.types    = resDrop.types    || [];
+    listesDropdown.fullData = resDrop.fullData || [];
+    listesDropdown.config   = resDrop.config   || {};
+  }
   document.getElementById('loading-inci').classList.add('cache');
 
   if (!res || !res.success) {
@@ -1863,14 +1869,7 @@ function inciConstruireAccordeons() {
       <div class="form-body inci-accord-body cache">
         <div class="tableau-wrap">
           <table class="tableau-admin">
-            <thead>
-              <tr>
-                <th style="width:25%">Nom</th>
-                <th style="width:35%">INCI</th>
-                <th style="width:25%">Catégorie UC</th>
-                <th></th>
-              </tr>
-            </thead>
+      
             <tbody>
               ${lignes.map((l, i) => inciRendreLigne(l, cat, `${idx}-${i}`)).join('')}
             </tbody>
@@ -1882,7 +1881,7 @@ function inciConstruireAccordeons() {
 }
 
 function inciRendreLigne(l, cat, uid) {
-  const statutClass = l.valide ? 'badge-statut-ok' : 'badge-statut-cours';
+  const statutClass = '';
   const statutLabel = l.valide ? '✅' : '🔴';
   const id = `inci-${uid}`;
   const nomSafe = l.nom.replace(/'/g, "\\'");
