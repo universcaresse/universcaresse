@@ -1891,21 +1891,26 @@ function inciRendreLigne(l, cat, uid) {
   return `
     <tr class="${ligneValideeClass}">
       <td>${l.nom}</td>
-      <td><input type="text" class="form-ctrl" id="${id}-inci" value="${(l.inci || '').replace(/"/g, '&quot;')}"></td>
-      <td>
-        <select class="form-ctrl" id="${id}-cat">
-          <option value="">— Choisir —</option>
-          ${inciCategoriesUC.map(c => `<option value="${c.categorie}" ${(l.categorMaitre === c.categorie) ? 'selected' : ''}>${c.categorie}</option>`).join('')}
-        </select>
-      </td>
+      <td></td>
+      <td></td>
       <td>
         <span class="${statutClass}">${statutLabel}</span>
         <button class="btn btn-sm btn-outline" onclick="inciToggleDetail('${id}')">▼</button>
-        <button class="btn btn-sm btn-primary" onclick="inciValider('${id}','${nomSafe}','${catSafe}','${l.source}')">Valider</button>
       </td>
     </tr>
     <tr class="accordeon-detail cache" id="${id}-detail">
       <td colspan="4">
+        <div class="form-groupe">
+          <label class="form-label">INCI</label>
+          <input type="text" class="form-ctrl" id="${id}-inci" value="${(l.inci || '').replace(/"/g, '&quot;')}">
+        </div>
+        <div class="form-groupe">
+          <label class="form-label">Catégorie UC</label>
+          <select class="form-ctrl" id="${id}-cat">
+            <option value="">— Choisir —</option>
+            ${inciCategoriesUC.map(c => `<option value="${c.categorie}" ${(l.categorMaitre === c.categorie) ? 'selected' : ''}>${c.categorie}</option>`).join('')}
+          </select>
+        </div>
         <div class="form-groupe">
           <label class="form-label">Catégorie fournisseur</label>
           <div class="form-valeur">${l.categorie || '—'}</div>
@@ -1922,7 +1927,11 @@ function inciRendreLigne(l, cat, uid) {
           <label class="form-label">Texte brut</label>
           <div class="texte-brut">${(l.texteBrut || '—')}</div>
         </div>
-        ${l.url ? `<div class="form-groupe"><label class="form-label">Lien fournisseur</label><a href="${l.url}" target="_blank" class="btn btn-sm btn-outline">↗ Voir fiche</a></div>` : ''}
+        <hr class="separateur">
+        <div class="form-actions">
+          ${l.url ? `<a href="${l.url}" target="_blank" class="btn btn-sm btn-outline">↗ Voir fiche</a>` : '<span></span>'}
+          <button class="btn btn-sm btn-primary" onclick="inciValider('${id}','${nomSafe}','${catSafe}','${l.source}')">Valider</button>
+        </div>
       </td>
     </tr>`;
 }
