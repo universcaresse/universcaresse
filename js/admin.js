@@ -1994,7 +1994,7 @@ function inciRendreLigne(l, cat, uid) {
       <td colspan="4">
         <div class="form-groupe">
           <label class="form-label">INCI</label>
-          <input type="text" class="form-ctrl" id="${id}-inci" value="${(l.inci || '').replace(/"/g, '&quot;')}">
+          <textarea class="form-ctrl" id="${id}-inci" rows="3">${(l.inci || '').replace(/</g, '&lt;')}</textarea>
         </div>
         <div class="form-groupe">
           <label class="form-label">Catégorie UC</label>

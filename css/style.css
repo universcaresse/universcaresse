@@ -1338,7 +1338,7 @@ tr.cliquable { cursor: pointer; }
 .accordeon-detail { background: var(--beige-15); }
 .accordeon-detail td { padding: 12px 16px; vertical-align: top; }
 .ligne-validee td { background: var(--primary-06); }
-.texte-brut { font-size: 0.95rem; color: var(--gris); line-height: 1.5; max-height: 80px; overflow-y: auto; user-select: text; cursor: text; }
+.texte-brut { font-size: 0.95rem; color: var(--gris); line-height: 1.5; user-select: text; cursor: text; }
 .form-groupe { margin-top: 1rem; }
 .accordeon-detail .form-actions { justify-content: space-between; }
 .carte-admin { border: 1px solid var(--beige); border-radius: 6px; padding: 16px; margin-bottom: 12px; }
