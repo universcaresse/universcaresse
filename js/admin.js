@@ -1210,7 +1210,7 @@ async function modalInciGo() {
       noteOlfactive: document.getElementById('modal-inci-note').value.trim(),
       nomUC:         nom
     });
-    await chargerListesDeroulantes();
+    await chargerListesFournisseurs();
     fermerModalAjouterInci();
     if (liste === 'base') { ingredientsBase[index].nom = nom; rafraichirListeIngredientsBase(); }
     else { ingredientsRecette[index].nom = nom; rafraichirListeIngredientsRecette(); }
@@ -1263,7 +1263,7 @@ async function modalInciGo() {
   }
 
   // 3. Recharger les listes déroulantes
-  await chargerListesDeroulantes();
+  await chargerListesFournisseurs();
 
   // 4. Fermer le modal
   fermerModalAjouterInci();
