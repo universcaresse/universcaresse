@@ -1149,6 +1149,49 @@ function ajouterIngredientInci(categorie, index, liste = 'recette') {
 
 function fermerModalAjouterInci() {
   document.getElementById('modal-ajouter-inci').classList.remove('ouvert');
+  document.getElementById('modal-inci-nom').value   = '';
+  document.getElementById('modal-inci-url').value   = '';
+  document.getElementById('modal-inci-fourn').value = '';
+  document.getElementById('modal-inci-inci').value  = '';
+  document.getElementById('modal-inci-bot').value   = '';
+  document.getElementById('modal-inci-note').value  = '';
+  document.getElementById('modal-inci-champs-manuels').classList.add('cache');
+  document.getElementById('modal-inci-groupe-url').classList.remove('cache');
+  document.getElementById('modal-inci-groupe-fourn').classList.remove('cache');
+  document.getElementById('modal-inci-btn-go').textContent = 'Go';
+  document.getElementById('modal-inci-statut').classList.add('cache');
+}
+
+function modalInciSyncNomUC() {
+  const nom = document.getElementById('modal-inci-nom').value;
+  const fourn = document.getElementById('modal-inci-fourn').value.trim();
+  if (fourn) {
+    document.getElementById('modal-inci-inci').value;
+  }
+}
+
+function modalInciToggleChamps() {
+  const url   = document.getElementById('modal-inci-url').value.trim();
+  const fourn = document.getElementById('modal-inci-fourn').value.trim();
+  const groupeUrl   = document.getElementById('modal-inci-groupe-url');
+  const groupeFourn = document.getElementById('modal-inci-groupe-fourn');
+  const champsMan   = document.getElementById('modal-inci-champs-manuels');
+  const btnGo       = document.getElementById('modal-inci-btn-go');
+
+  if (url) {
+    groupeFourn.classList.add('cache');
+    champsMan.classList.add('cache');
+    btnGo.textContent = 'Go';
+  } else if (fourn) {
+    groupeUrl.classList.add('cache');
+    champsMan.classList.remove('cache');
+    btnGo.textContent = 'Valider';
+  } else {
+    groupeUrl.classList.remove('cache');
+    groupeFourn.classList.remove('cache');
+    champsMan.classList.add('cache');
+    btnGo.textContent = 'Go';
+  }
 }
 
 async function modalInciGo() {
