@@ -2918,6 +2918,10 @@ function importParserMD() {
       }
     }
     if (dansIngredients && l === '') dansIngredients = false;
+  }
+}
+
+// ─── CONTENU DU SITE ───
 async function chargerContenuSite() {
   const loading = document.getElementById('loading-contenu-site');
   const corps = document.getElementById('corps-contenu-site');
@@ -2969,6 +2973,8 @@ if (data && data.success) {
   } else {
     afficherMsg('msg-contenu-site', 'Erreur lors de la sauvegarde.', 'erreur');
   }
+}
+
 // ─── IMPORT RECETTES ───
 
 const IMPORT_TYPES_MAP = {
