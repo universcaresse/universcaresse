@@ -2016,7 +2016,7 @@ function inciRendreLigne(l, cat, uid) {
           <label class="form-label">Nom UC <button class="btn btn-sm btn-outline" onclick="inciAjouterNomUC('${id}')">+</button></label>
           <select class="form-ctrl" id="${id}-nomuc">
             <option value="">— Choisir —</option>
-            ${inciIngredientsUC.map(i => `<option value="${i.ingredient}" ${(l.nomUC === i.ingredient) ? 'selected' : ''}>${i.ingredient}</option>`).join('')}
+            ${[...inciIngredientsUC].sort((a, b) => a.ingredient.localeCompare(b.ingredient, 'fr')).map(i => `<option value="${i.ingredient}" ${(l.nomUC === i.ingredient) ? 'selected' : ''}>${i.ingredient}</option>`).join('')}
           </select>
         </div>
         <div class="form-groupe">
