@@ -9,6 +9,7 @@ const CONFIG = {
   MOT_DE_PASSE: '2026'
 };
 
+
 // ─── COULEURS COLLECTIONS ───
 const COULEURS_COLLECTIONS = {
   'SAPONICA':    ['#4a9b6f', '#2d7a50'],
