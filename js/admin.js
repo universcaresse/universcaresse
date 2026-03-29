@@ -20,10 +20,10 @@ function initScrollAnimations() {
 
 function reobserverFadeIn(conteneur) {
   if (!adminScrollObserver || !conteneur) return;
-  conteneur.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => {
-    el.classList.remove('visible');
-    adminScrollObserver.observe(el);
-  });
+  conteneur.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => el.classList.remove('visible'));
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    conteneur.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => adminScrollObserver.observe(el));
+  }));
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
