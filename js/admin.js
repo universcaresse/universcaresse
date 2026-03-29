@@ -1195,11 +1195,27 @@ function modalInciToggleChamps() {
 }
 
 async function modalInciGo() {
-  const nom = document.getElementById('modal-inci-nom').value.trim();
-  const url = document.getElementById('modal-inci-url').value.trim();
+  const nom   = document.getElementById('modal-inci-nom').value.trim();
+  const url   = document.getElementById('modal-inci-url').value.trim();
+  const fourn = document.getElementById('modal-inci-fourn').value.trim();
   const { categorie, index, liste } = _modalInciCtx;
 
   if (!nom) { afficherStatutModalInci('Le nom est requis.'); return; }
+  if (!url && !fourn) { afficherStatutModalInci('URL ou nom de fournisseur requis.'); return; }
+  if (fourn && !url) {
+    await appelAPIPost('saveIngredientInci', {
+      nom, categorie, source: fourn,
+      inci:          document.getElementById('modal-inci-inci').value.trim(),
+      nomBotanique:  document.getElementById('modal-inci-bot').value.trim(),
+      noteOlfactive: document.getElementById('modal-inci-note').value.trim(),
+      nomUC:         nom
+    });
+    await chargerListesDeroulantes();
+    fermerModalAjouterInci();
+    if (liste === 'base') { ingredientsBase[index].nom = nom; rafraichirListeIngredientsBase(); }
+    else { ingredientsRecette[index].nom = nom; rafraichirListeIngredientsRecette(); }
+    return;
+  }
 
   const btn = document.getElementById('modal-inci-btn-go');
   btn.disabled = true;
