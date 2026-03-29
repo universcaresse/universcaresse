@@ -2847,40 +2847,6 @@ function validerConnexionAdmin() {
 
 // ─── IMPORT RECETTES ───
 
-const IMPORT_TYPES_MAP = {
-  'huile de tournesol': 'Huiles', 'huile de coco': 'Huiles', 'huile d\'olive': 'Huiles',
-  'huile de calendula': 'Huiles', 'huile de rose': 'Huiles', 'huile végétale': 'Huiles',
-  'huile de ricin': 'Huiles', 'huile d\'argan': 'Huiles', 'huile de café': 'Huiles',
-  'huile de pépins': 'Huiles', 'huile': 'Huiles',
-  'beurre de karité': 'Beurres', 'beurre de cacao': 'Beurres', 'beurre de mangue': 'Beurres', 'beurre': 'Beurres',
-  'eau': 'Ingrédients Liquides', 'hydrolat': 'Hydrolats',
-  'soude caustique': 'Ingrédients Secs', 'naoh': 'Ingrédients Secs', 'bicarbonate': 'Ingrédients Secs',
-  'acide citrique': 'Ingrédients Secs', 'fécule': 'Ingrédients Secs', 'sel': 'Ingrédients Secs',
-  'sucre': 'Ingrédients Secs', 'avoine': 'Ingrédients Secs', 'amande moulue': 'Ingrédients Secs',
-  'argile': 'Argiles',
-  'charbon': 'Argiles',
-  'he ': 'Huiles essentielles', 'huile essentielle': 'Huiles essentielles',
-  'ha ': 'Huiles aromatiques', 'fragrance': 'Fragrances', 'musc': 'Fragrances',
-  'mica': 'Colorants et Pigments', 'colorant': 'Colorants et Pigments', 'pigment': 'Colorants et Pigments',
-  'pétales': 'Herbes et Fleurs', 'fleurs': 'Herbes et Fleurs', 'lavande': 'Herbes et Fleurs',
-  'romarin': 'Herbes et Fleurs', 'spiruline': 'Herbes et Fleurs', 'matcha': 'Herbes et Fleurs',
-  'curcuma': 'Herbes et Fleurs', 'cire': 'Cires',
-  'miel': 'Ingrédients Liquides', 'glycérine': 'Ingrédients Liquides',
-  'vitamine': 'Bases neutres', 'allantoine': 'Bases neutres', 'sci': 'Bases neutres'
-};
-
-function importDevinerType(nom) {
-  const n = nom.toLowerCase();
-  for (const [cle, type] of Object.entries(IMPORT_TYPES_MAP)) {
-    if (n.includes(cle)) return type;
-  }
-  return 'Ingrédients Secs';
-}
-
-function importParserMD() {
-  const texte = document.getElementById('import-md-texte').value.trim();
-  if (!texte) { afficherMsg('import-recettes', 'Coller un fichier MD d\'abord.', 'erreur'); return; }
-
   const lignes = texte.split('\n');
   const get = (regex) => { const m = texte.match(regex); return m ? m[1].trim() : ''; };
 
