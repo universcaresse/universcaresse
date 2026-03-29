@@ -1924,10 +1924,7 @@ async function chargerInci() {
   document.getElementById('loading-inci').classList.remove('cache');
   document.getElementById('inci-accordeons').innerHTML = '';
 
-  const promises = [appelAPI('getSourcesInci'), appelAPI('getCategoriesUC')];
-  if (!listesDropdown.fullData || listesDropdown.fullData.length === 0) {
-    promises.push(appelAPI('getDropdownLists'));
-  }
+  const promises = [appelAPI('getSourcesInci'), appelAPI('getCategoriesUC'), appelAPI('getDropdownLists')];
   const [res, resUC, resDrop] = await Promise.all(promises);
   if (resDrop) {
     listesDropdown.types    = resDrop.types    || [];
@@ -2298,23 +2295,37 @@ async function inciValider(id, nom, cat, source) {
   }
 }
 
-async function inciAjouterNomUC(id) {
-  const nom = prompt('Nouveau nom UC :');
-  if (!nom || !nom.trim()) return;
+let _nomUCCtxId = null;
+
+function inciAjouterNomUC(id) {
+  _nomUCCtxId = id;
+  document.getElementById('modal-nom-uc-valeur').value = '';
+  document.getElementById('modal-nom-uc').classList.add('ouvert');
+  setTimeout(() => document.getElementById('modal-nom-uc-valeur').focus(), 100);
+}
+
+function fermerModalNomUC() {
+  document.getElementById('modal-nom-uc').classList.remove('ouvert');
+  _nomUCCtxId = null;
+}
+
+async function confirmerModalNomUC() {
+  const nom = document.getElementById('modal-nom-uc-valeur').value.trim();
+  if (!nom) return;
+  const id  = _nomUCCtxId;
   const cat = document.getElementById(`${id}-cat`)?.value || '';
-  const res = await appelAPIPost('ajouterIngredientUC', { ingredient: nom.trim(), categorie: cat });
+  const res = await appelAPIPost('ajouterIngredientUC', { ingredient: nom, categorie: cat });
   if (res && res.success) {
     const resIngrUC = await appelAPI('getIngredientsUC');
     inciIngredientsUC = (resIngrUC && resIngrUC.success) ? resIngrUC.items : [];
     const select = document.getElementById(`${id}-nomuc`);
     if (select) {
       const option = document.createElement('option');
-      option.value = nom.trim();
-      option.textContent = nom.trim();
-      option.selected = true;
+      option.value = nom; option.textContent = nom; option.selected = true;
       select.appendChild(option);
     }
-    afficherMsg('inci', `✅ "${nom.trim()}" ajouté.`);
+    afficherMsg('inci', `✅ "${nom}" ajouté.`);
+    fermerModalNomUC();
   } else {
     afficherMsg('inci', res?.message || 'Erreur.', 'erreur');
   }
