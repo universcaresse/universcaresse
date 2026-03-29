@@ -774,9 +774,7 @@ footer > * { position: relative; z-index: 1; }
 /* ═══════════════════════════════════════
    ADMIN — EN-TÊTE DE PAGE
    ═══════════════════════════════════════ */
-.page-titre { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 400; color: var(--gris-fonce); }
-.page-titre em { font-style: italic; color: var(--primary); }
-.page-sous-titre { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; color: var(--gris); margin-top: 4px; letter-spacing: 0.04em; }
+
 
 /* ═══════════════════════════════════════
    ADMIN — ACCUEIL

@@ -4,6 +4,28 @@
 
 // ─── INITIALISATION ───
 
+let scrollObserver = null;
+
+function initScrollAnimations() {
+  scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        scrollObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => scrollObserver.observe(el));
+}
+
+function reobserverFadeIn(conteneur) {
+  if (!scrollObserver || !conteneur) return;
+  conteneur.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => {
+    el.classList.remove('visible');
+    scrollObserver.observe(el);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   const session = sessionStorage.getItem('uc_admin');
   if (session !== 'true') {
@@ -15,6 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const dateField = document.getElementById('nf-date');
   if (dateField) dateField.value = new Date().toISOString().split('T')[0];
   initBurgerAdmin();
+  initScrollAnimations();
   await chargerCollections();
 });
 
@@ -43,11 +66,13 @@ function afficherSection(id, bouton) {
   if (contenu) contenu.scrollTop = 0;
 if (id === 'accueil')        chargerStatsAccueil();
 if (id === 'collections')    { chargerCollections(); chargerListesFournisseurs(); }
- if (id === 'recettes')       { chargerRecettes(); chargerListesFournisseurs(); }
-  if (id === 'inci')           chargerInci();
-  if (id === 'densites')       chargerDensites();
-  if (id === 'inventaire')     chargerInventaire();
-  if (id === 'factures')       chargerFactures();
+if (id === 'recettes')       { chargerRecettes(); chargerListesFournisseurs(); }
+if (id === 'inci')           chargerInci();
+if (id === 'densites')       chargerDensites();
+if (id === 'inventaire')     chargerInventaire();
+if (id === 'factures')       chargerFactures();
+const cible = document.getElementById('section-' + id);
+if (cible) reobserverFadeIn(cible);
  if (id === 'nouvelle-facture' && !factureActive) initialiserNouvelleFacture();
 if (id === 'contenu-site')    chargerContenuSite();
 }
