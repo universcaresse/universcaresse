@@ -4,7 +4,7 @@
 
 // ─── INITIALISATION ───
 
-let scrollObserver = null;
+var scrollObserver = null;
 
 function initScrollAnimations() {
   scrollObserver = new IntersectionObserver((entries) => {
