@@ -2845,7 +2845,79 @@ function validerConnexionAdmin() {
   }
 }
 
-// ─── CONTENU DU SITE ───
+// ─── IMPORT RECETTES ───
+
+const IMPORT_TYPES_MAP = {
+  'huile de tournesol': 'Huiles', 'huile de coco': 'Huiles', 'huile d\'olive': 'Huiles',
+  'huile de calendula': 'Huiles', 'huile de rose': 'Huiles', 'huile végétale': 'Huiles',
+  'huile de ricin': 'Huiles', 'huile d\'argan': 'Huiles', 'huile de café': 'Huiles',
+  'huile de pépins': 'Huiles', 'huile': 'Huiles',
+  'beurre de karité': 'Beurres', 'beurre de cacao': 'Beurres', 'beurre de mangue': 'Beurres', 'beurre': 'Beurres',
+  'eau': 'Ingrédients Liquides', 'hydrolat': 'Hydrolats',
+  'soude caustique': 'Ingrédients Secs', 'naoh': 'Ingrédients Secs', 'bicarbonate': 'Ingrédients Secs',
+  'acide citrique': 'Ingrédients Secs', 'fécule': 'Ingrédients Secs', 'sel': 'Ingrédients Secs',
+  'sucre': 'Ingrédients Secs', 'avoine': 'Ingrédients Secs', 'amande moulue': 'Ingrédients Secs',
+  'argile': 'Argiles',
+  'charbon': 'Argiles',
+  'he ': 'Huiles essentielles', 'huile essentielle': 'Huiles essentielles',
+  'ha ': 'Huiles aromatiques', 'fragrance': 'Fragrances', 'musc': 'Fragrances',
+  'mica': 'Colorants et Pigments', 'colorant': 'Colorants et Pigments', 'pigment': 'Colorants et Pigments',
+  'pétales': 'Herbes et Fleurs', 'fleurs': 'Herbes et Fleurs', 'lavande': 'Herbes et Fleurs',
+  'romarin': 'Herbes et Fleurs', 'spiruline': 'Herbes et Fleurs', 'matcha': 'Herbes et Fleurs',
+  'curcuma': 'Herbes et Fleurs', 'cire': 'Cires',
+  'miel': 'Ingrédients Liquides', 'glycérine': 'Ingrédients Liquides',
+  'vitamine': 'Bases neutres', 'allantoine': 'Bases neutres', 'sci': 'Bases neutres'
+};
+
+function importDevinerType(nom) {
+  const n = nom.toLowerCase();
+  for (const [cle, type] of Object.entries(IMPORT_TYPES_MAP)) {
+    if (n.includes(cle)) return type;
+  }
+  return 'Ingrédients Secs';
+}
+
+function importParserMD() {
+  const texte = document.getElementById('import-md-texte').value.trim();
+  if (!texte) { afficherMsg('import-recettes', 'Coller un fichier MD d\'abord.', 'erreur'); return; }
+
+  const lignes = texte.split('\n');
+  const get = (regex) => { const m = texte.match(regex); return m ? m[1].trim() : ''; };
+
+  const nom         = get(/^#\s+(.+?)(?:\s+—|$)/m);
+  const ligne       = get(/\*\*Ligne\s*:\*\*\s*(.+?)(?:\s*\||\n)/);
+  const cure        = parseInt(get(/\*\*Cure\s*:\*\*\s*(\d+)/)) || 0;
+  const nb_unites   = parseInt(get(/\*\*Nb unités\s*:\*\*\s*(\d+)/)) || 1;
+  const statut      = get(/\*\*Statut\s*:\*\*\s*(\w+)/) || 'test';
+  const couleur_hex = get(/\*\*HEX\s*:\*\*\s*(#[0-9a-fA-F]{3,6})/);
+  const image_url   = get(/\*\*Image\s*:\*\*\s*(https?:\/\/\S+)/);
+  const image_url_noel = get(/\*\*Image Noël\s*:\*\*\s*(https?:\/\/\S+)/);
+  const surgras     = get(/\*\*Surgras\s*:\*\*\s*(\d+%?)/);
+  const desc_courte = get(/\*\*Version courte\s*:\*\*\s*(.+)/);
+  const desc_longue = get(/\*\*Version longue\s*:\*\*\s*(.+)/);
+  const notes       = get(/\*\*Notes\s*:\*\*\s*(.+)/);
+
+  const ingredients = [];
+  let dansIngredients = false;
+  for (const ligne_raw of lignes) {
+    const l = ligne_raw.trim();
+    if (l.match(/^##\s+RECETTE|^##\s+Fragrance|^##\s+Additif/i) || l.match(/^\*\*Fragrances|^\*\*Additifs/i)) {
+      dansIngredients = true; continue;
+    }
+    if (dansIngredients && l.startsWith('- ')) {
+      const m = l.match(/^-\s+([\d.,¼½¾]+)\s*g\s+(.+)/);
+      if (m) {
+        const qte = parseFloat(m[1].replace(',', '.')) || 0;
+        const nomIng = m[2].trim();
+        ingredients.push({ type: importDevinerType(nomIng), nom: nomIng, quantite_g: qte, cout: 0 });
+      } else {
+        const nomIng = l.replace(/^-\s+/, '').trim();
+        if (nomIng && !nomIng.match(/^¼|^½|^¾|mélanger/i)) {
+          ingredients.push({ type: importDevinerType(nomIng), nom: nomIng, quantite_g: 0, cout: 0 });
+        }
+      }
+    }
+    if (dansIngredients && l === '') dansIngredients = false;
 async function chargerContenuSite() {
   const loading = document.getElementById('loading-contenu-site');
   const corps = document.getElementById('corps-contenu-site');
