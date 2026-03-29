@@ -2845,48 +2845,6 @@ function validerConnexionAdmin() {
   }
 }
 
-// ─── IMPORT RECETTES ───
-
-  const lignes = texte.split('\n');
-  const get = (regex) => { const m = texte.match(regex); return m ? m[1].trim() : ''; };
-
-  const nom         = get(/^#\s+(.+?)(?:\s+—|$)/m);
-  const ligne       = get(/\*\*Ligne\s*:\*\*\s*(.+?)(?:\s*\||\n)/);
-  const cure        = parseInt(get(/\*\*Cure\s*:\*\*\s*(\d+)/)) || 0;
-  const nb_unites   = parseInt(get(/\*\*Nb unités\s*:\*\*\s*(\d+)/)) || 1;
-  const statut      = get(/\*\*Statut\s*:\*\*\s*(\w+)/) || 'test';
-  const couleur_hex = get(/\*\*HEX\s*:\*\*\s*(#[0-9a-fA-F]{3,6})/);
-  const image_url   = get(/\*\*Image\s*:\*\*\s*(https?:\/\/\S+)/);
-  const image_url_noel = get(/\*\*Image Noël\s*:\*\*\s*(https?:\/\/\S+)/);
-  const surgras     = get(/\*\*Surgras\s*:\*\*\s*(\d+%?)/);
-  const desc_courte = get(/\*\*Version courte\s*:\*\*\s*(.+)/);
-  const desc_longue = get(/\*\*Version longue\s*:\*\*\s*(.+)/);
-  const notes       = get(/\*\*Notes\s*:\*\*\s*(.+)/);
-
-  const ingredients = [];
-  let dansIngredients = false;
-  for (const ligne_raw of lignes) {
-    const l = ligne_raw.trim();
-    if (l.match(/^##\s+RECETTE|^##\s+Fragrance|^##\s+Additif/i) || l.match(/^\*\*Fragrances|^\*\*Additifs/i)) {
-      dansIngredients = true; continue;
-    }
-    if (dansIngredients && l.startsWith('- ')) {
-      const m = l.match(/^-\s+([\d.,¼½¾]+)\s*g\s+(.+)/);
-      if (m) {
-        const qte = parseFloat(m[1].replace(',', '.')) || 0;
-        const nomIng = m[2].trim();
-        ingredients.push({ type: importDevinerType(nomIng), nom: nomIng, quantite_g: qte, cout: 0 });
-      } else {
-        const nomIng = l.replace(/^-\s+/, '').trim();
-        if (nomIng && !nomIng.match(/^¼|^½|^¾|mélanger/i)) {
-          ingredients.push({ type: importDevinerType(nomIng), nom: nomIng, quantite_g: 0, cout: 0 });
-        }
-      }
-    }
-    if (dansIngredients && l === '') dansIngredients = false;
-  }
-}
-
 // ─── CONTENU DU SITE ───
 async function chargerContenuSite() {
   const loading = document.getElementById('loading-contenu-site');
