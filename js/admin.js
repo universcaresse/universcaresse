@@ -4,7 +4,7 @@
 
 // ─── INITIALISATION ───
 
-var scrollObserver = null;
+var adminScrollObserver = null;
 
 function initScrollAnimations() {
   scrollObserver = new IntersectionObserver((entries) => {
