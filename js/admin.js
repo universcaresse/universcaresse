@@ -7,22 +7,22 @@
 var adminScrollObserver = null;
 
 function initScrollAnimations() {
-  scrollObserver = new IntersectionObserver((entries) => {
+  adminScrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        scrollObserver.unobserve(entry.target);
+        adminScrollObserver.unobserve(entry.target);
       }
     });
   }, { threshold: 0.15 });
-  document.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => scrollObserver.observe(el));
+  document.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => adminScrollObserver.observe(el));
 }
 
 function reobserverFadeIn(conteneur) {
-  if (!scrollObserver || !conteneur) return;
+  if (!adminScrollObserver || !conteneur) return;
   conteneur.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => {
     el.classList.remove('visible');
-    scrollObserver.observe(el);
+    adminScrollObserver.observe(el);
   });
 }
 
