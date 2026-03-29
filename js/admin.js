@@ -2969,4 +2969,114 @@ if (data && data.success) {
   } else {
     afficherMsg('msg-contenu-site', 'Erreur lors de la sauvegarde.', 'erreur');
   }
+// ─── IMPORT RECETTES ───
+
+const IMPORT_TYPES_MAP = {
+  'huile de tournesol': 'Huiles', 'huile de coco': 'Huiles', 'huile d\'olive': 'Huiles',
+  'huile de calendula': 'Huiles', 'huile de rose': 'Huiles', 'huile végétale': 'Huiles',
+  'huile de ricin': 'Huiles', 'huile d\'argan': 'Huiles', 'huile de café': 'Huiles',
+  'huile de pépins': 'Huiles', 'huile': 'Huiles',
+  'beurre de karité': 'Beurres', 'beurre de cacao': 'Beurres', 'beurre de mangue': 'Beurres', 'beurre': 'Beurres',
+  'eau': 'Ingrédients Liquides', 'hydrolat': 'Hydrolats',
+  'soude caustique': 'Ingrédients Secs', 'naoh': 'Ingrédients Secs', 'bicarbonate': 'Ingrédients Secs',
+  'acide citrique': 'Ingrédients Secs', 'fécule': 'Ingrédients Secs', 'sel': 'Ingrédients Secs',
+  'sucre': 'Ingrédients Secs', 'avoine': 'Ingrédients Secs', 'amande moulue': 'Ingrédients Secs',
+  'argile': 'Argiles', 'charbon': 'Argiles',
+  'he ': 'Huiles essentielles', 'huile essentielle': 'Huiles essentielles',
+  'ha ': 'Huiles aromatiques', 'fragrance': 'Fragrances', 'musc': 'Fragrances',
+  'mica': 'Colorants et Pigments', 'colorant': 'Colorants et Pigments', 'pigment': 'Colorants et Pigments',
+  'petales': 'Herbes et Fleurs', 'fleurs': 'Herbes et Fleurs', 'lavande': 'Herbes et Fleurs',
+  'romarin': 'Herbes et Fleurs', 'spiruline': 'Herbes et Fleurs', 'matcha': 'Herbes et Fleurs',
+  'curcuma': 'Herbes et Fleurs', 'cire': 'Cires',
+  'miel': 'Ingrédients Liquides', 'glycerine': 'Ingrédients Liquides',
+  'vitamine': 'Bases neutres', 'allantoine': 'Bases neutres', 'sci': 'Bases neutres'
+};
+
+function importDevinerType(nom) {
+  const n = nom.toLowerCase();
+  for (const [cle, type] of Object.entries(IMPORT_TYPES_MAP)) {
+    if (n.includes(cle)) return type;
+  }
+  return 'Ingredients Secs';
+}
+
+function importParserMD() {
+  const texte = document.getElementById('import-md-texte').value.trim();
+  if (!texte) { afficherMsg('import-recettes', 'Coller un fichier MD dabord.', 'erreur'); return; }
+
+  const lignes = texte.split('\n');
+  const get = (regex) => { const m = texte.match(regex); return m ? m[1].trim() : ''; };
+
+  const nom            = get(/^#\s+(.+?)(?:\s+—|$)/m);
+  const ligne          = get(/\*\*Ligne\s*:\*\*\s*(.+?)(?:\s*\||\n)/);
+  const cure           = parseInt(get(/\*\*Cure\s*:\*\*\s*(\d+)/)) || 0;
+  const nb_unites      = parseInt(get(/\*\*Nb unités\s*:\*\*\s*(\d+)/)) || 1;
+  const statut         = get(/\*\*Statut\s*:\*\*\s*(\w+)/) || 'test';
+  const couleur_hex    = get(/\*\*HEX\s*:\*\*\s*(#[0-9a-fA-F]{3,6})/);
+  const image_url      = get(/\*\*Image\s*:\*\*\s*(https?:\/\/\S+)/);
+  const image_url_noel = get(/\*\*Image Noël\s*:\*\*\s*(https?:\/\/\S+)/);
+  const surgras        = get(/\*\*Surgras\s*:\*\*\s*(\d+%?)/);
+  const desc_courte    = get(/\*\*Version courte\s*:\*\*\s*(.+)/);
+  const desc_longue    = get(/\*\*Version longue\s*:\*\*\s*(.+)/);
+  const notes          = get(/\*\*Notes\s*:\*\*\s*(.+)/);
+
+  const ingredients = [];
+  let dansIngredients = false;
+  for (const ligne_raw of lignes) {
+    const l = ligne_raw.trim();
+    if (l.match(/^##\s+RECETTE|^##\s+Fragrance|^##\s+Additif/i) || l.match(/^\*\*Fragrances|^\*\*Additifs/i)) {
+      dansIngredients = true; continue;
+    }
+    if (dansIngredients && l.startsWith('- ')) {
+      const m = l.match(/^-\s+([\d.,]+)\s*g\s+(.+)/);
+      if (m) {
+        const qte = parseFloat(m[1].replace(',', '.')) || 0;
+        const nomIng = m[2].trim();
+        ingredients.push({ type: importDevinerType(nomIng), nom: nomIng, quantite_g: qte, cout: 0 });
+      } else {
+        const nomIng = l.replace(/^-\s+/, '').trim();
+        if (nomIng && !nomIng.match(/^melanger/i)) {
+          ingredients.push({ type: importDevinerType(nomIng), nom: nomIng, quantite_g: 0, cout: 0 });
+        }
+      }
+    }
+    if (dansIngredients && l === '') dansIngredients = false;
+  }
+
+  const id = parseInt(document.getElementById('import-recette-id').value) || 1;
+  const json = {
+    action: 'saveRecette',
+    recette_id: String(id),
+    nom, description: desc_longue, desc_emballage: desc_courte,
+    couleur_hex, collection: 'SAPONICA', ligne, nb_unites, cure,
+    image_url, image_url_noel, statut, surgras, notes,
+    format: '', prix_vente: 0, instructions: '', collections_secondaires: [],
+    ingredients
+  };
+
+  document.getElementById('import-apercu-json').textContent = JSON.stringify(json, null, 2);
+  document.getElementById('import-apercu-zone').classList.remove('cache');
+}
+
+async function importEnvoyer() {
+  const texte = document.getElementById('import-apercu-json').textContent;
+  let json;
+  try { json = JSON.parse(texte); } catch(e) { afficherMsg('import-recettes', 'JSON invalide.', 'erreur'); return; }
+
+  const res = await appelAPIPost('saveRecette', json);
+  if (!res || !res.success) {
+    afficherMsg('import-recettes', res?.message || 'Erreur import.', 'erreur');
+    return;
+  }
+  afficherMsg('import-recettes', 'Recette ' + json.nom + ' importee (ID ' + json.recette_id + ').', 'succes');
+  const nextId = parseInt(json.recette_id) + 1;
+  document.getElementById('import-recette-id').value = nextId;
+  document.getElementById('import-md-texte').value = '';
+  document.getElementById('import-apercu-zone').classList.add('cache');
+  document.getElementById('import-apercu-json').textContent = '';
+}
+
+function importAnnuler() {
+  document.getElementById('import-apercu-zone').classList.add('cache');
+  document.getElementById('import-apercu-json').textContent = '';
 }
