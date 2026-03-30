@@ -882,6 +882,7 @@ tr.cliquable { cursor: pointer; }
 .fiche-visuel-hex { width: 180px; height: 180px; flex-shrink: 0; }
 .fiche-champ { display: flex; flex-direction: column; gap: 4px; }
 .fiche-label { font-family: 'DM Sans', sans-serif; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gris); }
+.fiche-label-manquant { color: var(--danger); font-weight: 500; }
 .fiche-valeur { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--gris-fonce); }
 .fiche-section-titre { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--gris-fonce); margin: 24px 0 8px; border-bottom: 1px solid var(--beige); padding-bottom: 6px; }
 .fiche-texte { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--gris-fonce); white-space: pre-line; }

@@ -826,25 +826,29 @@ async function ouvrirFicheRecette(id) {
     : '<div class="fiche-vide">Aucun format</div>';
   document.getElementById('fiche-recette-titre').textContent = rec.nom || '—';
   const ings = rec.ingredients && rec.ingredients.length
-    ? rec.ingredients.map(i => `<div class="fiche-ingredient"><span class="fiche-ing-nom">${i.nom}</span><span class="fiche-ing-qte">${i.quantite_g} g</span></div>`).join('')
+    ? rec.ingredients.map(i => `<div class="fiche-ingredient"><span class="fiche-ing-nom">${i.nom}</span><span class="fiche-ing-inci">${i.inci || ''}</span><span class="fiche-ing-qte">${i.quantite_g} g</span></div>`).join('')
     : '<div class="fiche-vide">Aucun ingrédient</div>';
+  const m = (champ) => !rec[champ] ? ' fiche-label-manquant' : '';
   document.getElementById('fiche-recette-contenu').innerHTML = `
   <div class="fiche-visuel">
-      ${rec.image_url ? `<img src="${rec.image_url}" class="fiche-visuel-photo">` : ''}
+      ${rec.image_url ? `<img src="${rec.image_url}" class="fiche-visuel-photo">` : '<div class="fiche-label fiche-label-manquant">Image manquante</div>'}
       ${rec.image_url_noel ? `<img src="${rec.image_url_noel}" class="fiche-visuel-photo">` : ''}
       <div class="fiche-visuel-hex" style="background:${rec.couleur_hex || 'var(--beige)'}"></div>
     </div>
     <div class="fiche-grille">
-      <div class="fiche-champ"><span class="fiche-label">Collection</span><span class="fiche-valeur">${rec.collection || '—'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label${m('collection')}">Collection</span><span class="fiche-valeur">${rec.collection || '—'}</span></div>
       <div class="fiche-champ"><span class="fiche-label">Collections secondaires</span><span class="fiche-valeur">${Array.isArray(rec.collections_secondaires) && rec.collections_secondaires.length ? rec.collections_secondaires.join(', ') : '—'}</span></div>
-      <div class="fiche-champ"><span class="fiche-label">Ligne</span><span class="fiche-valeur">${rec.ligne || '—'}</span></div>
-      <div class="fiche-champ"><span class="fiche-label">Ligne</span><span class="fiche-valeur">${rec.ligne || '—'}</span></div>
-      <div class="fiche-champ"><span class="fiche-label">Format</span><span class="fiche-valeur">${rec.format || '—'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label${m('ligne')}">Ligne</span><span class="fiche-valeur">${rec.ligne || '—'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label${m('format')}">Format</span><span class="fiche-valeur">${rec.format || '—'}</span></div>
       <div class="fiche-champ"><span class="fiche-label">Statut</span><span class="fiche-valeur">${rec.statut || 'test'}</span></div>
-      <div class="fiche-champ"><span class="fiche-label">Prix</span><span class="fiche-valeur">${rec.prix_vente ? formaterPrix(rec.prix_vente) : '— $'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label${!rec.prix_vente ? ' fiche-label-manquant' : ''}">Prix</span><span class="fiche-valeur">${rec.prix_vente ? formaterPrix(rec.prix_vente) : '— $'}</span></div>
       <div class="fiche-champ"><span class="fiche-label">Cure</span><span class="fiche-valeur">${rec.cure || '—'} jours</span></div>
+      <div class="fiche-champ"><span class="fiche-label">Nb unités</span><span class="fiche-valeur">${rec.nb_unites || '—'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label${m('surgras')}">Surgras</span><span class="fiche-valeur">${rec.surgras || '—'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label">Rang</span><span class="fiche-valeur">${rec.rang || '—'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label${m('couleur_hex')}">Couleur HEX</span><span class="fiche-valeur">${rec.couleur_hex || '—'}</span></div>
     </div>
-    <div class="fiche-section-titre">Description</div>
+    <div class="fiche-section-titre${!rec.description ? ' fiche-label-manquant' : ''}">Description</div>
     <div class="fiche-texte">${rec.description || '—'}</div>
     <div class="fiche-section-titre">Description emballage</div>
     <div class="fiche-texte">${rec.desc_emballage || '—'}</div>
@@ -867,12 +871,14 @@ async function ouvrirFicheRecette(id) {
       return `${avertissement}<div class="fiche-texte" id="fiche-inci-texte">${inci}</div><button class="btn btn-secondary" ${btnDisabled} onclick="navigator.clipboard.writeText(document.getElementById('fiche-inci-texte').textContent)">Copier INCI</button>`;
     })()}
   `;
-fermerFormRecette();
+  fermerFormRecette();
   document.getElementById('fiche-recette').classList.add('visible');
   document.querySelector('#section-recettes .filtres-bar').classList.add('cache');
   document.getElementById('grille-recettes').classList.add('cache');
   document.querySelector('.admin-contenu').scrollTop = 0;
 }
+
+
 function fermerFicheRecette() {
   document.getElementById('fiche-recette').classList.remove('visible');
   document.querySelector('#section-recettes .filtres-bar').classList.remove('cache');
@@ -2977,14 +2983,22 @@ function importParserMD() {
     if (dansIngredients && l.match(/^\*\*(?!Fragrances|Additifs)/i)) { dansIngredients = false; continue; }
     if (dansIngredients && l.startsWith('- ')) {
       const m = l.match(/^-\s+([\d.,]+)\s*g\s+(.+)/);
-      if (m) {
+     if (m) {
         const qte = parseFloat(m[1].replace(',', '.')) || 0;
         const nomIng = m[2].trim();
-        ingredients.push({ type: importDevinerType(nomIng), nom: nomIng, quantite_g: qte, cout: 0 });
+        const foundIng = (listesDropdown.fullData || []).find(d => d.ingredient.toLowerCase() === nomIng.toLowerCase());
+        const nomFinal = foundIng ? foundIng.ingredient : nomIng;
+        const inciFinal = foundIng ? (foundIng.inci || '') : '';
+        const typeFinal = foundIng ? foundIng.type : importDevinerType(nomIng);
+        ingredients.push({ type: typeFinal, nom: nomFinal, quantite_g: qte, cout: 0, inci: inciFinal });
       } else {
         const nomIng = l.replace(/^-\s+/, '').trim();
         if (nomIng && !nomIng.match(/mélanger|melanger|^¼|^½|^¾|sur le dessus|gouttes|flocons|restes/i)) {
-          ingredients.push({ type: importDevinerType(nomIng), nom: nomIng, quantite_g: 0, cout: 0 });
+          const foundIng = (listesDropdown.fullData || []).find(d => d.ingredient.toLowerCase() === nomIng.toLowerCase());
+          const nomFinal = foundIng ? foundIng.ingredient : nomIng;
+          const inciFinal = foundIng ? (foundIng.inci || '') : '';
+          const typeFinal = foundIng ? foundIng.type : importDevinerType(nomIng);
+          ingredients.push({ type: typeFinal, nom: nomFinal, quantite_g: 0, cout: 0, inci: inciFinal });
         }
       }
     }
