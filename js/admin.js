@@ -641,12 +641,11 @@ grille.innerHTML = '';
 		  <div class="recette-infos ${couleurTexteContraste(couleur)}">
           
 
-		<span class="recette-badge">${rec.collection || '—'}</span>
+		<span class="recette-badge">${rec.collection || '—'} · ${rec.statut === 'public' ? 'Public' : 'Test'}</span>
             <div class="recette-nom">${rec.nom || '—'}</div>
             <div class="recette-ligne">${rec.ligne || ''}</div>
             <div class="recette-bas">
-              <span class="recette-prix">${rec.prix_vente ? formaterPrix(rec.prix_vente) : '—\u00a0$'}</span>
-              <span class="recette-statut-badge recette-statut-${rec.statut || 'test'} recette-statut-droite">${rec.statut === 'public' ? 'Public' : 'Test'}</span>
+              <span class="recette-prix">${Array.isArray(rec.formats_complets) && rec.formats_complets.length ? rec.formats_complets.map(f => `${parseFloat(f.prix_vente).toFixed(2).replace('.', ',')} $ / ${f.poids} ${f.unite}`).join(' · ') : ''}</span>
             </div>
 			
 			
