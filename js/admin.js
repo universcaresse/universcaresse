@@ -1374,10 +1374,10 @@ function rafraichirListeIngredientsBase() {
       </select>
       <select class="form-ctrl ing-nom" onchange="if(this.value==='__nouveau__'){ajouterIngredientInci('${ing.type}',${i},'base')}else{ingredientsBase[${i}].nom=this.value; rafraichirListeIngredientsBase()}">
         <option value="">— Ingrédient —</option>
-        ${(listesDropdown.fullData || []).filter(d => d.type===ing.type).map(d => `<option value="${d.ingredient}" ${ing.nom===d.ingredient?'selected':''}>${d.ingredient}</option>`).join('')}
+        ${(listesDropdown.fullData || []).filter(d => d.type===ing.type).map(d => `<option value="${d.ingredient}" ${ing.nom.toLowerCase()===d.ingredient.toLowerCase()?'selected':''}>${d.ingredient}</option>`).join('')}
         <option value="__nouveau__">+ Ajouter un ingrédient</option>
       </select>
-      <input type="text" class="form-ctrl ing-inci" readonly placeholder="INCI" value="${(listesDropdown.fullData||[]).find(d=>d.type===ing.type&&d.ingredient===ing.nom)?.inci||''}">
+      <input type="text" class="form-ctrl ing-inci" readonly placeholder="INCI" value="${(listesDropdown.fullData||[]).find(d=>d.type===ing.type&&d.ingredient.toLowerCase()===ing.nom.toLowerCase())?.inci||ing.inci||''}">
       <input type="text" inputmode="decimal" class="form-ctrl ing-qte" value="${ing.quantite||''}" placeholder="g" onchange="ingredientsBase[${i}].quantite=parseFloat(this.value)||0">
       <button class="btn btn-sm btn-danger" onclick="supprimerIngredientBase(${i})">✕</button>
     </div>
