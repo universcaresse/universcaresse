@@ -642,7 +642,7 @@ function carteProduit(p) {
         <div class="carte-nom">${p.nom.toUpperCase()}</div>
         <div class="carte-ligne">${p.ligne.toUpperCase()}</div>
         <div class="carte-bas">
-          <span class="carte-prix">${prix}</span>
+       
           <div class="carte-formats">${prix}</div>
         </div>
       </div>
