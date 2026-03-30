@@ -950,6 +950,7 @@ async function modifierRecette(id) {
    document.getElementById('fr-desc-emballage').value = rec.desc_emballage || '';
   document.getElementById('fr-instructions').value = rec.instructions || '';
   document.getElementById('fr-notes').value        = rec.notes || '';
+  document.getElementById('fr-surgras').value      = rec.surgras || '';
   document.getElementById('fr-statut').value       = rec.statut || 'test';
 document.getElementById('fr-collection').value   = rec.collection || '';
   mettreAJourLignes();
@@ -1000,6 +1001,7 @@ async function sauvegarderRecette() {
     desc_emballage: document.getElementById('fr-desc-emballage').value,
     instructions: document.getElementById('fr-instructions').value,
     notes:        document.getElementById('fr-notes').value,
+    surgras:      document.getElementById('fr-surgras').value,
     statut:       document.getElementById('fr-statut').value || 'test',
     image_url:         document.getElementById('fr-image-url').value,
     image_url_noel:    document.getElementById('fr-image-url-noel').value,
@@ -1258,6 +1260,7 @@ async function modalInciGo() {
       desc_emballage: document.getElementById('fr-desc-emballage').value,
       instructions: document.getElementById('fr-instructions').value,
       notes:        document.getElementById('fr-notes').value,
+    surgras:      document.getElementById('fr-surgras').value,
       statut:       document.getElementById('fr-statut').value || 'test',
       image_url:         document.getElementById('fr-image-url').value,
       image_url_noel:    document.getElementById('fr-image-url-noel').value,
