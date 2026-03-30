@@ -3010,6 +3010,7 @@ function importParserMD() {
       <input type="text" class="form-ctrl" placeholder="Type" value="${ing.type}" data-ing="${i}" data-champ="type">
       <input type="text" class="form-ctrl" placeholder="Nom" value="${ing.nom}" data-ing="${i}" data-champ="nom">
       <input type="text" inputmode="decimal" class="form-ctrl" placeholder="g" value="${ing.quantite_g}" data-ing="${i}" data-champ="quantite_g">
+      <button class="btn btn-sm btn-danger" onclick="this.closest('.import-ing-row').remove()">✕</button>
     `;
     zone.appendChild(row);
   });
