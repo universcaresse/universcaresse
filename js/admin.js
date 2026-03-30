@@ -810,13 +810,8 @@ async function chargerIngredientsBaseRecette() {
 
 
 async function ouvrirFicheRecette(id) {
-  let rec = donneesRecettes.find(r => r.recette_id === id);
+  const rec = donneesRecettes.find(r => r.recette_id === id);
   if (!rec) return;
-  const resfrais = await appelAPI('getRecettes');
-  if (resfrais && resfrais.success) {
-    donneesRecettes = resfrais.recettes || donneesRecettes;
-    rec = donneesRecettes.find(r => r.recette_id === id) || rec;
-  }
   recetteActive = rec;
   const resFormats = await appelAPIPost('getRecettesFormats', { recette_id: id });
   const formats = (resFormats && resFormats.formats) ? resFormats.formats : [];
@@ -926,13 +921,8 @@ document.querySelector('#section-recettes .filtres-bar').classList.remove('cache
 }
 
 async function modifierRecette(id) {
-  let rec = donneesRecettes.find(r => r.recette_id === id);
+  const rec = donneesRecettes.find(r => r.recette_id === id);
   if (!rec) return;
-  const resfrais = await appelAPI('getRecettes');
-  if (resfrais && resfrais.success) {
-    donneesRecettes = resfrais.recettes || donneesRecettes;
-    rec = donneesRecettes.find(r => r.recette_id === id) || rec;
-  }
   document.getElementById('form-recettes-titre').textContent = 'Modifier la recette';
   document.getElementById('fr-id').value           = rec.recette_id;
   document.getElementById('fr-nom').value          = rec.nom || '';
@@ -999,7 +989,10 @@ async function sauvegarderRecette() {
     image_url:         document.getElementById('fr-image-url').value,
     image_url_noel:    document.getElementById('fr-image-url-noel').value,
     collections_secondaires: Array.from(document.getElementById('fr-collections-secondaires')?.querySelectorAll('input[type="checkbox"]:checked') || []).map(cb => cb.value),
-     ingredients:  ingredientsRecette.map(i => ({ type: i.type, nom: i.nom, quantite_g: i.quantite }))
+     ingredients:  ingredientsRecette.map(i => {
+        const found = (listesDropdown.fullData || []).find(d => d.ingredient.toLowerCase() === i.nom.toLowerCase());
+        return { type: i.type, nom: i.nom, quantite_g: i.quantite, cout: 0, inci: found ? (found.inci || '') : '' };
+      })
   };
   if (!d.nom) { afficherMsg('recettes', 'Le nom est requis.', 'erreur'); return; }
   const res = await appelAPIPost('saveRecette', d);
@@ -1334,7 +1327,8 @@ function genererInci(ingredients) {
   const unPctOuMoins = autres.filter(i => (i.quantite_g / total) <= 0.01);
 
   const getInci = (ing) => {
-    const found = (listesDropdown.fullData || []).find(d => d.type === ing.type && d.ingredient.toLowerCase() === ing.nom.toLowerCase());
+    if (ing.inci) return ing.inci;
+    const found = (listesDropdown.fullData || []).find(d => d.ingredient.toLowerCase() === ing.nom.toLowerCase());
     return found ? (found.inci || '') : '';
   };
 
@@ -3027,7 +3021,9 @@ async function importEnvoyer() {
     const type       = champs[0].value.trim();
     const nom        = champs[1].value.trim();
     const quantite_g = parseFloat(champs[2].value) || 0;
-    if (nom) ingredients.push({ type, nom, quantite_g, cout: 0 });
+    const found      = (listesDropdown.fullData || []).find(d => d.ingredient.toLowerCase() === nom.toLowerCase());
+    const inci       = found ? (found.inci || '') : '';
+    if (nom) ingredients.push({ type, nom, quantite_g, cout: 0, inci });
   });
 
   const json = {
