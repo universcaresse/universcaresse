@@ -926,8 +926,13 @@ document.querySelector('#section-recettes .filtres-bar').classList.remove('cache
 }
 
 async function modifierRecette(id) {
-  const rec = donneesRecettes.find(r => r.recette_id === id);
+  let rec = donneesRecettes.find(r => r.recette_id === id);
   if (!rec) return;
+  const resfrais = await appelAPI('getRecettes');
+  if (resfrais && resfrais.success) {
+    donneesRecettes = resfrais.recettes || donneesRecettes;
+    rec = donneesRecettes.find(r => r.recette_id === id) || rec;
+  }
   document.getElementById('form-recettes-titre').textContent = 'Modifier la recette';
   document.getElementById('fr-id').value           = rec.recette_id;
   document.getElementById('fr-nom').value          = rec.nom || '';
