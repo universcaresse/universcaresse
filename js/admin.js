@@ -2985,6 +2985,7 @@ function importParserMD() {
   }
 
   document.getElementById('imp-nom').value            = nom;
+  document.getElementById('imp-rang').value           = rang;
   document.getElementById('imp-collection').value     = 'SAPONICA';
   document.getElementById('imp-ligne').value          = ligne;
   document.getElementById('imp-statut').value         = statut;
@@ -3033,7 +3034,8 @@ async function importEnvoyer() {
   const json = {
     action: 'saveRecette',
     recette_id: String(id),
-    nom:            document.getElementById('imp-nom').value.trim(),
+    nom:                   document.getElementById('imp-nom').value.trim(),
+    rang:                  document.getElementById('imp-rang').value.trim(),
     collection:     document.getElementById('imp-collection').value.trim(),
     ligne:          document.getElementById('imp-ligne').value.trim(),
     statut:         document.getElementById('imp-statut').value,
