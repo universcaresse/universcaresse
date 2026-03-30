@@ -9,17 +9,18 @@
 **HEX :** #FF6735
 **Image :** https://res.cloudinary.com/dfasrauyy/image/upload/v1773448785/Eclatfloral_lg1ysi.jpg
 **Image Noël :** https://res.cloudinary.com/dfasrauyy/image/upload/v1773448370/Eclattropicalnoel_iggl8h.jpg
+**Rang :** 1
 **Surgras :** 8%
 
 ---
 
 ## RECETTE DE BASE SAPONICA
 
-- 325g huile de tournesol oléique
-- 260g huile de coco
-- 65g beurre de karité
-- 184g eau
-- 92g soude caustique (NaOH)
+- 325g Huile de tournesol oléique
+- 260g Huile de coco
+- 65g Beurre de karité
+- 184g Eau
+- 92g Soude caustique (NaOH)
 
 ---
 
@@ -27,16 +28,16 @@
 - 6g HE mandarine
 - 4g HE orange douce
 - 4g HE pêche
-- 1.5g HE jasmin
+- 1.5g HA jasmin
 - 1g HE ylang-ylang
 - 1g HE basilic
 - 2g HA mangue-coco
 
 **Additifs :**
-- 10.5g argile blanche
+- 10.5g Argile blanche
 - Restes de savon coco-mangue en petits morceaux
 
-**Notes :** 10.5g argile blanche = 3 c. à thé
+**Notes :** 10.5g Argile blanche = 3 c. à thé
 
 **Version courte :** Mangue, pêche, mandarine. Un été qui ne finit jamais.
 

@@ -460,6 +460,10 @@
             <option value="public">Public</option>
           </select>
           <input type="text" class="form-ctrl filtre-recherche" id="filtre-recette-nom" oninput="filtrerRecettes()" placeholder="Par nom">
+          <select class="form-ctrl filtre-select" id="filtre-recette-complet" onchange="filtrerRecettes()">
+            <option value="">Toutes</option>
+            <option value="incomplet">Incomplètes</option>
+          </select>
           <button class="btn btn-outline btn-sm" onclick="reinitialiserFiltresRecettes()">Réinitialiser</button>
         </div>
         <div class="form-panel" id="fiche-recette">

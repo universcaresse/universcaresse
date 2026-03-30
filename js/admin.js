@@ -699,17 +699,22 @@ function filtrerRecettes() {
   const col    = document.getElementById('filtre-recette-collection').value;
   const ligne  = document.getElementById('filtre-recette-ligne').value;
   const statut = document.getElementById('filtre-recette-statut').value;
-  const nom    = (document.getElementById('filtre-recette-nom').value || '').toLowerCase().trim();
+  const nom      = (document.getElementById('filtre-recette-nom').value || '').toLowerCase().trim();
+  const complet  = document.getElementById('filtre-recette-complet').value;
   const cartes = document.querySelectorAll('#grille-recettes .recette-carte');
   const vide   = document.getElementById('vide-recettes');
   let visible  = 0;
   cartes.forEach(carte => {
     const rec = donneesRecettes.find(r => r.nom === carte.querySelector('.recette-nom').textContent);
     if (!rec) return;
+    const estIncomplet = !rec.nom || !rec.description || !rec.couleur_hex || !rec.collection
+      || !rec.ligne || !rec.format || !rec.prix_vente || !rec.image_url || !rec.statut || !rec.surgras
+      || (rec.ingredients || []).some(i => !i.inci);
     const ok = (!col || rec.collection === col)
             && (!ligne || rec.ligne === ligne)
             && (!statut || (rec.statut || 'test') === statut)
-            && (!nom || rec.nom.toLowerCase().includes(nom));
+            && (!nom || rec.nom.toLowerCase().includes(nom))
+            && (!complet || (complet === 'incomplet' && estIncomplet));
     carte.classList.toggle('cache', !ok);
     if (ok) visible++;
   });
@@ -735,6 +740,7 @@ function reinitialiserFiltresRecettes() {
   document.getElementById('filtre-recette-ligne').value = '';
   document.getElementById('filtre-recette-statut').value = '';
   document.getElementById('filtre-recette-nom').value = '';
+  document.getElementById('filtre-recette-complet').value = '';
   document.getElementById('filtre-recette-ligne').disabled = true;
   filtrerRecettes();
 }
