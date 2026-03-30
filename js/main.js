@@ -617,8 +617,12 @@ function couleurTexteContraste(hex) {
   return luminance > 0.5 ? 'carte-infos-fonce' : 'carte-infos-clair';
 }
 function carteProduit(p) {
-  const prix = p.prix_vente ? parseFloat(p.prix_vente).toFixed(2).replace('.', ',') + ' $' : '—';
-  const formats = Array.isArray(p.formats) ? p.formats : (p.format ? [p.format] : []);
+  const formats = Array.isArray(p.formats_complets) && p.formats_complets.length
+    ? p.formats_complets
+    : [];
+  const prix = formats.length
+    ? formats.map(f => `${parseFloat(f.prix_vente).toFixed(2).replace('.', ',')} $ / ${f.poids} ${f.unite}`).join('&nbsp;&nbsp;')
+    : (p.prix_vente ? parseFloat(p.prix_vente).toFixed(2).replace('.', ',') + ' $' : '—');
   const photoUrl = (window.modeSaisonnier && p.image_url_noel) ? p.image_url_noel : p.image_url;
   const image = photoUrl ? `<img src="${photoUrl}" alt="${p.nom}" onerror="this.style.display='none'">` : '';
   return `
@@ -639,7 +643,7 @@ function carteProduit(p) {
         <div class="carte-ligne">${p.ligne.toUpperCase()}</div>
         <div class="carte-bas">
           <span class="carte-prix">${prix}</span>
-          <div class="carte-formats">${formats.map(f => `<span class="carte-format-tag">${f}</span>`).join('')}</div>
+          <div class="carte-formats">${prix}</div>
         </div>
       </div>
     </div>`;
