@@ -910,7 +910,7 @@ function ouvrirFormRecette() {
   formatsRecette = [];
   document.getElementById('form-recettes-titre').textContent = 'Nouvelle recette';
   document.getElementById('fr-id').value = '';
- ['fr-nom','fr-couleur','fr-format','fr-unites','fr-cure','fr-prix','fr-description','fr-instructions','fr-notes']
+ ['fr-nom','fr-couleur','fr-format','fr-unites','fr-cure','fr-prix','fr-description','fr-instructions','fr-notes','fr-surgras']
     .forEach(id => { const e = document.getElementById(id); if (e) e.value = ''; });
   document.getElementById('fr-statut').value = 'test';
   document.getElementById('fr-collection').value = '';
@@ -1264,7 +1264,7 @@ async function modalInciGo() {
       desc_emballage: document.getElementById('fr-desc-emballage').value,
       instructions: document.getElementById('fr-instructions').value,
       notes:        document.getElementById('fr-notes').value,
-    surgras:      document.getElementById('fr-surgras').value,
+      surgras:      document.getElementById('fr-surgras').value,
       statut:       document.getElementById('fr-statut').value || 'test',
       image_url:         document.getElementById('fr-image-url').value,
       image_url_noel:    document.getElementById('fr-image-url-noel').value,
