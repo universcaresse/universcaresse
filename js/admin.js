@@ -2955,6 +2955,7 @@ function importParserMD() {
   const image_url      = get(/\*\*Image\s*:\*\*\s*(https?:\/\/\S+)(?!\s*Noël)/);
   const image_url_noel = get(/\*\*Image Noël\s*:\*\*\s*(https?:\/\/\S+)/);
   const surgras        = get(/\*\*Surgras\s*:\*\*\s*(\d+%?)/);
+  const rang           = get(/\*\*Rang\s*:\*\*\s*(\d+)/);
   const desc_courte    = get(/\*\*Version courte\s*:\*\*\s*(.+)/);
   const desc_longue    = get(/\*\*Version longue\s*:\*\*\s*(.+)/);
   const notes          = get(/\*\*Notes\s*:\*\*\s*(.+)/);
