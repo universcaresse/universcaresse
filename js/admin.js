@@ -846,6 +846,8 @@ async function ouvrirFicheRecette(id) {
     <div class="fiche-texte">${rec.instructions || '—'}</div>
     <div class="fiche-section-titre">Notes</div>
     <div class="fiche-texte">${rec.notes || '—'}</div>
+    <div class="fiche-section-titre">Ingrédients</div>
+    <div class="fiche-ingredients">${ings}</div>
     <div class="fiche-section-titre">Formats disponibles</div>
     <div class="fiche-ingredients">${formatsHtml}</div>
     <div class="fiche-section-titre">Liste INCI</div>
