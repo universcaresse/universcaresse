@@ -2943,7 +2943,7 @@ function importParserMD() {
   const nb_unites      = parseInt(get(/\*\*Nb unités\s*:\*\*\s*(\d+)/)) || 1;
   const statut         = get(/\*\*Statut\s*:\*\*\s*(\w+)/) || 'test';
   const couleur_hex    = get(/\*\*HEX\s*:\*\*\s*(#[0-9a-fA-F]{3,6})/);
-  const image_url      = get(/\*\*Image\s*:\*\*\s*(https?:\/\/\S+)/);
+  const image_url      = get(/\*\*Image\s*:\*\*\s*(https?:\/\/\S+)(?!\s*Noël)/);
   const image_url_noel = get(/\*\*Image Noël\s*:\*\*\s*(https?:\/\/\S+)/);
   const surgras        = get(/\*\*Surgras\s*:\*\*\s*(\d+%?)/);
   const desc_courte    = get(/\*\*Version courte\s*:\*\*\s*(.+)/);
@@ -2954,23 +2954,24 @@ function importParserMD() {
   let dansIngredients = false;
   for (const ligne_raw of lignes) {
     const l = ligne_raw.trim();
-    if (l.match(/^##\s+RECETTE|^##\s+Fragrance|^##\s+Additif/i) || l.match(/^\*\*Fragrances\s*:|^\*\*Additifs\s*:/i) || l === '---') {
+    if (l.match(/^##\s+RECETTE/i) || l.match(/^\*\*Fragrances\s*:|^\*\*Additifs\s*:/i)) {
       dansIngredients = true; continue;
     }
+    if (dansIngredients && l === '---') { continue; }
+    if (dansIngredients && l.match(/^\*\*(?!Fragrances|Additifs)/i)) { dansIngredients = false; continue; }
     if (dansIngredients && l.startsWith('- ')) {
       const m = l.match(/^-\s+([\d.,]+)\s*g\s+(.+)/);
       if (m) {
         const qte = parseFloat(m[1].replace(',', '.')) || 0;
-        const nomIng = m[2].trim();
+        const nomIng = m[2].replace(/\s*\(.*?\)\s*/g, '').trim();
         ingredients.push({ type: importDevinerType(nomIng), nom: nomIng, quantite_g: qte, cout: 0 });
       } else {
         const nomIng = l.replace(/^-\s+/, '').trim();
-        if (nomIng && !nomIng.match(/mélanger|melanger|^¼|^½|^¾|sur le dessus/i)) {
+        if (nomIng && !nomIng.match(/mélanger|melanger|^¼|^½|^¾|sur le dessus|gouttes|flocons|restes/i)) {
           ingredients.push({ type: importDevinerType(nomIng), nom: nomIng, quantite_g: 0, cout: 0 });
         }
       }
     }
-    if (dansIngredients && l === '') dansIngredients = false;
   }
 
   const id = parseInt(document.getElementById('import-recette-id').value) || 1;
