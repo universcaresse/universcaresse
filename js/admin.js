@@ -2954,7 +2954,7 @@ function importParserMD() {
   let dansIngredients = false;
   for (const ligne_raw of lignes) {
     const l = ligne_raw.trim();
-    if (l.match(/^##\s+RECETTE|^##\s+Fragrance|^##\s+Additif/i) || l.match(/^\*\*Fragrances|^\*\*Additifs/i)) {
+    if (l.match(/^##\s+RECETTE|^##\s+Fragrance|^##\s+Additif/i) || l.match(/^\*\*Fragrances\s*:|^\*\*Additifs\s*:/i) || l === '---') {
       dansIngredients = true; continue;
     }
     if (dansIngredients && l.startsWith('- ')) {
@@ -2965,7 +2965,7 @@ function importParserMD() {
         ingredients.push({ type: importDevinerType(nomIng), nom: nomIng, quantite_g: qte, cout: 0 });
       } else {
         const nomIng = l.replace(/^-\s+/, '').trim();
-        if (nomIng && !nomIng.match(/^melanger/i)) {
+        if (nomIng && !nomIng.match(/mélanger|melanger|^¼|^½|^¾|sur le dessus/i)) {
           ingredients.push({ type: importDevinerType(nomIng), nom: nomIng, quantite_g: 0, cout: 0 });
         }
       }
