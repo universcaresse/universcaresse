@@ -843,7 +843,7 @@ async function ouvrirFicheRecette(id) {
       <div class="fiche-champ"><span class="fiche-label${m('collection')}">Collection</span><span class="fiche-valeur">${rec.collection || '—'}</span></div>
       <div class="fiche-champ"><span class="fiche-label">Collections secondaires</span><span class="fiche-valeur">${Array.isArray(rec.collections_secondaires) && rec.collections_secondaires.length ? rec.collections_secondaires.join(', ') : '—'}</span></div>
       <div class="fiche-champ"><span class="fiche-label${m('ligne')}">Ligne</span><span class="fiche-valeur">${rec.ligne || '—'}</span></div>
-      <div class="fiche-champ"><span class="fiche-label">Format</span><span class="fiche-valeur">${rec.formats_complets && rec.formats_complets.length ? rec.formats_complets.map(f => `${f.poids} ${f.unite} — ${formaterPrix(f.prix_vente)}`).join(', ') : '—'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label${(!rec.formats_complets || rec.formats_complets.length === 0) ? ' fiche-label-manquant' : ''}">Format</span><span class="fiche-valeur">${rec.formats_complets && rec.formats_complets.length ? rec.formats_complets.map(f => `${f.poids} ${f.unite} — ${formaterPrix(f.prix_vente)}`).join(', ') : '—'}</span></div>
       <div class="fiche-champ"><span class="fiche-label">Statut</span><span class="fiche-valeur">${rec.statut || 'test'}</span></div>
       
       <div class="fiche-champ"><span class="fiche-label">Cure</span><span class="fiche-valeur">${rec.cure || '—'} jours</span></div>
