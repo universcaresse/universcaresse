@@ -9,17 +9,18 @@
 **HEX :** #AF99A4
 **Image :** https://res.cloudinary.com/dfasrauyy/image/upload/v1773418760/D%C3%A9licat_vdewef.jpg
 **Image Noël :** https://res.cloudinary.com/dfasrauyy/image/upload/v1773418761/DelicatNoel_b8setp.jpg
+**Rang :** 1
 **Surgras :** 8%
 
 ---
 
 ## RECETTE DE BASE SAPONICA
 
-- 325g huile de tournesol oléique
-- 260g huile de coco
-- 65g beurre de karité
-- 184g eau
-- 92g soude caustique (NaOH)
+- 325g Huile de tournesol oléique
+- 260g Huile de coco
+- 65g Beurre de karité
+- 184g Eau
+- 92g Soude caustique (NaOH)
 
 ---
 
@@ -29,8 +30,8 @@
 - 4g HA thé vert
 
 **Additifs :**
-- 14g argile blanche
-- 5 gouttes Colorant PINK
+- 14g Argile blanche
+- 5 gouttes Colorant pink
 - Fleurs de lavande sur le dessus
 
 **Notes :**

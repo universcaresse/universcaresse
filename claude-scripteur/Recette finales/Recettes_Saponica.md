@@ -8,11 +8,11 @@
 
 ## RECETTE DE BASE SAPONICA
 
-- 325g huile de tournesol oléique
-- 260g huile de coco
-- 65g beurre de karité
-- 184g eau
-- 92g soude caustique (NaOH)
+- 325g Huile de tournesol oléique
+- 260g Huile de coco
+- 65g Beurre de karité
+- 184g Eau
+- 92g Soude caustique (NaOH)
 
 ---
 
@@ -22,17 +22,17 @@
 **Collections secondaires :** LUI
 
 **Fragrances :**
-- 4g musc blanc
+- 4g Musc blanc
 - 6g HE petitgrain
 - 7g HE cèdre feuilles
 - 2g HE palmarosa
 
 **Additifs :**
-- 10g argile jaune
-- 11g charbon activé végétal (entre les deux couches)
-- Moitié sunset yellow et moitié Colorant matcha
+- 10g Argile jaune
+- 11g Charbon activé végétal (entre les deux couches)
+- Moitié Sunset yellow et moitié Matcha
 
-**Notes :** 10g argile jaune = 3 c. à thé / 11g charbon activé végétal = 1 c. à thé
+**Notes :** 10g Argile jaune = 3 c. à thé / 11g Charbon activé végétal = 1 c. à thé
 
 **Version courte :** C'est la rencontre entre la fraîcheur des grands espaces et la chaleur intime du foyer.
 
@@ -50,10 +50,10 @@
 
 **Additifs :**
 - ¼ blanc
-- ¾ → charbon activé végétal
+- ¾ → Charbon activé végétal
 - Couleur gris foncé et blanc, effet graphique
 
-**Notes :** ¾ charbon activé végétal = 1 à 2 c. à thé
+**Notes :** ¾ Charbon activé végétal = 1 à 2 c. à thé
 
 **Version courte :** L'élégance brute de la forêt. Notes boisées et épicées pour une force tranquille.
 
@@ -71,8 +71,8 @@
 - 5g HE cèdre bleu
 
 **Additifs :**
-- 10.5g argile blanche
-- ½ sarcelle, ½ argile blanche
+- 10.5g Argile blanche
+- ½ sarcelle, ½ Argile blanche
 
 **Notes :** Huile aromatique Jasmin, Huile aromatique Lotus, HE Christe marine, Huile aromatique Bois de santal, HE Romarin, HE Bois de Hô, HE Citron
 
@@ -91,7 +91,7 @@
 - 11.7g HA cigare *(tête : feuille de tabac fraîche, épices sèches ; cœur : tabac blond et brun, accords cuirés, bois fumés ; fond : cèdre, bois ambrés, muscs chauds)*
 - 7.8g HA vanille
 
-**Instructions :** Travailler la pâte à 34°C. Garder de côté un peu de pâte pour marbrage crème et chocolat. Le reste va brunir avec le temps. Mélanger les fragrances à la main. Ajouter un peu de charbon activé végétal dans une couche.
+**Instructions :** Travailler la pâte à 34°C. Garder de côté un peu de pâte pour marbrage crème et chocolat. Le reste va brunir avec le temps. Mélanger les fragrances à la main. Ajouter un peu de Charbon activé végétal dans une couche.
 
 **Notes :**
 
@@ -111,8 +111,8 @@
 - 4g HA thé vert
 
 **Additifs :**
-- 14g argile blanche
-- 5 gouttes Colorant PINK
+- 14g Argile blanche
+- 5 gouttes Colorant pink
 - Fleurs de lavande sur le dessus
 
 **Notes :**
@@ -132,15 +132,15 @@
 - 5g HE ylang-ylang
 
 **Additifs :**
-- 17.5g argile rose
+- 17.5g Argile rose
 - Pétales de roses sur le dessus
 - ¼ blanc, ¾ rose, mélanger à la main
 
-**Notes :** 17.5g argile rose = 5 c. à thé
+**Notes :** 17.5g Argile rose = 5 c. à thé
 
 **Version courte :** Savon qui apaise l'esprit autant qu'il embellit la peau, un bouquet délicat déposé sur le cœur.
 
-**Version longue :** Un bouquet déposé sur la peau. Le géranium rosat équilibre, le ylang-ylang enveloppe d'une chaleur florale presque tropicale, et l'argile rose apaise en douceur. Des pétales de roses couronnent chaque barre comme un geste d'attention. Douce pensée, c'est le savon qu'on offre quand les mots ne suffisent pas.
+**Version longue :** Un bouquet déposé sur la peau. Le géranium rosat équilibre, le ylang-ylang enveloppe d'une chaleur florale presque tropicale, et l'Argile rose apaise en douceur. Des Pétales de roses couronnent chaque barre comme un geste d'attention. Douce pensée, c'est le savon qu'on offre quand les mots ne suffisent pas.
 
 ---
 
@@ -155,9 +155,9 @@
 
 **Additifs :**
 - ~300g éclats de savon Brise des lagunes
-- 11g argile blanche
+- 11g Argile blanche
 
-**Notes :** Couleur sarcelle / 11g argile blanche = 1 c. à table
+**Notes :** Couleur sarcelle / 11g Argile blanche = 1 c. à table
 
 **Version courte :** Une mousse claire qui réveille la peau comme un matin au bord de l'océan.
 
@@ -170,14 +170,14 @@
 **HEX :** #FFB400
 
 **Additifs :**
-- 17.5g argile Multani mutti
+- 17.5g Argile Multani mutti
 - Fleurs confettis sur le dessus
 
-**Notes :** 17.5g argile Multani mutti = 5 c. à thé
+**Notes :** 17.5g Argile Multani mutti = 5 c. à thé
 
-**Version courte :** Un savon mosaïque, doré d'argile jaune et parsemé de fleurs, où chaque fragment renaît en douceur.
+**Version courte :** Un savon mosaïque, doré d'Argile jaune et parsemé de fleurs, où chaque fragment renaît en douceur.
 
-**Version longue :** Éclat floral célèbre la beauté simple et lumineuse du naturel. L'argile Multani mutti illumine, les confettis de fleurs couronnent chaque barre d'une touche unique et poétique. Pas deux barres pareilles, pas deux moments identiques. Juste la douceur, la lumière, et ce petit quelque chose qui fait sourire.
+**Version longue :** Éclat floral célèbre la beauté simple et lumineuse du naturel. L'Argile Multani mutti illumine, les confettis de fleurs couronnent chaque barre d'une touche unique et poétique. Pas deux barres pareilles, pas deux moments identiques. Juste la douceur, la lumière, et ce petit quelque chose qui fait sourire.
 
 ---
 
@@ -195,10 +195,10 @@
 - 2g HA mangue-coco
 
 **Additifs :**
-- 10.5g argile blanche
+- 10.5g Argile blanche
 - Restes de savon coco-mangue en petits morceaux
 
-**Notes :** 10.5g argile blanche = 3 c. à thé
+**Notes :** 10.5g Argile blanche = 3 c. à thé
 
 **Version courte :** Mangue, pêche, mandarine. Un été qui ne finit jamais.
 
@@ -211,14 +211,14 @@
 **HEX :** #A4894A
 
 **Additifs :**
-- 22g avoine colloïdale
-- 22g amande moulue
-- 22g miel
-- 10g amande amère
+- 22g Avoine colloïdale
+- 22g Amande moulue
+- 22g Miel
+- 10g Amande amère
 - Flocons d'avoine et amande sur le dessus
 - Moitié blanc, moitié or
 
-**Notes :** 22g avoine colloïdale = 2 c. à table / 22g amande moulue = 2 c. à table / 22g miel = 2 c. à table
+**Notes :** 22g Avoine colloïdale = 2 c. à table / 22g Amande moulue = 2 c. à table / 22g Miel = 2 c. à table
 
 **Version courte :** La transparence d'une caresse. Avoine et miel enlacés, l'amande en lumière.
 
@@ -236,7 +236,7 @@
 - 3g HE pin blanc
 
 **Additifs :**
-- 5 gouttes colorant rouge
+- 5 gouttes Colorant rouge
 - Romarin sur le dessus en petite quantité
 
 **Notes :**
@@ -252,19 +252,19 @@
 **HEX :** #65791A
 
 **Recette (variante) :**
-- 260g huile de coco
-- 65g beurre de karité
-- 225g huile de tournesol oléique
-- 100g huile de calendula
-- 184g eau
-- 92g soude caustique (NaOH)
+- 260g Huile de coco
+- 65g Beurre de karité
+- 225g Huile de tournesol oléique
+- 100g Huile de calendula
+- 184g Eau
+- 92g Soude caustique (NaOH)
 
 **Fragrances :**
 - 14g HA concombre
 - 2g HE menthe poivrée
 
 **Additifs :**
-- 6 gouttes colorant vert kiwi
+- 6 gouttes Colorant vert kiwi
 
 **Notes :** Un p'tit clin d'œil à ma grand-mère que j'aurais voulu connaître.
 
@@ -279,16 +279,16 @@
 **HEX :** #9E3E3E
 
 **Additifs :**
-- 16g huile de rose
-- 6-12g pétales de rose en poudre
-- 11-22g argile rouge
+- 16g Huile de rose
+- 6-12g Pétales de rose en poudre
+- 11-22g Argile rouge
 - Une rose à ajouter à chaque savon à la fin
 
-**Notes :** 6-12g pétales de rose en poudre = 1-2 c. à table / 11-22g argile rouge = 1-2 c. à table
+**Notes :** 6-12g Pétales de rose en poudre = 1-2 c. à table / 11-22g Argile rouge = 1-2 c. à table
 
 **Version courte :** L'essence même de la rose dans sa plus belle simplicité. Délicate et envoûtante.
 
-**Version longue :** La rose est l'ingrédient le plus ancien du soin de la peau. Ici, elle est partout, dans l'huile, dans la poudre de pétales, dans l'argile rouge qui illumine. Jardin de roses ne joue pas à être floral, il l'est, pleinement, sans retenue. Un savon pour ceux qui aiment les choses belles et vraies.
+**Version longue :** La rose est l'ingrédient le plus ancien du soin de la peau. Ici, elle est partout, dans l'huile, dans la poudre de pétales, dans l'Argile rouge qui illumine. Jardin de roses ne joue pas à être floral, il l'est, pleinement, sans retenue. Un savon pour ceux qui aiment les choses belles et vraies.
 
 ---
 
@@ -300,10 +300,10 @@
 - 15g HE lavande
 
 **Additifs :**
-- 14g argile blanche
+- 14g Argile blanche
 - Moitié blanc et moitié lavande
 
-**Notes :** 14g argile blanche = 4 c. à thé
+**Notes :** 14g Argile blanche = 4 c. à thé
 
 **Version courte :** Un champ de lavande, le soir. Rien de plus, rien de moins.
 
@@ -335,12 +335,12 @@
 - 14g HA poire
 - 3g HA thé vert
 - 2g HE bergamote
-- Quelques gouttes musc blanc
+- Quelques gouttes Musc blanc
 
 **Additifs :**
-- 11g argile blanche
+- 11g Argile blanche
 
-**Notes :** Vert kiwi / 11g argile blanche = 1 c. à table
+**Notes :** Vert kiwi / 11g Argile blanche = 1 c. à table
 
 **Version courte :** Poire juteuse, thé vert, bergamote. Une douceur qui glisse.
 

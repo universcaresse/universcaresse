@@ -2972,7 +2972,7 @@ function importParserMD() {
       const m = l.match(/^-\s+([\d.,]+)\s*g\s+(.+)/);
       if (m) {
         const qte = parseFloat(m[1].replace(',', '.')) || 0;
-        const nomIng = m[2].replace(/\s*\(.*?\)\s*/g, '').trim();
+        const nomIng = m[2].trim();
         ingredients.push({ type: importDevinerType(nomIng), nom: nomIng, quantite_g: qte, cout: 0 });
       } else {
         const nomIng = l.replace(/^-\s+/, '').trim();

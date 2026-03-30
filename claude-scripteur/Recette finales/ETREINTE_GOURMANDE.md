@@ -9,29 +9,30 @@
 **HEX :** #A4894A
 **Image :** https://res.cloudinary.com/dfasrauyy/image/upload/v1773418762/etreinte_nknqua.jpg
 **Image Noël :** https://res.cloudinary.com/dfasrauyy/image/upload/v1773418762/etreinteNoel_szipsq.jpg
+**Rang :** 1
 **Surgras :** 8%
 
 ---
 
 ## RECETTE DE BASE SAPONICA
 
-- 325g huile de tournesol oléique
-- 260g huile de coco
-- 65g beurre de karité
-- 184g eau
-- 92g soude caustique (NaOH)
+- 325g Huile de tournesol oléique
+- 260g Huile de coco
+- 65g Beurre de karité
+- 184g Eau
+- 92g Soude caustique (NaOH)
 
 ---
 
 **Additifs :**
-- 22g avoine colloïdale
-- 22g amande moulue
-- 22g miel
-- 10g amande amère
+- 22g Avoine colloïdale
+- 22g Amande moulue
+- 22g Miel
+- 10g Amande amère
 - Flocons d'avoine et amande sur le dessus
 - Moitié blanc, moitié or
 
-**Notes :** 22g avoine colloïdale = 2 c. à table / 22g amande moulue = 2 c. à table / 22g miel = 2 c. à table
+**Notes :** 22g Avoine colloïdale = 2 c. à table / 22g Amande moulue = 2 c. à table / 22g Miel = 2 c. à table
 
 **Version courte :** La transparence d'une caresse. Avoine et miel enlacés, l'amande en lumière.
 
