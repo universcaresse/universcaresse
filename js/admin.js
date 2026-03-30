@@ -857,7 +857,7 @@ async function ouvrirFicheRecette(id) {
     <div class="fiche-ingredients">${formatsHtml}</div>
     <div class="fiche-section-titre">Liste INCI</div>
     ${(() => {
-      const manquants = (rec.ingredients || []).filter(i => i.type !== 'Fragrances' && !(listesDropdown.fullData||[]).find(d => d.type===i.type && d.ingredient===i.nom && d.inci));
+      const manquants = (rec.ingredients || []).filter(i => i.type !== 'Fragrances' && !(listesDropdown.fullData||[]).find(d => d.type===i.type && d.ingredient.toLowerCase()===i.nom.toLowerCase() && d.inci));
       const avertissement = manquants.length > 0
         ? `<div class="msg-erreur">INCI manquants : ${manquants.map(i=>i.nom).join(', ')}</div>`
         : '';
@@ -1329,7 +1329,7 @@ function genererInci(ingredients) {
   const unPctOuMoins = autres.filter(i => (i.quantite_g / total) <= 0.01);
 
   const getInci = (ing) => {
-    const found = (listesDropdown.fullData || []).find(d => d.type === ing.type && d.ingredient === ing.nom);
+    const found = (listesDropdown.fullData || []).find(d => d.type === ing.type && d.ingredient.toLowerCase() === ing.nom.toLowerCase());
     return found ? (found.inci || '') : '';
   };
 
