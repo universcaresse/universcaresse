@@ -3064,7 +3064,16 @@ function importApercuCouleur(input) {
   apercu.style.background = val.match(/^#[0-9a-fA-F]{3,6}$/) ? val : 'transparent';
 }
 
-
+function importLireFichier(input) {
+  const fichier = input.files[0];
+  if (!fichier) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    document.getElementById('import-md-texte').value = e.target.result;
+    importParserMD();
+  };
+  reader.readAsText(fichier, 'UTF-8');
+}
 
 function importAnnuler() {
   document.getElementById('import-apercu-zone').classList.add('cache');
