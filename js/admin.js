@@ -75,6 +75,10 @@ const cible = document.getElementById('section-' + id);
 if (cible) reobserverFadeIn(cible);
  if (id === 'nouvelle-facture' && !factureActive) initialiserNouvelleFacture();
 if (id === 'contenu-site')    chargerContenuSite();
+if (id === 'import-recettes') {
+  const maxId = donneesRecettes.reduce((max, r) => Math.max(max, parseInt(r.recette_id) || 0), 0);
+  document.getElementById('import-recette-id').value = maxId + 1;
+}
 }
 
 // ─── STATS ACCUEIL ───
