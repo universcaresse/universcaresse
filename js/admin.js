@@ -712,7 +712,7 @@ function filtrerRecettes() {
     const rec = donneesRecettes.find(r => r.nom === carte.querySelector('.recette-nom').textContent);
     if (!rec) return;
     const estIncomplet = !rec.nom || !rec.description || !rec.couleur_hex || !rec.collection
-      || !rec.ligne || !rec.format || !rec.prix_vente || !rec.image_url || !rec.statut || !rec.surgras
+      || !rec.ligne || !rec.formats_complets || rec.formats_complets.length === 0 || !rec.image_url || !rec.statut || !rec.surgras
       || (rec.ingredients || []).some(i => !i.inci);
     const ok = (!col || rec.collection === col)
             && (!ligne || rec.ligne === ligne)
@@ -843,9 +843,9 @@ async function ouvrirFicheRecette(id) {
       <div class="fiche-champ"><span class="fiche-label${m('collection')}">Collection</span><span class="fiche-valeur">${rec.collection || '—'}</span></div>
       <div class="fiche-champ"><span class="fiche-label">Collections secondaires</span><span class="fiche-valeur">${Array.isArray(rec.collections_secondaires) && rec.collections_secondaires.length ? rec.collections_secondaires.join(', ') : '—'}</span></div>
       <div class="fiche-champ"><span class="fiche-label${m('ligne')}">Ligne</span><span class="fiche-valeur">${rec.ligne || '—'}</span></div>
-      <div class="fiche-champ"><span class="fiche-label${m('format')}">Format</span><span class="fiche-valeur">${rec.format || '—'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label">Format</span><span class="fiche-valeur">${rec.formats_complets && rec.formats_complets.length ? rec.formats_complets.map(f => `${f.poids} ${f.unite} — ${formaterPrix(f.prix_vente)}`).join(', ') : '—'}</span></div>
       <div class="fiche-champ"><span class="fiche-label">Statut</span><span class="fiche-valeur">${rec.statut || 'test'}</span></div>
-      <div class="fiche-champ"><span class="fiche-label${!rec.prix_vente ? ' fiche-label-manquant' : ''}">Prix</span><span class="fiche-valeur">${rec.prix_vente ? formaterPrix(rec.prix_vente) : '— $'}</span></div>
+      
       <div class="fiche-champ"><span class="fiche-label">Cure</span><span class="fiche-valeur">${rec.cure || '—'} jours</span></div>
       <div class="fiche-champ"><span class="fiche-label">Nb unités</span><span class="fiche-valeur">${rec.nb_unites || '—'}</span></div>
       <div class="fiche-champ"><span class="fiche-label${m('surgras')}">Surgras</span><span class="fiche-valeur">${rec.surgras || '—'}</span></div>
