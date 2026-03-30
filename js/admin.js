@@ -946,10 +946,8 @@ async function modifierRecette(id) {
   document.getElementById('fr-couleur-visible').value = rec.couleur_hex || '';
   const apercu = document.getElementById('fr-couleur-apercu');
   if (apercu) apercuCouleurRecette(document.getElementById('fr-couleur-visible'));
-  document.getElementById('fr-format').value       = rec.format || '';
-  document.getElementById('fr-unites').value       = rec.nb_unites || '';
+document.getElementById('fr-unites').value       = rec.nb_unites || '';
   document.getElementById('fr-cure').value         = rec.cure || '';
-  document.getElementById('fr-prix').value         = rec.prix_vente || '';
   document.getElementById('fr-description').value  = rec.description || '';
    document.getElementById('fr-desc-emballage').value = rec.desc_emballage || '';
   document.getElementById('fr-instructions').value = rec.instructions || '';
