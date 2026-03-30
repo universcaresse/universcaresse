@@ -8,15 +8,15 @@
 
 ## RECETTE DE BASE PETIT NUAGE (surgras 10%)
 
-- 250g huile d'olive
-- 50g huile végétale amande douce
-- 100g huile de coco
-- 100g beurre de karité
-- 5g argile blanche ou rose (selon variété)
-- 59g soude caustique (NaOH)
-- 130g eau
+- 250g Huile d'olive
+- 50g Huile végétale amande douce
+- 100g Huile de coco
+- 100g Beurre de karité
+- 5g Argile blanche ou rose (selon variété)
+- 59g Soude caustique (NaOH)
+- 130g Eau
 
-**Notes :** 1 c. à thé argile blanche ou rose = 5g
+**Notes :** 1 c. à thé Argile blanche ou rose = 5g
 
 ---
 
@@ -25,11 +25,11 @@
 **HEX :** #B64679
 
 **Additifs :**
-- 5g argile blanche
+- 5g Argile blanche
 - 5 gouttes orange
-- 5g gomme balloune (fragrance)
+- 5g Gomme balloune (fragrance)
 
-**Notes :** Orange / 1 c. à thé argile blanche = 5g
+**Notes :** Orange / 1 c. à thé Argile blanche = 5g
 
 **Version courte :** Un nuage espiègle et sucré, gomme balloune et rires d'enfants dans une mousse joyeuse.
 
@@ -42,11 +42,11 @@
 **HEX :** #B7DCC4
 
 **Additifs :**
-- 5g argile blanche
+- 5g Argile blanche
 - 5 gouttes bleu
 - 5g poudre de bébé (fragrance)
 
-**Notes :** 1 c. à thé argile blanche = 5g
+**Notes :** 1 c. à thé Argile blanche = 5g
 
 **Version courte :** Un savon tendre comme une étreinte, pensé pour envelopper la peau d'une douceur rassurante.
 
@@ -59,11 +59,11 @@
 **HEX :** #5A4657
 
 **Additifs :**
-- 5g argile rose
+- 5g Argile rose
 - 5 gouttes rose foncé
-- 5g smoothie aux mûres (fragrance)
+- 5g Smoothie aux mûres (fragrance)
 
-**Notes :** Rose foncé / 1 c. à thé argile rose = 5g
+**Notes :** Rose foncé / 1 c. à thé Argile rose = 5g
 
 **Version courte :** Un souffle mauve et fruité, velouté comme un smoothie d'été, doux comme une caresse de mûre.
 
@@ -76,11 +76,11 @@
 **HEX :** #F8E7A1
 
 **Additifs :**
-- 5g argile jaune
+- 5g Argile jaune
 - 5 gouttes jaune
-- 5g pois de senteur (fragrance)
+- 5g Pois de senteur (fragrance)
 
-**Notes :** 1 c. à thé argile jaune = 5g
+**Notes :** 1 c. à thé Argile jaune = 5g
 
 **Version courte :** Un savon lumineux et joyeux, comme un matin de printemps.
 
@@ -93,10 +93,10 @@
 **HEX :** #F7DDE6
 
 **Additifs :**
-- 5g argile rose
+- 5g Argile rose
 - 5 gouttes rose
 
-**Notes :** 1 c. à thé argile rose = 5g
+**Notes :** 1 c. à thé Argile rose = 5g
 
 **Version courte :** Une bulle de tendresse, une invitation à la douceur quotidienne.
 

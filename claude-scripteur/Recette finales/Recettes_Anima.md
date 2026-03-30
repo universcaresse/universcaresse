@@ -20,16 +20,16 @@
 **Surgraissage :** 10%
 
 **Recette :**
-- 280g huile de tournesol oléique
-- 175g huile de coco
-- 140g beurre de karité
-- 105g huile de ricin
-- 95g soude caustique (NaOH)
-- 235g eau
+- 280g Huile de tournesol oléique
+- 175g Huile de coco
+- 140g Beurre de karité
+- 105g Huile de ricin
+- 95g Soude caustique (NaOH)
+- 235g Eau
 
 **Additifs :**
-- 10g argile blanche
-- 15g avoine colloïdale
+- 10g Argile blanche
+- 15g Avoine colloïdale
 
 **Notes :**
 

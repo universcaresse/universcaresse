@@ -8,12 +8,12 @@
 
 ## RECETTE DE BASE ÉPURE
 
-- 325g huile de tournesol oléique
-- 260g huile de coco
-- 65g beurre de karité
-- 184g eau
-- 92g soude caustique (NaOH)
-- 10g sucre
+- 325g Huile de tournesol oléique
+- 260g Huile de coco
+- 65g Beurre de karité
+- 184g Eau
+- 92g Soude caustique (NaOH)
+- 10g Sucre
 
 **Notes :** 2 c. à thé sucre = 10g
 
@@ -25,16 +25,16 @@
 **Collections secondaires :** LUI
 
 **Additifs :**
-- Trace de charbon activé végétal
-- 7g pierre ponce
-- 3.5g argile blanche
+- Trace de Charbon activé végétal
+- 7g Pierre ponce
+- 3.5g Argile blanche
 
 **Fragrances :**
 - 9g HE pin blanc
 - 8g HE cèdre feuilles
 - 2.5g HE orange douce
 
-**Notes :** 7g pierre ponce = 2 c. à thé / 3.5g argile blanche = 1 c. à thé / Savon gris pâle avec mouchette de charbon activé végétal pour rappeler le métal.
+**Notes :** 7g pierre ponce = 2 c. à thé / 3.5g Argile blanche = 1 c. à thé / Savon gris pâle avec mouchette de Charbon activé végétal pour rappeler le métal.
 
 **Version courte :** Un savon robuste et épuré, conçu pour les mains marquées d'huile et de métal. Sa mousse dense décroche la graisse et laisse la peau nette.
 
@@ -47,7 +47,7 @@
 **HEX :** #425B00
 
 **Additifs :**
-- 3.5g argile blanche
+- 3.5g Argile blanche
 - Vert sauge dans une petite quantité de pâte, ajouté sans trop mêler
 
 **Fragrances :**
@@ -56,7 +56,7 @@
 - 4g HE orange douce
 - 1g HE ylang-ylang
 
-**Notes :** 3.5g argile blanche = 1 c. à thé
+**Notes :** 3.5g Argile blanche = 1 c. à thé
 
 **Version courte :** Un savon clair et apaisant, où le pin blanc et la poire se mêlent à une lumière douce. Une fraîcheur verte, simple et pure, comme un matin tranquille.
 
@@ -70,14 +70,14 @@
 
 **Recette (variante) :**
 - 365g café infusé
-- 259g huile d'olive
-- 235g huile de coco
-- 225g beurre de cacao brut
-- 200g beurre de karité
-- 136g soude caustique (NaOH)
-- 28g huile de café
-- 22g marc de café
-- 11g cacao en poudre
+- 259g Huile d'olive
+- 235g Huile de coco
+- 225g Beurre de cacao brut
+- 200g Beurre de karité
+- 136g Soude caustique (NaOH)
+- 28g Huile de café
+- 22g Marc de café
+- 11g Cacao en poudre
 
 **Notes :** 22g marc de café = 2 c. à table / 11g cacao en poudre = 1 c. à table
 
@@ -92,19 +92,19 @@
 **HEX :** #A2AF0E
 
 **Recette (variante) :**
-- 325g huile d'olive
-- 260g huile de coco
-- 65g beurre de karité
-- 184g eau
-- 94g soude caustique (NaOH)
+- 325g Huile d'olive
+- 260g Huile de coco
+- 65g Beurre de karité
+- 184g Eau
+- 94g Soude caustique (NaOH)
 
 **Fragrances :**
 - 8g HE romarin
 - 7g HE citron
 
 **Additifs :**
-- 17.5g argile verte
-- 10g romarin séché
+- 17.5g Argile verte
+- 10g Romarin séché
 
 **Notes :** 17.5g argile verte = 5 c. à thé / 10g romarin séché = 5 c. à thé / Verser moules en cubes avec une demie tranche de citron dans chaque cube
 

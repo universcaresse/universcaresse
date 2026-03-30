@@ -23,12 +23,12 @@
 **Surgraissage :** 10%
 
 **Recette (500g d'huiles) :**
-- 200g huile d'olive (40%)
-- 125g beurre de karité (25%)
-- 75g huile de tournesol oléique (15%)
-- 50g huile de coco (10%)
-- 25g huile de ricin (5%)
-- 25g huile végétale amande douce (5%)
+- 200g Huile d'olive (40%)
+- 125g Beurre de karité (25%)
+- 75g Huile de tournesol oléique (15%)
+- 50g Huile de coco (10%)
+- 25g Huile de ricin (5%)
+- 25g Huile végétale amande douce (5%)
 - 175g eau (35%)
 
 **À la trace (dans l'ordre) :**
@@ -53,12 +53,12 @@
 **Surgraissage :** 7-8%
 
 **Recette (500g d'huiles) :**
-- 225g huile d'olive (45%)
-- 100g huile de tournesol oléique (20%)
-- 75g huile de coco (15%)
-- 40g beurre de karité (8%)
-- 35g huile de ricin (7%)
-- 25g huile végétale amande douce (5%)
+- 225g Huile d'olive (45%)
+- 100g Huile de tournesol oléique (20%)
+- 75g Huile de coco (15%)
+- 40g Beurre de karité (8%)
+- 35g Huile de ricin (7%)
+- 25g Huile végétale amande douce (5%)
 - 165g eau (33%)
 
 **À la trace (dans l'ordre) :**
@@ -81,12 +81,12 @@
 **Surgraissage :** 6-8%
 
 **Recette (500g d'huiles) :**
-- 200g huile d'olive (40%)
-- 100g huile de tournesol oléique (20%)
-- 90g huile de coco (18%)
-- 50g beurre de karité (10%)
-- 40g huile de ricin (8%)
-- 20g huile végétale amande douce (4%)
+- 200g Huile d'olive (40%)
+- 100g Huile de tournesol oléique (20%)
+- 90g Huile de coco (18%)
+- 50g Beurre de karité (10%)
+- 40g Huile de ricin (8%)
+- 20g Huile végétale amande douce (4%)
 - 165g eau (33%)
 
 **À la trace (dans l'ordre) :**

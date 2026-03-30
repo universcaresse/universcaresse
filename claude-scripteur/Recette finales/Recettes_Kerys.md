@@ -18,12 +18,12 @@
 
 **Recette :**
 - 48g SCI
-- 10g argile blanche
-- 15g huile végétale de pépins de raisin
-- 15g hydrolat de menthe poivrée
-- 8g beurre de cacao brut
-- 5g poudre de guimauve
-- 6g glycérine végétale
+- 10g Argile blanche
+- 15g Huile végétale de pépins de raisin
+- 15g Hydrolat de menthe poivrée
+- 8g Beurre de cacao brut
+- 5g Poudre de guimauve
+- 6g Glycérine végétale
 - 8-10 gouttes HE menthe poivrée
 
 **Notes :** Ce savon est beige
@@ -40,12 +40,12 @@
 
 **Recette :**
 - 48g SCI
-- 10g poudre d'avoine
-- 15g huile végétale amande douce
-- 15g hydrolat lavande
-- 8g beurre de karité
-- 5g shikakaï en poudre
-- 6g glycérine végétale
+- 10g Poudre d'avoine
+- 15g Huile végétale amande douce
+- 15g Hydrolat lavande
+- 8g Beurre de karité
+- 5g Shikakaï en poudre
+- 6g Glycérine végétale
 - 10 gouttes HE lavande
 
 **Instructions :** Fondre SCI + hydrolat. Ajouter huile. Incorporer les poudres. Hors feu, ajouter les HE.
@@ -70,14 +70,14 @@
 
 **Recette :**
 - 35g SCI
-- 12g beurre de karité
-- 12g huile de coco
-- 10g poudre de guimauve
-- 10g shikakaï en poudre
-- 12g hydrolat lavande
-- 6g glycérine végétale
-- 3g provitamine B5
-- 3g phytokératine
+- 12g Beurre de karité
+- 12g Huile de coco
+- 10g Poudre de guimauve
+- 10g Shikakaï en poudre
+- 12g Hydrolat lavande
+- 6g Glycérine végétale
+- 3g Provitamine B5
+- 3g Phytokératine
 - 10 gouttes HE lavande
 
 **Notes :** Ce savon est beige
@@ -94,10 +94,10 @@
 
 **Recette :**
 - 50g SCI
-- 20g beurre de karité
-- 12g huile de coco
-- 15g eau
-- 6g glycérine végétale
+- 20g Beurre de karité
+- 12g Huile de coco
+- 15g Eau
+- 6g Glycérine végétale
 - 20 gouttes HA mangue-coco
 
 **Notes :** Ce savon est crème / Vérifier si hydrolat
@@ -120,12 +120,12 @@
 
 **Recette :**
 - 45g SCI
-- 8g argile blanche
-- 15g huile végétale jojoba
-- 10g hydrolat romarin
-- 5g beurre de cacao brut
-- 5g poudre ortie
-- 6g glycérine végétale
+- 8g Argile blanche
+- 15g Huile végétale jojoba
+- 10g Hydrolat romarin
+- 5g Beurre de cacao brut
+- 5g Poudre ortie
+- 6g Glycérine végétale
 - 8-10 gouttes HE tea tree
 
 **Notes :** Ce savon est vert foncé
@@ -142,12 +142,12 @@
 
 **Recette :**
 - 50g SCI
-- 10g shikakaï en poudre
-- 8g argile blanche
-- 10g hydrolat de menthe
-- 10g huile végétale de pépins de raisin
-- 5g poudre de bardane
-- 6g glycérine végétale
+- 10g Shikakaï en poudre
+- 8g Argile blanche
+- 10g Hydrolat de menthe
+- 10g Huile végétale de pépins de raisin
+- 5g Poudre de bardane
+- 6g Glycérine végétale
 - 8-10 gouttes HE citron ou pamplemousse
 
 **Notes :**

@@ -8,13 +8,13 @@
 
 ## RECETTE DE BASE CAPRIN (surgras 8%)
 
-- 280g huile de tournesol oléique
-- 210g huile de coco
-- 140g beurre de karité
-- 70g huile végétale amande douce
-- 98g soude caustique (NaOH)
-- 235g eau glacée
-- 70g lait de chèvre en poudre
+- 280g Huile de tournesol oléique
+- 210g Huile de coco
+- 140g Beurre de karité
+- 70g Huile végétale amande douce
+- 98g Soude caustique (NaOH)
+- 235g Eau glacée
+- 70g Lait de chèvre en poudre
 
 **Notes :** Utiliser de l'eau glacée pour ralentir la réaction avec le lait de chèvre.
 
@@ -26,10 +26,10 @@
 
 **Recette :**
 - Recette de base Caprin
-- 15g argile blanche
+- 15g Argile blanche
 - 30g HA fraise
 
-**Notes :** 1 c. à table argile blanche = 15g
+**Notes :** 1 c. à table Argile blanche = 15g
 
 **Version courte :** L'alliance gourmande du lait onctueux et de la fraise sucrée.
 
@@ -43,10 +43,10 @@
 
 **Recette :**
 - Recette de base Caprin
-- 15g argile blanche
+- 15g Argile blanche
 - 30g HA cerise
 
-**Notes :** 1 c. à table argile blanche = 15g
+**Notes :** 1 c. à table Argile blanche = 15g
 
 **Version courte :** Savon gourmand au lait de chèvre et cerises, douceur fruitée et peau satinée.
 
@@ -60,7 +60,7 @@
 
 **Recette :**
 - Recette de base Caprin
-- 6g spiruline
+- 6g Spiruline
 - 18g HA thé vert
 - 12g HA jasmin
 
@@ -78,10 +78,10 @@
 
 **Recette :**
 - Recette de base Caprin
-- 15g argile blanche
-- 30g HA melon d'eau
+- 15g Argile blanche
+- 30g HA melon d'Eau
 
-**Notes :** 1 c. à table argile blanche = 15g
+**Notes :** 1 c. à table Argile blanche = 15g
 
 **Version courte :** La douceur crémeuse du lait de chèvre épouse la légèreté rafraîchissante du melon d'eau.
 
@@ -96,12 +96,12 @@
 **Recette :**
 - Recette de base Caprin
 - 30g HE orange douce
-- 0.5g cannelle moulue
-- 0.5g gingembre moulu
-- 1g curcuma
-- 4g poudre écorce orange
-- 1g argile blanche
-- 1g clou de girofle moulu
+- 0.5g Cannelle moulue
+- 0.5g Gingembre moulu
+- 1g Curcuma
+- 4g Poudre écorce orange
+- 1g Argile blanche
+- 1g Clou de girofle moulu
 
 **Notes :**
 
@@ -119,9 +119,9 @@
 - Recette de base Caprin
 - Mica vert
 - 30g HA pomme verte
-- 15g argile blanche
+- 15g Argile blanche
 
-**Notes :** 1 c. à table argile blanche = 15g
+**Notes :** 1 c. à table Argile blanche = 15g
 
 **Version courte :** Savon délicat au lait de chèvre et pomme verte, fraîcheur et douceur en un seul geste.
 

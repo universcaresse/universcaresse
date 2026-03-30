@@ -17,16 +17,16 @@
 **HEX :** #5A1C37
 
 **Recette :**
-- 20g cire de carnauba
-- 30g beurre de karité
-- 25g huile de calendula
-- 25g huile de jojoba
-- 14g beurre de mangue
-- 2-4g allantoine
-- 1.5g vitamine E (30 gouttes)
-- 0.6g arôme de fraises
-- 0.6g arôme cerise
-- 1.5g mica rose-rouge
+- 20g Cire de carnauba
+- 30g Beurre de karité
+- 25g Huile de calendula
+- 25g Huile de jojoba
+- 14g Beurre de mangue
+- 2-4g Allantoine
+- 1.5g Vitamine E (30 gouttes)
+- 0.6g Arôme de fraises
+- 0.6g Arôme cerise
+- 1.5g Mica rose-rouge
 
 **Notes :** Colore les lèvres
 
@@ -44,22 +44,22 @@
 **Petit nuage douillet (hiver) :** #519A9C
 
 **Version été :**
-- 15g cire d'abeille
-- 30g beurre de karité
-- 25g huile de tournesol oléique
-- 20g huile de coco
-- 15g beurre de mangue
-- 1g vitamine E (20 gouttes)
-- 0.5g saveur de fraises
+- 15g Cire d'abeille
+- 30g Beurre de karité
+- 25g Huile de tournesol oléique
+- 20g Huile de coco
+- 15g Beurre de mangue
+- 1g Vitamine E (20 gouttes)
+- 0.5g Saveur de fraises
 
 **Version hiver :**
-- 20g cire d'abeille
-- 35g beurre de karité
-- 25g huile de tournesol oléique
-- 20g huile de coco
-- 15g beurre de mangue
-- 1g vitamine E (20 gouttes)
-- 0.5g saveur de fraises
+- 20g Cire d'abeille
+- 35g Beurre de karité
+- 25g Huile de tournesol oléique
+- 20g Huile de coco
+- 15g Beurre de mangue
+- 1g Vitamine E (20 gouttes)
+- 0.5g Saveur de fraises
 
 **Notes :** Zéro HE, Zéro Mica, Comestibles et non toxiques
 
@@ -78,11 +78,11 @@
 **HEX :** #B60F31
 
 **Recette :**
-- 22g huile de coco
-- 30g cire d'abeille
-- 30g beurre de mangue
-- 5g vitamine E
-- 10g sirop de fraise
+- 22g Huile de coco
+- 30g Cire d'abeille
+- 30g Beurre de mangue
+- 5g Vitamine E
+- 10g Sirop de fraise
 - 0.5g HE basilic
 
 **Notes :** 5g vitamine E = 1 c. à thé / 10g sirop de fraise = 2 c. à thé
@@ -98,10 +98,10 @@
 **HEX :** #908ED3
 
 **Recette :**
-- 22g huile de coco
-- 30g cire d'abeille
-- 30g beurre de mangue
-- 1g vitamine E (2 capsules)
+- 22g Huile de coco
+- 30g Cire d'abeille
+- 30g Beurre de mangue
+- 1g Vitamine E (2 capsules)
 - 0.6g HE lavande (12 gouttes)
 - 0.6g HE romarin (12 gouttes)
 - 6 gouttes couleur lavande
@@ -119,10 +119,10 @@
 **HEX :** #90FAD3
 
 **Recette :**
-- 22g huile de coco
-- 30g cire d'abeille
-- 30g beurre de mangue
-- 5g vitamine E
+- 22g Huile de coco
+- 30g Cire d'abeille
+- 30g Beurre de mangue
+- 5g Vitamine E
 - 5g arôme naturel de menthe poivrée
 - 0.5g HE menthe poivrée (10 gouttes)
 - 6 gouttes couleur vert
@@ -140,14 +140,14 @@
 **HEX :** #F1FFBB
 
 **Recette :**
-- 18g cire de carnauba
-- 30g beurre de karité
-- 24g huile de calendula
-- 24g huile de ricin
-- 18g huile de coco
-- 2.4g allantoine
-- 1.8g vitamine E (36 gouttes)
-- 2g mica perlé blanc
+- 18g Cire de carnauba
+- 30g Beurre de karité
+- 24g Huile de calendula
+- 24g Huile de ricin
+- 18g Huile de coco
+- 2.4g Allantoine
+- 1.8g Vitamine E (36 gouttes)
+- 2g Mica perlé blanc
 - 2 gouttes HE menthe poivrée
 
 **Instructions :** Fondre cire. Ajouter huile et beurre. Hors feu, ajouter allantoine en remuant bien. Ajouter vitamine E, mica et HE.
@@ -163,15 +163,15 @@
 ### SOUFFLE D'HIVER
 
 **Recette :**
-- 26g cire d'abeille
-- 26g huile de coco
-- 26g beurre de karité
-- 13g huile végétale amande douce
+- 26g Cire d'abeille
+- 26g Huile de coco
+- 26g Beurre de karité
+- 13g Huile végétale amande douce
 - 0.4g HE eucalyptus (8 gouttes)
 - 0.3g HE menthe poivrée (6 gouttes)
 - 0.2g HE ravintsara (4 gouttes)
-- 5 gouttes colorant bleu
-- 2.5g vitamine E
+- 5 gouttes Colorant bleu
+- 2.5g Vitamine E
 
 **Instructions :** Appliquer sur les lèvres et sous les narines. Conservation 1 an.
 
@@ -188,13 +188,13 @@
 **HEX :** #609C6A
 
 **Recette :**
-- 20g cire de carnauba
-- 30g beurre de karité
-- 25g huile de calendula
-- 25g huile de jojoba
-- 12g beurre de cacao brut
-- 2.4g allantoine
-- 1.5g vitamine E (30 gouttes)
+- 20g Cire de carnauba
+- 30g Beurre de karité
+- 25g Huile de calendula
+- 25g Huile de jojoba
+- 12g Beurre de cacao brut
+- 2.4g Allantoine
+- 1.5g Vitamine E (30 gouttes)
 - 0.15g HE menthe poivrée (3 gouttes)
 - 0.1g HE tea tree (2 gouttes)
 - 0.1g HE eucalyptus radié (2 gouttes)
@@ -218,9 +218,9 @@
 **HEX :** #E7B539
 
 **Recette :**
-- 50g huile de coco
-- 50g beurre de karité
-- 10g cire d'abeille
+- 50g Huile de coco
+- 50g Beurre de karité
+- 10g Cire d'abeille
 - 0.75g HE eucalyptus (15 gouttes)
 - 0.35g HE camphrier (7 gouttes)
 - 0.50g HE menthe poivrée (10 gouttes)
@@ -242,10 +242,10 @@
 **Collections secondaires :** Petit Nuage
 
 **Recette :**
-- 50g beurre de karité
-- 40g huile de coco
-- 10g cire d'abeille
-- 2g maximum fragrance poudre de bébé
+- 50g Beurre de karité
+- 40g Huile de coco
+- 10g Cire d'abeille
+- 2g maximum Fragrance poudre de bébé
 
 **Notes :** Les zones comme les fesses sont plus sensibles / Pour utilisation externe seulement
 
@@ -260,13 +260,13 @@
 **Nb unités :** 3 | **Cure :** aucune
 
 **Recette de base :**
-- 115g bicarbonate de soude
-- 55g fécule de maïs
-- 55g acide citrique en poudre
-- 50g sel d'Epsom
-- 10g eau
+- 115g Bicarbonate de soude
+- 55g Fécule de maïs
+- 55g Acide citrique en poudre
+- 50g Sel d'Epsom
+- 10g Eau
 - 0.50g HE (10 gouttes)
-- 45g huile végétale amande douce
+- 45g Huile végétale amande douce
 - 6g fleurs si désiré
 
 **Notes :** 10g eau = 2 c. à thé / 45g huile végétale amande douce = 3 c. à table / 6g fleurs = 1 c. à table
@@ -284,7 +284,7 @@
 - 0.50g HE petitgrain
 - 0.50g HE cèdre feuilles
 - 0.50g HE palmarosa
-- musc blanc
+- Musc blanc
 - Colorant ⚠️ à confirmer avec Chantal
 
 **Version courte :** Le grand air du Nord dans un bain effervescent — bois, verdure et musc pour une détente profonde.
@@ -375,11 +375,11 @@
 **Collections secondaires :** Petit Nuage
 
 **Recette de base :**
-- 240g bicarbonate de soude
-- 120g acide citrique
-- 120g fécule de maïs
-- 26g huile végétale amande douce
-- 13g beurre de karité fondu
+- 240g Bicarbonate de soude
+- 120g Acide citrique
+- 120g Fécule de maïs
+- 26g Huile végétale amande douce
+- 13g Beurre de karité fondu
 
 **Notes :** Pas de sel d'Epsom ni de HE / 26g huile végétale amande douce = 2 c. à table / 13g beurre de karité fondu = 1 c. à table
 
@@ -398,15 +398,15 @@
 **HEX :** #9EBD7C
 
 **Recette de base :**
-- 325g huile de tournesol oléique
-- 260g huile de coco
-- 65g beurre de karité
-- 184g eau
-- 92g soude caustique (NaOH)
+- 325g Huile de tournesol oléique
+- 260g Huile de coco
+- 65g Beurre de karité
+- 184g Eau
+- 92g Soude caustique (NaOH)
 
 **Additifs :**
 - 16g HE menthe poivrée
-- 9 luffa (1 par savon)
+- 9 Luffa (1 par savon)
 - Micas à fleurs bleues ⚠️ quantité à confirmer
 - Couleur vert grass
 
@@ -427,14 +427,14 @@
 **Cure :** 6 semaines
 
 **Recette (1 kilo) :**
-- 300g huile de coco
-- 150g huile de ricin
-- 350g huile d'olive
-- 200g beurre de karité
-- 136g soude caustique (NaOH)
-- 340g eau
-- 2g soie de tussah
-- 2g vitamine E
+- 300g Huile de coco
+- 150g Huile de ricin
+- 350g Huile d'olive
+- 200g Beurre de karité
+- 136g Soude caustique (NaOH)
+- 340g Eau
+- 2g Soie de tussah
+- 2g Vitamine E
 - 20g HE lavande
 - 6g HE menthe poivrée
 - 10g HE cèdre atlas
@@ -456,10 +456,10 @@
 **Rendement :** 6 x 50ml
 
 **Recette :**
-- 138g huile végétale amande douce
-- 66g huile d'argan
-- 77g huile de ricin
-- 3g vitamine E
+- 138g Huile végétale amande douce
+- 66g Huile d'argan
+- 77g Huile de ricin
+- 3g Vitamine E
 - 1.7g HE lavande
 - 0.9g HE cèdre atlas
 - 0.5g HE menthe poivrée

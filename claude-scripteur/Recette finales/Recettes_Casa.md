@@ -21,7 +21,7 @@ Un cake vaisselle qui dégraisse sans agresser les mains, une eau de linge qui d
 
 ### RECETTE DE BASE
 
-- 1000g cire de soya
+- 1000g Cire de soya
 - 80g essence au choix
 
 ### PARFUMS DISPONIBLES
@@ -50,7 +50,7 @@ Un cake vaisselle qui dégraisse sans agresser les mains, une eau de linge qui d
 ### RECETTE DE BASE
 
 - 54g alcool à 70%
-- 152g eau
+- 152g Eau
 - 0.75g HE au choix
 
 ### PARFUMS DISPONIBLES
@@ -80,9 +80,9 @@ Un cake vaisselle qui dégraisse sans agresser les mains, une eau de linge qui d
 
 **Recette pour un cake :**
 - 129g SCI
-- 12g vinaigre blanc
-- 38g eau
-- 18g cristaux de soude
+- 12g Vinaigre blanc
+- 38g Eau
+- 18g Cristaux de soude
 - 2g HE citron
 
 **Notes :**
@@ -101,7 +101,7 @@ Un cake vaisselle qui dégraisse sans agresser les mains, une eau de linge qui d
 ### RECETTE DE BASE
 
 - 99g alcool à 70%
-- 304g eau
+- 304g Eau
 - 4-5g HE au choix (80-100 gouttes)
 
 **Notes :** Recette originale : 110 ml alcool 70%, 380 ml eau, 80-100 gouttes HE
@@ -118,7 +118,7 @@ Un cake vaisselle qui dégraisse sans agresser les mains, une eau de linge qui d
 
 ### SÉRÉNITÉ PURE
 
-- 55 gouttes fragrance lessive fraîche
+- 55 gouttes Fragrance lessive fraîche
 - 40 gouttes HE lavande
 
 **Version courte :** La douceur de la lavande sur un fond de linge propre — une sérénité textile, du matin au soir.
@@ -127,7 +127,7 @@ Un cake vaisselle qui dégraisse sans agresser les mains, une eau de linge qui d
 
 ### LESSIVE FRAÎCHE
 
-- 80g fragrance lessive fraîche
+- 80g Fragrance lessive fraîche
 
 **Version courte :** L'odeur du linge séché au grand air — comme si la corde à linge avait tout fait le travail.
 
@@ -151,14 +151,14 @@ Un cake vaisselle qui dégraisse sans agresser les mains, une eau de linge qui d
 **Nb unités :** 30
 
 **Recette :**
-- 2500g saindoux
-- 1000g eau
-- 340g soude caustique (NaOH)
-- 15g sel
-- 15g argile blanche
+- 2500g Saindoux
+- 1000g Eau
+- 340g Soude caustique (NaOH)
+- 15g Sel
+- 15g Argile blanche
 - 40g HE sapin
 
-**Notes :** 1 c. à soupe sel = 15g / 1 c. à soupe argile blanche = 15g
+**Notes :** 1 c. à soupe sel = 15g / 1 c. à soupe Argile blanche = 15g
 
 **Version courte :** Un savon rustique au parfum de forêt, puissant et authentique, créé pour détacher les tissus et nettoyer la maison avec la force simple du sapin.
 
