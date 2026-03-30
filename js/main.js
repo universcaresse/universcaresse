@@ -622,7 +622,7 @@ function carteProduit(p) {
     : [];
   const prix = formats.length
     ? formats.map(f => `${parseFloat(f.prix_vente).toFixed(2).replace('.', ',')} $ / ${f.poids} ${f.unite}`).join('&nbsp;&nbsp;')
-    : (p.prix_vente ? parseFloat(p.prix_vente).toFixed(2).replace('.', ',') + ' $' : '—');
+    : '';
   const photoUrl = (window.modeSaisonnier && p.image_url_noel) ? p.image_url_noel : p.image_url;
   const image = photoUrl ? `<img src="${photoUrl}" alt="${p.nom}" onerror="this.style.display='none'">` : '';
   return `
@@ -642,8 +642,7 @@ function carteProduit(p) {
         <div class="carte-nom">${p.nom.toUpperCase()}</div>
         <div class="carte-ligne">${p.ligne.toUpperCase()}</div>
         <div class="carte-bas">
-       
-          <div class="carte-formats">${prix}</div>
+          ${prix ? `<div class="carte-prix">${prix}</div>` : ''}
         </div>
       </div>
     </div>`;
