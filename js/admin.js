@@ -3061,6 +3061,7 @@ async function importEnvoyer() {
   const nextId = parseInt(json.recette_id) + 1;
   document.getElementById('import-recette-id').value = nextId;
   document.getElementById('import-md-texte').value = '';
+  document.getElementById('import-md-fichier').value = '';
   document.getElementById('import-apercu-zone').classList.add('cache');
 }
 
