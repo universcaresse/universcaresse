@@ -1165,23 +1165,11 @@
         </div>
         <div class="msg-zone" id="msg-import-recettes"></div>
         <div class="carte-admin">
-          <div class="carte-admin-entete">Prochain recette_id</div>
-          <div class="form-groupe">
-            <label class="form-label">Numéro de départ</label>
-            <input type="number" class="form-ctrl" id="import-recette-id" value="1" min="1">
-          </div>
-        </div>
-        <div class="carte-admin">
-          <div class="carte-admin-entete">Contenu MD</div>
+          <input type="hidden" id="import-recette-id" value="1">
           <div class="form-groupe">
             <input type="file" class="form-ctrl" id="import-md-fichier" accept=".md" onchange="importLireFichier(this)">
           </div>
-          <div class="form-groupe">
-            <textarea class="form-ctrl" id="import-md-texte" rows="20" placeholder="Coller le contenu de votre fichier .md ici..."></textarea>
-          </div>
-          <div class="form-actions">
-            <button class="btn btn-outline" onclick="importParserMD()">Analyser</button>
-          </div>
+          <textarea class="cache" id="import-md-texte"></textarea>
         </div>
        <div class="carte-admin cache" id="import-apercu-zone">
   <div class="carte-admin-entete">Aperçu — vérifier et corriger avant d'importer</div>
