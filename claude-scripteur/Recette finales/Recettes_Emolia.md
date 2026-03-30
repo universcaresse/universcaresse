@@ -284,7 +284,7 @@
 - 0.50g HE petitgrain
 - 0.50g HE cèdre feuilles
 - 0.50g HE palmarosa
-- Musc blanc
+- musc blanc
 - Colorant ⚠️ à confirmer avec Chantal
 
 **Version courte :** Le grand air du Nord dans un bain effervescent — bois, verdure et musc pour une détente profonde.

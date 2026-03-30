@@ -30,7 +30,7 @@
 
 **Additifs :**
 - 14g argile blanche
-- 5 gouttes Pink
+- 5 gouttes Colorant PINK
 - Fleurs de lavande sur le dessus
 
 **Notes :**

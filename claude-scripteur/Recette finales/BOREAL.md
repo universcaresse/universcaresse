@@ -33,7 +33,7 @@
 **Additifs :**
 - 10g argile jaune
 - 11g charbon activé végétal (entre les deux couches)
-- Moitié sunset yellow et moitié matcha
+- Moitié sunset yellow et moitié Colorant matcha
 
 **Notes :** 10g argile jaune = 3 c. à thé / 11g charbon activé végétal = 1 c. à thé
 

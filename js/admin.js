@@ -957,7 +957,10 @@ document.getElementById('fr-collection').value   = rec.collection || '';
       cb.checked = Array.isArray(rec.collections_secondaires) && rec.collections_secondaires.map(s => s.trim().toUpperCase()).includes(cb.value.trim().toUpperCase());
     });
   }
-ingredientsRecette = (rec.ingredients || []).map(i => ({ type: i.type, nom: i.nom, quantite: i.quantite_g }));
+ingredientsRecette = (rec.ingredients || []).map(i => {
+  const found = (listesDropdown.fullData || []).find(d => d.ingredient.toLowerCase() === i.nom.toLowerCase());
+  return { type: i.type, nom: found ? found.ingredient : i.nom, quantite: i.quantite_g };
+});
   const resFormats = await appelAPIPost('getRecettesFormats', { recette_id: rec.recette_id });
   formatsRecette = (resFormats && resFormats.formats) ? resFormats.formats.map(f => ({ poids: f.poids, unite: f.unite, prix: f.prix_vente, desc: f.desc_emballage })) : [];
   document.querySelector('#section-recettes .filtres-bar').classList.add('cache');
