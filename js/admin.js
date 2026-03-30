@@ -2932,15 +2932,15 @@ function importDevinerType(nom) {
 
 function importParserMD() {
   const texte = document.getElementById('import-md-texte').value.trim();
-  if (!texte) { afficherMsg('import-recettes', 'Coller un fichier MD dabord.', 'erreur'); return; }
+  if (!texte) { afficherMsg('import-recettes', 'Coller un fichier MD d\'abord.', 'erreur'); return; }
 
   const lignes = texte.split('\n');
   const get = (regex) => { const m = texte.match(regex); return m ? m[1].trim() : ''; };
 
   const nom            = get(/^#\s+(.+?)(?:\s+—|$)/m);
   const ligne          = get(/\*\*Ligne\s*:\*\*\s*(.+?)(?:\s*\||\n)/);
-  const cure           = parseInt(get(/\*\*Cure\s*:\*\*\s*(\d+)/)) || 0;
-  const nb_unites      = parseInt(get(/\*\*Nb unités\s*:\*\*\s*(\d+)/)) || 1;
+  const cure           = get(/\*\*Cure\s*:\*\*\s*(\d+)/) || '';
+  const nb_unites      = get(/\*\*Nb unités\s*:\*\*\s*(\d+)/) || '';
   const statut         = get(/\*\*Statut\s*:\*\*\s*(\w+)/) || 'test';
   const couleur_hex    = get(/\*\*HEX\s*:\*\*\s*(#[0-9a-fA-F]{3,6})/);
   const image_url      = get(/\*\*Image\s*:\*\*\s*(https?:\/\/\S+)(?!\s*Noël)/);
@@ -2974,40 +2974,92 @@ function importParserMD() {
     }
   }
 
-  const id = parseInt(document.getElementById('import-recette-id').value) || 1;
-  const json = {
-    action: 'saveRecette',
-    recette_id: String(id),
-    nom, description: desc_longue, desc_emballage: desc_courte,
-    couleur_hex, collection: 'SAPONICA', ligne, nb_unites, cure,
-    image_url, image_url_noel, statut, surgras, notes,
-    format: '', prix_vente: 0, instructions: '', collections_secondaires: [],
-    ingredients
-  };
+  document.getElementById('imp-nom').value            = nom;
+  document.getElementById('imp-collection').value     = 'SAPONICA';
+  document.getElementById('imp-ligne').value          = ligne;
+  document.getElementById('imp-statut').value         = statut;
+  document.getElementById('imp-unites').value         = nb_unites;
+  document.getElementById('imp-cure').value           = cure;
+  document.getElementById('imp-surgras').value        = surgras;
+  document.getElementById('imp-couleur-hex').value    = couleur_hex;
+  document.getElementById('imp-image-url').value      = image_url;
+  document.getElementById('imp-image-url-noel').value = image_url_noel;
+  document.getElementById('imp-desc-courte').value    = desc_courte;
+  document.getElementById('imp-desc-longue').value    = desc_longue;
+  document.getElementById('imp-notes').value          = notes;
 
-  document.getElementById('import-apercu-json').textContent = JSON.stringify(json, null, 2);
+  importApercuCouleur(document.getElementById('imp-couleur-hex'));
+
+  const zone = document.getElementById('imp-ingredients');
+  zone.innerHTML = '';
+  ingredients.forEach((ing, i) => {
+    const row = document.createElement('div');
+    row.className = 'import-ing-row';
+    row.innerHTML = `
+      <input type="text" class="form-ctrl" placeholder="Type" value="${ing.type}" data-ing="${i}" data-champ="type">
+      <input type="text" class="form-ctrl" placeholder="Nom" value="${ing.nom}" data-ing="${i}" data-champ="nom">
+      <input type="text" inputmode="decimal" class="form-ctrl" placeholder="g" value="${ing.quantite_g}" data-ing="${i}" data-champ="quantite_g">
+    `;
+    zone.appendChild(row);
+  });
+
   document.getElementById('import-apercu-zone').classList.remove('cache');
 }
 
 async function importEnvoyer() {
-  const texte = document.getElementById('import-apercu-json').textContent;
-  let json;
-  try { json = JSON.parse(texte); } catch(e) { afficherMsg('import-recettes', 'JSON invalide.', 'erreur'); return; }
+  const id = parseInt(document.getElementById('import-recette-id').value) || 1;
+
+  const ingredients = [];
+  document.querySelectorAll('#imp-ingredients .import-ing-row').forEach(row => {
+    const champs = row.querySelectorAll('input');
+    const type       = champs[0].value.trim();
+    const nom        = champs[1].value.trim();
+    const quantite_g = parseFloat(champs[2].value) || 0;
+    if (nom) ingredients.push({ type, nom, quantite_g, cout: 0 });
+  });
+
+  const json = {
+    action: 'saveRecette',
+    recette_id: String(id),
+    nom:            document.getElementById('imp-nom').value.trim(),
+    collection:     document.getElementById('imp-collection').value.trim(),
+    ligne:          document.getElementById('imp-ligne').value.trim(),
+    statut:         document.getElementById('imp-statut').value,
+    nb_unites:      parseInt(document.getElementById('imp-unites').value) || 1,
+    cure:           parseInt(document.getElementById('imp-cure').value) || 0,
+    surgras:        document.getElementById('imp-surgras').value.trim(),
+    couleur_hex:    document.getElementById('imp-couleur-hex').value.trim(),
+    image_url:      document.getElementById('imp-image-url').value.trim(),
+    image_url_noel: document.getElementById('imp-image-url-noel').value.trim(),
+    desc_emballage: document.getElementById('imp-desc-courte').value.trim(),
+    description:    document.getElementById('imp-desc-longue').value.trim(),
+    notes:          document.getElementById('imp-notes').value.trim(),
+    format: '', prix_vente: 0, instructions: '', collections_secondaires: [],
+    ingredients
+  };
 
   const res = await appelAPIPost('saveRecette', json);
   if (!res || !res.success) {
     afficherMsg('import-recettes', res?.message || 'Erreur import.', 'erreur');
     return;
   }
-  afficherMsg('import-recettes', 'Recette ' + json.nom + ' importee (ID ' + json.recette_id + ').', 'succes');
+  afficherMsg('import-recettes', 'Recette ' + json.nom + ' importée (ID ' + json.recette_id + ').', 'succes');
   const nextId = parseInt(json.recette_id) + 1;
   document.getElementById('import-recette-id').value = nextId;
   document.getElementById('import-md-texte').value = '';
   document.getElementById('import-apercu-zone').classList.add('cache');
-  document.getElementById('import-apercu-json').textContent = '';
 }
+
+function importApercuCouleur(input) {
+  const apercu = document.getElementById('imp-couleur-apercu');
+  if (!apercu) return;
+  const val = input.value.trim();
+  apercu.style.background = val.match(/^#[0-9a-fA-F]{3,6}$/) ? val : 'transparent';
+}
+
+
 
 function importAnnuler() {
   document.getElementById('import-apercu-zone').classList.add('cache');
-  document.getElementById('import-apercu-json').textContent = '';
+  document.getElementById('imp-ingredients').innerHTML = '';
 }

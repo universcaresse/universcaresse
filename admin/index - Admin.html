@@ -1171,7 +1171,7 @@
             <input type="number" class="form-ctrl" id="import-recette-id" value="1" min="1">
           </div>
         </div>
-        <div class="carte-admin">
+        <div class="carte-admin" style="margin-top:16px;">
           <div class="carte-admin-entete">Contenu MD</div>
           <div class="form-groupe">
             <textarea class="form-ctrl" id="import-md-texte" rows="20" placeholder="Coller le contenu de votre fichier .md ici..."></textarea>
@@ -1180,77 +1180,14 @@
             <button class="btn btn-outline" onclick="importParserMD()">Analyser</button>
           </div>
         </div>
-       <div class="carte-admin cache" id="import-apercu-zone">
-  <div class="carte-admin-entete">Aperçu — vérifier et corriger avant d'importer</div>
-  <div class="form-body">
-    <div class="form-grille">
-      <div class="form-groupe col-demi">
-        <label class="form-label">Nom</label>
-        <input type="text" class="form-ctrl" id="imp-nom">
-      </div>
-      <div class="form-groupe">
-        <label class="form-label">Collection</label>
-        <input type="text" class="form-ctrl" id="imp-collection">
-      </div>
-      <div class="form-groupe">
-        <label class="form-label">Ligne</label>
-        <input type="text" class="form-ctrl" id="imp-ligne">
-      </div>
-      <div class="form-groupe">
-        <label class="form-label">Statut</label>
-        <select class="form-ctrl" id="imp-statut">
-          <option value="test">Test</option>
-          <option value="public">Public</option>
-        </select>
-      </div>
-      <div class="form-groupe">
-        <label class="form-label">Nb unités</label>
-        <input type="text" inputmode="decimal" class="form-ctrl" id="imp-unites">
-      </div>
-      <div class="form-groupe">
-        <label class="form-label">Cure (jours)</label>
-        <input type="text" inputmode="decimal" class="form-ctrl" id="imp-cure">
-      </div>
-      <div class="form-groupe">
-        <label class="form-label">Surgras</label>
-        <input type="text" class="form-ctrl" id="imp-surgras">
-      </div>
-      <div class="form-groupe">
-        <label class="form-label">Couleur HEX</label>
-        <input type="text" class="form-ctrl" id="imp-couleur-hex" oninput="importApercuCouleur(this)">
-        <div id="imp-couleur-apercu" class="couleur-apercu"></div>
-      </div>
-      <div class="form-groupe col-plein">
-        <label class="form-label">Image principale (URL)</label>
-        <input type="text" class="form-ctrl" id="imp-image-url">
-      </div>
-      <div class="form-groupe col-plein">
-        <label class="form-label">Image Noël (URL)</label>
-        <input type="text" class="form-ctrl" id="imp-image-url-noel">
-      </div>
-      <div class="form-groupe col-plein">
-        <label class="form-label">Version courte</label>
-        <textarea class="form-ctrl" id="imp-desc-courte" rows="2"></textarea>
-      </div>
-      <div class="form-groupe col-plein">
-        <label class="form-label">Version longue</label>
-        <textarea class="form-ctrl" id="imp-desc-longue" rows="4"></textarea>
-      </div>
-      <div class="form-groupe col-plein">
-        <label class="form-label">Notes</label>
-        <textarea class="form-ctrl" id="imp-notes" rows="2"></textarea>
-      </div>
-    </div>
-    <div class="form-groupe col-plein">
-      <label class="form-label">Ingrédients</label>
-      <div id="imp-ingredients"></div>
-    </div>
-  </div>
-  <div class="form-actions">
-    <button class="btn btn-primary" onclick="importEnvoyer()">Importer</button>
-    <button class="btn btn-outline" onclick="importAnnuler()">Annuler</button>
-  </div>
-</div>
+        <div class="carte-admin cache" id="import-apercu-zone" style="margin-top:16px;">
+          <div class="carte-admin-entete">Aperçu de la recette</div>
+          <div id="import-apercu-visuel"></div>
+          <div class="form-actions">
+            <button class="btn btn-primary" onclick="importEnvoyer()">Importer</button>
+            <button class="btn btn-outline" onclick="importAnnuler()">Annuler</button>
+          </div>
+        </div>
       </div>
 
       <!-- DENSITÉS -->
