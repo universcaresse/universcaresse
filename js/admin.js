@@ -810,8 +810,13 @@ async function chargerIngredientsBaseRecette() {
 
 
 async function ouvrirFicheRecette(id) {
-  const rec = donneesRecettes.find(r => r.recette_id === id);
+  let rec = donneesRecettes.find(r => r.recette_id === id);
   if (!rec) return;
+  const resfrais = await appelAPI('getRecettes');
+  if (resfrais && resfrais.success) {
+    donneesRecettes = resfrais.recettes || donneesRecettes;
+    rec = donneesRecettes.find(r => r.recette_id === id) || rec;
+  }
   recetteActive = rec;
   const resFormats = await appelAPIPost('getRecettesFormats', { recette_id: id });
   const formats = (resFormats && resFormats.formats) ? resFormats.formats : [];
