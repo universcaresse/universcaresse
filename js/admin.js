@@ -2872,7 +2872,7 @@ if (!res || !res.success) {
     document.getElementById('final-total-affichage').textContent = '0,00 $';
   }, 5000);
 }
-function validerConnexionAdmin() {
+async function validerConnexionAdmin() {
   const mdp = document.getElementById('input-mdp-admin').value;
   if (mdp === CONFIG.MOT_DE_PASSE) {
     sessionStorage.setItem('uc_admin', 'true');
