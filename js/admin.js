@@ -33,13 +33,41 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
   document.getElementById('ecran-connexion').classList.add('cache');
-  chargerStatsAccueil();
   const dateField = document.getElementById('nf-date');
   if (dateField) dateField.value = new Date().toISOString().split('T')[0];
   initBurgerAdmin();
   initScrollAnimations();
-  await chargerCollections();
+  await chargerDonneesInitiales();
 });
+
+async function chargerDonneesInitiales() {
+  const [resCol, resRec, resDrop] = await Promise.all([
+    appelAPI('getCollections'),
+    appelAPI('getRecettes'),
+    appelAPI('getDropdownLists')
+  ]);
+  if (resCol && resCol.success) {
+    donneesCollections = resCol.items || [];
+    afficherCollections();
+  }
+  if (resRec && resRec.success) {
+    donneesRecettes = (resRec.recettes || []).sort((a, b) =>
+      (parseInt(a.rang) || 99) - (parseInt(b.rang) || 99) ||
+      (a.ligne || '').localeCompare(b.ligne || '') ||
+      (a.nom || '').localeCompare(b.nom || '')
+    );
+  }
+  if (resDrop) {
+    listesDropdown.types    = resDrop.types    || [];
+    listesDropdown.fullData = resDrop.fullData || [];
+    listesDropdown.config   = resDrop.config   || {};
+  }
+  const nbPublics = donneesRecettes.filter(r => r.statut === 'public').length;
+  const statCol = document.getElementById('admin-stat-collections');
+  const statRec = document.getElementById('admin-stat-produits');
+  if (statCol) statCol.textContent = new Set(donneesCollections.map(i => i.collection)).size;
+  if (statRec && nbPublics > 0) statRec.textContent = nbPublics + '+';
+}
 
 // ─── NAVIGATION SIDEBAR ───
 function toggleDropdownAdmin(el) {
@@ -64,9 +92,9 @@ function afficherSection(id, bouton) {
   document.documentElement.scrollTop = 0;
   const contenu = document.querySelector('.admin-contenu');
   if (contenu) contenu.scrollTop = 0;
-if (id === 'accueil')        chargerStatsAccueil();
-if (id === 'collections')    { chargerCollections(); chargerListesFournisseurs(); }
-if (id === 'recettes')       { chargerRecettes(); chargerListesFournisseurs(); }
+if (id === 'accueil')        afficherStatsAccueil();
+if (id === 'collections')    afficherCollections();
+if (id === 'recettes')       afficherRecettes();
 if (id === 'inci')           chargerInci();
 if (id === 'densites')       chargerDensites();
 if (id === 'inventaire')     chargerInventaire();
@@ -85,18 +113,13 @@ if (id === 'import-recettes') {
 }
 
 // ─── STATS ACCUEIL ───
-async function chargerStatsAccueil() {
-  try {
-   const resCol = await appelAPI('getCollectionsPublic');
-    if (resCol && resCol.collections) {
-      document.getElementById('admin-stat-collections').textContent = resCol.collections.length;
-    }
-    const resRec = await appelAPI('getRecettes');
-    if (resRec && resRec.recettes) {
-      const nb = resRec.recettes.filter(r => r.statut === 'public').length;
-      document.getElementById('admin-stat-produits').textContent = nb + '+';
-    }
-  } catch(err) {}
+function afficherStatsAccueil() {
+  const nbCollections = new Set(donneesCollections.map(i => i.collection)).size;
+  const nbPublics = donneesRecettes.filter(r => r.statut === 'public').length;
+  const statCol = document.getElementById('admin-stat-collections');
+  const statRec = document.getElementById('admin-stat-produits');
+  if (statCol) statCol.textContent = nbCollections;
+  if (statRec && nbPublics > 0) statRec.textContent = nbPublics + '+';
 }
 
 // ─── BURGER MOBILE ───
@@ -174,17 +197,19 @@ function stringToColor(str) {
 let donneesCollections = [];
  
 async function chargerCollections() {
+  const res = await appelAPI('getCollections');
+  if (!res || !res.success) { afficherMsg('collections', 'Erreur lors du chargement.', 'erreur'); return; }
+  donneesCollections = res.items || [];
+  afficherCollections();
+}
+
+function afficherCollections() {
   const loading = document.getElementById('loading-collections');
   const contenu = document.getElementById('contenu-collections');
   const vide    = document.getElementById('vide-collections');
-  loading.classList.remove('cache');
+  if (loading) loading.classList.add('cache');
   contenu.innerHTML = '';
   vide.classList.add('cache');
-
-  const res = await appelAPI('getCollections');
-  loading.classList.add('cache');
-  if (!res || !res.success) { afficherMsg('collections', 'Erreur lors du chargement.', 'erreur'); return; }
-  donneesCollections = res.items || [];
   if (!donneesCollections.length) { vide.classList.remove('cache'); return; }
 
   const groupes = {};
@@ -565,24 +590,26 @@ let recetteActive = null;
 let collectionsDisponibles = {};
 
 async function chargerRecettes() {
-  const loading = document.getElementById('loading-recettes');
-  const grille  = document.getElementById('grille-recettes');
-  const vide    = document.getElementById('vide-recettes');
-  loading.classList.remove('cache');
-  grille.classList.add('cache');
-  vide.classList.add('cache');
-  document.getElementById('filtre-recette-collection').value = '';
-  document.getElementById('filtre-recette-ligne').innerHTML  = '<option value="">Toutes les lignes</option>';
-  document.getElementById('filtre-recette-ligne').disabled   = true;
-
-   const res = await appelAPI('getRecettes');
-
- if (!res || !res.success) { loading.classList.add('cache'); afficherMsg('recettes', 'Erreur.', 'erreur'); return; }
+  const res = await appelAPI('getRecettes');
+  if (!res || !res.success) { afficherMsg('recettes', 'Erreur.', 'erreur'); return; }
   donneesRecettes = (res.recettes || []).sort((a, b) =>
     (parseInt(a.rang) || 99) - (parseInt(b.rang) || 99) ||
     (a.ligne || '').localeCompare(b.ligne || '') ||
     (a.nom || '').localeCompare(b.nom || '')
   );
+  afficherRecettes();
+}
+
+async function afficherRecettes() {
+  const loading = document.getElementById('loading-recettes');
+  const grille  = document.getElementById('grille-recettes');
+  const vide    = document.getElementById('vide-recettes');
+  if (loading) loading.classList.add('cache');
+  grille.classList.add('cache');
+  vide.classList.add('cache');
+  document.getElementById('filtre-recette-collection').value = '';
+  document.getElementById('filtre-recette-ligne').innerHTML  = '<option value="">Toutes les lignes</option>';
+  document.getElementById('filtre-recette-ligne').disabled   = true;
   await chargerCollectionsPourSelecteur();
 
   if (!donneesRecettes.length) { loading.classList.add('cache'); vide.classList.remove('cache'); return; }
@@ -755,12 +782,10 @@ function reinitialiserFiltresRecettes() {
 
    
 async function chargerCollectionsPourSelecteur() {
-  const res = await appelAPI('getCollections');
-  if (!res || !res.success) return;
   const sel = document.getElementById('fr-collection');
   sel.innerHTML = '<option value="">— Choisir —</option>';
   collectionsDisponibles = {};
-  (res.items || []).forEach(item => {
+  (donneesCollections || []).forEach(item => {
     if (!collectionsDisponibles[item.collection]) collectionsDisponibles[item.collection] = [];
     if (item.ligne && !collectionsDisponibles[item.collection].includes(item.ligne))
       collectionsDisponibles[item.collection].push(item.ligne);
