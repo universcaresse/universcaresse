@@ -712,26 +712,15 @@ function ouvrirModal(produit) {
     photo.style.background = `linear-gradient(145deg, ${produit.couleur_hex}dd, ${produit.couleur_hex}88)`;
   }
 
-  const formats = Array.isArray(produit.formats) ? produit.formats : (produit.format ? [produit.format] : []);
-  const prix = produit.prix_vente ? parseFloat(produit.prix_vente).toFixed(2).replace('.', ',') + ' $' : '—';
-  const formatsEl = document.getElementById('modal-formats');
-  const formatsTitre = document.getElementById('modal-formats-titre');
-  formatsEl.innerHTML = '';
-  if (formats.length > 0) {
-    if (formatsTitre) formatsTitre.classList.remove('cache');
-    formats.forEach((f, i) => {
-      const btn = document.createElement('div');
-      btn.className = 'modal-format' + (i === 0 ? ' selectionne' : '');
-      btn.innerHTML = `${f}<span class="modal-format-prix">${prix}</span>`;
-      btn.onclick = () => {
-        document.querySelectorAll('.modal-format').forEach(b => b.classList.remove('selectionne'));
-        btn.classList.add('selectionne');
-      };
-      formatsEl.appendChild(btn);
-    });
-  } else {
-    if (formatsTitre) formatsTitre.classList.add('cache');
-  }
+  const prixFormat = Array.isArray(produit.formats_complets) && produit.formats_complets.length
+    ? produit.formats_complets.map(f => `${parseFloat(f.prix_vente).toFixed(2).replace('.', ',')} $ / ${f.poids} ${f.unite}`).join('&nbsp;&nbsp;·&nbsp;&nbsp;')
+    : '';
+  const prixFormatEl = document.getElementById('modal-prix-format');
+  if (prixFormatEl) prixFormatEl.innerHTML = prixFormat;
+
+  const inci = genererInci(produit.ingredients || []);
+  const inciEl = document.getElementById('modal-inci');
+  if (inciEl) inciEl.textContent = inci || '';
 
   document.getElementById('modal-produit').classList.add('ouvert');
   document.body.style.overflow = 'hidden';
