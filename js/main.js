@@ -52,17 +52,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   initNav();
   initScrollAnimations();
   initSPA();
-  const [resCat, resContenu] = await Promise.all([
-    appelAPI('getCatalogue'),
-    appelAPI('getContenu')
-  ]);
-  if (resCat && resCat.success) donneesCatalogue = resCat;
+  const resContenu = await appelAPI('getContenu');
   if (resContenu && resContenu.success) appliquerContenu(resContenu.contenu);
   initSPA();
-  afficherCollectionsPublic();
-  afficherNbProduits();
-  const hash = window.location.hash.replace('#', '') || 'accueil';
-  if (hash === 'catalogue') afficherCatalogue();
+  appelAPI('getCatalogue').then(resCat => {
+    if (resCat && resCat.success) {
+      donneesCatalogue = resCat;
+      afficherCollectionsPublic();
+      afficherNbProduits();
+    }
+  });
 });
 
 window.addEventListener('resize', () => {
