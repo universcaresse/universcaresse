@@ -1042,8 +1042,9 @@ async function sauvegarderRecette() {
       })
   };
   if (!d.nom) { afficherMsg('recettes', 'Le nom est requis.', 'erreur'); return; }
-  const res = await appelAPIPost('saveRecette', d);
+ const res = await appelAPIPost('saveRecette', d);
 if (res && res.success) {
+    await appelAPIPost('deleteAllRecetteFormats', { recette_id: d.recette_id });
     for (const f of formatsRecette) {
       await appelAPIPost('saveRecetteFormat', { recette_id: d.recette_id, poids: f.poids, unite: f.unite, prix_vente: f.prix, desc_emballage: f.desc || '' });
     }
