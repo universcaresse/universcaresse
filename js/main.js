@@ -51,13 +51,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   verifierSession();
   initNav();
   initScrollAnimations();
+  initSPA();
   const [resCat, resContenu] = await Promise.all([
     appelAPI('getCatalogue'),
     appelAPI('getContenu')
   ]);
   if (resCat && resCat.success) donneesCatalogue = resCat;
   if (resContenu && resContenu.success) appliquerContenu(resContenu.contenu);
-  initSPA();
+  const hash = window.location.hash.replace('#', '') || 'accueil';
+  if (hash === 'accueil') { afficherCollectionsPublic(); afficherNbProduits(); }
+  if (hash === 'catalogue') afficherCatalogue();
 });
 
 window.addEventListener('resize', () => {
