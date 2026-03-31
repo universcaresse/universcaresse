@@ -51,13 +51,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   verifierSession();
   initNav();
   initScrollAnimations();
-  initSPA();
   const [resCat, resContenu] = await Promise.all([
     appelAPI('getCatalogue'),
     appelAPI('getContenu')
   ]);
   if (resCat && resCat.success) donneesCatalogue = resCat;
   if (resContenu && resContenu.success) appliquerContenu(resContenu.contenu);
+  initSPA();
   afficherCollectionsPublic();
   afficherNbProduits();
   const hash = window.location.hash.replace('#', '') || 'accueil';
