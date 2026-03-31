@@ -3097,6 +3097,115 @@ function importLireFichier(input) {
   reader.readAsText(fichier, 'UTF-8');
 }
 
+async function importEnLot(input) {
+  const fichiers = Array.from(input.files);
+  if (!fichiers.length) return;
+  const msg = document.getElementById('msg-import-recettes');
+  msg.textContent = `Import en cours — 0 / ${fichiers.length}`;
+  msg.className = 'msg-zone';
+
+  let nextId = parseInt(document.getElementById('import-recette-id').value) || 1;
+  let succes = 0;
+  let erreurs = [];
+
+  for (let i = 0; i < fichiers.length; i++) {
+    const texte = await new Promise((res, rej) => {
+      const r = new FileReader();
+      r.onload = e => res(e.target.result);
+      r.onerror = () => rej();
+      r.readAsText(fichiers[i], 'UTF-8');
+    });
+
+    try {
+      const parsed = importParserTexte(texte, nextId);
+      const res = await appelAPIPost('saveRecette', parsed);
+      if (res && res.success) {
+        succes++;
+        nextId++;
+        msg.textContent = `Import en cours — ${i + 1} / ${fichiers.length} — ${fichiers[i].name}`;
+      } else {
+        erreurs.push(fichiers[i].name);
+      }
+    } catch(e) {
+      erreurs.push(fichiers[i].name);
+    }
+  }
+
+  document.getElementById('import-recette-id').value = nextId;
+  input.value = '';
+
+  if (erreurs.length === 0) {
+    afficherMsg('import-recettes', `✅ ${succes} recettes importées avec succès.`, 'succes');
+  } else {
+    afficherMsg('import-recettes', `${succes} importées — Erreurs : ${erreurs.join(', ')}`, 'erreur');
+  }
+  await chargerRecettes();
+}
+
+function importParserTexte(texte, id) {
+  const get = (regex) => { const m = texte.match(regex); return m ? m[1].trim() : ''; };
+  const lignes = texte.split('\n');
+
+  const nom            = get(/^#\s+(.+?)(?:\s+—|$)/m);
+  const ligne          = get(/\*\*Ligne\s*:\*\*\s*(.+?)(?:\s*\||\n)/);
+  const cure           = get(/\*\*Cure\s*:\*\*\s*(\d+)/) || '';
+  const nb_unites      = get(/\*\*Nb unités\s*:\*\*\s*(\d+)/) || '';
+  const statut         = get(/\*\*Statut\s*:\*\*\s*(\w+)/) || 'test';
+  const couleur_hex    = get(/\*\*HEX\s*:\*\*\s*(#[0-9a-fA-F]{3,6})/);
+  const image_url      = get(/\*\*Image\s*:\*\*\s*(https?:\/\/\S+)(?!\s*Noël)/);
+  const image_url_noel = get(/\*\*Image Noël\s*:\*\*\s*(https?:\/\/\S+)/);
+  const surgras        = get(/\*\*Surgras\s*:\*\*\s*(\d+%?)/);
+  const rang           = get(/\*\*Rang\s*:\*\*\s*(\d+)/);
+  const desc_courte    = get(/\*\*Version courte\s*:\*\*\s*(.+)/);
+  const desc_longue    = get(/\*\*Version longue\s*:\*\*\s*(.+)/);
+  const notes          = get(/\*\*Notes\s*:\*\*\s*(.+)/);
+  const collection     = get(/^#\s+.+?—\s+(.+)$/m) || 'SAPONICA';
+
+  const ingredients = [];
+  let dansIngredients = false;
+  for (const ligne_raw of lignes) {
+    const l = ligne_raw.trim();
+    if (l.match(/^##\s+RECETTE/i) || l.match(/^\*\*Fragrances\s*:|\*\*Additifs\s*:/i)) { dansIngredients = true; continue; }
+    if (dansIngredients && l === '---') { continue; }
+    if (dansIngredients && l.match(/^\*\*(?!Fragrances|Additifs)/i)) { dansIngredients = false; continue; }
+    if (dansIngredients && l.startsWith('- ')) {
+      const m = l.match(/^-\s+([\d.,]+)\s*g\s+(.+)/);
+      if (m) {
+        const qte = parseFloat(m[1].replace(',', '.')) || 0;
+        const nomIng = m[2].trim();
+        const foundIng = (listesDropdown.fullData || []).find(d => d.ingredient.toLowerCase() === nomIng.toLowerCase());
+        const nomFinal = foundIng ? foundIng.ingredient : nomIng;
+        const inciFinal = foundIng ? (foundIng.inci || '') : '';
+        const typeFinal = foundIng ? foundIng.type : importDevinerType(nomIng);
+        ingredients.push({ type: typeFinal, nom: nomFinal, quantite_g: qte, cout: 0, inci: inciFinal });
+      } else {
+        const nomIng = l.replace(/^-\s+/, '').trim();
+        if (nomIng && !nomIng.match(/mélanger|melanger|^¼|^½|^¾|sur le dessus|gouttes|flocons|restes/i)) {
+          const foundIng = (listesDropdown.fullData || []).find(d => d.ingredient.toLowerCase() === nomIng.toLowerCase());
+          const nomFinal = foundIng ? foundIng.ingredient : nomIng;
+          const inciFinal = foundIng ? (foundIng.inci || '') : '';
+          const typeFinal = foundIng ? foundIng.type : importDevinerType(nomIng);
+          ingredients.push({ type: typeFinal, nom: nomFinal, quantite_g: 0, cout: 0, inci: inciFinal });
+        }
+      }
+    }
+  }
+
+  return {
+    action: 'saveRecette',
+    recette_id: String(id),
+    nom, collection, ligne: ligne.toUpperCase(), statut,
+    nb_unites: parseInt(nb_unites) || 1,
+    cure: parseInt(cure) || 0,
+    surgras, couleur_hex, image_url, image_url_noel,
+    desc_emballage: desc_courte,
+    description: desc_longue,
+    notes, rang,
+    format: '', prix_vente: 0, instructions: '', collections_secondaires: [],
+    ingredients
+  };
+}
+
 function importAnnuler() {
   document.getElementById('import-apercu-zone').classList.add('cache');
   document.getElementById('imp-ingredients').innerHTML = '';
