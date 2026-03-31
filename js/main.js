@@ -52,9 +52,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   initNav();
   initScrollAnimations();
   initSPA();
+  initSPA();
   const resContenu = await appelAPI('getContenu');
   if (resContenu && resContenu.success) appliquerContenu(resContenu.contenu);
-  initSPA();
   appelAPI('getCatalogue').then(resCat => {
     if (resCat && resCat.success) {
       donneesCatalogue = resCat;
