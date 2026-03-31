@@ -153,7 +153,7 @@ function afficherSection(id) {
     afficherNbProduits();
   }
   if (id === 'catalogue') {
-    afficherCatalogue();
+    chargerCatalogue();
   }
   if (id === 'educatif') {
     afficherEduSection(1);
