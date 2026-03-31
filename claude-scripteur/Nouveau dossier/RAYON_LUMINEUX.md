@@ -20,11 +20,10 @@
 - 10g Huile végétale de pépins de raisin
 - 5g Poudre de bardane
 - 6g Glycérine végétale
-- 8-10 gouttes HE citron ou pamplemousse
 
 ---
 
-**Notes :** 
+**Notes :** 8-10 gouttes HE citron ou pamplemousse
 
 **Version courte :** La chevelure s'illumine d'une fraîcheur solaire et pétillante.
 

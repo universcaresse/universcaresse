@@ -29,10 +29,9 @@
 
 **Additifs :**
 - 5g Argile blanche
-- 5 gouttes orange
 - 5g Gomme balloune (fragrance)
 
-**Notes :** Orange / 1 c. à thé Argile blanche = 5g
+**Notes :** Orange / 1 c. à thé Argile blanche = 5g / 5 gouttes colorant orange
 
 **Version courte :** Un nuage espiègle et sucré, gomme balloune et rires d'enfants dans une mousse joyeuse.
 

@@ -28,10 +28,9 @@
 
 **Additifs :**
 - 5g Argile rose
-- 5 gouttes rose foncé
 - 5g Smoothie aux mûres (fragrance)
 
-**Notes :** Rose foncé / 1 c. à thé Argile rose = 5g
+**Notes :** Rose foncé / 1 c. à thé Argile rose = 5g / 5 gouttes colorant rose foncé
 
 **Version courte :** Un souffle mauve et fruité, velouté comme un smoothie d'été, doux comme une caresse de mûre.
 

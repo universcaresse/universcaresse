@@ -1,4 +1,4 @@
-# BAUME LÈVRES ENFANT — Petit nuage douillet (hiver) — ÉMOLIA
+# PETIT NUAGE DOUILLET — ÉMOLIA
 
 **Date de création :** 19 mars 2026
 **Dernière mise à jour :** 28 mars 2026

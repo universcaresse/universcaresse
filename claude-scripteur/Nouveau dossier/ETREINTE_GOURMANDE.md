@@ -27,8 +27,8 @@
 **Additifs :**
 - 22g Avoine colloïdale
 - 22g Amande moulue
-- 22g Miel
-- 10g Amande amère
+- 22g miel
+- 10g HA amande amère
 
 **Notes :** 22g Avoine colloïdale = 2 c. à table / 22g Amande moulue = 2 c. à table / 22g Miel = 2 c. à table / Flocons d'avoine et amande sur le dessus / Moitié blanc, moitié or
 

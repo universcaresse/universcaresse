@@ -21,11 +21,10 @@
 - 8g Beurre de cacao brut
 - 5g Poudre de guimauve
 - 6g Glycérine végétale
-- 8-10 gouttes HE menthe poivrée
 
 ---
 
-**Notes :** Ce savon est beige
+**Notes :** Ce savon est beige / 8-10 gouttes HE menthe poivrée
 
 **Version courte :** Sous sa caresse, le cuir chevelu s'illumine comme au lever du jour.
 

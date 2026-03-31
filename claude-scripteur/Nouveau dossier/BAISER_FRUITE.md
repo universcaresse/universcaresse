@@ -18,7 +18,7 @@
 - 25g Huile de calendula
 - 25g Huile végétale jojoba
 - 14g Beurre de mangue
-- 2-4g Allantoine
+- 4g Allantoine
 - 1.5g Vitamine E
 - 0.6g Arôme de fraises
 - 0.6g Arôme cerise
@@ -26,7 +26,7 @@
 
 ---
 
-**Notes :** Colore les lèvres
+**Notes :** Colore les lèvres / 2-4g Allantoine selon sensibilité
 
 **Version courte :** La douceur des fruits rouges, un brillant qui fait tout dire.
 

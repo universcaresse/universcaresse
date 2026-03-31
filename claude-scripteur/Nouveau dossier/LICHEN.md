@@ -1,4 +1,4 @@
-# LICHEN — Été — LUI
+# LICHEN — LUI
 
 **Date de création :** 19 mars 2026
 **Dernière mise à jour :** 28 mars 2026
@@ -32,9 +32,8 @@
 
 **Additifs :**
 - 20g Huile végétale amande douce (à la trace)
-- 1-1.5 c. à thé Spiruline — dispersée dans huile
 
-**Notes :** 1-1.5 c. à thé Spiruline
+**Notes :** 1-1.5 c. à thé Spiruline / 1-1.5 c. à thé Spiruline dispersée dans huile
 
 **Version courte :** Savon d'été rafraîchissant. Formulé avec olive, coco et ricin pour une mousse généreuse. Spiruline naturelle, senteur de sous-bois après la pluie. Saponifié à froid. Curé 6 semaines.
 

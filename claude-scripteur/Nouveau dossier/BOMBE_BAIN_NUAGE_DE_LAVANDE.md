@@ -19,14 +19,13 @@
 - 50g Sel d'Epsom
 - 10g Eau
 - 45g Huile végétale amande douce
-- 6g fleurs si désiré
 
 ---
 
 **Additifs :**
 - 0.50g HE lavande
 
-**Notes :** 10g Eau = 2 c. à thé / 45g Huile végétale amande douce = 3 c. à table / 6g fleurs = 1 c. à table / Colorant ⚠️ à confirmer avec Chantal
+**Notes :** 10g Eau = 2 c. à thé / 45g Huile végétale amande douce = 3 c. à table / 6g fleurs = 1 c. à table / Colorant ⚠️ à confirmer avec Chantal / 6g fleurs si désiré
 
 **Version courte :** La lavande à l'état pur — une effervescence douce pour un bain tout en quiétude.
 

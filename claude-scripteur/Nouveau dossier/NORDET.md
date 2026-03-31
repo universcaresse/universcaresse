@@ -1,4 +1,4 @@
-# NORDET — Hiver — LUI
+# NORDET — LUI
 
 **Date de création :** 19 mars 2026
 **Dernière mise à jour :** 28 mars 2026
@@ -31,11 +31,10 @@
 
 **Additifs :**
 - 25g Huile végétale amande douce (à la trace)
-- 1.5-2 c. à thé Indigo — dispersé dans huile 30 min avant
 - 6g Flocons d'avoine mixés fins
-- 4.5g Miel
+- 4.5g miel
 
-**Notes :** Karité + indigo accélèrent la trace / 1.5-2 c. à thé indigo / 6g Flocons d'avoine mixés fins = 1 c. à soupe / 4.5g Miel = 1 c. à thé
+**Notes :** Karité + indigo accélèrent la trace / 6g Flocons d'avoine mixés fins = 1 c. à soupe / 4.5g Miel = 1 c. à thé / 1.5-2 c. à thé Indigo dispersé dans huile 30 min avant
 
 **Version courte :** Pour ceux qui ne négocient pas avec l'hiver.
 

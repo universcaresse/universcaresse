@@ -2297,8 +2297,9 @@ async function inciValider(id, nom, cat, source) {
   const categorieUC   = document.getElementById(`${id}-cat`)?.value   || cat;
   const nomUC         = document.getElementById(`${id}-nomuc`)?.value || '';
 
+  const ancienNomUC = (inciDonnees.find(l => l.nom.toLowerCase() === nom.toLowerCase()) || {}).nomUC || '';
   const res = await appelAPIPost('validerIngredientInci', {
-    nom, categorie: categorieUC, inci, source, nomBotanique, noteOlfactive, nomUC
+    nom, categorie: categorieUC, inci, source, nomBotanique, noteOlfactive, nomUC, ancienNomUC
   });
 
   if (res && res.success) {
@@ -3158,8 +3159,10 @@ function importParserTexte(texte, id) {
   const rang           = get(/\*\*Rang\s*:\*\*\s*(\d+)/);
   const desc_courte    = get(/\*\*Version courte\s*:\*\*\s*(.+)/);
   const desc_longue    = get(/\*\*Version longue\s*:\*\*\s*(.+)/);
-  const notes          = get(/\*\*Notes\s*:\*\*\s*(.+)/);
-  const collection     = get(/^#\s+.+?—\s+(.+)$/m) || 'SAPONICA';
+  const notes               = get(/\*\*Notes\s*:\*\*\s*(.+)/);
+  const collection          = get(/^#\s+.+—\s+([^—\n]+)$/m) || 'SAPONICA';
+  const colsSecondairesRaw  = get(/\*\*Collections secondaires\s*:\*\*\s*(.+)/);
+  const collections_secondaires = colsSecondairesRaw ? colsSecondairesRaw.split(',').map(s => s.trim()).filter(Boolean) : [];
 
   const ingredients = [];
   let dansIngredients = false;
@@ -3201,7 +3204,7 @@ function importParserTexte(texte, id) {
     desc_emballage: desc_courte,
     description: desc_longue,
     notes, rang,
-    format: '', prix_vente: 0, instructions: '', collections_secondaires: [],
+    format: '', prix_vente: 0, instructions: '', collections_secondaires,
     ingredients
   };
 }

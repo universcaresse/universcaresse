@@ -24,7 +24,7 @@
 ---
 
 **Fragrances :**
-- 16g O'masculin (Cèdre bleu, Jasmin, Magnolia, Patchouli, Romarin)
+- 16g HA O'masculin
 
 **Additifs :**
 

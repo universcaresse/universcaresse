@@ -20,11 +20,10 @@
 - 5g Beurre de cacao brut
 - 5g Poudre ortie
 - 6g Glycérine végétale
-- 8-10 gouttes HE tea tree
 
 ---
 
-**Notes :** Ce savon est vert foncé
+**Notes :** Ce savon est vert foncé / 8-10 gouttes HE tea tree
 
 **Version courte :** La chevelure respire comme une clairière purifiée.
 

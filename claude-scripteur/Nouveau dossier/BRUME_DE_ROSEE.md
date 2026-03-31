@@ -25,9 +25,8 @@
 - 16g HE menthe poivrée
 
 **Additifs :**
-- 9 Luffa (1 par savon)
 
-**Notes :** Micas à fleurs bleues ⚠️ quantité à confirmer / Couleur vert grass
+**Notes :** Micas à fleurs bleues ⚠️ quantité à confirmer / Couleur vert grass / 9 Luffa (1 par savon)
 
 **Version courte :** Le luffa réveille, la menthe vivifie. Une fraîcheur verte pour une peau neuve.
 

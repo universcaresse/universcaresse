@@ -20,7 +20,6 @@
 - 50g Sel d'Epsom
 - 10g Eau
 - 45g Huile végétale amande douce
-- 6g fleurs si désiré
 
 ---
 
@@ -28,7 +27,7 @@
 - 0.50g HA brise de mer
 - 0.50g HE cèdre bleu
 
-**Notes :** 10g Eau = 2 c. à thé / 45g Huile végétale amande douce = 3 c. à table / 6g fleurs = 1 c. à table / Colorant ⚠️ à confirmer avec Chantal
+**Notes :** 10g Eau = 2 c. à thé / 45g Huile végétale amande douce = 3 c. à table / 6g fleurs = 1 c. à table / Colorant ⚠️ à confirmer avec Chantal / 6g fleurs si désiré
 
 **Version courte :** Une escapade aquatique — la brise marine et le cèdre bleu pour un bain qui sent l'horizon.
 

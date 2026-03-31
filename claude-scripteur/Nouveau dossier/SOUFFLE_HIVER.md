@@ -20,14 +20,13 @@
 - 0.4g HE eucalyptus (8 gouttes)
 - 0.3g HE menthe poivrée (6 gouttes)
 - 0.2g HE ravintsara (4 gouttes)
-- 5 gouttes colorant bleu
 - 2.5g Vitamine E
 
 ---
 
 **Instructions :** Appliquer sur les lèvres et sous les narines. Conservation 1 an.
 
-**Notes :** 
+**Notes :** 5 gouttes colorant bleu
 
 **Version courte :** Un souffle chaud qui libère, répare et protège au cœur de l'hiver.
 

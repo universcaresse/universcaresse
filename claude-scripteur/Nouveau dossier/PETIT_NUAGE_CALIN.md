@@ -28,10 +28,9 @@
 
 **Additifs :**
 - 5g Argile blanche
-- 5 gouttes bleu
 - 5g Fragrance poudre de bébé
 
-**Notes :** 1 c. à thé Argile blanche = 5g
+**Notes :** 1 c. à thé Argile blanche = 5g / 5 gouttes colorant bleu
 
 **Version courte :** Un savon tendre comme une étreinte, pensé pour envelopper la peau d'une douceur rassurante.
 

@@ -28,9 +28,8 @@
 
 **Additifs :**
 - 5g Argile rose
-- 5 gouttes rose
 
-**Notes :** 1 c. à thé Argile rose = 5g
+**Notes :** 1 c. à thé Argile rose = 5g / 5 gouttes colorant rose
 
 **Version courte :** Une bulle de tendresse, une invitation à la douceur quotidienne.
 

@@ -20,7 +20,6 @@
 - 50g Sel d'Epsom
 - 10g Eau
 - 45g Huile végétale amande douce
-- 6g fleurs si désiré
 
 ---
 
@@ -29,7 +28,7 @@
 - 0.50g HE cèdre feuilles
 - 0.50g HE palmarosa
 
-**Notes :** 10g Eau = 2 c. à thé / 45g Huile végétale amande douce = 3 c. à table / 6g fleurs = 1 c. à table / Colorant ⚠️ à confirmer avec Chantal / Musc blanc à confirmer avec Chantal
+**Notes :** 10g Eau = 2 c. à thé / 45g Huile végétale amande douce = 3 c. à table / 6g fleurs = 1 c. à table / Colorant ⚠️ à confirmer avec Chantal / Musc blanc à confirmer avec Chantal / 6g fleurs si désiré
 
 **Version courte :** Le grand air du Nord dans un bain effervescent — bois, verdure et musc pour une détente profonde.
 

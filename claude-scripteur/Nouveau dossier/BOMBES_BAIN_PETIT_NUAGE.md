@@ -15,7 +15,7 @@
 ## RECETTE BOMBE DE BAIN PETIT NUAGE
 
 - 240g Bicarbonate de soude
-- 120g Acide citrique
+- 120g Acide citrique en poudre
 - 120g Fécule de maïs
 - 26g Huile végétale amande douce
 - 13g Beurre de karité fondu

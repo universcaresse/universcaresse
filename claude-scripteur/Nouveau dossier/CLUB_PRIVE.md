@@ -26,7 +26,7 @@
 ---
 
 **Fragrances :**
-- 11.7g HA cigare *(tête : feuille de tabac fraîche, épices sèches ; cœur : tabac blond et brun, accords cuirés, bois fumés ; fond : cèdre, bois ambrés, muscs chauds)*
+- 11.7g HA cigare
 - 7.8g HA vanille
 
 **Instructions :** Travailler la pâte à 34°C. Garder de côté un peu de pâte pour marbrage crème et chocolat. Le reste va brunir avec le temps. Mélanger les fragrances à la main. Ajouter un peu de Charbon activé végétal dans une couche.
