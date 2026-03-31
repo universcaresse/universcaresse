@@ -729,7 +729,7 @@ function ouvrirModal(produit) {
       const unPctOuMoins = autres.filter(i => (i.quantite_g / total) <= 0.01);
       const lignes = [...plusDeUnPct, ...unPctOuMoins].map(i => i.inci || i.nom).filter(Boolean);
       if (fragrances.length > 0) lignes.push('Fragrance');
-      inciEl.textContent = lignes.join(', ');
+      inciEl.textContent = 'Ingrédients : ' + lignes.join(', ');
     } else {
       inciEl.textContent = '';
     }
