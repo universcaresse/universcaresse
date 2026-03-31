@@ -2876,7 +2876,7 @@ function validerConnexionAdmin() {
   if (mdp === CONFIG.MOT_DE_PASSE) {
     sessionStorage.setItem('uc_admin', 'true');
     document.getElementById('ecran-connexion').classList.add('cache');
-    chargerStatsAccueil();
+    await chargerDonneesInitiales();
     afficherSection('accueil', null);
   } else {
     document.getElementById('erreur-mdp-admin').textContent = 'Mot de passe incorrect.';

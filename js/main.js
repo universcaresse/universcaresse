@@ -45,12 +45,19 @@ let adminConnecte = false;
 let scrollObserver = null;
 
 // ─── INITIALISATION ───
-document.addEventListener('DOMContentLoaded', () => {
+let donneesCatalogue = null;
+
+document.addEventListener('DOMContentLoaded', async () => {
   verifierSession();
   initNav();
-  initSPA();
   initScrollAnimations();
-  chargerContenu();
+  const [resCat, resContenu] = await Promise.all([
+    appelAPI('getCatalogue'),
+    appelAPI('getContenu')
+  ]);
+  if (resCat && resCat.success) donneesCatalogue = resCat;
+  if (resContenu && resContenu.success) appliquerContenu(resContenu.contenu);
+  initSPA();
 });
 
 window.addEventListener('resize', () => {
@@ -138,11 +145,11 @@ function afficherSection(id) {
 
   // Charger le contenu dynamique selon la section
   if (id === 'accueil') {
-    chargerCollections();
-    chargerNbProduits();
+    afficherCollectionsPublic();
+    afficherNbProduits();
   }
   if (id === 'catalogue') {
-    chargerCatalogue();
+    afficherCatalogue();
   }
   if (id === 'educatif') {
     afficherEduSection(1);
@@ -322,44 +329,37 @@ function majuscules(texte) {
 }
 
 // ─── ACCUEIL — COLLECTIONS ───
-async function chargerCollections() {
-  try {
-    const data = await appelAPI('getCollectionsPublic');
-    if (!data || !data.success || !data.collections) { afficherCollectionsFallback(); return; }
-
-    const strip = document.getElementById('collections-strip');
-    const count = document.getElementById('collections-count');
-    const statCol = document.getElementById('hero-stat-collections');
-    if (count) count.textContent = data.collections.length + ' collections';
-    if (statCol) statCol.textContent = data.collections.length;
-    if (!strip) return;
-    strip.innerHTML = '';
-
-    data.collections.forEach(col => {
-      const couleurs = couleurCollection(col.nom, col.couleur_hex);
-      strip.innerHTML += `
-        <a href="#catalogue" onclick="naviguer('catalogue'); filtrerApresChargement('${col.nom}');" class="collection-tile" style="--col-hex-1: ${couleurs[0]}; --col-hex-2: ${couleurs[1]};">
-          <div class="collection-tile-bg"></div>
-          <div class="collection-tile-overlay"></div>
-          <div class="collection-tile-content">
-            <span class="collection-tile-name">${col.nom.toUpperCase()}</span>
-            <span class="collection-tile-slogan">${col.slogan || ''}</span>
-          </div>
-        </a>`;
-    });
-  } catch (err) {
-    afficherCollectionsFallback();
-  }
+function afficherCollectionsPublic() {
+  if (!donneesCatalogue) { afficherCollectionsFallback(); return; }
+  const collections = donneesCatalogue.collections || [];
+  const infoCollections = donneesCatalogue.infoCollections || {};
+  const strip = document.getElementById('collections-strip');
+  const count = document.getElementById('collections-count');
+  const statCol = document.getElementById('hero-stat-collections');
+  if (count) count.textContent = collections.length + ' collections';
+  if (statCol) statCol.textContent = collections.length;
+  if (!strip) return;
+  strip.innerHTML = '';
+  collections.forEach(nom => {
+    const info = infoCollections[nom] || {};
+    const couleurs = couleurCollection(nom, info.couleur_hex);
+    strip.innerHTML += `
+      <a href="#catalogue" onclick="naviguer('catalogue'); filtrerApresChargement('${nom}');" class="collection-tile" style="--col-hex-1: ${couleurs[0]}; --col-hex-2: ${couleurs[1]};">
+        <div class="collection-tile-bg"></div>
+        <div class="collection-tile-overlay"></div>
+        <div class="collection-tile-content">
+          <span class="collection-tile-name">${nom.toUpperCase()}</span>
+          <span class="collection-tile-slogan">${info.slogan || ''}</span>
+        </div>
+      </a>`;
+  });
 }
 
-async function chargerNbProduits() {
-  try {
-    const data = await appelAPI('getRecettes', { t: Date.now() });
-    if (!data || !data.recettes) return;
-    const nb = data.recettes.filter(r => r.statut === 'public').length;
-    const statProd = document.getElementById('hero-stat-produits');
-    if (nb > 0 && statProd) statProd.textContent = nb + '+';
-  } catch (err) {}
+function afficherNbProduits() {
+  if (!donneesCatalogue) return;
+  const nb = (donneesCatalogue.produits || []).length;
+  const statProd = document.getElementById('hero-stat-produits');
+  if (nb > 0 && statProd) statProd.textContent = nb + '+';
 }
 
 function afficherCollectionsFallback() {
@@ -394,40 +394,24 @@ function afficherCollectionsFallback() {
 }
 
 // ─── CATALOGUE ───
-async function chargerCatalogue() {
+function afficherCatalogue() {
   const conteneur = document.getElementById('catalogue-contenu');
   if (!conteneur) return;
-  conteneur.innerHTML = '<p style="padding:40px;color:var(--gris);">Chargement…</p>';
-  try {
-    const data = await appelAPI('getRecettes', { t: Date.now() });
-    if (!data || !data.recettes) { conteneur.innerHTML = '<p style="padding:40px;">Aucun produit disponible.</p>'; return; }
-    const publics = data.recettes.filter(r => r.statut === 'public');
-    if (publics.length === 0) { conteneur.innerHTML = '<p style="padding:40px;">Aucun produit disponible.</p>'; return; }
-    conteneur.innerHTML = publics.map(r => {
-    const couleurs = couleurCollection(r.collection, r.couleur_hex);
-      return `
-        <div class="catalogue-carte">
-          <div class="catalogue-carte-couleur" style="background: linear-gradient(135deg, ${couleurs[0]} 0%, ${couleurs[1]} 100%);"></div>
-          <div class="catalogue-carte-info">
-            <span class="catalogue-carte-collection">${r.collection || ''}</span>
-            <span class="catalogue-carte-nom">${r.nom || ''}</span>
-            <span class="catalogue-carte-ligne">${r.ligne || ''}</span>
-          </div>
-        </div>`;
-    }).join('');
-  } catch (err) {
-    conteneur.innerHTML = '<p style="padding:40px;">Erreur de chargement.</p>';
+  if (!donneesCatalogue || !donneesCatalogue.produits) {
+    conteneur.innerHTML = '<p style="padding:40px;">Aucun produit disponible.</p>';
+    return;
   }
+  const publics = donneesCatalogue.produits;
+  if (publics.length === 0) { conteneur.innerHTML = '<p style="padding:40px;">Aucun produit disponible.</p>'; return; }
+  conteneur.innerHTML = publics.map(p => carteProduit(p)).join('');
 }
 
 
 
 // ─── CONTENU DYNAMIQUE ───
-async function chargerContenu() {
+function appliquerContenu(c) {
   try {
-    const data = await appelAPI('getContenu', { t: Date.now() });
-    if (!data || !data.success || !data.contenu) return;
-    const c = data.contenu;
+    if (!c) return;
     if (String(c.maintenance_active) === '1') { afficherMaintenance(); return; }
     window.modeSaisonnier = String(c.mode_saisonnier) === 'oui';
     const set = (id, val) => { const el = document.getElementById(id); if (el && val) el.textContent = val; };
@@ -553,7 +537,7 @@ setEdu('edu-s7-astuce', c.edu_s7_astuce); setEdu('edu-s7-section2-titre', c.edu_
     });
 
   } catch (err) {
-    console.error('Erreur chargerContenu:', err);
+    console.error('Erreur appliquerContenu:', err);
   }
 }
 
