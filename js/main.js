@@ -718,9 +718,22 @@ function ouvrirModal(produit) {
   const prixFormatEl = document.getElementById('modal-prix-format');
   if (prixFormatEl) prixFormatEl.innerHTML = prixFormat;
 
-  const inci = genererInci(produit.ingredients || []);
   const inciEl = document.getElementById('modal-inci');
-  if (inciEl) inciEl.textContent = inci || '';
+  if (inciEl) {
+    const ingredients = produit.ingredients || [];
+    const total = ingredients.reduce((s, i) => s + (parseFloat(i.quantite_g) || 0), 0);
+    if (total > 0) {
+      const fragrances = ingredients.filter(i => i.type === 'Fragrances');
+      const autres = ingredients.filter(i => i.type !== 'Fragrances');
+      const plusDeUnPct = autres.filter(i => (i.quantite_g / total) > 0.01).sort((a, b) => b.quantite_g - a.quantite_g);
+      const unPctOuMoins = autres.filter(i => (i.quantite_g / total) <= 0.01);
+      const lignes = [...plusDeUnPct, ...unPctOuMoins].map(i => i.inci || i.nom).filter(Boolean);
+      if (fragrances.length > 0) lignes.push('Fragrance');
+      inciEl.textContent = lignes.join(', ');
+    } else {
+      inciEl.textContent = '';
+    }
+  }
 
   document.getElementById('modal-produit').classList.add('ouvert');
   document.body.style.overflow = 'hidden';
