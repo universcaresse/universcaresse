@@ -58,8 +58,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   ]);
   if (resCat && resCat.success) donneesCatalogue = resCat;
   if (resContenu && resContenu.success) appliquerContenu(resContenu.contenu);
+  afficherCollectionsPublic();
+  afficherNbProduits();
   const hash = window.location.hash.replace('#', '') || 'accueil';
-  if (hash === 'accueil') { afficherCollectionsPublic(); afficherNbProduits(); }
   if (hash === 'catalogue') afficherCatalogue();
 });
 
