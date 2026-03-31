@@ -475,7 +475,7 @@ select.form-control, select.form-ctrl { cursor: pointer; }
 
 .modal-produit {
   background: var(--blanc); max-width: 900px; width: 90%;
-  max-height: min(88vh, 900px);
+  height: min(88vh, 900px);
   display: grid; grid-template-columns: 1fr 1.2fr;
   overflow: hidden;
   animation: modalEntre 0.35s ease;
