@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   verifierSession();
   initNav();
   initScrollAnimations();
+  initSPA();
   const [resCat, resContenu] = await Promise.all([
     appelAPI('getCatalogue'),
     appelAPI('getContenu')
