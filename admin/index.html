@@ -449,19 +449,20 @@
 	   
         <div class="filtres-bar">
           <select class="form-ctrl filtre-select" id="filtre-recette-collection" onchange="onFiltreCollection()">
-            <option value="">Toutes les collections</option>
+            <option value="">Collections</option>
           </select>
           <select class="form-ctrl filtre-select" id="filtre-recette-ligne" onchange="filtrerRecettes()" disabled>
-            <option value="">Toutes les lignes</option>
+            <option value="">Lignes</option>
           </select>
           <select class="form-ctrl filtre-select" id="filtre-recette-statut" onchange="filtrerRecettes()">
-            <option value="">Tous les statuts</option>
+            <option value="">Statuts</option>
             <option value="test">Test</option>
             <option value="public">Public</option>
           </select>
           <input type="text" class="form-ctrl filtre-recherche" id="filtre-recette-nom" oninput="filtrerRecettes()" placeholder="Par nom">
           <select class="form-ctrl filtre-select" id="filtre-recette-complet" onchange="filtrerRecettes()">
-            <option value="">Toutes</option>
+            <option value="">Affichage</option>
+			 <option value="complet">Complètes</option>
             <option value="incomplet">Incomplètes</option>
           </select>
           <button class="btn btn-outline btn-sm" onclick="reinitialiserFiltresRecettes()">Réinitialiser</button>
