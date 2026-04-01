@@ -2822,6 +2822,12 @@ const prixTotal = parseFloat(quantite) * parseFloat(prixUnit);
     type, ingredient, fournisseur: factureActive.fournisseur,
     contenant, quantite: parseFloat(formatQte), unite: formatUnite
   });
+  if (isNouveau) {
+    listesDropdown.formats.push({
+      type, ingredient, fournisseur: factureActive.fournisseur,
+      contenant, quantite: parseFloat(formatQte), unite: formatUnite
+    });
+  }
 
   produitsFacture.push({ type, ingredient, formatQte, formatUnite, prixUnitaire: parseFloat(prixUnit), quantite: parseFloat(quantite), prixTotal });
   afficherMsg('item-msg', 'Item ajouté.', 'succes');
