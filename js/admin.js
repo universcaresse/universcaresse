@@ -217,8 +217,9 @@ function afficherCollections() {
     if (!groupes[item.collection]) {
       groupes[item.collection] = { slogan: item.slogan, couleur_hex: item.couleur_hex, lignes: [] };
     }
-    if (item.ligne) groupes[item.collection].lignes.push(item);
+  if (item.ligne) groupes[item.collection].lignes.push(item);
   });
+  Object.values(groupes).forEach(g => g.lignes.sort((a, b) => (a.ligne || '').localeCompare(b.ligne || '')));
 
   let html = '<div class="collections-grille">';
   Object.entries(groupes).forEach(([col, data]) => {
@@ -284,7 +285,7 @@ document.getElementById('fiche-collection-bandeau').style.background = '';
   if (ficheExtras) ficheExtras.innerHTML = ficheExtrasHtml;
   document.getElementById('fiche-collection-lignes').innerHTML = lignesHtml || '<p class="vide-desc">Aucune ligne</p>';
 document.getElementById('fiche-collection-modifier').onclick = () => {
-    fermerFicheCollection();
+    document.getElementById('fiche-collection').classList.remove('visible');
     modifierCollection(groupe.info.rowIndex);
   };
 document.getElementById('fiche-collection-ajouter-ligne').onclick = () => {
@@ -294,8 +295,8 @@ document.getElementById('fiche-collection-ajouter-ligne').onclick = () => {
     document.getElementById('fc-collection-ligne').value = col || '';
   };
  document.getElementById('btn-supprimer-collection').onclick = () => supprimerCollection(col, groupe);
-  fiche.classList.add('visible');
   document.getElementById('contenu-collections').classList.add('cache');
+  fiche.classList.add('visible');
   window.scrollTo(0, 0);
 }
 
@@ -333,7 +334,7 @@ function ouvrirFormCollection() {
   ingredientsBase = [];
   rafraichirListeIngredientsBase();
   document.getElementById('contenu-collections').classList.add('cache');
- document.getElementById('contenu-collections').classList.add('cache');
+  document.getElementById('btn-nouvelle-collection').classList.add('cache');
   document.getElementById('form-collections').classList.add('visible');
   const btnSupprLigneNouv = document.getElementById('btn-supprimer-ligne');
   if (btnSupprLigneNouv) btnSupprLigneNouv.classList.add('cache');
@@ -352,6 +353,8 @@ function fermerModalConfirm() {
 
 function fermerFormCollection() {
   document.getElementById('contenu-collections').classList.remove('cache');
+  document.getElementById('btn-nouvelle-collection').classList.remove('cache');
+  document.getElementById('fc-toggle-mode').classList.remove('cache');
   document.getElementById('form-collections').classList.remove('visible');
 }
 
@@ -452,7 +455,9 @@ document.getElementById('fc-couleur-hex').value       = item.couleur_hex || 'var
     .filter(i => i.collection === item.collection && i.ligne === item.ligne)
     .map(i => ({ type: i.ingredient_type, nom: i.ingredient_nom, quantite: i.quantite_g }));
 rafraichirListeIngredientsBase();
-  document.getElementById('contenu-collections').classList.add('cache');
+document.getElementById('contenu-collections').classList.add('cache');
+  document.getElementById('btn-nouvelle-collection').classList.add('cache');
+  document.getElementById('fc-toggle-mode').classList.add('cache');
   document.getElementById('form-collections').classList.add('visible');
   window.scrollTo(0, 0);
 }
@@ -743,7 +748,7 @@ function filtrerRecettes() {
             && (!ligne || rec.ligne === ligne)
             && (!statut || (rec.statut || 'test') === statut)
             && (!nom || rec.nom.toLowerCase().includes(nom))
-            && (!complet || (complet === 'incomplet' && estIncomplet));
+            && (!complet || (complet === 'incomplet' && estIncomplet) || (complet === 'complet' && !estIncomplet));
     carte.classList.toggle('cache', !ok);
     if (ok) visible++;
   });
@@ -857,7 +862,7 @@ async function ouvrirFicheRecette(id) {
     : '<div class="fiche-vide fiche-label-manquant">⚠ Aucun format</div>';
   document.getElementById('fiche-recette-titre').textContent = rec.nom || '—';
   const ings = rec.ingredients && rec.ingredients.length
-    ? rec.ingredients.map(i => {
+    ? [...rec.ingredients].sort((a, b) => b.quantite_g - a.quantite_g).map(i => {
         const sansCinci = i.type !== 'Fragrances' && !i.inci;
         return `<div class="fiche-ingredient"><span class="fiche-ing-nom${sansCinci ? ' fiche-label-manquant' : ''}">${sansCinci ? '⚠ ' : ''}${i.nom}</span><span class="fiche-ing-inci">${i.inci || ''}</span><span class="fiche-ing-qte">${i.quantite_g} g</span></div>`;
       }).join('')
@@ -956,14 +961,16 @@ function ouvrirFormRecette() {
   if (apercuRecette) apercuRecette.style.background = '';
  document.querySelector('#section-recettes .filtres-bar').classList.add('cache');
   document.getElementById('grille-recettes').classList.add('cache');
- document.getElementById('form-recettes').classList.add('visible');
+  document.getElementById('btn-nouvelle-recette').classList.add('cache');
+  document.getElementById('form-recettes').classList.add('visible');
   window.scrollTo(0, 0);
 }
 
 function fermerFormRecette() {
   document.getElementById('form-recettes').classList.remove('visible');
-document.querySelector('#section-recettes .filtres-bar').classList.remove('cache');
+  document.querySelector('#section-recettes .filtres-bar').classList.remove('cache');
   document.getElementById('grille-recettes').classList.remove('cache');
+  document.getElementById('btn-nouvelle-recette').classList.remove('cache');
 }
 
 async function modifierRecette(id) {
@@ -2477,11 +2484,7 @@ loading.classList.add('cache');
       <td>${parseFloat(d.densite).toFixed(3)}</td>
       <td>${d.unite}</td>
       <td>${d.marge_perte_pct ? parseFloat(d.marge_perte_pct).toFixed(1) + ' %' : '—'}</td>
-      <td>
-        <div class="td-actions">
-          <button class="btn-edit" onclick="event.stopPropagation(); modifierDensite('${d.type.replace(/'/g, "\\'")}')">Modifier</button>
-        </div>
-      </td>`;
+     `;
     tbody.appendChild(tr);
   });
   tableau.classList.remove('cache');
