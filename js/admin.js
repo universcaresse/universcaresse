@@ -478,15 +478,10 @@ async function sauvegarderCollection() {
     });
  const infoCol = donneesCollections.find(i => i.collection === col);
     const d = {
+      mode:              'ligne',
       collection:        col,
       ligne,
-      format:            document.getElementById('fc-format').value,
       description_ligne: document.getElementById('fc-desc-ligne').value,
-      couleur_hex:       document.getElementById('fc-couleur-hex-ligne').value,
-      photo_url:         document.getElementById('fc-photo-url-ligne').value,
-      rang:              infoCol ? infoCol.rang : '',
-      slogan:            infoCol ? infoCol.slogan : '',
-      description_collection: infoCol ? infoCol.description_collection : ''
     };
   const res = rowIndex
       ? await appelAPIPost('updateCollectionItem', { ...d, rowIndex: parseInt(rowIndex) })
