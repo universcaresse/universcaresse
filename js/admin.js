@@ -852,17 +852,24 @@ async function ouvrirFicheRecette(id) {
   recetteActive = rec;
   const resFormats = await appelAPIPost('getRecettesFormats', { recette_id: id });
   const formats = (resFormats && resFormats.formats) ? resFormats.formats : [];
+  const estSavon = (rec.ligne || '').trim().toLowerCase().startsWith('savon');
   const formatsHtml = formats.length
-    ? formats.map(f => `<div class="fiche-ingredient"><span class="fiche-ing-nom">${f.poids} ${f.unite}</span><span class="fiche-ing-qte">${formaterPrix(f.prix_vente)}</span>${f.desc_emballage ? `<span class="fiche-label">${f.desc_emballage}</span>` : ''}</div>`).join('')
-    : '<div class="fiche-vide">Aucun format</div>';
+    ? formats.map(f => {
+        const incomplet = !f.poids || !f.unite || !f.prix_vente;
+        return `<div class="fiche-ingredient${incomplet ? ' fiche-label-manquant' : ''}"><span class="fiche-ing-nom">${f.poids || '⚠ poids'} ${f.unite || '⚠ unité'}</span><span class="fiche-ing-qte">${f.prix_vente ? formaterPrix(f.prix_vente) : '⚠ prix'}</span>${f.desc_emballage ? `<span class="fiche-label">${f.desc_emballage}</span>` : ''}</div>`;
+      }).join('')
+    : '<div class="fiche-vide fiche-label-manquant">⚠ Aucun format</div>';
   document.getElementById('fiche-recette-titre').textContent = rec.nom || '—';
   const ings = rec.ingredients && rec.ingredients.length
-    ? rec.ingredients.map(i => `<div class="fiche-ingredient"><span class="fiche-ing-nom">${i.nom}</span><span class="fiche-ing-inci">${i.inci || ''}</span><span class="fiche-ing-qte">${i.quantite_g} g</span></div>`).join('')
+    ? rec.ingredients.map(i => {
+        const sansCinci = i.type !== 'Fragrances' && !i.inci;
+        return `<div class="fiche-ingredient"><span class="fiche-ing-nom${sansCinci ? ' fiche-label-manquant' : ''}">${sansCinci ? '⚠ ' : ''}${i.nom}</span><span class="fiche-ing-inci">${i.inci || ''}</span><span class="fiche-ing-qte">${i.quantite_g} g</span></div>`;
+      }).join('')
     : '<div class="fiche-vide">Aucun ingrédient</div>';
   const m = (champ) => !rec[champ] ? ' fiche-label-manquant' : '';
   document.getElementById('fiche-recette-contenu').innerHTML = `
   <div class="fiche-visuel">
-      ${rec.image_url ? `<img src="${rec.image_url}" class="fiche-visuel-photo">` : '<div class="fiche-label fiche-label-manquant">Image manquante</div>'}
+      ${rec.image_url ? `<img src="${rec.image_url}" class="fiche-visuel-photo">` : ''}
       ${rec.image_url_noel ? `<img src="${rec.image_url_noel}" class="fiche-visuel-photo">` : ''}
       <div class="fiche-visuel-hex" style="background:${rec.couleur_hex || 'var(--beige)'}"></div>
     </div>
@@ -875,7 +882,7 @@ async function ouvrirFicheRecette(id) {
       
       <div class="fiche-champ"><span class="fiche-label">Cure</span><span class="fiche-valeur">${rec.cure || '—'} jours</span></div>
       <div class="fiche-champ"><span class="fiche-label">Nb unités</span><span class="fiche-valeur">${rec.nb_unites || '—'}</span></div>
-      <div class="fiche-champ"><span class="fiche-label${m('surgras')}">Surgras</span><span class="fiche-valeur">${rec.surgras || '—'}</span></div>
+      <div class="fiche-champ"><span class="fiche-label${estSavon && !rec.surgras ? ' fiche-label-manquant' : ''}">Surgras</span><span class="fiche-valeur">${rec.surgras || '—'}</span></div>
       <div class="fiche-champ"><span class="fiche-label">Rang</span><span class="fiche-valeur">${rec.rang || '—'}</span></div>
       <div class="fiche-champ"><span class="fiche-label${m('couleur_hex')}">Couleur HEX</span><span class="fiche-valeur">${rec.couleur_hex || '—'}</span></div>
     </div>
