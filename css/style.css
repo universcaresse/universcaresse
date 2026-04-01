@@ -192,16 +192,14 @@ h1, h2, h3 { font-family: 'Playfair Display', serif; }
 p { white-space: pre-line; overflow-wrap: break-word; }
 
 /* ═══════════════════════════════════════
-   NAVIGATION background: rgba(249,247,244,0.92);
+   NAVIGATION background: rgba(249,247,244,0.92); backdrop-filter: blur(12px);
    ═══════════════════════════════════════ */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   height: var(--nav-h);
   display: flex; align-items: center; justify-content: flex-end;
   padding: 0 48px;
- 
-  backdrop-filter: blur(12px);
-  border-bottom: none;
+   border-bottom: none;
   transition: box-shadow 0.3s;
 }
 nav.scrolled { box-shadow: 0 2px 20px rgba(90,138,58,0.08); }
