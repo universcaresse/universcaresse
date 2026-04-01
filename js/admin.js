@@ -296,6 +296,7 @@ document.getElementById('fiche-collection-ajouter-ligne').onclick = () => {
   };
  document.getElementById('btn-supprimer-collection').onclick = () => supprimerCollection(col, groupe);
   document.getElementById('contenu-collections').classList.add('cache');
+  document.getElementById('btn-nouvelle-collection').classList.add('cache');
   fiche.classList.add('visible');
   window.scrollTo(0, 0);
 }
