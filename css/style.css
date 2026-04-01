@@ -1171,10 +1171,12 @@ tr.cliquable { cursor: pointer; }
 }
 
 @media (min-width: 600px) and (max-width: 900px) {
-  .modal-produit { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; max-height: 90vh; width: 90%; }
-  .modal-visuel-hex { grid-column: 1; grid-row: 1; min-height: 300px; display: block; }
-  .modal-visuel-photo { min-height: 300px; grid-column: 2; grid-row: 1; }
-  .modal-contenu { grid-column: 1 / -1; grid-row: 2; }
+  .modal-produit { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; max-height: 90vh; width: 90%; position: relative; overflow: hidden; }
+  .modal-visuel { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; }
+  .modal-visuel-photo { min-height: 300px; flex-shrink: 0; }
+  .modal-visuel-hex { flex: 1; display: flex; align-items: center; }
+  .modal-contenu { grid-column: 2; grid-row: 1; overflow-y: auto; }
+  .modal-fermer { position: absolute; top: 16px; right: 16px; }
   .modal-nom { font-size: 1.3rem; }
 }
 
