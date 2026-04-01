@@ -918,10 +918,11 @@ async function ouvrirFicheRecette(id) {
       return `${avertissement}<div class="fiche-texte" id="fiche-inci-texte">${inci}</div><button class="btn btn-secondary" ${btnDisabled} onclick="navigator.clipboard.writeText(document.getElementById('fiche-inci-texte').textContent)">Copier INCI</button>`;
     })()}
   `;
-  fermerFormRecette();
+ fermerFormRecette();
   document.getElementById('fiche-recette').classList.add('visible');
   document.querySelector('#section-recettes .filtres-bar').classList.add('cache');
   document.getElementById('grille-recettes').classList.add('cache');
+  document.getElementById('btn-nouvelle-recette').classList.add('cache');
   document.querySelector('.admin-contenu').scrollTop = 0;
 }
 
