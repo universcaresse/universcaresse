@@ -810,9 +810,7 @@ async function chargerCatalogue() {
   if (catalogueCharge) return;
   catalogueCharge = true;
   try {
-    const url = `${CONFIG.APPS_SCRIPT_URL}?action=getCatalogue&t=${Date.now()}`;
-    const response = await fetch(url);
-    const data = await response.json();
+    const data = donneesCatalogue || await appelAPI('getCatalogue');
     if (!data || !data.success || !data.produits) { afficherErreurCatalogue('Impossible de charger le catalogue.'); return; }
     donneescatalogue = data.produits;
     collectionsOrdre = data.collections || [];
