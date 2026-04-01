@@ -974,6 +974,7 @@ function ouvrirFormRecette() {
   window.scrollTo(0, 0);
 }
 
+
 function fermerFormRecette() {
   document.getElementById('form-recettes').classList.remove('visible');
   const filtresBar = document.querySelector('#section-recettes .filtres-bar');
