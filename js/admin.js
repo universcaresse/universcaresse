@@ -2679,7 +2679,6 @@ function onChangeFormat() {
   const selFormat = document.getElementById('item-format');
   if (!selFormat) return;
   const nouveau = selFormat.value === '__nouveau__';
-  document.getElementById('item-nouveau-format-bloc').classList.toggle('cache', !nouveau);
   document.getElementById('item-nouveau-qte-bloc').classList.toggle('cache', !nouveau);
   document.getElementById('item-nouveau-unite-bloc').classList.toggle('cache', !nouveau);
   if (nouveau) {
