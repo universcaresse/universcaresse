@@ -625,7 +625,7 @@ footer > * { position: relative; z-index: 1; }
 .page-hero-titre { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 400; line-height: 1.1; color: var(--gris-fonce); margin-bottom: 8px; }
 .page-hero-titre em { font-style: italic; color: var(--primary); display: block; }
 .page-hero-texte { font-family: 'DM Sans', sans-serif; font-size: var(--texte-corps); line-height: 1.9; color: var(--gris); font-weight: 300; margin-top: 28px; max-width: 480px; word-wrap: break-word; }
-.page-hero-signature { font-family: 'Birthstone', cursive; font-size: 1.8rem; color: var(--accent); margin-top: 20px; margin-bottom: 4px; }
+.page-hero-signature { font-family: 'Birthstone', cursive; font-size: 2.2rem; color: var(--accent); margin-top: 20px; margin-bottom: 4px; }
 .page-hero-titre-signature { font-family: 'DM Sans', sans-serif; font-size: var(--texte-xs-2); letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); font-weight: 400; }
 .page-hero-signature-bloc { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--beige); }
 .page-hero-visuel { display: flex; align-items: center; justify-content: center; max-width: 480px; width: 100%; }
