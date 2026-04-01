@@ -614,7 +614,7 @@ footer > * { position: relative; z-index: 1; }
    ═══════════════════════════════════════ */
 .page-entete { padding: var(--padding-page) var(--padding-page) 32px; border-bottom: 1px solid var(--beige); display: flex; align-items: center; justify-content: space-between; gap: 40px; min-height: 120px; }
 .page-entete-gauche { max-width: 100%; }
-.page-entete-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; font-weight: 500; }
+.page-entete-eyebrow { font-family: 'DM Sans', sans-serif; font-size: var(--texte-xs); letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; font-weight: 500; }
 .page-entete-titre { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 3.5vw, 3.2rem); font-weight: 400; line-height: 1.1; color: var(--gris-fonce); }
 .page-entete-titre em { font-style: italic; color: var(--primary); }
 .page-entete-plume { width: 100px; opacity: 0.15; flex-shrink: 0; }
@@ -668,8 +668,8 @@ footer > * { position: relative; z-index: 1; }
 .info-card { background: white; padding: 28px 28px 28px 24px; border-left: 3px solid var(--primary); }
 .info-card.accent { border-left-color: var(--accent); }
 .info-card.neutre { border-left-color: var(--beige); }
-.info-card-titre { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gris-fonce); margin-bottom: 10px; }
-.info-card-texte { font-family: 'DM Sans', sans-serif; font-size: 0.88rem; line-height: 1.75; color: var(--gris); font-weight: 300; }
+.info-card-titre { font-family: 'DM Sans', sans-serif; font-size: var(--texte-xs-2); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gris-fonce); margin-bottom: 10px; }
+.info-card-texte { font-family: 'DM Sans', sans-serif; font-size: var(--texte-corps); line-height: 1.75; color: var(--gris); font-weight: 300; }
 .note-allergenes { margin: 0 var(--padding-page) 64px; background: rgba(212,164,69,0.08); border: 1px solid rgba(212,164,69,0.3); padding: 28px 32px; display: flex; gap: 20px; align-items: flex-start; }
 .note-allergenes-icone { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; color: var(--accent); }
 .note-allergenes-texte { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; line-height: 1.7; color: var(--gris-fonce); font-weight: 300; }
@@ -1308,7 +1308,7 @@ tr.cliquable { cursor: pointer; }
 .edu-pager-btn { background: none; border: none; cursor: pointer; color: var(--primary); display: flex; align-items: center; padding: 4px; transition: color 0.2s; }
 .edu-pager-btn:hover { color: var(--primary-dark); }
 .edu-pager-btn svg { width: 20px; height: 20px; }
-.edu-accroche { font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--gris); font-weight: 300; margin-top: 8px; }
+.edu-accroche { font-family: 'DM Sans', sans-serif; font-size: var(--texte-sm); color: var(--gris); font-weight: 300; margin-top: 8px; }
 
 
 .edu-niveaux { display: flex; flex-direction: column; }
