@@ -1,0 +1,1148 @@
+const SPREADSHEET_ID = "1Y4OCwcb2XBTPDTl_KDUGHgEiXgwqqXHmWSw6XQVSe3g";
+const VINO_SHEET = "Vino";
+const CONFIG_SHEET = "config";
+
+/* ============================================================
+   STRUCTURE DE L'ONGLET VINO
+   
+   RÉFÉRENCE (colonnes A à AF = index 0 à 31) :
+   0  A  Code CUP (clé principale)
+   1  B  Code SAQ
+   2  C  Nom
+   3  D  Prix
+   4  E  Couleur
+   5  F  Cépages
+   6  G  Pays
+   7  H  Région
+   8  I  Appellation
+   9  J  Désignation
+   10 K  Classification
+   11 L  Format
+   12 M  Alcool
+   13 N  Sucre
+   14 O  Particularité
+   15 P  Producteur
+   16 Q  Agent promo
+   17 R  Millésime dégusté
+   18 S  Arômes
+   19 T  Acidité
+   20 U  Sucrosité
+   21 V  Corps
+   22 W  Bouche
+   23 X  Température
+   24 Y  Description
+   25 Z  Date ajout ref
+   26 AA Modifié?
+   27 AB Racheter
+   28 AC Accords
+   29 AD Recettes
+   30 AE Notes temporaires
+   31 AF Divers
+   
+   BOUTEILLES (5 × 7 colonnes = 35, colonnes AG à BO = index 32 à 66) :
+   Chaque bouteille : Meuble, Rangée, Espace, Statut, Date ajout, Date sortie, Ancien emplacement
+   
+   B1 : index 32-38  (AG-AM)
+   B2 : index 39-45  (AN-AT)
+   B3 : index 46-52  (AU-BA)
+   B4 : index 53-59  (BB-BH)
+   B5 : index 60-66  (BI-BO)
+=============================================================== */
+
+const REF_COLS = {
+  CODE_CUP: 0,
+  CODE_SAQ: 1,
+  NOM: 2,
+  PRIX: 3,
+  COULEUR: 4,
+  CEPAGES: 5,
+  PAYS: 6,
+  REGION: 7,
+  APPELLATION: 8,
+  DESIGNATION: 9,
+  CLASSIFICATION: 10,
+  FORMAT: 11,
+  ALCOOL: 12,
+  SUCRE: 13,
+  PARTICULARITE: 14,
+  PRODUCTEUR: 15,
+  AGENT_PROMO: 16,
+  MILLESIME: 17,
+  AROMES: 18,
+  ACIDITE: 19,
+  SUCROSITE: 20,
+  CORPS: 21,
+  BOUCHE: 22,
+  TEMPERATURE: 23,
+  DESCRIPTION: 24,
+  DATE_AJOUT_REF: 25,
+  MODIFIE: 26,
+  RACHETER: 27,
+  ACCORDS: 28,
+  RECETTES: 29,
+  NOTES_TEMP: 30,
+  DIVERS: 31
+};
+
+const BOTTLE_START = 32;      // Index de la première colonne bouteille (AG)
+const FIELDS_PER_BOTTLE = 7;  // Meuble, Rangée, Espace, Statut, Date ajout, Date sortie, Ancien emplacement
+const MAX_BOTTLES = 5;
+const TOTAL_COLS = BOTTLE_START + (FIELDS_PER_BOTTLE * MAX_BOTTLES); // 32 + 35 = 67
+
+// Offsets dans chaque groupe bouteille
+const B_MEUBLE = 0;
+const B_RANGEE = 1;
+const B_ESPACE = 2;
+const B_STATUT = 3;
+const B_DATE_AJOUT = 4;
+const B_DATE_SORTIE = 5;
+const B_ANCIEN_EMPLACEMENT = 6;
+
+/**
+ * Retourne l'index de colonne (0-based) pour un champ d'une bouteille donnée
+ * @param {number} bottleNum - Numéro de bouteille (1 à 5)
+ * @param {number} fieldOffset - Offset du champ (B_MEUBLE, B_RANGEE, etc.)
+ */
+function bottleColIndex(bottleNum, fieldOffset) {
+  return BOTTLE_START + ((bottleNum - 1) * FIELDS_PER_BOTTLE) + fieldOffset;
+}
+
+/**
+ * Retourne le numéro de colonne Sheets (1-based) pour un champ d'une bouteille
+ */
+function bottleCol(bottleNum, fieldOffset) {
+  return bottleColIndex(bottleNum, fieldOffset) + 1;
+}
+
+/* ============================================================
+   INTERFACE WEB
+=============================================================== */
+
+function doGet() {
+  return HtmlService.createTemplateFromFile('Index').evaluate()
+    .setTitle('Vino')
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
+}
+
+function include(filename) {
+  return HtmlService.createHtmlOutputFromFile(filename).getContent();
+}
+
+/* ============================================================
+   CRÉATION / CONFIGURATION DE L'ONGLET VINO
+=============================================================== */
+
+function createVinoSheet() {
+  try {
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    let sheet = ss.getSheetByName(VINO_SHEET);
+    
+    if (!sheet) {
+      sheet = ss.insertSheet(VINO_SHEET);
+      Logger.log("Onglet " + VINO_SHEET + " créé");
+    }
+    
+    const headers = [
+      // Référence (A-AF)
+      "Code CUP", "Code SAQ", "Nom", "Prix", "Couleur", "Cépages", "Pays", "Région",
+      "Appellation", "Désignation", "Classification", "Format", "Alcool", "Sucre",
+      "Particularité", "Producteur", "Agent promo", "Millésime dégusté", "Arômes",
+      "Acidité", "Sucrosité", "Corps", "Bouche", "Température", "Description",
+      "Date ajout ref", "Modifié?", "Racheter", "Accords", "Recettes", "Notes temporaires", "Divers"
+    ];
+    
+    // Bouteilles (AG-BO)
+    for (let b = 1; b <= MAX_BOTTLES; b++) {
+      headers.push(
+        "B" + b + " Meuble", "B" + b + " Rangée", "B" + b + " Espace",
+        "B" + b + " Statut", "B" + b + " Date ajout", "B" + b + " Date sortie",
+        "B" + b + " Ancien emplacement"
+      );
+    }
+    
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+    
+    // Style headers référence
+    const refHeaderRange = sheet.getRange(1, 1, 1, BOTTLE_START);
+    refHeaderRange.setBackground("#4a86e8");
+    refHeaderRange.setFontColor("#ffffff");
+    refHeaderRange.setFontWeight("bold");
+    refHeaderRange.setHorizontalAlignment("center");
+    
+    // Style headers bouteilles
+    const bottleHeaderRange = sheet.getRange(1, BOTTLE_START + 1, 1, FIELDS_PER_BOTTLE * MAX_BOTTLES);
+    bottleHeaderRange.setBackground("#6aa84f");
+    bottleHeaderRange.setFontColor("#ffffff");
+    bottleHeaderRange.setFontWeight("bold");
+    bottleHeaderRange.setHorizontalAlignment("center");
+    
+    sheet.setFrozenRows(1);
+    
+    Logger.log("Onglet " + VINO_SHEET + " configuré avec " + headers.length + " colonnes");
+    return { success: true, message: "Onglet créé et configuré" };
+    
+  } catch (e) {
+    Logger.log("Erreur création " + VINO_SHEET + ": " + e.message);
+    return { success: false, error: e.message };
+  }
+}
+
+/* ============================================================
+   LECTURE DES DONNÉES
+=============================================================== */
+
+/**
+ * Retourne toutes les bouteilles en stock (pour l'affichage inventaire)
+ * Chaque bouteille active génère une entrée avec les infos du vin + son emplacement
+ */
+function getInventoryData() {
+  try {
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = ss.getSheetByName(VINO_SHEET);
+    
+    if (!sheet) return [];
+    
+    const values = sheet.getDataRange().getValues();
+    if (values.length < 2) return [];
+    
+    const data = [];
+    
+    for (let i = 1; i < values.length; i++) {
+      const row = values[i];
+      const codeCUP = row[REF_COLS.CODE_CUP] ? row[REF_COLS.CODE_CUP].toString().trim() : "";
+      const nom = row[REF_COLS.NOM] ? row[REF_COLS.NOM].toString() : "Sans nom";
+      
+      if (!codeCUP && !nom) continue;
+      
+      // Parcourir les 5 slots de bouteilles
+      for (let b = 1; b <= MAX_BOTTLES; b++) {
+        const statut = row[bottleColIndex(b, B_STATUT)] ? row[bottleColIndex(b, B_STATUT)].toString() : "";
+        
+        // Slot vide = pas de bouteille
+        if (!statut) continue;
+        
+        data.push({
+          "row": i + 1,
+          "bottle": b,
+          "Code-barres": codeCUP,
+          "Nom": nom,
+          "Couleur": row[REF_COLS.COULEUR] ? row[REF_COLS.COULEUR].toString() : "",
+          "Cépage": row[REF_COLS.CEPAGES] ? row[REF_COLS.CEPAGES].toString() : "",
+          "Pays": row[REF_COLS.PAYS] ? row[REF_COLS.PAYS].toString() : "",
+          "Meuble": row[bottleColIndex(b, B_MEUBLE)] ? row[bottleColIndex(b, B_MEUBLE)].toString() : "",
+          "Rangée": row[bottleColIndex(b, B_RANGEE)] ? row[bottleColIndex(b, B_RANGEE)].toString() : "",
+          "Espace": row[bottleColIndex(b, B_ESPACE)] ? row[bottleColIndex(b, B_ESPACE)].toString() : "",
+          "Racheter": row[REF_COLS.RACHETER] ? row[REF_COLS.RACHETER].toString() : "Non",
+          "Accords": row[REF_COLS.ACCORDS] ? row[REF_COLS.ACCORDS].toString() : "",
+          "Statut": statut,
+          "Date d'ajout": row[bottleColIndex(b, B_DATE_AJOUT)] ? row[bottleColIndex(b, B_DATE_AJOUT)].toString() : "",
+          "Source": "App VINO",
+          "Date sortie": row[bottleColIndex(b, B_DATE_SORTIE)] ? row[bottleColIndex(b, B_DATE_SORTIE)].toString() : "",
+          "Ancien emplacement": row[bottleColIndex(b, B_ANCIEN_EMPLACEMENT)] ? row[bottleColIndex(b, B_ANCIEN_EMPLACEMENT)].toString() : "",
+          "Region": row[REF_COLS.REGION] ? row[REF_COLS.REGION].toString() : "",
+          "Code SAQ": row[REF_COLS.CODE_SAQ] ? row[REF_COLS.CODE_SAQ].toString() : ""
+        });
+      }
+    }
+    
+    return data;
+  } catch (e) {
+    Logger.log("Erreur getInventoryData: " + e.message);
+    return [];
+  }
+}
+
+/* ============================================================
+   CONFIG & RECHERCHE
+=============================================================== */
+
+function getConfig() {
+  try {
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = ss.getSheetByName(CONFIG_SHEET);
+    const data = sheet.getDataRange().getValues();
+    const headers = data[0].map(h => h.toString().trim());
+    
+    let config = { couleurs: {}, pays: {}, meubles: {}, accords: [] };
+    const idxC = headers.indexOf('Couleur');
+    const idxCep = headers.indexOf('Cépage');
+    const idxP = headers.indexOf('Pays');
+    const idxR = headers.indexOf('Région');
+    const idxM = headers.indexOf('Meuble');
+    const idxRan = headers.indexOf('Rangée');
+    const idxE = headers.indexOf('Espace');
+    const idxAcc = headers.indexOf('Accords');
+
+    for (let i = 1; i < data.length; i++) {
+      const row = data[i];
+      if (idxAcc > -1 && row[idxAcc] && !config.accords.includes(row[idxAcc])) config.accords.push(row[idxAcc]);
+      if (idxC > -1 && row[idxC]) {
+        if (!config.couleurs[row[idxC]]) config.couleurs[row[idxC]] = [];
+        if (idxCep > -1 && row[idxCep] && !config.couleurs[row[idxC]].includes(row[idxCep])) config.couleurs[row[idxC]].push(row[idxCep]);
+      }
+      if (idxP > -1 && row[idxP]) {
+        if (!config.pays[row[idxP]]) config.pays[row[idxP]] = [];
+        if (idxR > -1 && row[idxR] && !config.pays[row[idxP]].includes(row[idxR])) config.pays[row[idxP]].push(row[idxR]);
+      }
+      if (idxM > -1 && row[idxM]) {
+        if (!config.meubles[row[idxM]]) config.meubles[row[idxM]] = {};
+        if (idxRan > -1 && row[idxRan]) {
+          if (!config.meubles[row[idxM]][row[idxRan]]) config.meubles[row[idxM]][row[idxRan]] = [];
+          if (idxE > -1 && row[idxE] && !config.meubles[row[idxM]][row[idxRan]].includes(row[idxE])) config.meubles[row[idxM]][row[idxRan]].push(row[idxE]);
+        }
+      }
+    }
+    return config;
+  } catch(e) { return { couleurs: {}, pays: {}, meubles: {}, accords: [] }; }
+}
+
+/**
+ * Vérifie si un vin existe déjà dans Vino par son Code CUP
+ */
+function checkWineExists(codebarre) {
+  try {
+    if (!codebarre || codebarre.trim() === "") return { exists: false, message: "" };
+    
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = ss.getSheetByName(VINO_SHEET);
+    
+    if (!sheet) return { exists: false, message: "" };
+    
+    const values = sheet.getDataRange().getValues();
+    
+    for (let i = 1; i < values.length; i++) {
+      const rowCUP = values[i][REF_COLS.CODE_CUP] ? values[i][REF_COLS.CODE_CUP].toString().trim() : "";
+      
+      if (rowCUP === codebarre.trim()) {
+        const bouteilles = [];
+        const wineInfo = {
+          nom: values[i][REF_COLS.NOM] || "",
+          couleur: values[i][REF_COLS.COULEUR] || "",
+          cepage: values[i][REF_COLS.CEPAGES] || "",
+          pays: values[i][REF_COLS.PAYS] || "",
+          racheter: values[i][REF_COLS.RACHETER] || "Non",
+          accords: values[i][REF_COLS.ACCORDS] || "",
+          region: values[i][REF_COLS.REGION] || ""
+        };
+        
+        for (let b = 1; b <= MAX_BOTTLES; b++) {
+          const statut = values[i][bottleColIndex(b, B_STATUT)] ? values[i][bottleColIndex(b, B_STATUT)].toString() : "";
+          if (!statut) continue;
+          
+          if (statut !== "Bu" && statut !== "Sorti") {
+            bouteilles.push({
+              nom: wineInfo.nom,
+              bottle: b,
+              meuble: values[i][bottleColIndex(b, B_MEUBLE)] ? values[i][bottleColIndex(b, B_MEUBLE)].toString() : "",
+              rangee: values[i][bottleColIndex(b, B_RANGEE)] ? values[i][bottleColIndex(b, B_RANGEE)].toString() : "",
+              espace: values[i][bottleColIndex(b, B_ESPACE)] ? values[i][bottleColIndex(b, B_ESPACE)].toString() : "",
+              statut: statut
+            });
+          }
+        }
+        
+        return {
+          exists: true,
+          row: i + 1,
+          count: bouteilles.length,
+          wine: wineInfo,
+          bottles: bouteilles,
+          message: bouteilles.length > 0 ? "Ce vin existe déjà." : "Ce vin existe (toutes les bouteilles ont été bues)."
+        };
+      }
+    }
+    
+    return { exists: false, message: "" };
+  } catch(e) {
+    Logger.log("Erreur checkWineExists: " + e.message);
+    return { exists: false, message: "Erreur" };
+  }
+}
+
+/**
+ * Vérifie si un emplacement est disponible
+ */
+function checkLocationAvailable(meuble, rangee, espace) {
+  try {
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = ss.getSheetByName(VINO_SHEET);
+    
+    if (!sheet) return { available: true, message: "Libre" };
+    
+    const values = sheet.getDataRange().getValues();
+    
+    for (let i = 1; i < values.length; i++) {
+      for (let b = 1; b <= MAX_BOTTLES; b++) {
+        const statut = values[i][bottleColIndex(b, B_STATUT)] ? values[i][bottleColIndex(b, B_STATUT)].toString() : "";
+        if (!statut || statut === "Bu" || statut === "Sorti") continue;
+        
+        const bMeuble = values[i][bottleColIndex(b, B_MEUBLE)] ? values[i][bottleColIndex(b, B_MEUBLE)].toString() : "";
+        const bRangee = values[i][bottleColIndex(b, B_RANGEE)] ? values[i][bottleColIndex(b, B_RANGEE)].toString() : "";
+        const bEspace = values[i][bottleColIndex(b, B_ESPACE)] ? values[i][bottleColIndex(b, B_ESPACE)].toString() : "";
+        
+        if (bMeuble == meuble && bRangee == rangee && bEspace == espace) {
+          return { available: false, message: `Occupé par : ${values[i][REF_COLS.NOM]}` };
+        }
+      }
+    }
+    
+    return { available: true, message: "Libre" };
+  } catch(e) { return { available: false }; }
+}
+
+/* ============================================================
+   ÉCRITURE ET LOGISTIQUE
+=============================================================== */
+
+/**
+ * Trouve le premier slot de bouteille libre dans une ligne
+ * Retourne le numéro de bouteille (1-5) ou -1 si plein
+ */
+function findFreeBottleSlot(row) {
+  for (let b = 1; b <= MAX_BOTTLES; b++) {
+    const statut = row[bottleColIndex(b, B_STATUT)] ? row[bottleColIndex(b, B_STATUT)].toString() : "";
+    if (!statut) return b;
+  }
+  return -1;
+}
+
+/**
+ * Ajoute une bouteille dans Vino
+ * - Si le vin (Code CUP) existe déjà : ajoute dans le prochain slot libre
+ * - Sinon : crée une nouvelle ligne avec les infos de référence + bouteille en slot 1
+ */
+function addBottle(formData) {
+  try {
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    let sheet = ss.getSheetByName(VINO_SHEET);
+    
+    if (!sheet) {
+      createVinoSheet();
+      sheet = ss.getSheetByName(VINO_SHEET);
+    }
+    
+    const codeCUP = formData.codebarre ? formData.codebarre.toString().trim() : "";
+    const statut = (formData.meuble && formData.rangee && formData.espace) ? "En stock" : "À ranger";
+    
+    // Chercher si le vin existe déjà
+    if (codeCUP) {
+      const values = sheet.getDataRange().getValues();
+      
+      for (let i = 1; i < values.length; i++) {
+        const rowCUP = values[i][REF_COLS.CODE_CUP] ? values[i][REF_COLS.CODE_CUP].toString().trim() : "";
+        
+        if (rowCUP === codeCUP) {
+          // Vin trouvé - chercher un slot libre
+          const slot = findFreeBottleSlot(values[i]);
+          
+          if (slot === -1) {
+            return { success: false, message: "Maximum de 5 bouteilles atteint pour ce vin" };
+          }
+          
+          const sheetRow = i + 1;
+          sheet.getRange(sheetRow, bottleCol(slot, B_MEUBLE)).setValue(formData.meuble || "");
+          sheet.getRange(sheetRow, bottleCol(slot, B_RANGEE)).setValue(formData.rangee || "");
+          sheet.getRange(sheetRow, bottleCol(slot, B_ESPACE)).setValue(formData.espace || "");
+          sheet.getRange(sheetRow, bottleCol(slot, B_STATUT)).setValue(statut);
+          sheet.getRange(sheetRow, bottleCol(slot, B_DATE_AJOUT)).setValue(new Date());
+          
+          // Mettre à jour les infos de référence si fournies
+          if (formData.nom) sheet.getRange(sheetRow, REF_COLS.NOM + 1).setValue(formData.nom);
+          if (formData.couleur) sheet.getRange(sheetRow, REF_COLS.COULEUR + 1).setValue(formData.couleur);
+          if (formData.cepage) sheet.getRange(sheetRow, REF_COLS.CEPAGES + 1).setValue(formData.cepage);
+          if (formData.pays) sheet.getRange(sheetRow, REF_COLS.PAYS + 1).setValue(formData.pays);
+          if (formData.region) sheet.getRange(sheetRow, REF_COLS.REGION + 1).setValue(formData.region);
+          if (formData.racheter) sheet.getRange(sheetRow, REF_COLS.RACHETER + 1).setValue(formData.racheter);
+          if (formData.accords) sheet.getRange(sheetRow, REF_COLS.ACCORDS + 1).setValue(formData.accords);
+          
+          return { success: true, message: "Bouteille ajoutée (slot " + slot + ")" };
+        }
+      }
+    }
+    
+    // Vin inexistant — créer une nouvelle ligne
+    const newRow = new Array(TOTAL_COLS).fill("");
+    
+    // Référence
+    newRow[REF_COLS.CODE_CUP] = codeCUP;
+    newRow[REF_COLS.NOM] = formData.nom || "";
+    newRow[REF_COLS.COULEUR] = formData.couleur || "";
+    newRow[REF_COLS.CEPAGES] = formData.cepage || "";
+    newRow[REF_COLS.PAYS] = formData.pays || "";
+    newRow[REF_COLS.REGION] = formData.region || "";
+    newRow[REF_COLS.DATE_AJOUT_REF] = new Date();
+    newRow[REF_COLS.MODIFIE] = "Non";
+    newRow[REF_COLS.RACHETER] = formData.racheter || "Non";
+    newRow[REF_COLS.ACCORDS] = formData.accords || "";
+    
+    // Bouteille 1
+    newRow[bottleColIndex(1, B_MEUBLE)] = formData.meuble || "";
+    newRow[bottleColIndex(1, B_RANGEE)] = formData.rangee || "";
+    newRow[bottleColIndex(1, B_ESPACE)] = formData.espace || "";
+    newRow[bottleColIndex(1, B_STATUT)] = statut;
+    newRow[bottleColIndex(1, B_DATE_AJOUT)] = new Date();
+    
+    sheet.appendRow(newRow);
+    
+    return { success: true, message: "Nouveau vin ajouté" };
+  } catch(e) {
+    Logger.log("Erreur addBottle: " + e.message);
+    return { success: false, message: e.message };
+  }
+}
+
+/**
+ * Action sur une bouteille spécifique (boire ou déplacer)
+ * @param {number} row - Numéro de ligne dans le sheet (1-based)
+ * @param {number} bottle - Numéro de bouteille (1-5)
+ * @param {string} action - "boire" ou "deplacer"
+ * @param {object} detail - Détails pour le déplacement {meuble, rangee, espace}
+ */
+function actionBouteille(row, action, detail = {}) {
+  try {
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = ss.getSheetByName(VINO_SHEET);
+    const bottle = detail.bottle || 1;
+    
+    if (action === "boire") {
+      sheet.getRange(row, bottleCol(bottle, B_STATUT)).setValue("Bu");
+      sheet.getRange(row, bottleCol(bottle, B_DATE_SORTIE)).setValue(new Date());
+      
+    } else if (action === "deplacer") {
+      // Sauvegarder ancien emplacement
+      const ancienMeuble = sheet.getRange(row, bottleCol(bottle, B_MEUBLE)).getValue();
+      const ancienneRangee = sheet.getRange(row, bottleCol(bottle, B_RANGEE)).getValue();
+      const ancienEspace = sheet.getRange(row, bottleCol(bottle, B_ESPACE)).getValue();
+      const ancienEmplacement = `${ancienMeuble} - R:${ancienneRangee} - E:${ancienEspace}`;
+      
+      sheet.getRange(row, bottleCol(bottle, B_ANCIEN_EMPLACEMENT)).setValue(ancienEmplacement);
+      sheet.getRange(row, bottleCol(bottle, B_MEUBLE)).setValue(detail.meuble);
+      sheet.getRange(row, bottleCol(bottle, B_RANGEE)).setValue(detail.rangee);
+      sheet.getRange(row, bottleCol(bottle, B_ESPACE)).setValue(detail.espace);
+      sheet.getRange(row, bottleCol(bottle, B_STATUT)).setValue("En stock");
+    }
+    
+    return { success: true };
+  } catch (e) {
+    Logger.log("Erreur actionBouteille: " + e.message);
+    return { success: false };
+  }
+}
+
+/**
+ * Met à jour les données de référence d'un vin (par Code CUP)
+ */
+function updateWineData(updatedData) {
+  try {
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = ss.getSheetByName(VINO_SHEET);
+    const data = sheet.getDataRange().getValues();
+    const cupTarget = updatedData.codebarre.toString().trim();
+
+    Logger.log("updateWineData appelée avec: " + JSON.stringify(updatedData));
+    
+    for (let i = 1; i < data.length; i++) {
+      let currentCUP = data[i][REF_COLS.CODE_CUP] ? data[i][REF_COLS.CODE_CUP].toString().trim() : "";
+      
+      if (currentCUP === cupTarget) {
+        const sheetRow = i + 1;
+        sheet.getRange(sheetRow, REF_COLS.NOM + 1).setValue(updatedData.nom || "");
+        sheet.getRange(sheetRow, REF_COLS.COULEUR + 1).setValue(updatedData.couleur || "");
+        sheet.getRange(sheetRow, REF_COLS.CEPAGES + 1).setValue(updatedData.cepage || "");
+        sheet.getRange(sheetRow, REF_COLS.PAYS + 1).setValue(updatedData.pays || "");
+        sheet.getRange(sheetRow, REF_COLS.RACHETER + 1).setValue(updatedData.racheter || "");
+        sheet.getRange(sheetRow, REF_COLS.ACCORDS + 1).setValue(updatedData.accords || "");
+        sheet.getRange(sheetRow, REF_COLS.REGION + 1).setValue(updatedData.region || "");
+        sheet.getRange(sheetRow, REF_COLS.CODE_SAQ + 1).setValue(updatedData.codesaq || "");
+        sheet.getRange(sheetRow, REF_COLS.MODIFIE + 1).setValue("Oui");
+        
+        Logger.log("Vin mis à jour à la ligne " + sheetRow);
+        return { success: true, count: 1 };
+      }
+    }
+    
+    Logger.log("Aucun vin trouvé avec Code CUP: " + cupTarget);
+    return { success: true, count: 0 };
+  } catch (e) { 
+    Logger.log("Erreur dans updateWineData: " + e.message);
+    return { success: false, error: e.message }; 
+  }
+}
+
+/**
+ * Met une bouteille en statut "À ranger" (vide l'emplacement)
+ */
+function mettreBotteilleARanger(row, bottle) {
+  try {
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = ss.getSheetByName(VINO_SHEET);
+    const b = bottle || 1;
+    
+    sheet.getRange(row, bottleCol(b, B_MEUBLE)).setValue("");
+    sheet.getRange(row, bottleCol(b, B_RANGEE)).setValue("");
+    sheet.getRange(row, bottleCol(b, B_ESPACE)).setValue("");
+    sheet.getRange(row, bottleCol(b, B_STATUT)).setValue("À ranger");
+    
+    return { success: true };
+  } catch (e) {
+    Logger.log("Erreur mettreBotteilleARanger: " + e.message);
+    return { success: false, error: e.message };
+  }
+}
+
+/**
+ * Retourne les infos d'un vin et toutes ses bouteilles
+ */
+function getWineBottles(codebarre) {
+  try {
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = ss.getSheetByName(VINO_SHEET);
+    const values = sheet.getDataRange().getValues();
+    const target = codebarre.toString().trim();
+    
+    for (let i = 1; i < values.length; i++) {
+      const rowCUP = values[i][REF_COLS.CODE_CUP] ? values[i][REF_COLS.CODE_CUP].toString().trim() : "";
+      
+      if (rowCUP === target) {
+        const wineInfo = {
+          "Code-barres": rowCUP,
+          "Nom": values[i][REF_COLS.NOM] || "",
+          "Couleur": values[i][REF_COLS.COULEUR] || "",
+          "Cépage": values[i][REF_COLS.CEPAGES] || "",
+          "Pays": values[i][REF_COLS.PAYS] || "",
+          "Racheter": values[i][REF_COLS.RACHETER] || "",
+          "Accords": values[i][REF_COLS.ACCORDS] || "",
+          "Region": values[i][REF_COLS.REGION] || "",
+          "Code SAQ": values[i][REF_COLS.CODE_SAQ] || ""
+        };
+        
+        const bottles = [];
+        for (let b = 1; b <= MAX_BOTTLES; b++) {
+          const statut = values[i][bottleColIndex(b, B_STATUT)] ? values[i][bottleColIndex(b, B_STATUT)].toString() : "";
+          if (!statut) continue;
+          
+          bottles.push({
+            row: i + 1,
+            bottle: b,
+            meuble: values[i][bottleColIndex(b, B_MEUBLE)] ? values[i][bottleColIndex(b, B_MEUBLE)].toString() : "",
+            rangee: values[i][bottleColIndex(b, B_RANGEE)] ? values[i][bottleColIndex(b, B_RANGEE)].toString() : "",
+            espace: values[i][bottleColIndex(b, B_ESPACE)] ? values[i][bottleColIndex(b, B_ESPACE)].toString() : "",
+            statut: statut
+          });
+        }
+        
+        return { wine: wineInfo, bottles: bottles };
+      }
+    }
+    
+    return null;
+  } catch(e) {
+    Logger.log("Erreur getWineBottles: " + e.message);
+    return null;
+  }
+}
+
+/* ============================================================
+   SCRAPING SAQ
+=============================================================== */
+
+function findCodeSAQFromBarcode(barcode) {
+  try {
+    barcode = barcode.toString().trim();
+    
+    Logger.log("========================================");
+    Logger.log("Recherche du Code SAQ pour le code-barres: " + barcode);
+    
+    let searchUrl = "https://www.saq.com/fr/catalogsearch/result/?q=" + barcode;
+    Logger.log("Tentative 1 - Code original: " + searchUrl);
+    
+    let result = tryFindCodeSAQ(searchUrl);
+    if (result.success) return result;
+    
+    if (barcode.length < 14) {
+      let normalizedBarcode = barcode;
+      while (normalizedBarcode.length < 14) {
+        normalizedBarcode = "0" + normalizedBarcode;
+      }
+      
+      searchUrl = "https://www.saq.com/fr/catalogsearch/result/?q=" + normalizedBarcode;
+      Logger.log("Tentative 2 - Code normalisé (" + normalizedBarcode + "): " + searchUrl);
+      
+      result = tryFindCodeSAQ(searchUrl);
+      if (result.success) return result;
+    }
+    
+    Logger.log("✗ Aucun Code SAQ trouvé après toutes les tentatives");
+    return { success: false, error: "Aucun produit trouvé avec ce code-barres" };
+    
+  } catch (e) {
+    Logger.log("Erreur recherche: " + e.message);
+    return { success: false, error: e.message };
+  }
+}
+
+function tryFindCodeSAQ(searchUrl) {
+  try {
+    const response = UrlFetchApp.fetch(searchUrl, {
+      muteHttpExceptions: true,
+      followRedirects: true
+    });
+    
+    const htmlContent = response.getContentText();
+    const statusCode = response.getResponseCode();
+    
+    if (statusCode !== 200) return { success: false };
+    
+    const patterns = [
+      /\/catalog\/product\/\d\/\d\/(\d{7,8})-/i,
+      /href="\/fr\/(\d{7,8})"/i,
+      /href="https:\/\/www\.saq\.com\/fr\/(\d{7,8})"/i,
+      /\/produits\/(\d{7,8})/i,
+      /Code SAQ[:\s]+(\d{7,8})/i
+    ];
+    
+    for (let i = 0; i < patterns.length; i++) {
+      const match = htmlContent.match(patterns[i]);
+      if (match && match[1]) {
+        Logger.log("✓ Code SAQ trouvé (pattern " + (i+1) + "): " + match[1]);
+        return { success: true, codeSAQ: match[1] };
+      }
+    }
+    
+    return { success: false };
+  } catch (e) { return { success: false }; }
+}
+
+/**
+ * Scrape les infos SAQ et les sauvegarde directement dans la ligne Vino
+ */
+function testScrapingSAQ(codeSAQ) {
+  try {
+    const url = `https://www.saq.com/fr/${codeSAQ}`;
+    
+    Logger.log("========================================");
+    Logger.log("URL du produit: " + url);
+    
+    const response = UrlFetchApp.fetch(url, {
+      muteHttpExceptions: true,
+      followRedirects: true
+    });
+    
+    const htmlContent = response.getContentText();
+    const statusCode = response.getResponseCode();
+    
+    Logger.log("Status code: " + statusCode);
+    
+    if (statusCode !== 200) {
+      return { success: false, error: "Code HTTP: " + statusCode };
+    }
+    
+    const result = { codeSAQ: codeSAQ, url: url };
+    
+    result.nom = extractFromMeta(htmlContent, 'og:title');
+    result.prix = extractFromMeta(htmlContent, 'product:price:amount');
+    result.pays = extractDetailInfo(htmlContent, 'Pays');
+    result.region = extractDetailInfo(htmlContent, 'Région');
+    result.appellation = extractDetailInfo(htmlContent, "Appellation d&#039;origine");
+    result.designation = extractDetailInfo(htmlContent, 'Désignation réglementée');
+    result.classification = extractDetailInfo(htmlContent, 'Classification');
+    result.cepages = extractDetailInfo(htmlContent, 'Cépages');
+    if (!result.cepages) result.cepages = extractDetailInfo(htmlContent, 'Cépage');
+    if (result.cepages) result.cepages = cleanCepages(result.cepages);
+    result.alcool = extractDetailInfo(htmlContent, "Degré d&#039;alcool");
+    result.sucre = extractDetailInfo(htmlContent, 'Taux de sucre');
+    result.couleur = extractDetailInfo(htmlContent, 'Couleur');
+    result.particularite = extractDetailInfo(htmlContent, 'Particularité');
+    result.format = extractDetailInfo(htmlContent, 'Format');
+    result.producteur = extractDetailInfo(htmlContent, 'Producteur');
+    result.agentPromotionnel = extractDetailInfo(htmlContent, 'Agent promotionnel');
+    result.codeCUP = extractDetailInfo(htmlContent, 'Code CUP');
+    
+    result.millesimeDeguste = extractTastingInfo(htmlContent, 'Millésime dégusté');
+    result.aromes = extractTastingInfo(htmlContent, 'Arômes');
+    result.acidite = extractTastingInfo(htmlContent, 'Acidité');
+    result.sucrosite = extractTastingInfo(htmlContent, 'Sucrosité');
+    result.corps = extractTastingInfo(htmlContent, 'Corps');
+    result.bouche = extractTastingInfo(htmlContent, 'Bouche');
+    result.temperature = extractTastingInfo(htmlContent, 'Température de service');
+    result.description = extractDescription(htmlContent);
+    
+    Logger.log("========== RÉSULTAT COMPLET ==========");
+    Logger.log(JSON.stringify(result, null, 2));
+    Logger.log("======================================");
+    
+    // Sauvegarder dans Vino
+    const saveResult = saveScrapedDataToVino(result);
+    
+    if (saveResult.success) {
+      Logger.log("✓ Infos SAQ sauvegardées dans " + VINO_SHEET);
+      return { success: true, data: result, saved: true };
+    } else {
+      Logger.log("⚠️ Scraping réussi mais sauvegarde échouée");
+      return { success: true, data: result, saved: false };
+    }
+    
+  } catch (e) {
+    Logger.log("Erreur scraping: " + e.message);
+    return { success: false, error: e.message };
+  }
+}
+
+/**
+ * Sauvegarde les données scrapées SAQ dans une ligne Vino existante ou nouvelle
+ * Cherche d'abord par Code SAQ, puis par Code CUP
+ */
+function saveScrapedDataToVino(dataSAQ) {
+  try {
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    let sheet = ss.getSheetByName(VINO_SHEET);
+    
+    if (!sheet) {
+      createVinoSheet();
+      sheet = ss.getSheetByName(VINO_SHEET);
+    }
+    
+    const values = sheet.getDataRange().getValues();
+    let existingRow = -1;
+    
+    // Chercher par Code SAQ d'abord
+    for (let i = 1; i < values.length; i++) {
+      const rowSAQ = values[i][REF_COLS.CODE_SAQ] ? values[i][REF_COLS.CODE_SAQ].toString().trim() : "";
+      if (rowSAQ === dataSAQ.codeSAQ.toString()) {
+        existingRow = i + 1;
+        break;
+      }
+    }
+    
+    // Sinon chercher par Code CUP
+    if (existingRow === -1 && dataSAQ.codeCUP) {
+      for (let i = 1; i < values.length; i++) {
+        const rowCUP = values[i][REF_COLS.CODE_CUP] ? values[i][REF_COLS.CODE_CUP].toString().trim() : "";
+        if (rowCUP === dataSAQ.codeCUP.toString().trim()) {
+          existingRow = i + 1;
+          break;
+        }
+      }
+    }
+    
+    if (existingRow > 0) {
+      // Mettre à jour la ligne existante (référence seulement, ne pas toucher aux bouteilles)
+      const r = existingRow;
+      if (dataSAQ.codeCUP) sheet.getRange(r, REF_COLS.CODE_CUP + 1).setValue(dataSAQ.codeCUP);
+      sheet.getRange(r, REF_COLS.CODE_SAQ + 1).setValue(dataSAQ.codeSAQ);
+      if (dataSAQ.nom) sheet.getRange(r, REF_COLS.NOM + 1).setValue(dataSAQ.nom);
+      if (dataSAQ.prix) sheet.getRange(r, REF_COLS.PRIX + 1).setValue(dataSAQ.prix);
+      if (dataSAQ.couleur) sheet.getRange(r, REF_COLS.COULEUR + 1).setValue(dataSAQ.couleur);
+      if (dataSAQ.cepages) sheet.getRange(r, REF_COLS.CEPAGES + 1).setValue(dataSAQ.cepages);
+      if (dataSAQ.pays) sheet.getRange(r, REF_COLS.PAYS + 1).setValue(dataSAQ.pays);
+      if (dataSAQ.region) sheet.getRange(r, REF_COLS.REGION + 1).setValue(dataSAQ.region);
+      if (dataSAQ.appellation) sheet.getRange(r, REF_COLS.APPELLATION + 1).setValue(dataSAQ.appellation);
+      if (dataSAQ.designation) sheet.getRange(r, REF_COLS.DESIGNATION + 1).setValue(dataSAQ.designation);
+      if (dataSAQ.classification) sheet.getRange(r, REF_COLS.CLASSIFICATION + 1).setValue(dataSAQ.classification);
+      if (dataSAQ.format) sheet.getRange(r, REF_COLS.FORMAT + 1).setValue(dataSAQ.format);
+      if (dataSAQ.alcool) sheet.getRange(r, REF_COLS.ALCOOL + 1).setValue(dataSAQ.alcool);
+      if (dataSAQ.sucre) sheet.getRange(r, REF_COLS.SUCRE + 1).setValue(dataSAQ.sucre);
+      if (dataSAQ.particularite) sheet.getRange(r, REF_COLS.PARTICULARITE + 1).setValue(dataSAQ.particularite);
+      if (dataSAQ.producteur) sheet.getRange(r, REF_COLS.PRODUCTEUR + 1).setValue(dataSAQ.producteur);
+      if (dataSAQ.agentPromotionnel) sheet.getRange(r, REF_COLS.AGENT_PROMO + 1).setValue(dataSAQ.agentPromotionnel);
+      if (dataSAQ.millesimeDeguste) sheet.getRange(r, REF_COLS.MILLESIME + 1).setValue(dataSAQ.millesimeDeguste);
+      if (dataSAQ.aromes) sheet.getRange(r, REF_COLS.AROMES + 1).setValue(dataSAQ.aromes);
+      if (dataSAQ.acidite) sheet.getRange(r, REF_COLS.ACIDITE + 1).setValue(dataSAQ.acidite);
+      if (dataSAQ.sucrosite) sheet.getRange(r, REF_COLS.SUCROSITE + 1).setValue(dataSAQ.sucrosite);
+      if (dataSAQ.corps) sheet.getRange(r, REF_COLS.CORPS + 1).setValue(dataSAQ.corps);
+      if (dataSAQ.bouche) sheet.getRange(r, REF_COLS.BOUCHE + 1).setValue(dataSAQ.bouche);
+      if (dataSAQ.temperature) sheet.getRange(r, REF_COLS.TEMPERATURE + 1).setValue(dataSAQ.temperature);
+      if (dataSAQ.description) sheet.getRange(r, REF_COLS.DESCRIPTION + 1).setValue(dataSAQ.description);
+      sheet.getRange(r, REF_COLS.DATE_AJOUT_REF + 1).setValue(new Date());
+      sheet.getRange(r, REF_COLS.MODIFIE + 1).setValue("Non");
+      
+      Logger.log("Code SAQ " + dataSAQ.codeSAQ + " mis à jour à la ligne " + existingRow);
+      return { success: true, action: "updated", row: existingRow };
+      
+    } else {
+      // Nouvelle ligne (référence seulement, pas de bouteille)
+      const newRow = new Array(TOTAL_COLS).fill("");
+      newRow[REF_COLS.CODE_CUP] = dataSAQ.codeCUP || "";
+      newRow[REF_COLS.CODE_SAQ] = dataSAQ.codeSAQ || "";
+      newRow[REF_COLS.NOM] = dataSAQ.nom || "";
+      newRow[REF_COLS.PRIX] = dataSAQ.prix || "";
+      newRow[REF_COLS.COULEUR] = dataSAQ.couleur || "";
+      newRow[REF_COLS.CEPAGES] = dataSAQ.cepages || "";
+      newRow[REF_COLS.PAYS] = dataSAQ.pays || "";
+      newRow[REF_COLS.REGION] = dataSAQ.region || "";
+      newRow[REF_COLS.APPELLATION] = dataSAQ.appellation || "";
+      newRow[REF_COLS.DESIGNATION] = dataSAQ.designation || "";
+      newRow[REF_COLS.CLASSIFICATION] = dataSAQ.classification || "";
+      newRow[REF_COLS.FORMAT] = dataSAQ.format || "";
+      newRow[REF_COLS.ALCOOL] = dataSAQ.alcool || "";
+      newRow[REF_COLS.SUCRE] = dataSAQ.sucre || "";
+      newRow[REF_COLS.PARTICULARITE] = dataSAQ.particularite || "";
+      newRow[REF_COLS.PRODUCTEUR] = dataSAQ.producteur || "";
+      newRow[REF_COLS.AGENT_PROMO] = dataSAQ.agentPromotionnel || "";
+      newRow[REF_COLS.MILLESIME] = dataSAQ.millesimeDeguste || "";
+      newRow[REF_COLS.AROMES] = dataSAQ.aromes || "";
+      newRow[REF_COLS.ACIDITE] = dataSAQ.acidite || "";
+      newRow[REF_COLS.SUCROSITE] = dataSAQ.sucrosite || "";
+      newRow[REF_COLS.CORPS] = dataSAQ.corps || "";
+      newRow[REF_COLS.BOUCHE] = dataSAQ.bouche || "";
+      newRow[REF_COLS.TEMPERATURE] = dataSAQ.temperature || "";
+      newRow[REF_COLS.DESCRIPTION] = dataSAQ.description || "";
+      newRow[REF_COLS.DATE_AJOUT_REF] = new Date();
+      newRow[REF_COLS.MODIFIE] = "Non";
+      
+      sheet.appendRow(newRow);
+      const newRowNum = sheet.getLastRow();
+      Logger.log("Code SAQ " + dataSAQ.codeSAQ + " ajouté à la ligne " + newRowNum);
+      return { success: true, action: "added", row: newRowNum };
+    }
+    
+  } catch (e) {
+    Logger.log("Erreur saveScrapedDataToVino: " + e.message);
+    return { success: false, error: e.message };
+  }
+}
+
+/* ============================================================
+   FICHE VIN COMPLÈTE
+=============================================================== */
+
+/**
+ * Retourne toutes les données de référence d'un vin par Code SAQ
+ */
+function getReferenceVinByCode(codeSAQ) {
+  try {
+    Logger.log("=== getReferenceVinByCode ===");
+    Logger.log("Parametre recu: [" + codeSAQ + "] Type: " + typeof codeSAQ);
+    
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = ss.getSheetByName(VINO_SHEET);
+    
+    if (!sheet) throw new Error("Feuille " + VINO_SHEET + " introuvable");
+    
+    const data = sheet.getDataRange().getValues();
+    const headers = data[0];
+    
+    const codeSAQString = codeSAQ ? codeSAQ.toString().trim() : "";
+    const codeSAQNumber = parseInt(codeSAQ);
+    
+    for (let i = 1; i < data.length; i++) {
+      const cellValue = data[i][REF_COLS.CODE_SAQ];
+      const cellString = cellValue ? cellValue.toString().trim() : "";
+      
+      if (cellString === codeSAQString || cellValue === codeSAQNumber) {
+        Logger.log("TROUVE a la ligne " + (i+1));
+        
+        const result = {};
+        // Ne retourner que les colonnes de référence
+        for (let col = 0; col < BOTTLE_START; col++) {
+          const header = headers[col] || ("Col" + col);
+          const value = data[i][col];
+          
+          if (value instanceof Date) {
+            result[header] = value.toISOString();
+          } else if (value === null || value === undefined) {
+            result[header] = "";
+          } else {
+            result[header] = value.toString();
+          }
+        }
+        
+        Logger.log("Objet construit avec " + Object.keys(result).length + " colonnes");
+        return result;
+      }
+    }
+    
+    Logger.log("PAS TROUVE");
+    return null;
+    
+  } catch (error) {
+    Logger.log("ERREUR: " + error.message);
+    throw error;
+  }
+}
+
+/**
+ * Ajoute un Code SAQ à un vin identifié par son Code CUP
+ * Puis lance le scraping si nécessaire
+ */
+function ajouterCodeSAQ(codebarre, codeSAQ) {
+  try {
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = ss.getSheetByName(VINO_SHEET);
+    
+    if (!sheet) throw new Error("Feuille " + VINO_SHEET + " introuvable");
+    
+    const data = sheet.getDataRange().getValues();
+    let targetRow = -1;
+    
+    for (let i = 1; i < data.length; i++) {
+      const rowCUP = data[i][REF_COLS.CODE_CUP] ? data[i][REF_COLS.CODE_CUP].toString().trim() : "";
+      
+      if (rowCUP === codebarre.toString().trim()) {
+        targetRow = i + 1;
+        break;
+      }
+    }
+    
+    if (targetRow === -1) {
+      throw new Error("Aucun vin trouvé avec ce Code CUP");
+    }
+    
+    // Écrire le Code SAQ
+    sheet.getRange(targetRow, REF_COLS.CODE_SAQ + 1).setValue(codeSAQ);
+    Logger.log("Code SAQ " + codeSAQ + " ajouté à la ligne " + targetRow);
+    
+    // Lancer le scraping pour enrichir les données
+    Logger.log("Lancement du scraping SAQ...");
+    const scrapResult = testScrapingSAQ(codeSAQ);
+    
+    if (scrapResult.success) {
+      Logger.log("Scraping réussi, données enrichies");
+    }
+    
+    return { success: true, updated: 1 };
+    
+  } catch (error) {
+    Logger.log("Erreur ajouterCodeSAQ: " + error.message);
+    throw error;
+  }
+}
+
+/* ============================================================
+   FONCTIONS UTILITAIRES HTML
+=============================================================== */
+
+function extractFromMeta(html, property) {
+  try {
+    const regex = new RegExp('<meta\\s+property="' + property + '"\\s+content="([^"]*)"', 'i');
+    const match = html.match(regex);
+    return (match && match[1]) ? cleanHTML(match[1]) : "";
+  } catch (e) { return ""; }
+}
+
+function extractDetailInfo(html, label) {
+  try {
+    const escapedLabel = label.replace(/'/g, "\\'");
+    const regex = new RegExp('<span[^>]*>\\s*' + escapedLabel + '\\s*</span>\\s*<strong[^>]*>([\\s\\S]*?)</strong>', 'i');
+    const match = html.match(regex);
+    return (match && match[1]) ? cleanHTML(match[1]) : "";
+  } catch (e) { return ""; }
+}
+
+function extractTastingInfo(html, label) {
+  try {
+    const escapedLabel = label.replace(/'/g, "\\'");
+    const regex = new RegExp('<span[^>]*>' + escapedLabel + '</span>\\s*<strong[^>]*>([^<]*)</strong>', 'i');
+    const match = html.match(regex);
+    return (match && match[1]) ? cleanHTML(match[1]) : "";
+  } catch (e) { return ""; }
+}
+
+function extractDescription(html) {
+  try {
+    const regex = /<div class="wrapper-content-info">\s*([\s\S]*?)\s*<\/div>/i;
+    const match = html.match(regex);
+    return (match && match[1]) ? cleanHTML(match[1]) : "";
+  } catch (e) { return ""; }
+}
+
+function cleanCepages(text) {
+  return text.replace(/\s*\d+\s*%/g, '').replace(/,\s+/g, ', ').trim();
+}
+
+function cleanHTML(text) {
+  return text
+    .replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#x20;/g, ' ')
+    .replace(/&#xF4;/g, 'ô')
+    .replace(/&#xE9;/g, 'é')
+    .replace(/&#xE8;/g, 'è')
+    .replace(/&#xEA;/g, 'ê')
+    .replace(/&#x27;/g, "'")
+    .replace(/&#x3A;/g, ':')
+    .replace(/&#xE0;/g, 'à')
+    .replace(/&#xFB;/g, 'û')
+    .replace(/&#x3C;/g, '<')
+    .replace(/&#x3E;/g, '>')
+    .replace(/&#039;/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/* ============================================================
+   FONCTIONS DE TEST / DEBUG
+=============================================================== */
+
+function testVinoSheet() {
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = ss.getSheetByName(VINO_SHEET);
+  const data = sheet.getDataRange().getValues();
+  
+  Logger.log("=== HEADERS ===");
+  Logger.log(JSON.stringify(data[0]));
+  Logger.log("Nombre de colonnes: " + data[0].length);
+  Logger.log("Nombre de lignes: " + data.length);
+  
+  if (data.length > 1) {
+    Logger.log("=== PREMIÈRE LIGNE DE DONNÉES ===");
+    Logger.log(JSON.stringify(data[1]));
+  }
+}
+
+function testDirect() {
+  const result = getReferenceVinByCode(14836976);
+  Logger.log("Test 1 (nombre): " + (result ? "TROUVÉ" : "NULL"));
+  
+  const result2 = getReferenceVinByCode("14836976");
+  Logger.log("Test 2 (string): " + (result2 ? "TROUVÉ" : "NULL"));
+}
+
+/**
+ * Sauvegarde un vin scanné dans la sheet "Vins scannés"
+ * Crée la sheet si elle n'existe pas
+ */
+function saveScannedWine(codebarre, note) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName("Vins scannés");
+  
+  // Créer la sheet si elle n'existe pas
+  if (!sheet) {
+    sheet = ss.insertSheet("Vins scannés");
+    
+    // Headers
+    sheet.getRange(1, 1, 1, 3).setValues([
+      ["Code-barres", "Note", "Date scan"]
+    ]);
+    
+    // Formater les headers
+    const headerRange = sheet.getRange(1, 1, 1, 3);
+    headerRange.setFontWeight("bold");
+    headerRange.setBackground("#E6A100");
+    headerRange.setFontColor("#000000");
+    headerRange.setHorizontalAlignment("center");
+    
+    // Largeur des colonnes
+    sheet.setColumnWidth(1, 150); // Code-barres
+    sheet.setColumnWidth(2, 300); // Note
+    sheet.setColumnWidth(3, 150); // Date
+  }
+  
+  // Ajouter la nouvelle ligne
+  const date = new Date();
+  const dateStr = Utilities.formatDate(date, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm:ss");
+  
+  sheet.appendRow([
+    codebarre,
+    note || "",
+    dateStr
+  ]);
+  
+  return { success: true };
+}
+
+

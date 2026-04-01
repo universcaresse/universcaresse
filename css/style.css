@@ -927,7 +927,7 @@ tr.cliquable { cursor: pointer; }
 .recette-carte:hover .recette-couleur { transform: scale(1.04); }
 .recette-photo-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: rgba(255,255,255,0.45); font-family: 'DM Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; }
 .recette-photo-placeholder svg { width: 26px; height: 26px; opacity: 0.4; }
-.recette-dot { position: absolute; bottom: 12px; right: 12px; width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--blanc-pur-50); background: var(--col-hex, var(--gris)); }
+.recette-dot { position: absolute; top: 12px; right: 12px; width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--blanc-pur-50); background: var(--col-hex, var(--gris)); }
 .recette-section-collection { margin-bottom: 56px; }
 .recette-collection-titre { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 400; color: var(--gris-fonce); margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--beige); }
 .recette-section-ligne { margin-bottom: 40px; }
