@@ -180,6 +180,7 @@
   --texte-corps:    1.05rem;   /* 17px — lecture principale */
   --texte-corps-2:  1.15rem;   /* 18px — variante corps */
   --texte-titre-sm: 1.30rem;   /* 21px — titres tuiles */
+  --texte-titre-md: 1.50rem;   /* 24px — titres de section */
   --texte-signature: 2rem;     /* 32px — signature cursive */
 }
 /* ═══════════════════════════════════════
@@ -662,7 +663,7 @@ footer > * { position: relative; z-index: 1; }
    ═══════════════════════════════════════ */
 .bonne-section { padding: 64px var(--padding-page); border-bottom: 1px solid var(--beige); }
 .bonne-section:last-of-type { border-bottom: none; }
-.bonne-section-titre { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; color: var(--gris-fonce); margin-bottom: 32px; display: flex; align-items: center; gap: 16px; }
+.bonne-section-titre { font-family: 'Playfair Display', serif; font-size: var(--texte-titre-md); font-weight: 600; color: var(--gris-fonce); margin-bottom: 32px; display: flex; align-items: center; gap: 16px; }
 .bonne-section-titre::after { content: ''; flex: 1; height: 1px; background: var(--beige); }
 .items-grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
 .info-card { background: white; padding: 28px 28px 28px 24px; border-left: 3px solid var(--primary); }
@@ -679,20 +680,20 @@ footer > * { position: relative; z-index: 1; }
    CONTACT
    ═══════════════════════════════════════ */
 .contact-grille { padding: 72px var(--padding-page) var(--padding-page); display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px; align-items: start; }
-.contact-info-titre { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--gris-fonce); margin-bottom: 24px; }
-.contact-info-desc { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; line-height: 1.8; color: var(--gris); font-weight: 300; margin-bottom: 40px; }
+.contact-info-titre { font-family: 'Playfair Display', serif; font-size: var(--texte-titre-md); font-weight: 400; color: var(--gris-fonce); margin-bottom: 24px; }
+.contact-info-desc { font-family: 'DM Sans', sans-serif; font-size: var(--texte-sm); line-height: 1.8; color: var(--gris); font-weight: 300; margin-bottom: 40px; }
 .contact-item { display: flex; gap: 16px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid var(--beige); }
 .contact-item:first-of-type { border-top: 1px solid var(--beige); }
 .contact-item-icone { width: 36px; height: 36px; background: rgba(90,138,58,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
 .contact-item-icone svg { width: 16px; height: 16px; color: var(--primary); }
-.contact-item-label { font-family: 'DM Sans', sans-serif; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris); font-weight: 500; margin-bottom: 4px; }
-.contact-item-valeur { font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--gris-fonce); font-weight: 300; }
+.contact-item-label { font-family: 'DM Sans', sans-serif; font-size: var(--texte-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--gris); font-weight: 500; margin-bottom: 4px; }
+.contact-item-valeur { font-family: 'DM Sans', sans-serif; font-size: var(--texte-sm); color: var(--gris-fonce); font-weight: 300; }
 .contact-item-valeur a { color: var(--primary); text-decoration: none; transition: color 0.2s; }
 .contact-item-valeur a:hover { color: var(--primary-dark); }
 .contact-delai { margin-top: 32px; padding: 20px 24px; background: rgba(90,138,58,0.06); border-left: 3px solid var(--primary); }
-.contact-delai p { font-family: 'DM Sans', sans-serif; font-size: 0.82rem; line-height: 1.7; color: var(--gris); font-weight: 300; }
+.contact-delai p { font-family: 'DM Sans', sans-serif; font-size: var(--texte-xs-2); line-height: 1.7; color: var(--gris); font-weight: 300; }
 .contact-delai strong { font-weight: 500; color: var(--gris-fonce); }
-.formulaire-titre { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--gris-fonce); margin-bottom: 32px; }
+.formulaire-titre { font-family: 'Playfair Display', serif; font-size: var(--texte-titre-md); font-weight: 400; color: var(--gris-fonce); margin-bottom: 32px; }
 
 /* ═══════════════════════════════════════
    CATALOGUE PUBLIC
