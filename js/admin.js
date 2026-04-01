@@ -1993,6 +1993,8 @@ async function chargerInci() {
     listesDropdown.fullData = resDrop.fullData || [];
     listesDropdown.config   = resDrop.config   || {};
   }
+  const resFormats = await appelAPI('getFormatsIngredients');
+  listesDropdown.formats = (resFormats && resFormats.items) ? resFormats.items : [];
   document.getElementById('loading-inci').classList.add('cache');
 
   if (!res || !res.success) {
@@ -2645,19 +2647,37 @@ function onChangeIngredient() {
   const type = document.getElementById('item-type')?.value;
   const ing  = sel.value;
   if (!ing || ing === '__nouveau__') return;
-  const item = listesDropdown.fullData.find(d => d.type === type && d.ingredient === ing);
-  if (!item || !item.formats.length) return;
-  item.formats.forEach(f => {
+
+  const formats = (listesDropdown.formats || []).filter(f =>
+    f.type === type && f.ingredient === ing && f.fournisseur === (factureActive?.fournisseur || '')
+  );
+  formats.forEach(f => {
     const opt = document.createElement('option');
-    opt.value = JSON.stringify(f);
-    opt.textContent = f.contenant + ' ' + f.quantite + ' ' + f.unite;
+    opt.value = JSON.stringify({ quantite: f.quantite, unite: f.unite });
+    opt.dataset.contenant = f.contenant;
+    opt.textContent = (f.contenant ? f.contenant + ' — ' : '') + f.quantite + ' ' + f.unite;
     selFormat.appendChild(opt);
   });
+
+  const optNouveau = document.createElement('option');
+  optNouveau.value = '__nouveau__';
+  optNouveau.textContent = '+ Nouveau format';
+  selFormat.appendChild(optNouveau);
 }
 
 function onChangeFormat() {
   const selFormat = document.getElementById('item-format');
-  if (!selFormat || !selFormat.value) return;
+  if (!selFormat) return;
+  const nouveau = selFormat.value === '__nouveau__';
+  document.getElementById('item-nouveau-format-bloc').classList.toggle('cache', !nouveau);
+  document.getElementById('item-nouveau-qte-bloc').classList.toggle('cache', !nouveau);
+  document.getElementById('item-nouveau-unite-bloc').classList.toggle('cache', !nouveau);
+  if (nouveau) {
+    document.getElementById('item-format-qte').value   = '';
+    document.getElementById('item-format-unite').value = '';
+    return;
+  }
+  if (!selFormat.value) return;
   const f = JSON.parse(selFormat.value);
   document.getElementById('item-format-qte').value   = f.quantite;
   document.getElementById('item-format-unite').value = f.unite;
@@ -2745,8 +2765,11 @@ async function ajouterItem() {
     ingredient = document.getElementById('item-ingredient-nouveau')?.value?.trim();
   }
   const type        = document.getElementById('item-type')?.value;
-  const formatQte   = document.getElementById('item-format-qte')?.value?.trim();
-  const formatUnite = document.getElementById('item-format-unite')?.value;
+  const selFormat   = document.getElementById('item-format');
+  const isNouveau   = selFormat?.value === '__nouveau__';
+  const formatQte   = isNouveau ? document.getElementById('item-nouveau-qte')?.value?.trim() : document.getElementById('item-format-qte')?.value?.trim();
+  const formatUnite = isNouveau ? document.getElementById('item-nouveau-unite')?.value : document.getElementById('item-format-unite')?.value;
+  const contenant   = isNouveau ? document.getElementById('item-contenant')?.value?.trim() : (selFormat?.options[selFormat.selectedIndex]?.dataset?.contenant || '');
   const prixUnit    = document.getElementById('item-prix-unitaire')?.value?.trim();
   const quantite    = document.getElementById('item-quantite')?.value?.trim();
   const notes       = document.getElementById('item-notes')?.value?.trim();
@@ -2765,11 +2788,14 @@ const prixTotal = parseFloat(quantite) * parseFloat(prixUnit);
     const qte      = parseFloat(formatQte);
     const densite  = cfg.densite || 1;
     const perte    = cfg.margePertePct || 0;
-    let qteEnG     = cfg.unite === 'ml' ? qte * densite : qte;
-    if (formatUnite === 'kg') qteEnG = qte * 1000;
-    if (formatUnite === 'L')  qteEnG = qte * 1000 * densite;
-    const qteUtile = qteEnG * (1 - perte / 100);
-    prixParG = qteUtile > 0 ? parseFloat(prixUnit) / qteUtile : null;
+    let qteEnG = qte;
+    if (formatUnite === 'g')   qteEnG = qte;
+    if (formatUnite === 'kg')  qteEnG = qte * 1000;
+    if (formatUnite === 'L')   qteEnG = qte * 1000 * (cfg.densite || 1);
+    if (formatUnite === 'ml')  qteEnG = qte * (cfg.densite || 1);
+    if (formatUnite === 'lbs') qteEnG = qte * 453.592;
+    const prixParGBrut = qteEnG > 0 ? parseFloat(prixUnit) / qteEnG : null;
+    prixParG = prixParGBrut !== null ? prixParGBrut * (1 + (perte / 100)) : null;
   }
 
   const res = await appelAPIPost('addProduct', {
@@ -2792,6 +2818,11 @@ const prixTotal = parseFloat(quantite) * parseFloat(prixUnit);
     return;
   }
 
+  appelAPIPost('saveFormatIngredient', {
+    type, ingredient, fournisseur: factureActive.fournisseur,
+    contenant, quantite: parseFloat(formatQte), unite: formatUnite
+  });
+
   produitsFacture.push({ type, ingredient, formatQte, formatUnite, prixUnitaire: parseFloat(prixUnit), quantite: parseFloat(quantite), prixTotal });
   afficherMsg('item-msg', 'Item ajouté.', 'succes');
   reinitialiserFormulaireItem();
@@ -2800,13 +2831,16 @@ const prixTotal = parseFloat(quantite) * parseFloat(prixUnit);
 }
 
 function reinitialiserFormulaireItem() {
- ['item-type','item-ingredient','item-format-qte','item-format-unite','item-prix-unitaire','item-quantite','item-notes']
+  ['item-type','item-ingredient','item-format-qte','item-format-unite','item-prix-unitaire','item-quantite','item-notes','item-nouveau-qte','item-contenant']
     .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
   const champNouv = document.getElementById('item-ingredient-nouveau');
   if (champNouv) { champNouv.classList.add('cache'); champNouv.value = ''; }
   document.getElementById('item-ingredient').innerHTML = '<option value=""></option>';
   const selFormat = document.getElementById('item-format');
   if (selFormat) selFormat.innerHTML = '<option value="">— Choisir un format —</option>';
+  ['item-nouveau-format-bloc','item-nouveau-qte-bloc','item-nouveau-unite-bloc'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.classList.add('cache');
+  });
 }
 
 function afficherItemsFacture() {
