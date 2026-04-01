@@ -5,7 +5,7 @@
    ═══════════════════════════════════════ */
 
 /* ═══════════════════════════════════════
-   VARIABLES  #e8dcc8;
+   VARIABLES #f9f7f4;
    ═══════════════════════════════════════ */
    
 :root {
@@ -13,8 +13,8 @@
   --primary-dark:   #4a6e2e;
   --accent:         #d4a445;
   --danger:         #c44536;
-  --blanc:          #f9f7f4;
-  --beige:         #f9f7f4;
+  --blanc:          #ffffff;
+  --beige:          #e8dcc8;
   --gris:           #8b8680;
   --gris-fonce:     #3d3b39;
   --logo:           #333333;
