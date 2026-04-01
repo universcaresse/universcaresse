@@ -503,7 +503,7 @@ select.form-control, select.form-ctrl { cursor: pointer; }
 .ligne-groupe { margin-bottom: 48px; }
 .ligne-groupe-entete { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--beige); }
 .ligne-groupe-nom { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400; color: var(--gris-fonce); margin-bottom: 0; }
-.ligne-groupe-desc { font-family: 'DM Sans', sans-serif; font-size: var(--texte-corps); line-height: 1.7; color: var(--gris); font-weight: 300; }
+.ligne-groupe-desc { font-family: 'DM Sans', sans-serif; font-size: var(--texte-corps); line-height: 1.7; color: var(--gris); font-weight: 300; margin-top: 8px; }
 .modal-desc { font-family: 'DM Sans', sans-serif; font-size: var(--texte-corps); line-height: 1.85; color: var(--gris); font-weight: 300; margin-bottom: 24px; }
 .modal-formats-titre { font-family: 'DM Sans', sans-serif; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); margin-bottom: 10px; }
 .modal-formats { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
@@ -708,11 +708,11 @@ footer > * { position: relative; z-index: 1; }
 .collection-section.masquee { display: none; }
 .collection-entete { display: grid; grid-template-columns: 1fr 340px; gap: 48px; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--beige); align-items: start; }
 .collection-entete-nom { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 400; color: var(--gris-fonce); margin-bottom: 4px; }
-.collection-entete-slogan { font-family: 'Playfair Display', serif; font-size: var(--texte-sm-2); font-style: italic; color: var(--accent); margin-bottom: 14px; }
+.collection-entete-slogan { font-family: 'Playfair Display', serif; font-size: var(--texte-corps); font-style: italic; color: var(--accent); margin-bottom: 14px; }
 .collection-entete-desc { font-family: 'DM Sans', sans-serif; font-size: var(--texte-corps); line-height: 1.8; color: var(--gris); font-weight: 300; max-width: 560px; }
 .collection-entete-visuel { aspect-ratio: 1/1; overflow: hidden; position: relative; max-height: 300px; }
 .collection-entete-bg { width: 100%; aspect-ratio: 1/1; background: linear-gradient(135deg, color-mix(in srgb, var(--col-hex) 80%, transparent), color-mix(in srgb, var(--col-hex) 53%, transparent)); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-.collection-entete-bg img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.collection-entete-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center; position: absolute; inset: 0; }
 .entete-visuel-placeholder { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: rgba(255,255,255,0.6); font-style: italic; letter-spacing: 0.06em; text-align: center; position: relative; z-index: 1; }
 .produits-grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; }
 .carte-produit { background: white; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
