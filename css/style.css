@@ -1123,7 +1123,7 @@ tr.cliquable { cursor: pointer; }
 
   .hero { grid-template-columns: 1fr; }
   .hero-right { min-height: 280px; }
- .hero-left { padding: 48px var(--padding-mobile); align-items: center; }
+ .hero-left { padding: 48px var(--padding-mobile); align-items: flex-start; }
 .hero-eyebrow { text-align: left; }
 .hero-cta { width: 100%; max-width: 100%; justify-content: center; }
   .hero-left::after { display: none; }
@@ -1177,6 +1177,7 @@ tr.cliquable { cursor: pointer; }
 }
 
 @media (min-width: 600px) and (max-width: 900px) {
+  .collection-tile { aspect-ratio: 3/4; }
   .modal-produit { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; max-height: 90vh; width: 90%; position: relative; overflow: hidden; }
   .modal-visuel { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; }
   .modal-visuel-photo { min-height: 300px; flex-shrink: 0; }
