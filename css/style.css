@@ -1181,10 +1181,12 @@ tr.cliquable { cursor: pointer; }
 }
 
 @media (orientation: landscape) and (max-width: 1180px) {
-  .modal-produit { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; max-height: 90vh; width: 85%; overflow-y: auto; }
-  .modal-visuel-photo { min-height: 300px; grid-column: 1; grid-row: 1; }
-  .modal-visuel-hex { min-height: 200px; grid-column: 1; grid-row: 2; display: block; }
-  .modal-contenu { grid-column: 2; grid-row: 1 / -1; overflow-y: auto; }
+  .modal-produit { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; max-height: 90vh; width: 85%; overflow: hidden; position: relative; }
+  .modal-visuel { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; }
+  .modal-visuel-photo { min-height: 300px; flex-shrink: 0; }
+  .modal-visuel-hex { flex: 1; display: flex; align-items: center; }
+  .modal-contenu { grid-column: 2; grid-row: 1; overflow-y: auto; }
+  .modal-fermer { position: absolute; top: 16px; right: 16px; }
 }
 
 @media (max-width: 480px) {
