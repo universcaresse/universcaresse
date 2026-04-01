@@ -322,7 +322,7 @@ function ouvrirFormCollection() {
   document.getElementById('fc-bloc-ligne').classList.add('cache');
   document.getElementById('fc-toggle-mode').textContent = '+ Ajouter une ligne';
   ['fc-rang','fc-collection','fc-slogan','fc-desc-col','fc-couleur-hex','fc-photo-url',
-   'fc-ligne','fc-format','fc-desc-ligne','fc-couleur-hex-ligne','fc-photo-url-ligne','fc-collection-ligne']
+   'fc-ligne','fc-desc-ligne','fc-couleur-hex-ligne','fc-photo-url-ligne','fc-collection-ligne']
     .forEach(id => { const e = document.getElementById(id); if (e) e.value = ''; });
   ['fc-photo-preview','fc-photo-preview-ligne','fc-photo-preview-noel'].forEach(id => {
     const e = document.getElementById(id); if (e) e.innerHTML = '';
@@ -359,9 +359,9 @@ async function ouvrirFicheLigne(rowIndex) {
   const item = donneesCollections.find(i => i.rowIndex === rowIndex);
   if (!item) return;
   document.getElementById('fiche-ligne-titre').textContent = item.ligne.toUpperCase();
-  document.getElementById('fiche-ligne-format').textContent = item.format || '';
+  
   document.getElementById('fiche-ligne-collection').textContent = item.collection || '';
-  document.getElementById('fiche-ligne-format-detail').textContent = item.format || '—';
+  
   document.getElementById('fiche-ligne-desc').textContent = item.description_ligne || '—';
   document.getElementById('fiche-ligne-modifier').onclick = () => {
     fermerFicheLigne();
@@ -404,7 +404,7 @@ async function modifierLigneProduit(rowIndex) {
   document.getElementById('fc-toggle-mode').textContent = '← Retour collection';
   document.getElementById('fc-collection-ligne').value = item.collection || '';
   document.getElementById('fc-ligne').value = item.ligne || '';
-  document.getElementById('fc-format').value = item.format || '';
+  
   document.getElementById('fc-desc-ligne').value = item.description_ligne || '';
   document.getElementById('fc-couleur-hex-ligne').value = item.couleur_hex || '';
   document.getElementById('fc-photo-url-ligne').value = item.photo_url || '';
@@ -427,6 +427,7 @@ async function modifierLigneProduit(rowIndex) {
 async function modifierCollection(rowIndex) {
   const item = donneesCollections.find(i => i.rowIndex === rowIndex);
   if (!item) return;
+  document.getElementById('fc-mode').value = 'collection';
   document.getElementById('form-collections-titre').textContent = 'Modifier l\'entrée';
   document.getElementById('fc-rowIndex').value          = rowIndex;
   document.getElementById('fc-rang').value              = item.rang || '';
@@ -436,7 +437,7 @@ async function modifierCollection(rowIndex) {
 descCol.value = item.description_collection || '';
 ajusterHauteurTextarea(descCol);
   document.getElementById('fc-ligne').value             = item.ligne || '';
-  document.getElementById('fc-format').value            = item.format || '';
+  
   document.getElementById('fc-desc-ligne').value        = item.description_ligne || '';
 document.getElementById('fc-couleur-hex').value       = item.couleur_hex || 'var(--gris)';
   apercuCouleurCollection(document.getElementById('fc-couleur-hex'));
