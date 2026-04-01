@@ -2516,6 +2516,7 @@ function ouvrirFormDensite() {
 
 function fermerFormDensite() {
   document.getElementById('form-densites').classList.remove('visible');
+  document.getElementById('btn-nouvelle-densite').classList.remove('cache');
 }
 
 function modifierDensite(type) {
@@ -2529,6 +2530,7 @@ function modifierDensite(type) {
   document.getElementById('fd-marge-perte').value  = d.marge_perte_pct || '';
   document.getElementById('fd-type').readOnly      = true;
   document.getElementById('form-densites').classList.add('visible');
+  document.getElementById('btn-nouvelle-densite').classList.add('cache');
   document.getElementById('fd-densite').focus();
 }
 
