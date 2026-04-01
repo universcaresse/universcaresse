@@ -453,16 +453,20 @@ document.getElementById('fc-couleur-hex').value       = item.couleur_hex || 'var
   document.getElementById('fc-photo-url-noel').value    = item.photo_url_noel || '';
   const previewNoel = document.getElementById('fc-photo-preview-noel');
   if (previewNoel) previewNoel.innerHTML = item.photo_url_noel ? `<img src="${item.photo_url_noel}" class="photo-preview">` : '';
-  const res = await appelAPI('getRecettesBase');
-  ingredientsBase = (res && res.items ? res.items : [])
-    .filter(i => i.collection === item.collection && i.ligne === item.ligne)
-    .map(i => ({ type: i.ingredient_type, nom: i.ingredient_nom, quantite: i.quantite_g }));
-rafraichirListeIngredientsBase();
-document.getElementById('contenu-collections').classList.add('cache');
+  document.getElementById('contenu-collections').classList.add('cache');
   document.getElementById('btn-nouvelle-collection').classList.add('cache');
   document.getElementById('fc-toggle-mode').classList.add('cache');
   document.getElementById('form-collections').classList.add('visible');
   window.scrollTo(0, 0);
+  ingredientsBase = [];
+  rafraichirListeIngredientsBase();
+  const res = await appelAPI('getRecettesBase');
+  if (res && res.items) {
+    ingredientsBase = res.items
+      .filter(i => i.collection === item.collection && i.ligne === item.ligne)
+      .map(i => ({ type: i.ingredient_type, nom: i.ingredient_nom, quantite: i.quantite_g }));
+    rafraichirListeIngredientsBase();
+  }
 }
 
 
