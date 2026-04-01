@@ -192,14 +192,14 @@ h1, h2, h3 { font-family: 'Playfair Display', serif; }
 p { white-space: pre-line; overflow-wrap: break-word; }
 
 /* ═══════════════════════════════════════
-   NAVIGATION
+   NAVIGATION background: rgba(249,247,244,0.92);
    ═══════════════════════════════════════ */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   height: var(--nav-h);
-display: flex; align-items: center; justify-content: flex-end;
+  display: flex; align-items: center; justify-content: flex-end;
   padding: 0 48px;
-  background: rgba(249,247,244,0.92);
+ 
   backdrop-filter: blur(12px);
   border-bottom: none;
   transition: box-shadow 0.3s;
