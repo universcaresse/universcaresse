@@ -180,7 +180,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
-  background: var(--blanc);
+  background: #ffffff !important;
   color: var(--gris-fonce);
   overflow-x: hidden;
 }
@@ -203,7 +203,7 @@ nav {
    border-bottom: none;
   transition: box-shadow 0.3s;
 }
-nav.scrolled { box-shadow: 0 2px 20px rgba(90,138,58,0.08); }
+nav.scrolled { box-shadow: none; }
 @media (max-width: 900px) { nav.scrolled { box-shadow: none; } }
 
 .nav-logo { display: flex; flex-direction: column; text-decoration: none; line-height: 1.1; }
