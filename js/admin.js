@@ -2563,6 +2563,13 @@ async function sauvegarderDensite() {
 
 let listesDropdown = { types: [], fullData: [], fournisseurs: [] };
 
+function terminerPlusTard() {
+  factureActive   = null;
+  produitsFacture = [];
+  afficherSection('factures', null);
+  afficherMsg('factures', 'Facture sauvegardée — vous pouvez la compléter plus tard.', 'succes');
+}
+
 async function initialiserNouvelleFacture() {
   if (factureActive) return;
   factureActive   = null;
@@ -2838,7 +2845,7 @@ const prixTotal = parseFloat(quantite) * parseFloat(prixUnit);
 }
 
 function reinitialiserFormulaireItem() {
-  ['item-type','item-ingredient','item-format-qte','item-format-unite','item-prix-unitaire','item-quantite','item-notes','item-nouveau-qte','item-contenant']
+  ['item-type','item-ingredient','item-format-qte','item-format-unite','item-prix-unitaire','item-quantite','item-notes','item-nouveau-qte']
     .forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
   const champNouv = document.getElementById('item-ingredient-nouveau');
   if (champNouv) { champNouv.classList.add('cache'); champNouv.value = ''; }

@@ -711,10 +711,7 @@
           </div>
           <input type="hidden" id="item-format-qte">
           <input type="hidden" id="item-format-unite">
-          <div class="form-groupe cache" id="item-nouveau-format-bloc">
-            <label class="form-label">Contenant <span class="form-optionnel">(optionnel)</span></label>
-            <input type="text" id="item-contenant" class="form-ctrl" placeholder="ex: bouteille, sac, cruche" autocomplete="off">
-          </div>
+       
           <div class="form-groupe cache" id="item-nouveau-qte-bloc">
             <label class="form-label">Quantité du contenant</label>
             <input type="text" inputmode="decimal" id="item-nouveau-qte" class="form-ctrl" autocomplete="off">
@@ -759,6 +756,7 @@
     <!-- Navigation -->
     <div class="form-actions mt-24">
       <button class="btn btn-outline" onclick="wizardEtape1()">← Retour</button>
+      <button class="btn btn-secondary" onclick="terminerPlusTard()">Terminer plus tard</button>
       <button class="btn btn-primary" onclick="wizardEtape3()">Suivant →</button>
     </div>
 
