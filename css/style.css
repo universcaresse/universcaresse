@@ -503,7 +503,7 @@ select.form-control, select.form-ctrl { cursor: pointer; }
 .modal-desc-ligne { font-family: 'DM Sans', sans-serif; font-size: var(--texte-xs-2); color: var(--gris); margin-bottom: 20px; font-weight: 300; font-style: italic; }
 .ligne-groupe { margin-bottom: 48px; }
 .ligne-groupe-entete { margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--beige); }
-.ligne-groupe-nom { font-family: 'Playfair Display', serif; font-size: var(--texte-titre-sm); font-weight: 400; color: var(--gris-fonce); margin-bottom: 0; }
+.ligne-groupe-nom { font-family: 'Playfair Display', serif; font-size: var(--texte-titre-sm); font-weight: 600; color: var(--gris-fonce); margin-bottom: 0; }
 .ligne-groupe-desc { font-family: 'DM Sans', sans-serif; font-size: var(--texte-corps); line-height: 1.7; color: var(--gris); font-weight: 300; margin-top: 8px; }
 .modal-desc { font-family: 'DM Sans', sans-serif; font-size: var(--texte-corps); line-height: 1.85; color: var(--gris); font-weight: 300; margin-bottom: 24px; }
 .modal-formats-titre { font-family: 'DM Sans', sans-serif; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); margin-bottom: 10px; }
@@ -708,7 +708,7 @@ footer > * { position: relative; z-index: 1; }
 .collection-section { margin-bottom: 72px; }
 .collection-section { transition: opacity 0.4s ease; }
 .collection-section.masquee { display: none; opacity: 0; }
-.collection-entete { display: grid; grid-template-columns: 1fr 340px; gap: 48px; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--beige); align-items: start; }
+.collection-entete { display: grid; grid-template-columns: 1fr 340px; gap: 48px; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--beige); align-items: center; }
 .collection-entete-nom { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 400; color: var(--gris-fonce); margin-bottom: 4px; }
 .collection-entete-slogan { font-family: 'Playfair Display', serif; font-size: var(--texte-corps); font-style: italic; color: var(--accent); margin-bottom: 14px; }
 .collection-entete-desc { font-family: 'DM Sans', sans-serif; font-size: var(--texte-corps); line-height: 1.8; color: var(--gris); font-weight: 300; max-width: 560px; }
