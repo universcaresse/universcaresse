@@ -61,6 +61,7 @@ async function chargerDonneesInitiales() {
     listesDropdown.types    = resDrop.types    || [];
     listesDropdown.fullData = resDrop.fullData || [];
     listesDropdown.config   = resDrop.config   || {};
+    listesDropdown.formats  = [];
   }
   const nbPublics = donneesRecettes.filter(r => r.statut === 'public').length;
   const statCol = document.getElementById('admin-stat-collections');
