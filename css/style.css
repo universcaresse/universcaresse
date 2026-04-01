@@ -214,7 +214,7 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(90,138,58,0.08); }
 .nav-links { display: flex; gap: 32px; list-style: none; margin-left: auto; }
 .nav-links a {
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+  font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--gris); text-decoration: none; font-weight: 400;
   transition: color 0.2s; position: relative;
 }
@@ -562,7 +562,7 @@ footer > * { position: relative; z-index: 1; }
 .hero { min-height: calc(100vh - var(--nav-h)); display: grid; grid-template-columns: 1fr 1fr; }
 .hero-left { display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 24px 64px 80px 80px; position: relative; }
 .hero-left::after { display: none; }
-.hero-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; font-weight: 500; min-height: 1.2rem; }
+.hero-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; font-weight: 500; min-height: 1.2rem; }
 .hero-cta { display: flex; align-items: center; gap: 16px; background: var(--primary); color: white; padding: 16px 36px; font-size: 0.78rem; font-family: 'DM Sans', sans-serif; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: background 0.3s, transform 0.2s; min-height: 52px; }
 .hero-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
 .hero-cta svg { width: 16px; height: 16px; transition: transform 0.3s; }
