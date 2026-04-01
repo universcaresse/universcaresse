@@ -430,6 +430,9 @@ async function modifierLigneProduit(rowIndex) {
 async function modifierCollection(rowIndex) {
   const item = donneesCollections.find(i => i.rowIndex === rowIndex);
   if (!item) return;
+  document.getElementById('fc-bloc-collection').classList.remove('cache');
+  document.getElementById('fc-bloc-ligne').classList.add('cache');
+  document.getElementById('fc-toggle-mode').textContent = '+ Ajouter une ligne';
   document.getElementById('fc-mode').value = 'collection';
   document.getElementById('form-collections-titre').textContent = 'Modifier l\'entrée';
   document.getElementById('fc-rowIndex').value          = rowIndex;
