@@ -597,6 +597,7 @@ async function supprimerLigne(rowIndex, collection, ligne) {
 let donneesRecettes = [];
 let recetteActive = null;
 let collectionsDisponibles = {};
+let donneesDensites = [];
 
 async function chargerRecettes() {
   const res = await appelAPI('getRecettes');
@@ -1024,7 +1025,7 @@ document.getElementById('fr-collection').value   = rec.collection || '';
 ingredientsRecette = (rec.ingredients || []).map(i => {
   const found = (listesDropdown.fullData || []).find(d => d.ingredient.toLowerCase() === i.nom.toLowerCase());
   return { type: i.type, nom: found ? found.ingredient : i.nom, quantite: i.quantite_g };
-});
+}).sort((a, b) => b.quantite - a.quantite);
   const resFormats = await appelAPIPost('getRecettesFormats', { recette_id: rec.recette_id });
   formatsRecette = (resFormats && resFormats.formats) ? resFormats.formats.map(f => ({ poids: f.poids, unite: f.unite, prix: f.prix_vente, desc: f.desc_emballage })) : [];
   document.querySelector('#section-recettes .filtres-bar').classList.add('cache');
@@ -2465,7 +2466,7 @@ async function inciSauvegarderCorrespondance() {
 /* ════════════════════════════════
    DENSITÉS
 ════════════════════════════════ */
-let donneesDensites = [];
+
 
 async function chargerDensites() {
   const loading = document.getElementById('loading-densites');
