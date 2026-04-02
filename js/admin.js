@@ -1190,7 +1190,10 @@ grille.innerHTML = items.map(i => `
 function selectionnerPhotoMediatheque(url, nom) {
   const champ = document.getElementById(_mediathequeChampId);
   if (champ) champ.value = url;
+  const preview = document.getElementById(_mediathequePreviewId);
+  if (preview) preview.innerHTML = `<img src="${url}" class="photo-preview">`;
   fermerModalMediatheque();
+}
 }
 
 function fermerModalMediatheque() {
