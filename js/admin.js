@@ -1157,6 +1157,7 @@ async function chargerMediatheque() {
     </div>`).join('');
 }
 
+
 async function mediathequeSyncCloudinary() {
   const msg = document.getElementById('msg-mediatheque');
   afficherMsg('mediatheque', 'Synchronisation en cours…');
