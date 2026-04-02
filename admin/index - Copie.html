@@ -403,7 +403,6 @@
                   <div class="cloudinary-zone">
                     <input type="text" class="form-ctrl" id="fc-photo-url-ligne">
                     <button type="button" class="btn btn-secondary" onclick="ouvrirCloudinaryLigne()">Choisir une photo</button>
-<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fc-photo-url-ligne', 'fc-photo-preview-ligne', 'Collection')">Médiathèque</button>
                   </div>
                   <div id="fc-photo-preview-ligne"></div>
                 </div>
@@ -556,7 +555,6 @@
               <div class="cloudinary-zone">
                 <input type="text" class="form-ctrl" id="fr-image-url">
                 <button type="button" class="btn btn-secondary" onclick="ouvrirCloudinary()">Choisir une photo</button>
-<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fr-image-url', 'fr-image-preview', 'Recette')">Médiathèque</button>
               </div>
               <div id="fr-image-preview"></div>
             </div>
@@ -565,17 +563,6 @@
               <div class="cloudinary-zone">
                 <input type="text" class="form-ctrl" id="fr-image-url-noel">
                 <button type="button" class="btn btn-secondary" onclick="ouvrirMediaLibrary('fr-image-url-noel', 'fr-image-preview-noel')">Choisir une photo</button>
-<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fr-image-url-noel', 'fr-image-preview-noel', 'Recette Noël')">Médiathèque</button>
-<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fr-image-url-noel', 'fr-image-preview-noel', 'Recette Noël')">Médiathèque</button>
-<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fr-image-url-noel', 'fr-image-preview-noel', 'Recette Noël')">Médiathèque</button>
-<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fr-image-url-noel', 'fr-image-preview-noel', 'Recette Noël')">Médiathèque</button>
-<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fr-image-url-noel', 'fr-image-preview-noel', 'Recette Noël')">Médiathèque</button>
-<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fr-image-url-noel', 'fr-image-preview-noel', 'Recette Noël')">Médiathèque</button>
-<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fr-image-url-noel', 'fr-image-preview-noel', 'Recette Noël')">Médiathèque</button>
-<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fr-image-url-noel', 'fr-image-preview-noel', 'Recette Noël')">Médiathèque</button>
-<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fr-image-url-noel', 'fr-image-preview-noel', 'Recette Noël')">Médiathèque</button>
-<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fr-image-url-noel', 'fr-image-preview-noel', 'Recette Noël')">Médiathèque</button>
-<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fr-image-url-noel', 'fr-image-preview-noel', 'Recette Noël')">Médiathèque</button>
               </div>
               <div id="fr-image-preview-noel"></div>
             </div>
@@ -1522,32 +1509,6 @@
       </div>
     </div>
   </div>
-
-<div class="modal-admin-overlay" id="modal-mediatheque">
-  <div class="modal-admin modal-mediatheque-contenu">
-    <div class="modal-admin-header">
-      <div class="modal-admin-titre">Médiathèque</div>
-      <button class="btn-fermer-panneau" onclick="fermerModalMediatheque()" title="Fermer">✕</button>
-    </div>
-    <div class="modal-admin-body">
-      <div class="filtres-bar">
-        <select class="form-ctrl filtre-select" id="mediatheque-filtre-cat" onchange="filtrerMediatheque()">
-          <option value="">Toutes les catégories</option>
-        </select>
-        <input type="text" class="form-ctrl filtre-recherche" id="mediatheque-filtre-nom" oninput="filtrerMediatheque()" placeholder="Rechercher par nom">
-      </div>
-      <div id="mediatheque-grille" class="mediatheque-grille"></div>
-      <div class="chargement cache" id="mediatheque-chargement"><span class="spinner"><span></span><span></span><span></span><span></span><span></span></span>Chargement...</div>
-    </div>
-    <div class="modal-admin-body">
-      <div class="form-actions">
-        <button class="btn btn-outline btn-sm" onclick="fermerModalMediatheque()">Annuler</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 </body>
  
 </html>
