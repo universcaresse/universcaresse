@@ -1157,6 +1157,16 @@ async function chargerMediatheque() {
     </div>`).join('');
 }
 
+async function mediathequeSyncCloudinary() {
+  const msg = document.getElementById('msg-mediatheque');
+  afficherMsg('mediatheque', 'Synchronisation en cours…');
+  const res = await appelAPI('syncCloudinary');
+  if (!res || !res.success) { afficherMsg('mediatheque', 'Erreur de synchronisation.', 'erreur'); return; }
+  _mediathequeDonnees = null;
+  afficherMsg('mediatheque', `✅ ${res.ajouts} photo(s) ajoutée(s).`);
+  chargerMediatheque();
+}
+
 function mediathequeOuvrirAjout() {
   document.getElementById('med-form-ajout').classList.remove('cache');
   document.getElementById('med-url').value = '';
