@@ -3371,13 +3371,12 @@ async function lirePDF(fichier) {
   });
 }
 
+
 function parserFacturePA(texte) {
   const facture = { numeroFacture: '', date: '', items: [], tps: 0, tvq: 0, livraison: 0, sousTotal: 0, total: 0 };
 
-  console.log('TEXTE PDF:', texte.substring(0, 500));
-const mNum  = texte.match(/Détails de la commande\s+(\d{3,6})/i)
-             || texte.match(/Détails de la commande[\s\S]{0,10}?(\d{4,6})/i);
-  if (mNum)  facture.numeroFacture = mNum[1].trim();
+  const mNum = texte.match(/Détails de la commande[\s\S]{0,20}?(\d{4,6})/i);
+  if (mNum) facture.numeroFacture = mNum[1].trim();
 
   const mDate = texte.match(/(\d{2}-\d{2}-\d{4})/);
   if (mDate) {
@@ -3388,14 +3387,14 @@ const mNum  = texte.match(/Détails de la commande\s+(\d{3,6})/i)
   const mTps = texte.match(/TPS\s*[:\s]+([\d\s,\.]+)\s*\$/i);
   if (mTps) facture.tps = parseFloat(mTps[1].replace(/\s/g,'').replace(',','.'));
 
- const mTvq = texte.match(/TVQ\s*[:\s]+([\d\s,\.]+)\s*\$/i);
+  const mTvq = texte.match(/TVQ\s*[:\s]+([\d\s,\.]+)\s*\$/i);
   if (mTvq) facture.tvq = parseFloat(mTvq[1].replace(/\s/g,'').replace(',','.'));
-
-  const mTotal = texte.match(/Total de la commande\s*[:\s]+([\d\s,\.]+)\s*\$/i);
-  if (mTotal) facture.total = parseFloat(mTotal[1].replace(/\s/g,'').replace(',','.'));
 
   const mSous = texte.match(/Sous-total\s*[:\s]+([\d\s,\.]+)\s*\$/i);
   if (mSous) facture.sousTotal = parseFloat(mSous[1].replace(/\s/g,'').replace(',','.'));
+
+  const mTotal = texte.match(/Total de la commande\s*[:\s]+([\d\s,\.]+)\s*\$/i);
+  if (mTotal) facture.total = parseFloat(mTotal[1].replace(/\s/g,'').replace(',','.'));
 
   const mLiv = texte.match(/Livraison\s*[:\s]+([\d\s,\.]+)\s*\$/i);
   if (mLiv && !/gratuite/i.test(mLiv[0])) facture.livraison = parseFloat(mLiv[1].replace(/\s/g,'').replace(',','.'));
@@ -3407,9 +3406,10 @@ const mNum  = texte.match(/Détails de la commande\s+(\d{3,6})/i)
     const qte  = parseInt(m[2]);
     const fmt  = (m[3] || '').trim();
     const prix = parseFloat(m[4].replace(/\s/g,'').replace(',', '.'));
-    if (!desc || isNaN(prix)) continue;
+    if (!desc || isNaN(prix) || prix <= 0) continue;
 
-    const fmtMatch = fmt.match(/^([\d\.]+)\s*(ml|g|L|kg)/i);
+    const fmtMatch = fmt.match(/^([\d\.]+)\s*(ml|g|L|kg)/i)
+                  || desc.match(/([\d\.]+)\s*(ml|g|L|kg)/i);
     facture.items.push({
       description:  desc,
       formatQte:    fmtMatch ? parseFloat(fmtMatch[1]) : 0,
