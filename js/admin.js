@@ -14,6 +14,7 @@ function initScrollAnimations() {
         adminScrollObserver.unobserve(entry.target);
       }
     });
+	
   }, { threshold: 0.15 });
   document.querySelectorAll('.fade-in, .fade-in-doux').forEach(el => adminScrollObserver.observe(el));
 }
@@ -2615,7 +2616,7 @@ function peuplerSelectType() {
   const sel = document.getElementById('item-type');
   if (!sel) return;
   sel.innerHTML = '<option value=""></option>';
-  listesDropdown.types.forEach(t => {
+  [...listesDropdown.types].sort((a, b) => a.localeCompare(b, 'fr')).forEach(t => {
     const opt = document.createElement('option');
     opt.value = t; opt.textContent = t;
     sel.appendChild(opt);
@@ -2635,7 +2636,7 @@ function onChangeType() {
   const sel  = document.getElementById('item-ingredient');
   if (!sel) return;
   sel.innerHTML = '<option value=""></option>';
-  listesDropdown.fullData.filter(d => d.type === type).forEach(d => {
+  listesDropdown.fullData.filter(d => d.type === type).sort((a, b) => a.ingredient.localeCompare(b.ingredient, 'fr')).forEach(d => {
     const opt = document.createElement('option');
     opt.value = d.ingredient; opt.textContent = d.ingredient;
     sel.appendChild(opt);
@@ -2793,7 +2794,7 @@ const prixTotal = parseFloat(quantite) * parseFloat(prixUnit);
   // Calcul prix/g
   let prixParG = null;
   const cfg = listesDropdown.config?.[type];
-  console.log('type:', type, 'cfg:', cfg, 'config keys:', Object.keys(listesDropdown.config || {}));
+ 
   if (cfg && formatQte) {
     const qte      = parseFloat(formatQte);
     const densite  = cfg.densite || 1;
