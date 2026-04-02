@@ -1135,6 +1135,68 @@ function ouvrirCloudinaryCollection()      { ouvrirMediaLibrary('fc-photo-url', 
 function ouvrirCloudinaryCollectionNoel()  { ouvrirMediaLibrary('fc-photo-url-noel', 'fc-photo-preview-noel'); }
 function ouvrirCloudinaryLigne()      { ouvrirMediaLibrary('fc-photo-url-ligne','fc-photo-preview-ligne'); }
 
+// ─── MÉDIATHÈQUE ───
+let _mediathequeChampId = null;
+let _mediathequePreviewId = null;
+let _mediathequeDonnees = null;
+
+async function ouvrirMediatheque(champId, previewId, categorie) {
+  _mediathequeChampId = champId;
+  _mediathequePreviewId = previewId;
+  const overlay = document.getElementById('modal-mediatheque');
+  overlay.classList.add('ouvert');
+  if (!_mediathequeDonnees) {
+    document.getElementById('mediatheque-chargement').classList.remove('cache');
+    const res = await appelAPI('getMediatheque');
+    document.getElementById('mediatheque-chargement').classList.add('cache');
+    if (res && res.success) _mediathequeDonnees = res.items;
+  }
+  peuplerFiltresCategoriesMediatheque();
+  const sel = document.getElementById('mediatheque-filtre-cat');
+  sel.value = categorie || '';
+  filtrerMediatheque();
+}
+
+function peuplerFiltresCategoriesMediatheque() {
+  const sel = document.getElementById('mediatheque-filtre-cat');
+  const valActuelle = sel.value;
+  sel.innerHTML = '<option value="">Toutes les catégories</option>';
+  const cats = [...new Set((_mediathequeDonnees || []).map(i => i.categorie).filter(Boolean))].sort();
+  cats.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c;
+    sel.appendChild(opt);
+  });
+  sel.value = valActuelle;
+}
+
+function filtrerMediatheque() {
+  const cat = document.getElementById('mediatheque-filtre-cat').value;
+  const nom = (document.getElementById('mediatheque-filtre-nom').value || '').toLowerCase();
+  const items = (_mediathequeDonnees || []).filter(i =>
+    (!cat || i.categorie === cat) && (!nom || i.nom.toLowerCase().includes(nom))
+  );
+const grille = document.getElementById('mediatheque-grille');
+  grille.className = 'collections-grille';
+  if (!items.length) { grille.innerHTML = '<p class="vide-desc">Aucune photo</p>'; return; }
+grille.innerHTML = items.map(i => `
+    <div class="collection-carte" onclick="selectionnerPhotoMediatheque('${i.url}', '${i.nom}')">
+      <div class="carte-visuel"><img src="${i.url}" alt="${i.nom}" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="fiche-label">${i.nom}</div>
+      <div class="texte-secondaire">${i.categorie}</div>
+    </div>`).join('');
+}
+
+function selectionnerPhotoMediatheque(url, nom) {
+  const champ = document.getElementById(_mediathequeChampId);
+  if (champ) champ.value = url;
+  fermerModalMediatheque();
+}
+
+function fermerModalMediatheque() {
+  document.getElementById('modal-mediatheque').classList.remove('ouvert');
+}
+
 function basculerModeFormCollection() {
   const mode    = document.getElementById('fc-mode');
   const blocCol = document.getElementById('fc-bloc-collection');
