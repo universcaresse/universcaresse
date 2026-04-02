@@ -2100,6 +2100,9 @@ function inciConstruireAccordeons() {
 }
 
 
+
+
+
 function inciRendreLigne(l, cat, uid) {
   const aInci = !!l.inci;
   const statutLabel = aInci ? '✅' : '🔴';
