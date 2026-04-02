@@ -2100,9 +2100,6 @@ function inciConstruireAccordeons() {
 }
 
 
-
-
-
 function inciRendreLigne(l, cat, uid) {
   const aInci = !!l.inci;
   const statutLabel = aInci ? '✅' : '🔴';
@@ -3456,6 +3453,10 @@ function afficherApercuItems(fournisseur) {
     const total   = (item.prixUnitaire * item.quantite).toFixed(2);
     const rouge   = !nomUC;
 
+    const ingredientsFiltres = typeUC
+      ? (listesDropdown.fullData || []).filter(d => d.type === typeUC).sort((a,b) => a.ingredient.localeCompare(b.ingredient,'fr'))
+      : [];
+
     const tr = document.createElement('tr');
     tr.className = rouge ? 'ligne-rouge' : '';
     tr.innerHTML = `
@@ -3464,11 +3465,17 @@ function afficherApercuItems(fournisseur) {
       <td>${item.quantite}</td>
       <td>${item.prixUnitaire.toFixed(2)} $</td>
       <td>${total} $</td>
-   <td>
+      <td>
+        <select class="form-ctrl" id="if-type-${idx}" onchange="ifFiltrerNoms(${idx})">
+          <option value="">— Catégorie —</option>
+          ${(listesDropdown.types || []).map(t => `<option value="${t}" ${t === typeUC ? 'selected' : ''}>${t}</option>`).join('')}
+        </select>
+      </td>
+      <td>
         <div style="display:flex;gap:4px;align-items:center;">
-          <select class="form-ctrl" id="if-nomuc-${idx}" onchange="ifMajType(${idx})">
+          <select class="form-ctrl" id="if-nomuc-${idx}">
             <option value="">— Choisir —</option>
-            ${(listesDropdown.fullData || []).sort((a,b) => a.ingredient.localeCompare(b.ingredient,'fr')).map(d => `<option value="${d.ingredient}" ${d.ingredient === nomUC ? 'selected' : ''}>${d.ingredient}</option>`).join('')}
+            ${ingredientsFiltres.map(d => `<option value="${d.ingredient}" ${d.ingredient === nomUC ? 'selected' : ''}>${d.ingredient}</option>`).join('')}
           </select>
           <button class="btn btn-sm btn-outline" onclick="ifAjouterNomUC(${idx})" title="Ajouter un nouveau nom UC">+</button>
         </div>
@@ -3483,15 +3490,22 @@ function afficherApercuItems(fournisseur) {
             <button class="btn btn-sm btn-outline" onclick="document.getElementById('if-nouveau-uc-${idx}').classList.add('cache')">Annuler</button>
           </div>
         </div>
-      </td>
-      <td>
-        <select class="form-ctrl" id="if-type-${idx}">
-          <option value="">— Choisir —</option>
-          ${(listesDropdown.types || []).map(t => `<option value="${t}" ${t === typeUC ? 'selected' : ''}>${t}</option>`).join('')}
-        </select>
       </td>`;
     tbody.appendChild(tr);
   });
+}
+
+
+
+function ifFiltrerNoms(idx) {
+  const type   = document.getElementById(`if-type-${idx}`)?.value || '';
+  const select = document.getElementById(`if-nomuc-${idx}`);
+  if (!select) return;
+  const filtres = type
+    ? (listesDropdown.fullData || []).filter(d => d.type === type).sort((a,b) => a.ingredient.localeCompare(b.ingredient,'fr'))
+    : [];
+  select.innerHTML = '<option value="">— Choisir —</option>' +
+    filtres.map(d => `<option value="${d.ingredient}">${d.ingredient}</option>`).join('');
 }
 
 function ifAjouterNomUC(idx) {
