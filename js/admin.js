@@ -3340,6 +3340,7 @@ async function importerFacturePDF() {
   validerTotaux(facture);
 
   document.getElementById('if-apercu').classList.remove('cache');
+  document.getElementById('if-bloc-upload').classList.add('cache');
   afficherMsg('import-facture', '');
 }
 
@@ -3460,11 +3461,25 @@ function afficherApercuItems(fournisseur) {
       <td>${item.quantite}</td>
       <td>${item.prixUnitaire.toFixed(2)} $</td>
       <td>${total} $</td>
-      <td>
-        <select class="form-ctrl" id="if-nomuc-${idx}" onchange="ifMajType(${idx})">
-          <option value="">— Choisir —</option>
-          ${(listesDropdown.fullData || []).sort((a,b) => a.ingredient.localeCompare(b.ingredient,'fr')).map(d => `<option value="${d.ingredient}" ${d.ingredient === nomUC ? 'selected' : ''}>${d.ingredient}</option>`).join('')}
-        </select>
+   <td>
+        <div style="display:flex;gap:4px;align-items:center;">
+          <select class="form-ctrl" id="if-nomuc-${idx}" onchange="ifMajType(${idx})">
+            <option value="">— Choisir —</option>
+            ${(listesDropdown.fullData || []).sort((a,b) => a.ingredient.localeCompare(b.ingredient,'fr')).map(d => `<option value="${d.ingredient}" ${d.ingredient === nomUC ? 'selected' : ''}>${d.ingredient}</option>`).join('')}
+          </select>
+          <button class="btn btn-sm btn-outline" onclick="ifAjouterNomUC(${idx})" title="Ajouter un nouveau nom UC">+</button>
+        </div>
+        <div id="if-nouveau-uc-${idx}" class="cache" style="margin-top:6px;display:flex;flex-direction:column;gap:6px;">
+          <input type="text" class="form-ctrl" id="if-nouveau-nom-${idx}" placeholder="Nom UC">
+          <select class="form-ctrl" id="if-nouveau-cat-${idx}">
+            <option value="">— Catégorie —</option>
+            ${(listesDropdown.types || []).map(t => `<option value="${t}">${t}</option>`).join('')}
+          </select>
+          <div style="display:flex;gap:6px;">
+            <button class="btn btn-sm btn-primary" onclick="ifConfirmerNomUC(${idx})">Ajouter</button>
+            <button class="btn btn-sm btn-outline" onclick="document.getElementById('if-nouveau-uc-${idx}').classList.add('cache')">Annuler</button>
+          </div>
+        </div>
       </td>
       <td>
         <select class="form-ctrl" id="if-type-${idx}">
@@ -3474,6 +3489,39 @@ function afficherApercuItems(fournisseur) {
       </td>`;
     tbody.appendChild(tr);
   });
+}
+
+function ifAjouterNomUC(idx) {
+  document.getElementById(`if-nouveau-uc-${idx}`).classList.remove('cache');
+  document.getElementById(`if-nouveau-nom-${idx}`).focus();
+}
+
+async function ifConfirmerNomUC(idx) {
+  const nom = document.getElementById(`if-nouveau-nom-${idx}`)?.value.trim();
+  const cat = document.getElementById(`if-nouveau-cat-${idx}`)?.value;
+  if (!nom || !cat) { afficherMsg('import-facture', 'Nom et catégorie requis.', 'erreur'); return; }
+
+  const res = await appelAPIPost('ajouterIngredientUC', { ingredient: nom, categorie: cat });
+  if (!res || !res.success) { afficherMsg('import-facture', res?.message || 'Erreur.', 'erreur'); return; }
+
+  const resDrop = await appelAPI('getDropdownLists');
+  if (resDrop) {
+    listesDropdown.types    = resDrop.types    || [];
+    listesDropdown.fullData = resDrop.fullData || [];
+    listesDropdown.config   = resDrop.config   || {};
+  }
+
+  const select = document.getElementById(`if-nomuc-${idx}`);
+  if (select) {
+    const opt = document.createElement('option');
+    opt.value = nom; opt.textContent = nom; opt.selected = true;
+    select.appendChild(opt);
+  }
+  const selType = document.getElementById(`if-type-${idx}`);
+  if (selType) selType.value = cat;
+
+  document.getElementById(`if-nouveau-uc-${idx}`).classList.add('cache');
+  afficherMsg('import-facture', `✅ "${nom}" ajouté.`);
 }
 
 function ifMajType(idx) {

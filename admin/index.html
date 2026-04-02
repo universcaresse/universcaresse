@@ -825,7 +825,7 @@
           <div class="page-entete-titre">Import <em>facture PDF</em></div>
         </div>
         <div id="msg-import-facture" class="msg-zone"></div>
-        <div class="form-panel visible">
+        <div class="form-panel visible" id="if-bloc-upload">
           <div class="form-body">
             <div class="form-groupe">
               <label class="form-label">Fournisseur</label>
@@ -904,6 +904,13 @@
               <div class="form-actions" style="margin-top:1rem;">
                 <button class="btn btn-outline" onclick="document.getElementById('if-apercu').classList.add('cache')">Annuler</button>
                 <button class="btn btn-primary" id="if-btn-confirmer" onclick="confirmerImportFacture()">Confirmer l'import</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-admin" id="section-factures">
         <div class="page-entete fade-in">
           <div>
             <div class="page-entete-eyebrow">Historique des factures d'achat</div>
