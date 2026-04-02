@@ -2793,6 +2793,7 @@ const prixTotal = parseFloat(quantite) * parseFloat(prixUnit);
   // Calcul prix/g
   let prixParG = null;
   const cfg = listesDropdown.config?.[type];
+  console.log('type:', type, 'cfg:', cfg, 'config keys:', Object.keys(listesDropdown.config || {}));
   if (cfg && formatQte) {
     const qte      = parseFloat(formatQte);
     const densite  = cfg.densite || 1;
