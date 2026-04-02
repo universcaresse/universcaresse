@@ -2001,8 +2001,11 @@ async function chargerInci() {
 
   inciDonnees = listesDropdown.fullData;
   inciCategoriesUC = (resUC && resUC.success) ? resUC.categories : [];
+  const resIngrUC = await appelAPI('getIngredientsUC');
+  inciIngredientsUC = (resIngrUC && resIngrUC.success) ? resIngrUC.items : [];
 
   inciConstruireAccordeons();
+
 }
 
 function inciAppliquerFiltres() {
