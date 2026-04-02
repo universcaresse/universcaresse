@@ -3375,7 +3375,8 @@ function parserFacturePA(texte) {
   const facture = { numeroFacture: '', date: '', items: [], tps: 0, tvq: 0, livraison: 0, sousTotal: 0, total: 0 };
 
   console.log('TEXTE PDF:', texte.substring(0, 500));
-   const mNum  = texte.match(/Détails de la commande\s+(\d{4,6})/i);
+ const mNum  = texte.match(/Détails de la commande\s+(\d{3,6})/i)
+             || texte.match(/(\d{5,6})\s+[a-zA-Z0-9]{10,}/);
   if (mNum)  facture.numeroFacture = mNum[1].trim();
 
   const mDate = texte.match(/(\d{2}-\d{2}-\d{4})/);
