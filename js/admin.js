@@ -95,6 +95,7 @@ function afficherSection(id, bouton) {
   const contenu = document.querySelector('.admin-contenu');
   if (contenu) contenu.scrollTop = 0;
 if (id === 'accueil')        afficherStatsAccueil();
+if (id === 'import-facture') ifChargerMapping();
 if (id === 'collections')    afficherCollections();
 if (id === 'recettes')       afficherRecettes();
 if (id === 'inci')           chargerInci();
@@ -3292,4 +3293,259 @@ function importParserTexte(texte, id) {
 function importAnnuler() {
   document.getElementById('import-apercu-zone').classList.add('cache');
   document.getElementById('imp-ingredients').innerHTML = '';
+}
+
+
+/* ════════════════════════════════
+   IMPORT FACTURE PDF
+════════════════════════════════ */
+
+let ifItems = [];
+let ifMapping = [];
+
+async function ifChargerMapping() {
+  if (ifMapping.length) return;
+  const res = await appelAPI('getMappingFournisseurs');
+  ifMapping = (res && res.mapping) ? res.mapping : [];
+}
+
+async function importerFacturePDF() {
+  const fichier = document.getElementById('if-fichier').files[0];
+  const fournisseur = document.getElementById('if-fournisseur').value;
+  if (!fichier) { afficherMsg('import-facture', 'Choisis un fichier PDF.', 'erreur'); return; }
+
+  afficherMsg('import-facture', 'Lecture du PDF…');
+
+  const texte = await lirePDF(fichier);
+  if (!texte) { afficherMsg('import-facture', 'Impossible de lire le PDF.', 'erreur'); return; }
+
+  const facture = parserFacturePA(texte);
+  if (!facture.items.length) { afficherMsg('import-facture', 'Aucun item trouvé dans le PDF.', 'erreur'); return; }
+
+  if (!ifMapping.length) {
+    const res = await appelAPI('getMappingFournisseurs');
+    ifMapping = (res && res.mapping) ? res.mapping : [];
+  }
+
+  ifItems = facture.items;
+  document.getElementById('if-numero').value   = facture.numeroFacture;
+  document.getElementById('if-date').value     = facture.date;
+  document.getElementById('if-tps').value      = facture.tps;
+  document.getElementById('if-tvq').value      = facture.tvq;
+  document.getElementById('if-livraison').value = facture.livraison;
+  document.getElementById('if-soustotal').value = facture.sousTotal;
+
+  afficherApercuItems(fournisseur);
+  validerTotaux(facture);
+
+  document.getElementById('if-apercu').classList.remove('cache');
+  afficherMsg('import-facture', '');
+}
+
+async function lirePDF(fichier) {
+  return new Promise((resolve) => {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+    script.onload = async () => {
+      try {
+        const pdfjsLib = window['pdfjs-dist/build/pdf'];
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        const buffer = await fichier.arrayBuffer();
+        const pdf    = await pdfjsLib.getDocument({ data: buffer }).promise;
+        let texte    = '';
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page    = await pdf.getPage(i);
+          const content = await page.getTextContent();
+          texte += content.items.map(s => s.str).join(' ') + '\n';
+        }
+        resolve(texte);
+      } catch(e) { resolve(null); }
+    };
+    script.onerror = () => resolve(null);
+    if (!document.querySelector('script[src*="pdf.min.js"]')) {
+      document.head.appendChild(script);
+    } else {
+      script.onload();
+    }
+  });
+}
+
+function parserFacturePA(texte) {
+  const facture = { numeroFacture: '', date: '', items: [], tps: 0, tvq: 0, livraison: 0, sousTotal: 0, total: 0 };
+
+  const mNum  = texte.match(/Numéro de commande\s*[:\s]+(\d+)/i);
+  if (mNum)  facture.numeroFacture = mNum[1].trim();
+
+  const mDate = texte.match(/(\d{2}-\d{2}-\d{4})/);
+  if (mDate) {
+    const p = mDate[1].split('-');
+    facture.date = `${p[2]}-${p[1]}-${p[0]}`;
+  }
+
+  const mTps = texte.match(/TPS\s*[:\s]+([\d\s,\.]+)\s*\$/i);
+  if (mTps) facture.tps = parseFloat(mTps[1].replace(/\s/g,'').replace(',','.'));
+
+  const mTvq = texte.match(/TVQ\s*[:\s]+([\d\s,\.]+)\s*\$/i);
+  if (mTvq) facture.tvq = parseFloat(mTvq[1].replace(/\s/g,'').replace(',','.'));
+
+  const mSous = texte.match(/Sous-total\s*[:\s]+([\d\s,\.]+)\s*\$/i);
+  if (mSous) facture.sousTotal = parseFloat(mSous[1].replace(/\s/g,'').replace(',','.'));
+
+  const mLiv = texte.match(/Livraison\s*[:\s]+([\d\s,\.]+)\s*\$/i);
+  if (mLiv && !/gratuite/i.test(mLiv[0])) facture.livraison = parseFloat(mLiv[1].replace(/\s/g,'').replace(',','.'));
+
+  const ligneItem = /([A-ZÀ-Ÿa-zà-ÿ][A-ZÀ-Ÿa-zà-ÿ\s\/&\(\)\-\']+)\s*\((\d+)\)\s*([\d]+(?:ml|g|L|kg|oz)[^\n]*?)\s*([\d,\.]+)\s*\$\s*CAD/gi;
+  let m;
+  while ((m = ligneItem.exec(texte)) !== null) {
+    const desc = m[1].trim();
+    const qte  = parseInt(m[2]);
+    const fmt  = m[3].trim();
+    const prix = parseFloat(m[4].replace(',', '.'));
+    if (!desc || isNaN(prix)) continue;
+
+    const fmtMatch = fmt.match(/^([\d\.]+)\s*(ml|g|L|kg)/i);
+    facture.items.push({
+      description:  desc,
+      formatQte:    fmtMatch ? parseFloat(fmtMatch[1]) : 0,
+      formatUnite:  fmtMatch ? fmtMatch[2].toLowerCase() : 'unité',
+      prixUnitaire: prix,
+      quantite:     qte
+    });
+  }
+
+  return facture;
+}
+
+function normaliserPourMapping(s) {
+  return (s || '').toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9 ]/g, ' ')
+    .replace(/\s+/g, ' ').trim();
+}
+
+function trouverMappingItem(description, fournisseur) {
+  const desc = normaliserPourMapping(description);
+  for (const m of ifMapping) {
+    if (m.fournisseur !== fournisseur) continue;
+    if (normaliserPourMapping(m.nomFournisseur) === desc) return m;
+  }
+  for (const m of ifMapping) {
+    if (m.fournisseur !== fournisseur) continue;
+    const mf = normaliserPourMapping(m.nomFournisseur);
+    if (desc.includes(mf) || mf.includes(desc)) return m;
+  }
+  return null;
+}
+
+function afficherApercuItems(fournisseur) {
+  const tbody = document.getElementById('if-tbody');
+  tbody.innerHTML = '';
+
+  ifItems.forEach((item, idx) => {
+    const mapping = trouverMappingItem(item.description, fournisseur);
+    const nomUC   = mapping ? mapping.nomUC : '';
+    const typeUC  = nomUC ? ((listesDropdown.fullData || []).find(d => d.ingredient === nomUC)?.type || '') : '';
+    const total   = (item.prixUnitaire * item.quantite).toFixed(2);
+    const rouge   = !nomUC;
+
+    const tr = document.createElement('tr');
+    tr.className = rouge ? 'ligne-rouge' : '';
+    tr.innerHTML = `
+      <td>${item.description}</td>
+      <td>${item.formatQte} ${item.formatUnite}</td>
+      <td>${item.quantite}</td>
+      <td>${item.prixUnitaire.toFixed(2)} $</td>
+      <td>${total} $</td>
+      <td>
+        <select class="form-ctrl" id="if-nomuc-${idx}" onchange="ifMajType(${idx})">
+          <option value="">— Choisir —</option>
+          ${(listesDropdown.fullData || []).sort((a,b) => a.ingredient.localeCompare(b.ingredient,'fr')).map(d => `<option value="${d.ingredient}" ${d.ingredient === nomUC ? 'selected' : ''}>${d.ingredient}</option>`).join('')}
+        </select>
+      </td>
+      <td>
+        <select class="form-ctrl" id="if-type-${idx}">
+          <option value="">— Choisir —</option>
+          ${(listesDropdown.types || []).map(t => `<option value="${t}" ${t === typeUC ? 'selected' : ''}>${t}</option>`).join('')}
+        </select>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function ifMajType(idx) {
+  const nomUC = document.getElementById(`if-nomuc-${idx}`)?.value;
+  const found = (listesDropdown.fullData || []).find(d => d.ingredient === nomUC);
+  if (found) {
+    const sel = document.getElementById(`if-type-${idx}`);
+    if (sel) sel.value = found.type;
+  }
+}
+
+function validerTotaux(facture) {
+  const sommItems = ifItems.reduce((acc, i) => acc + i.prixUnitaire * i.quantite, 0);
+  const diff = Math.abs(sommItems - facture.sousTotal);
+  const zone = document.getElementById('if-validation');
+  if (diff < 0.02) {
+    zone.innerHTML = '<div class="msg msg-succes">✅ Totaux validés — somme des items = sous-total</div>';
+  } else {
+    zone.innerHTML = `<div class="msg msg-erreur">⚠ Écart de ${diff.toFixed(2)} $ entre les items (${sommItems.toFixed(2)} $) et le sous-total (${facture.sousTotal.toFixed(2)} $)</div>`;
+  }
+}
+
+async function confirmerImportFacture() {
+  const numero     = document.getElementById('if-numero').value.trim();
+  const date       = document.getElementById('if-date').value.trim();
+  const fournisseur = document.getElementById('if-fournisseur').value;
+  const tps        = parseFloat(document.getElementById('if-tps').value) || 0;
+  const tvq        = parseFloat(document.getElementById('if-tvq').value) || 0;
+  const livraison  = parseFloat(document.getElementById('if-livraison').value) || 0;
+  const sousTotal  = parseFloat(document.getElementById('if-soustotal').value) || 0;
+
+  if (!numero) { afficherMsg('import-facture', 'Numéro de facture requis.', 'erreur'); return; }
+
+  const btn = document.getElementById('if-btn-confirmer');
+  btn.disabled = true;
+
+  const resFacture = await appelAPIPost('createInvoice', { numeroFacture: numero, date, fournisseur });
+  if (!resFacture || !resFacture.success) {
+    afficherMsg('import-facture', resFacture?.message || 'Erreur création facture.', 'erreur');
+    btn.disabled = false;
+    return;
+  }
+
+  const nomFournisseurLabel = { PA: 'Pure Arôme', MH: 'Les Mauvaises Herbes', Arbressence: 'Arbressence', DE: 'Divine Essence' }[fournisseur] || fournisseur;
+
+  for (let idx = 0; idx < ifItems.length; idx++) {
+    const item   = ifItems[idx];
+    const nomUC  = document.getElementById(`if-nomuc-${idx}`)?.value || '';
+    const typeUC = document.getElementById(`if-type-${idx}`)?.value  || '';
+    if (!nomUC || !typeUC) continue;
+
+    const config    = listesDropdown.config[typeUC] || {};
+    const densite   = config.densite || 1;
+    let grammes     = item.formatQte;
+    if (item.formatUnite === 'l')  grammes = item.formatQte * 1000;
+    if (item.formatUnite === 'kg') grammes = item.formatQte * 1000;
+    if (item.formatUnite === 'ml') grammes = item.formatQte * densite;
+    const prixParG  = grammes > 0 ? (item.prixUnitaire / grammes) : 0;
+
+    await appelAPIPost('addProduct', {
+      numFacture:  numero,
+      date,
+      fournisseur: nomFournisseurLabel,
+      type:        typeUC,
+      ingredient:  nomUC,
+      formatQte:   item.formatQte,
+      formatUnite: item.formatUnite,
+      prixUnitaire: item.prixUnitaire,
+      prixParG:    prixParG.toFixed(6),
+      quantite:    item.quantite
+    });
+  }
+
+  await appelAPIPost('finalizeInvoice', { numeroFacture: numero, tps, tvq, livraison, sousTotal });
+
+  afficherMsg('import-facture', `✅ Facture ${numero} importée avec succès.`);
+  document.getElementById('if-apercu').classList.add('cache');
+  btn.disabled = false;
 }

@@ -99,6 +99,7 @@
       <div class="sidebar-groupe">
         <div class="sidebar-titre">Achats</div>
         <button class="sidebar-lien" onclick="afficherSection('nouvelle-facture', this)">Nouvelle facture</button>
+        <button class="sidebar-lien" onclick="afficherSection('import-facture', this)">Import PDF</button>
         <button class="sidebar-lien" onclick="afficherSection('factures', this)">Les factures</button>
         <button class="sidebar-lien" onclick="afficherSection('inventaire', this)">Inventaire</button>
       </div>
@@ -818,7 +819,86 @@
       </div>
 
       <!-- FACTURES -->
-      <div class="section-admin" id="section-factures">
+      <div class="section-admin" id="section-import-facture">
+        <div class="page-entete">
+          <div class="page-entete-titre">Import <em>facture PDF</em></div>
+        </div>
+        <div id="msg-import-facture" class="msg-zone"></div>
+        <div class="form-panel visible">
+          <div class="form-body">
+            <div class="form-groupe">
+              <label class="form-label">Fournisseur</label>
+              <select class="form-ctrl" id="if-fournisseur">
+                <option value="PA">Pure Arôme</option>
+                <option value="MH">Les Mauvaises Herbes</option>
+                <option value="Arbressence">Arbressence</option>
+                <option value="DE">Divine Essence</option>
+              </select>
+            </div>
+            <div class="form-groupe">
+              <label class="form-label">Fichier PDF</label>
+              <input type="file" class="form-ctrl" id="if-fichier" accept="application/pdf">
+            </div>
+            <div class="form-actions">
+              <span></span>
+              <button class="btn btn-primary" onclick="importerFacturePDF()">Lire le PDF</button>
+            </div>
+          </div>
+        </div>
+        <div id="if-apercu" class="cache">
+          <div class="form-panel visible" style="margin-top:1rem;">
+            <div class="form-panel-header">
+              <div class="form-panel-titre">Aperçu de la facture</div>
+            </div>
+            <div class="form-body">
+              <div class="form-grille-2">
+                <div class="form-groupe">
+                  <label class="form-label">N° facture</label>
+                  <input type="text" class="form-ctrl" id="if-numero">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Date</label>
+                  <input type="text" class="form-ctrl" id="if-date">
+                </div>
+              </div>
+              <div class="tableau-wrap" style="margin-top:1rem;">
+                <table class="tableau-admin" id="if-tableau">
+                  <thead>
+                    <tr>
+                      <th>Description facture</th>
+                      <th>Format</th>
+                      <th>Qté</th>
+                      <th>Prix unit.</th>
+                      <th>Total</th>
+                      <th>Nom UC</th>
+                      <th>Type UC</th>
+                    </tr>
+                  </thead>
+                  <tbody id="if-tbody"></tbody>
+                </table>
+              </div>
+              <div class="form-grille-2" style="margin-top:1rem;">
+                <div class="form-groupe">
+                  <label class="form-label">Sous-total</label>
+                  <input type="text" class="form-ctrl" id="if-soustotal" readonly>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">TPS</label>
+                  <input type="text" class="form-ctrl" id="if-tps">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">TVQ</label>
+                  <input type="text" class="form-ctrl" id="if-tvq">
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Livraison</label>
+                  <input type="text" class="form-ctrl" id="if-livraison">
+                </div>
+              </div>
+              <div id="if-validation" class="msg-zone" style="margin-top:0.5rem;"></div>
+              <div class="form-actions" style="margin-top:1rem;">
+                <button class="btn btn-outline" onclick="document.getElementById('if-apercu').classList.add('cache')">Annuler</button>
+                <button class="btn btn-primary" id="if-btn-confirmer" onclick="confirmerImportFacture()">Confirmer l'import</button>
         <div class="page-entete fade-in">
           <div>
             <div class="page-entete-eyebrow">Historique des factures d'achat</div>
