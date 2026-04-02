@@ -1988,27 +1988,19 @@ async function chargerInci() {
   document.getElementById('loading-inci').classList.remove('cache');
   document.getElementById('inci-accordeons').innerHTML = '';
 
-  const promises = [appelAPI('getSourcesInci'), appelAPI('getCategoriesUC'), appelAPI('getDropdownLists')];
-  const [res, resUC, resDrop] = await Promise.all(promises);
+  const [resUC, resDrop] = await Promise.all([
+    appelAPI('getCategoriesUC'),
+    appelAPI('getDropdownLists')
+  ]);
   if (resDrop) {
     listesDropdown.types    = resDrop.types    || [];
     listesDropdown.fullData = resDrop.fullData || [];
     listesDropdown.config   = resDrop.config   || {};
   }
-  const resFormats = await appelAPI('getFormatsIngredients');
-  listesDropdown.formats = (resFormats && resFormats.items) ? resFormats.items : [];
   document.getElementById('loading-inci').classList.add('cache');
 
-  if (!res || !res.success) {
-    afficherMsg('inci', 'Erreur de chargement.', 'erreur');
-    return;
-  }
-
-  inciDonnees = res.lignes || [];
-  inciCorrespondance = res.correspondance || [];
+  inciDonnees = listesDropdown.fullData;
   inciCategoriesUC = (resUC && resUC.success) ? resUC.categories : [];
-  const resIngrUC = await appelAPI('getIngredientsUC');
-  inciIngredientsUC = (resIngrUC && resIngrUC.success) ? resIngrUC.items : [];
 
   inciConstruireAccordeons();
 }
@@ -2037,19 +2029,11 @@ function inciGetFiltres() {
 }
 
 function inciConstruireAccordeons() {
-  const { statut, source, recherche } = inciGetFiltres();
+  const recherche = document.getElementById('inci-recherche')?.value.trim().toLowerCase() || '';
   const container = document.getElementById('inci-accordeons');
   container.innerHTML = '';
 
-  let donnees = inciDonnees.filter(l => {
-    if (source !== 'tout' && l.source !== source) return false;
-    if (statut === 'a-valider' && l.valide) return false;
-    if (statut === 'valide' && !l.valide) return false;
-    if (recherche && !l.nom.toLowerCase().includes(recherche)) return false;
-    return true;
-  });
-
-  // Accordéon Catégories UC
+  // Accordéon 1 — Catégories UC
   const blocUC = document.createElement('div');
   blocUC.className = 'form-panel visible';
   blocUC.innerHTML = `
@@ -2064,22 +2048,11 @@ function inciConstruireAccordeons() {
     </div>`;
   container.appendChild(blocUC);
 
-  // Accordéon table de correspondance
-  const blocCorr = document.createElement('div');
-  blocCorr.className = 'form-panel visible';
-  blocCorr.innerHTML = `
-    <div class="form-panel-header" onclick="inciToggleAccordeon(this)" style="cursor:pointer">
-      <div class="form-panel-titre">Table de correspondance des catégories</div>
-    </div>
-    <div class="form-body inci-accord-body cache" id="inci-corresp-body">
-      ${inciRendreCorrespondance()}
-    </div>`;
-  container.appendChild(blocCorr);
-
-  // Grouper par catégorie maître
+  // Accordéon 2+ — Par catégorie UC
   const parCat = {};
-  donnees.forEach(l => {
-    const cat = l.categorMaitre || l.categorie || 'Sans catégorie';
+  inciDonnees.forEach(l => {
+    if (recherche && !l.ingredient.toLowerCase().includes(recherche)) return;
+    const cat = l.type || 'Sans catégorie';
     if (!parCat[cat]) parCat[cat] = [];
     parCat[cat].push(l);
   });
@@ -2094,10 +2067,9 @@ function inciConstruireAccordeons() {
   }
 
   cats.forEach((cat, idx) => {
-    const lignes     = parCat[cat];
-    const nbTotal    = lignes.length;
-    const nbValides  = lignes.filter(l => l.valide).length;
-    const nbRestants = nbTotal - nbValides;
+    const lignes    = parCat[cat];
+    const nbInci    = lignes.filter(l => l.inci).length;
+    const nbSansInci = lignes.length - nbInci;
 
     const bloc = document.createElement('div');
     bloc.className = 'form-panel visible';
@@ -2106,16 +2078,15 @@ function inciConstruireAccordeons() {
       <div class="form-panel-header" onclick="inciToggleAccordeon(this)" style="cursor:pointer">
         <div class="form-panel-titre">${cat}</div>
         <div style="display:flex;gap:8px;align-items:center">
-          ${nbRestants > 0 ? `<span class="badge-statut-cours">${nbRestants} à valider</span>` : ''}
-          <span class="badge-statut-ok">${nbValides} validés</span>
+          ${nbSansInci > 0 ? `<span class="badge-statut-cours">${nbSansInci} 🔴</span>` : ''}
+          <span class="badge-statut-ok">${nbInci} ✅</span>
         </div>
       </div>
       <div class="form-body inci-accord-body cache">
         <div class="tableau-wrap">
           <table class="tableau-admin">
-      
             <tbody>
-              ${lignes.map((l, i) => inciRendreLigne(l, cat, `${idx}-${i}`)).join('')}
+              ${lignes.sort((a,b) => a.ingredient.localeCompare(b.ingredient,'fr')).map((l, i) => inciRendreLigne(l, cat, `${idx}-${i}`)).join('')}
             </tbody>
           </table>
         </div>
@@ -2124,21 +2095,19 @@ function inciConstruireAccordeons() {
   });
 }
 
+
 function inciRendreLigne(l, cat, uid) {
-  const statutClass = '';
-  const statutLabel = l.valide ? '✅' : '🔴';
+  const aInci = !!l.inci;
+  const statutLabel = aInci ? '✅' : '🔴';
   const id = `inci-${uid}`;
-  const nomSafe = l.nom.replace(/'/g, "\\'");
+  const nomSafe = l.ingredient.replace(/'/g, "\\'");
   const catSafe = cat.replace(/'/g, "\\'");
-  const ligneValideeClass = l.valide ? 'ligne-validee' : '';
   return `
-    <tr class="${ligneValideeClass} ligne-cliquable" onclick="inciToggleDetail('${id}')">
-      <td>${l.nom}</td>
+    <tr class="ligne-cliquable" onclick="inciToggleDetail('${id}')">
+      <td>${l.ingredient}</td>
       <td></td>
       <td></td>
-      <td>
-        <span>${statutLabel}</span>
-      </td>
+      <td><span>${statutLabel}</span></td>
     </tr>
     <tr class="accordeon-detail cache" id="${id}-detail">
       <td colspan="4">
@@ -2148,22 +2117,22 @@ function inciRendreLigne(l, cat, uid) {
         </div>
         <div class="form-groupe form-grille-2">
           <div>
-            <label class="form-label">Catégorie fournisseur</label>
-            <div class="form-valeur">${l.categorie || '—'}</div>
-          </div>
-          <div>
             <label class="form-label">Catégorie UC</label>
             <select class="form-ctrl" id="${id}-cat">
               <option value="">— Choisir —</option>
-              ${inciCategoriesUC.map(c => `<option value="${c.categorie}" ${(l.categorMaitre === c.categorie) ? 'selected' : ''}>${c.categorie}</option>`).join('')}
+              ${inciCategoriesUC.map(c => `<option value="${c.categorie}" ${cat === c.categorie ? 'selected' : ''}>${c.categorie}</option>`).join('')}
             </select>
+          </div>
+          <div>
+            <label class="form-label">Nom fournisseur</label>
+            <div class="form-valeur">${l.ingredientFournisseur || '—'}</div>
           </div>
         </div>
         <div class="form-groupe">
           <label class="form-label">Nom UC <button class="btn btn-sm btn-outline" onclick="inciAjouterNomUC('${id}')">+</button></label>
           <select class="form-ctrl" id="${id}-nomuc">
             <option value="">— Choisir —</option>
-            ${[...inciIngredientsUC].sort((a, b) => a.ingredient.localeCompare(b.ingredient, 'fr')).map(i => `<option value="${i.ingredient}" ${(l.nomUC === i.ingredient) ? 'selected' : ''}>${i.ingredient}</option>`).join('')}
+            ${[...inciIngredientsUC].sort((a, b) => a.ingredient.localeCompare(b.ingredient, 'fr')).map(i => `<option value="${i.ingredient}" ${l.ingredient === i.ingredient ? 'selected' : ''}>${i.ingredient}</option>`).join('')}
           </select>
         </div>
         <div class="form-groupe">
@@ -2172,20 +2141,31 @@ function inciRendreLigne(l, cat, uid) {
         </div>
         <div class="form-groupe">
           <label class="form-label">Note olfactive</label>
-          <input type="text" class="form-ctrl" id="${id}-note" value="${(l.noteOlfactive || '').replace(/"/g, '&quot;')}">
+          <input type="text" class="form-ctrl" id="${id}-note" value="${(l.note_olfactive || '').replace(/"/g, '&quot;')}">
         </div>
         <div class="form-groupe">
           <label class="form-label">Texte brut</label>
-          <div class="texte-brut">${(l.texteBrut || '—')}</div>
+          <div class="texte-brut" id="${id}-textebrut">
+            <button class="btn btn-sm btn-outline" onclick="inciChargerTexteBrut('${id}','${nomSafe}')">Charger</button>
+          </div>
         </div>
         <hr class="separateur">
         <div class="form-actions">
-          ${l.url ? `<a href="${l.url}" target="_blank" class="btn btn-sm btn-outline">↗ Voir fiche</a>` : '<span></span>'}
-          <button class="btn btn-sm btn-primary" onclick="inciValider('${id}','${nomSafe}','${catSafe}','${l.source}')">Valider</button>
+          <span></span>
+          <button class="btn btn-sm btn-primary" onclick="inciValider('${id}','${nomSafe}','${catSafe}','')">Sauvegarder</button>
         </div>
       </td>
     </tr>`;
 }
+
+async function inciChargerTexteBrut(id, nom) {
+  const zone = document.getElementById(`${id}-textebrut`);
+  if (!zone) return;
+  zone.textContent = 'Chargement…';
+  const res = await appelAPI('getTexteBrut&nom=' + encodeURIComponent(nom));
+  zone.textContent = (res && res.texteBrut) ? res.texteBrut : '—';
+}
+
 
 function inciRendreUC() {
   if (inciCategoriesUC.length === 0) {
@@ -2349,7 +2329,7 @@ async function inciValider(id, nom, cat, source) {
   const categorieUC   = document.getElementById(`${id}-cat`)?.value   || cat;
   const nomUC         = document.getElementById(`${id}-nomuc`)?.value || '';
 
-  const ancienNomUC = (inciDonnees.find(l => l.nom.toLowerCase() === nom.toLowerCase()) || {}).nomUC || '';
+  const ancienNomUC = (inciDonnees.find(l => l.ingredient.toLowerCase() === nom.toLowerCase()) || {}).ingredient || '';
   const res = await appelAPIPost('validerIngredientInci', {
     nom, categorie: categorieUC, inci, source, nomBotanique, noteOlfactive, nomUC, ancienNomUC
   });
