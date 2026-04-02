@@ -106,6 +106,7 @@ const cible = document.getElementById('section-' + id);
 if (cible) reobserverFadeIn(cible);
  if (id === 'nouvelle-facture' && !factureActive) initialiserNouvelleFacture();
 if (id === 'contenu-site')    chargerContenuSite();
+if (id === 'mediatheque')     chargerMediatheque();
 if (id === 'import-recettes') {
   appelAPI('getRecettes').then(resRec => {
     if (resRec && resRec.recettes) donneesRecettes = resRec.recettes;
@@ -1135,7 +1136,62 @@ function ouvrirCloudinaryCollection()      { ouvrirMediaLibrary('fc-photo-url', 
 function ouvrirCloudinaryCollectionNoel()  { ouvrirMediaLibrary('fc-photo-url-noel', 'fc-photo-preview-noel'); }
 function ouvrirCloudinaryLigne()      { ouvrirMediaLibrary('fc-photo-url-ligne','fc-photo-preview-ligne'); }
 
-// ─── MÉDIATHÈQUE ───
+// ─── MÉDIATHÈQUE — GESTION ───
+
+async function chargerMediatheque() {
+  document.getElementById('med-chargement').classList.remove('cache');
+  const res = await appelAPI('getMediatheque');
+  document.getElementById('med-chargement').classList.add('cache');
+  if (!res || !res.success) { afficherMsg('mediatheque', 'Erreur de chargement.', 'erreur'); return; }
+  _mediathequeDonnees = res.items;
+  const grille = document.getElementById('med-grille');
+  if (!res.items.length) { grille.innerHTML = '<p class="vide-desc">Aucune photo dans la médiathèque.</p>'; return; }
+  grille.innerHTML = res.items.map(i => `
+    <div class="collection-carte">
+      <div class="carte-visuel"><img src="${i.url}" alt="${i.nom}" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="fiche-label">${i.nom}</div>
+      <div class="texte-secondaire">${i.categorie}</div>
+      <div class="form-actions">
+        <button class="btn btn-sm btn-outline" onclick="mediathequeSupprimer(${i.rowIndex}, '${i.nom}')">Supprimer</button>
+      </div>
+    </div>`).join('');
+}
+
+function mediathequeOuvrirAjout() {
+  document.getElementById('med-form-ajout').classList.remove('cache');
+  document.getElementById('med-url').value = '';
+  document.getElementById('med-nom').value = '';
+  document.getElementById('med-categorie').value = '';
+  document.getElementById('med-url').focus();
+}
+
+function mediathequeFermerAjout() {
+  document.getElementById('med-form-ajout').classList.add('cache');
+}
+
+async function mediathequeSauvegarder() {
+  const url = document.getElementById('med-url').value.trim();
+  const nom = document.getElementById('med-nom').value.trim();
+  const cat = document.getElementById('med-categorie').value;
+  if (!url || !nom || !cat) { afficherMsg('mediatheque', 'URL, nom et catégorie requis.', 'erreur'); return; }
+  const res = await appelAPIPost('saveMediatheque', { url, nom, categorie: cat });
+  if (!res || !res.success) { afficherMsg('mediatheque', 'Erreur de sauvegarde.', 'erreur'); return; }
+  _mediathequeDonnees = null;
+  mediathequeFermerAjout();
+  afficherMsg('mediatheque', `✅ "${nom}" ajoutée.`);
+  chargerMediatheque();
+}
+
+async function mediathequeSupprimer(rowIndex, nom) {
+  if (!confirm(`Supprimer "${nom}" de la médiathèque?`)) return;
+  const res = await appelAPIPost('supprimerMediatheque', { rowIndex });
+  if (!res || !res.success) { afficherMsg('mediatheque', 'Erreur de suppression.', 'erreur'); return; }
+  _mediathequeDonnees = null;
+  afficherMsg('mediatheque', `✅ "${nom}" supprimée.`);
+  chargerMediatheque();
+}
+
+// ─── MÉDIATHÈQUE — SÉLECTEUR ───
 let _mediathequeChampId = null;
 let _mediathequePreviewId = null;
 let _mediathequeDonnees = null;
@@ -1194,7 +1250,7 @@ function selectionnerPhotoMediatheque(url, nom) {
   if (preview) preview.innerHTML = `<img src="${url}" class="photo-preview">`;
   fermerModalMediatheque();
 }
-}
+
 
 function fermerModalMediatheque() {
   document.getElementById('modal-mediatheque').classList.remove('ouvert');
