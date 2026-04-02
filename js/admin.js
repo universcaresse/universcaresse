@@ -3334,6 +3334,7 @@ async function importerFacturePDF() {
   document.getElementById('if-tvq').value      = facture.tvq;
   document.getElementById('if-livraison').value = facture.livraison;
   document.getElementById('if-soustotal').value = facture.sousTotal;
+  document.getElementById('if-total').value     = facture.total || (facture.sousTotal + facture.tps + facture.tvq + facture.livraison).toFixed(2);
 
   afficherApercuItems(fournisseur);
   validerTotaux(facture);
@@ -3374,7 +3375,7 @@ function parserFacturePA(texte) {
   const facture = { numeroFacture: '', date: '', items: [], tps: 0, tvq: 0, livraison: 0, sousTotal: 0, total: 0 };
 
   console.log('TEXTE PDF:', texte.substring(0, 500));
-  const mNum  = texte.match(/Numéro de commande\s*[:\s]+(\d+)/i);
+   const mNum  = texte.match(/Détails de la commande\s+(\d{4,6})/i);
   if (mNum)  facture.numeroFacture = mNum[1].trim();
 
   const mDate = texte.match(/(\d{2}-\d{2}-\d{4})/);
@@ -3386,8 +3387,11 @@ function parserFacturePA(texte) {
   const mTps = texte.match(/TPS\s*[:\s]+([\d\s,\.]+)\s*\$/i);
   if (mTps) facture.tps = parseFloat(mTps[1].replace(/\s/g,'').replace(',','.'));
 
-  const mTvq = texte.match(/TVQ\s*[:\s]+([\d\s,\.]+)\s*\$/i);
+ const mTvq = texte.match(/TVQ\s*[:\s]+([\d\s,\.]+)\s*\$/i);
   if (mTvq) facture.tvq = parseFloat(mTvq[1].replace(/\s/g,'').replace(',','.'));
+
+  const mTotal = texte.match(/Total de la commande\s*[:\s]+([\d\s,\.]+)\s*\$/i);
+  if (mTotal) facture.total = parseFloat(mTotal[1].replace(/\s/g,'').replace(',','.'));
 
   const mSous = texte.match(/Sous-total\s*[:\s]+([\d\s,\.]+)\s*\$/i);
   if (mSous) facture.sousTotal = parseFloat(mSous[1].replace(/\s/g,'').replace(',','.'));
@@ -3395,13 +3399,13 @@ function parserFacturePA(texte) {
   const mLiv = texte.match(/Livraison\s*[:\s]+([\d\s,\.]+)\s*\$/i);
   if (mLiv && !/gratuite/i.test(mLiv[0])) facture.livraison = parseFloat(mLiv[1].replace(/\s/g,'').replace(',','.'));
 
-  const ligneItem = /([A-ZÀ-Ÿa-zà-ÿ][A-ZÀ-Ÿa-zà-ÿ\s\/&\(\)\-\']+)\s*\((\d+)\)\s*([\d]+(?:ml|g|L|kg|oz)[^\n]*?)\s*([\d,\.]+)\s*\$\s*CAD/gi;
+  const ligneItem = /([A-ZÀ-Ÿa-zà-ÿ][A-ZÀ-Ÿa-zà-ÿ\s\/&\(\)\-\']+)\s*\((\d+)\)\s*([\d]+(?:ml|g|L|kg|oz)[^\n]*?)?\s*([\d,\.\s]+)\s*\$\s*CAD/gi;
   let m;
   while ((m = ligneItem.exec(texte)) !== null) {
     const desc = m[1].trim();
     const qte  = parseInt(m[2]);
     const fmt  = m[3].trim();
-    const prix = parseFloat(m[4].replace(',', '.'));
+    const prix = parseFloat(m[4].replace(/\s/g,'').replace(',', '.'));
     if (!desc || isNaN(prix)) continue;
 
     const fmtMatch = fmt.match(/^([\d\.]+)\s*(ml|g|L|kg)/i);
