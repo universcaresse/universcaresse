@@ -3373,6 +3373,7 @@ async function lirePDF(fichier) {
 function parserFacturePA(texte) {
   const facture = { numeroFacture: '', date: '', items: [], tps: 0, tvq: 0, livraison: 0, sousTotal: 0, total: 0 };
 
+  console.log('TEXTE PDF:', texte.substring(0, 500));
   const mNum  = texte.match(/Numéro de commande\s*[:\s]+(\d+)/i);
   if (mNum)  facture.numeroFacture = mNum[1].trim();
 
