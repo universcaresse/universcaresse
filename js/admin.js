@@ -3370,8 +3370,6 @@ async function lirePDF(fichier) {
     }
   });
 }
-
-
 function parserFacturePA(texte) {
   const facture = { numeroFacture: '', date: '', items: [], tps: 0, tvq: 0, livraison: 0, sousTotal: 0, total: 0 };
 
