@@ -3405,7 +3405,7 @@ const mNum  = texte.match(/Détails de la commande\s+(\d{3,6})/i)
   while ((m = ligneItem.exec(texte)) !== null) {
     const desc = m[1].trim();
     const qte  = parseInt(m[2]);
-    const fmt  = m[3].trim();
+    const fmt  = (m[3] || '').trim();
     const prix = parseFloat(m[4].replace(/\s/g,'').replace(',', '.'));
     if (!desc || isNaN(prix)) continue;
 
