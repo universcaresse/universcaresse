@@ -1151,7 +1151,7 @@ async function chargerMediatheque() {
       <div class="carte-visuel"><img src="${i.url}" alt="${i.nom}" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;"></div>
       <div class="fiche-label">${i.nom}</div>
       <div class="texte-secondaire">${i.categorie}</div>
-      <div class="form-actions">
+     <div class="collection-carte-actions">
         <button class="btn btn-sm btn-outline" onclick="mediathequeSupprimer(${i.rowIndex}, '${i.nom}')">Supprimer</button>
       </div>
     </div>`).join('');
