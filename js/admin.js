@@ -3884,6 +3884,9 @@ function ouvrirFormFabrication(existant) {
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('fab-date').value = existant ? '' : today;
   document.querySelector('#form-fabrication .form-panel-titre').textContent = existant ? 'Entrer un lot existant' : 'Nouveau lot';
+  document.getElementById('fab-groupe-multiplicateur').classList.toggle('cache', !!existant);
+  document.getElementById('fab-groupe-nb-unites').classList.toggle('cache', !existant);
+  document.getElementById('form-fabrication').dataset.mode = existant ? 'existant' : 'nouveau';
   document.getElementById('fab-apercu').classList.add('cache');
 document.getElementById('contenu-fabrication').classList.add('cache');
   document.getElementById('form-fabrication').classList.add('visible');
@@ -3922,8 +3925,11 @@ function calculerApercuLot() {
     document.getElementById('fab-apercu').classList.add('cache');
     return;
   }
+  const mode     = document.getElementById('form-fabrication').dataset.mode;
   const multi    = parseInt(document.getElementById('fab-multiplicateur').value) || 1;
-  const nbUnites = (parseInt(opt.dataset.nbUnites) || 1) * multi;
+  const nbUnites = mode === 'existant'
+    ? parseInt(document.getElementById('fab-nb-unites').value) || 0
+    : (parseInt(opt.dataset.nbUnites) || 1) * multi;
   const cure     = parseInt(opt.dataset.cure) || 0;
   const dateFab  = document.getElementById('fab-date').value;
 
@@ -3955,8 +3961,11 @@ async function sauvegarderLot() {
   const opt    = select.options[select.selectedIndex];
   if (!opt || !opt.value) { afficherMsg('fabrication', '❌ Choisir une recette.'); return; }
 
+  const mode     = document.getElementById('form-fabrication').dataset.mode;
   const multi    = parseInt(document.getElementById('fab-multiplicateur').value) || 1;
-  const nbUnites = (parseInt(opt.dataset.nbUnites) || 1) * multi;
+  const nbUnites = mode === 'existant'
+    ? parseInt(document.getElementById('fab-nb-unites').value) || 0
+    : (parseInt(opt.dataset.nbUnites) || 1) * multi;
   const cure     = parseInt(opt.dataset.cure) || 0;
   const dateFab  = document.getElementById('fab-date').value;
   if (!dateFab) { afficherMsg('fabrication', '❌ Date de fabrication requise.'); return; }
