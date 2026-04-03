@@ -3910,8 +3910,7 @@ function ouvrirFormFabrication(existant) {
   document.getElementById('form-fabrication').dataset.mode = existant ? 'existant' : 'nouveau';
   document.getElementById('fab-apercu').classList.add('cache');
 document.getElementById('contenu-fabrication').classList.add('cache');
-  document.getElementById('form-fabrication').classList.add('visible');
-  calculerApercuLot();
+document.getElementById('form-fabrication').classList.add('visible');
 }
 
 function fabFiltrerFormats() {
