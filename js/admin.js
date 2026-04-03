@@ -3875,12 +3875,12 @@ function ouvrirFormFabrication() {
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('fab-date').value = today;
   document.getElementById('fab-apercu').classList.add('cache');
-  document.getElementById('form-fabrication').classList.remove('cache');
+  document.getElementById('form-fabrication').classList.add('visible');
   calculerApercuLot();
 }
 
 function fermerFormFabrication() {
-  document.getElementById('form-fabrication').classList.add('cache');
+  document.getElementById('form-fabrication').classList.remove('visible');
   afficherMsg('fabrication', '');
 }
 
