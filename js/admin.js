@@ -3858,9 +3858,17 @@ function afficherTableauFabrication(lots) {
   document.getElementById('contenu-fabrication').innerHTML = html;
 }
 
-function ouvrirFormFabrication() {
-  const select = document.getElementById('fab-recette');
-  select.innerHTML = '<option value="">— Choisir une recette —</option>';
+function ouvrirFormFabrication(existant) {
+  const selectCol = document.getElementById('fab-collection');
+  selectCol.innerHTML = '<option value="">— Choisir une collection —</option>';
+  const collections = [...new Set((donneesRecettes || []).map(r => r.collection).filter(Boolean))].sort();
+  collections.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c;
+    opt.textContent = c;
+    selectCol.appendChild(opt);
+  });
+  document.getElementById('fab-recette').innerHTML = '<option value="">— Choisir une recette —</option>';
   const recettes = (donneesRecettes || []).filter(r => r.statut !== 'archive');
   recettes.sort((a, b) => a.nom.localeCompare(b.nom));
   recettes.forEach(r => {
@@ -3873,14 +3881,36 @@ function ouvrirFormFabrication() {
     select.appendChild(opt);
   });
   const today = new Date().toISOString().split('T')[0];
-  document.getElementById('fab-date').value = today;
+  document.getElementById('fab-date').value = existant ? '' : today;
+  document.querySelector('#form-fabrication .form-panel-titre').textContent = existant ? 'Entrer un lot existant' : 'Nouveau lot';
   document.getElementById('fab-apercu').classList.add('cache');
+document.getElementById('contenu-fabrication').classList.add('cache');
   document.getElementById('form-fabrication').classList.add('visible');
   calculerApercuLot();
 }
 
+function fabFiltrerRecettes() {
+  const col    = document.getElementById('fab-collection').value;
+  const select = document.getElementById('fab-recette');
+  select.innerHTML = '<option value="">— Choisir une recette —</option>';
+  const recettes = (donneesRecettes || [])
+    .filter(r => r.statut !== 'archive' && (!col || r.collection === col))
+    .sort((a, b) => a.nom.localeCompare(b.nom));
+  recettes.forEach(r => {
+    const opt = document.createElement('option');
+    opt.value = r.recette_id;
+    opt.textContent = r.nom;
+    opt.dataset.nbUnites    = r.nb_unites || 1;
+    opt.dataset.cure        = r.cure || 0;
+    opt.dataset.ingredients = JSON.stringify(r.ingredients || []);
+    select.appendChild(opt);
+  });
+  document.getElementById('fab-apercu').classList.add('cache');
+}
+
 function fermerFormFabrication() {
-  document.getElementById('form-fabrication').classList.remove('visible');
+document.getElementById('form-fabrication').classList.remove('visible');
+  document.getElementById('contenu-fabrication').classList.remove('cache');
   afficherMsg('fabrication', '');
 }
 
