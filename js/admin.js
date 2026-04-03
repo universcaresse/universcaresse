@@ -4006,6 +4006,7 @@ async function sauvegarderLot() {
   }
 
   const lotId = 'LOT-' + Date.now();
+  const recette = (donneesRecettes || []).find(r => r.recette_id === opt.value);
   const res = await appelAPIPost('saveProduction', {
     lot_id:             lotId,
     recette_id:         opt.value,
@@ -4017,7 +4018,9 @@ async function sauvegarderLot() {
     cout_ingredients:   coutIngredients.toFixed(2),
     cout_emballages:    0,
     cout_revient_total: coutIngredients.toFixed(2),
-    cout_par_unite:     nbUnites > 0 ? (coutIngredients / nbUnites).toFixed(2) : 0
+    cout_par_unite:     nbUnites > 0 ? (coutIngredients / nbUnites).toFixed(2) : 0,
+    collection:         recette ? recette.collection : '',
+    ligne:              recette ? recette.ligne : ''
   });
 
   if (res && res.success) {
