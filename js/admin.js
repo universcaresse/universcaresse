@@ -3871,6 +3871,7 @@ function ouvrirFormFabrication(existant) {
   document.getElementById('fab-recette').innerHTML = '<option value="">— Choisir une recette —</option>';
   const recettes = (donneesRecettes || []).filter(r => r.statut !== 'archive');
   recettes.sort((a, b) => a.nom.localeCompare(b.nom));
+  const selectRec = document.getElementById('fab-recette');
   recettes.forEach(r => {
     const opt = document.createElement('option');
     opt.value = r.recette_id;
@@ -3878,7 +3879,7 @@ function ouvrirFormFabrication(existant) {
     opt.dataset.nbUnites = r.nb_unites || 1;
     opt.dataset.cure     = r.cure || 0;
     opt.dataset.ingredients = JSON.stringify(r.ingredients || []);
-    select.appendChild(opt);
+    selectRec.appendChild(opt);
   });
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('fab-date').value = existant ? '' : today;
