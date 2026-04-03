@@ -3877,7 +3877,11 @@ function afficherTableauFabrication(lots) {
 function ouvrirFormFabrication(existant) {
   const selectCol = document.getElementById('fab-collection');
   selectCol.innerHTML = '<option value="">— Choisir une collection —</option>';
-  const collections = [...new Set((donneesRecettes || []).map(r => r.collection).filter(Boolean))].sort();
+  const colMap = {};
+  (donneesRecettes || []).forEach(r => {
+    if (r.collection && !colMap[r.collection]) colMap[r.collection] = r.rang || 999;
+  });
+  const collections = Object.keys(colMap).sort((a, b) => colMap[a] - colMap[b]);
   collections.forEach(c => {
     const opt = document.createElement('option');
     opt.value = c;
