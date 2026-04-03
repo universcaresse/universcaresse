@@ -1026,6 +1026,65 @@
         <div class="msg-zone" id="msg-fabrication"></div>
         <div class="chargement" id="loading-fabrication"><span class="spinner"><span></span><span></span><span></span><span></span><span></span></span>Chargement...</div>
         <div id="contenu-fabrication"></div>
+
+        <!-- FORMULAIRE NOUVEAU LOT -->
+        <div id="form-fabrication" class="form-panel cache">
+          <div class="form-panel-header">
+            <span class="form-panel-titre">Nouveau lot</span>
+            <button class="btn-fermer-panneau" onclick="fermerFormFabrication()">✕</button>
+          </div>
+          <div class="form-body">
+            <div class="form-grille">
+
+              <div class="form-groupe col-plein">
+                <label class="form-label">Recette</label>
+                <select id="fab-recette" class="form-ctrl" onchange="calculerApercuLot()">
+                  <option value="">— Choisir une recette —</option>
+                </select>
+              </div>
+
+              <div class="form-groupe">
+                <label class="form-label">Multiplicateur</label>
+                <select id="fab-multiplicateur" class="form-ctrl" onchange="calculerApercuLot()">
+                  <option value="1">1×</option>
+                  <option value="2">2×</option>
+                  <option value="3">3×</option>
+                </select>
+              </div>
+
+              <div class="form-groupe">
+                <label class="form-label">Date de fabrication</label>
+                <input type="date" id="fab-date" class="form-ctrl" onchange="calculerApercuLot()">
+              </div>
+
+            </div>
+
+            <!-- APERÇU CALCULÉ -->
+            <div id="fab-apercu" class="carte-admin cache">
+              <div class="carte-admin-entete">Aperçu</div>
+              <div class="form-grille">
+                <div class="form-groupe">
+                  <label class="form-label">Unités produites</label>
+                  <div id="fab-apercu-unites" class="texte-secondaire">—</div>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Disponible le</label>
+                  <div id="fab-apercu-dispo" class="texte-secondaire">—</div>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Coût estimé</label>
+                  <div id="fab-apercu-cout" class="texte-secondaire">—</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-outline" onclick="fermerFormFabrication()">Annuler</button>
+              <button class="btn btn-primary" onclick="sauvegarderLot()">Confirmer</button>
+            </div>
+          </div>
+        </div>
+
       </div>
 
     <!-- INVENTAIRE PRODUCTION -->

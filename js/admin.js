@@ -107,7 +107,16 @@ if (cible) reobserverFadeIn(cible);
  if (id === 'nouvelle-facture' && !factureActive) initialiserNouvelleFacture();
 if (id === 'contenu-site')    chargerContenuSite();
 if (id === 'mediatheque')     chargerMediatheque();
-if (id === 'fabrication')     chargerFabrication();
+if (id === 'fabrication') {
+  if (!donneesRecettes || donneesRecettes.length === 0) {
+    appelAPI('getRecettes').then(res => {
+      if (res && res.recettes) donneesRecettes = res.recettes;
+      chargerFabrication();
+    });
+  } else {
+    chargerFabrication();
+  }
+}
 if (id === 'import-recettes') {
   appelAPI('getRecettes').then(resRec => {
     if (resRec && resRec.recettes) donneesRecettes = resRec.recettes;
@@ -3850,5 +3859,110 @@ function afficherTableauFabrication(lots) {
 }
 
 function ouvrirFormFabrication() {
-  afficherMsg('fabrication', '🚧 Formulaire à venir.');
+  const select = document.getElementById('fab-recette');
+  select.innerHTML = '<option value="">— Choisir une recette —</option>';
+  const recettes = (donneesRecettes || []).filter(r => r.statut !== 'archive');
+  recettes.sort((a, b) => a.nom.localeCompare(b.nom));
+  recettes.forEach(r => {
+    const opt = document.createElement('option');
+    opt.value = r.recette_id;
+    opt.textContent = r.nom;
+    opt.dataset.nbUnites = r.nb_unites || 1;
+    opt.dataset.cure     = r.cure || 0;
+    opt.dataset.ingredients = JSON.stringify(r.ingredients || []);
+    select.appendChild(opt);
+  });
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('fab-date').value = today;
+  document.getElementById('fab-apercu').classList.add('cache');
+  document.getElementById('form-fabrication').classList.remove('cache');
+  calculerApercuLot();
+}
+
+function fermerFormFabrication() {
+  document.getElementById('form-fabrication').classList.add('cache');
+  afficherMsg('fabrication', '');
+}
+
+function calculerApercuLot() {
+  const select = document.getElementById('fab-recette');
+  const opt    = select.options[select.selectedIndex];
+  if (!opt || !opt.value) {
+    document.getElementById('fab-apercu').classList.add('cache');
+    return;
+  }
+  const multi    = parseInt(document.getElementById('fab-multiplicateur').value) || 1;
+  const nbUnites = (parseInt(opt.dataset.nbUnites) || 1) * multi;
+  const cure     = parseInt(opt.dataset.cure) || 0;
+  const dateFab  = document.getElementById('fab-date').value;
+
+  let dateDispo = '—';
+  if (dateFab) {
+    const d = new Date(dateFab);
+    d.setDate(d.getDate() + cure);
+    dateDispo = d.toISOString().split('T')[0];
+  }
+
+  const ingredients = JSON.parse(opt.dataset.ingredients || '[]');
+  let coutTotal = 0;
+  if (listesDropdown && listesDropdown.fullData) {
+    ingredients.forEach(ing => {
+      const found = listesDropdown.fullData.find(f => f.ingredient === ing.nom);
+      const prixParG = found ? (found.prixParG || 0) : 0;
+      coutTotal += (ing.quantite_g || 0) * multi * prixParG;
+    });
+  }
+
+  document.getElementById('fab-apercu-unites').textContent = nbUnites + ' unité(s)';
+  document.getElementById('fab-apercu-dispo').textContent  = dateDispo;
+  document.getElementById('fab-apercu-cout').textContent   = coutTotal > 0 ? coutTotal.toFixed(2) + ' $' : '—';
+  document.getElementById('fab-apercu').classList.remove('cache');
+}
+
+async function sauvegarderLot() {
+  const select = document.getElementById('fab-recette');
+  const opt    = select.options[select.selectedIndex];
+  if (!opt || !opt.value) { afficherMsg('fabrication', '❌ Choisir une recette.'); return; }
+
+  const multi    = parseInt(document.getElementById('fab-multiplicateur').value) || 1;
+  const nbUnites = (parseInt(opt.dataset.nbUnites) || 1) * multi;
+  const cure     = parseInt(opt.dataset.cure) || 0;
+  const dateFab  = document.getElementById('fab-date').value;
+  if (!dateFab) { afficherMsg('fabrication', '❌ Date de fabrication requise.'); return; }
+
+  const d = new Date(dateFab);
+  d.setDate(d.getDate() + cure);
+  const dateDispo = d.toISOString().split('T')[0];
+
+  const ingredients = JSON.parse(opt.dataset.ingredients || '[]');
+  let coutIngredients = 0;
+  if (listesDropdown && listesDropdown.fullData) {
+    ingredients.forEach(ing => {
+      const found = listesDropdown.fullData.find(f => f.ingredient === ing.nom);
+      const prixParG = found ? (found.prixParG || 0) : 0;
+      coutIngredients += (ing.quantite_g || 0) * multi * prixParG;
+    });
+  }
+
+  const lotId = 'LOT-' + Date.now();
+  const res = await appelAPIPost('saveProduction', {
+    lot_id:             lotId,
+    recette_id:         opt.value,
+    recette_nom:        opt.textContent,
+    multiplicateur:     multi,
+    nb_unites:          nbUnites,
+    date_fabrication:   dateFab,
+    date_disponibilite: dateDispo,
+    cout_ingredients:   coutIngredients.toFixed(2),
+    cout_emballages:    0,
+    cout_revient_total: coutIngredients.toFixed(2),
+    cout_par_unite:     nbUnites > 0 ? (coutIngredients / nbUnites).toFixed(2) : 0
+  });
+
+  if (res && res.success) {
+    fermerFormFabrication();
+    chargerFabrication();
+  } else {
+    afficherMsg('fabrication', '❌ ' + (res?.message || 'Erreur.'));
+  }
 }
