@@ -422,6 +422,7 @@ async function modifierLigneProduit(rowIndex) {
   document.getElementById('fc-toggle-mode').textContent = '← Retour collection';
   document.getElementById('fc-collection-ligne').value = item.collection || '';
   document.getElementById('fc-ligne').value = item.ligne || '';
+  document.getElementById('fc-ligne').dataset.ancienne = item.ligne || '';
   
   document.getElementById('fc-desc-ligne').value = item.description_ligne || '';
   document.getElementById('fc-couleur-hex-ligne').value = item.couleur_hex || '';
@@ -509,6 +510,7 @@ async function sauvegarderCollection() {
       mode:              'ligne',
       collection:        col,
       ligne,
+      ancienneLigne:     document.getElementById('fc-ligne').dataset.ancienne || '',
       description_ligne: document.getElementById('fc-desc-ligne').value,
     };
   const res = rowIndex
@@ -4069,5 +4071,4 @@ function fabFiltrerFormats() {
     formatSel.appendChild(o);
   });
   calculerApercuLot();
-}
 }
