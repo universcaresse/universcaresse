@@ -1046,8 +1046,15 @@
 
               <div class="form-groupe">
                 <label class="form-label">Recette</label>
-                <select id="fab-recette" class="form-ctrl" onchange="calculerApercuLot()">
+                <select id="fab-recette" class="form-ctrl" onchange="fabFiltrerFormats()">
                   <option value="">— Choisir une recette —</option>
+                </select>
+              </div>
+
+              <div class="form-groupe" id="fab-groupe-format">
+                <label class="form-label">Format</label>
+                <select id="fab-format" class="form-ctrl" onchange="calculerApercuLot()">
+                  <option value="">— Choisir un format —</option>
                 </select>
               </div>
 

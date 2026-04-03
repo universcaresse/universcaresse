@@ -3883,6 +3883,7 @@ function ouvrirFormFabrication(existant) {
   });
   const collections = Object.keys(colMap).sort((a, b) => colMap[a] - colMap[b]);
   collections.forEach(c => {
+	  
     const opt = document.createElement('option');
     opt.value = c;
     opt.textContent = c;
@@ -3913,7 +3914,25 @@ document.getElementById('contenu-fabrication').classList.add('cache');
   calculerApercuLot();
 }
 
-function fabFiltrerRecettes() {
+function fabFiltrerFormats() {
+  const select   = document.getElementById('fab-recette');
+  const opt      = select.options[select.selectedIndex];
+  const formatSel = document.getElementById('fab-format');
+  formatSel.innerHTML = '<option value="">— Choisir un format —</option>';
+  document.getElementById('fab-apercu').classList.add('cache');
+  if (!opt || !opt.value) return;
+  const recette = (donneesRecettes || []).find(r => r.recette_id === opt.value);
+  if (!recette || !recette.formats_complets || recette.formats_complets.length === 0) return;
+  recette.formats_complets.forEach(f => {
+    const o = document.createElement('option');
+    o.value = JSON.stringify(f);
+    o.textContent = `${f.poids} ${f.unite} — ${f.prix_vente ? f.prix_vente.toFixed(2) + ' $' : 'sans prix'}`;
+    formatSel.appendChild(o);
+  });
+  calculerApercuLot();
+}
+
+function fabFiltrerRecettes() { {
   const col    = document.getElementById('fab-collection').value;
   const select = document.getElementById('fab-recette');
   select.innerHTML = '<option value="">— Choisir une recette —</option>';
