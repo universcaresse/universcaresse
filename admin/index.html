@@ -46,12 +46,12 @@
       <li class="nav-admin-item">
         <button class="nav-admin-btn" onclick="toggleDropdownAdmin(this)">Production <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-item bientot">Confection</button>
+          <button class="nav-dropdown-item" onclick="afficherSection('fabrication', this)">Fabrication</button>
           <button class="nav-dropdown-item bientot">Ventes</button>
         </div>
       </li>
       <li class="nav-admin-item">
-        <button class="nav-admin-btn" onclick="toggleDropdownAdmin(this)">Listes <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
+        <button class="nav-admin-btn" onclick="toggleDropdownAdmin(this)">Statistiques <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
         <div class="nav-dropdown">
           <button class="nav-dropdown-item bientot">Les produits</button>
           <button class="nav-dropdown-item bientot">Inventaire</button>
@@ -109,8 +109,8 @@
       <div class="sidebar-sep"></div>
       <div class="sidebar-groupe">
         <div class="sidebar-titre">Production</div>
-        <button class="sidebar-lien bientot">Confection</button>
-        <button class="sidebar-lien bientot">Ventes</button>
+        <button class="sidebar-lien" onclick="afficherSection('fabrication', this)">Fabrication</button>
+        <button class="sidebar-lien" onclick="afficherSection('inventaire-production', this)">Inventaire</button>
       </div>
       <div class="sidebar-sep"></div>
      <div class="sidebar-groupe">
@@ -1012,6 +1012,33 @@
           <div class="vide-titre">Aucun stock disponible</div>
           <div class="vide-desc">Les stocks se calculent à partir des factures finalisées</div>
         </div>
+      </div>
+
+<!-- FABRICATION -->
+      <div class="section-admin" id="section-fabrication">
+        <div class="page-entete fade-in">
+          <div class="page-entete-gauche">
+            <div class="page-entete-eyebrow">Production</div>
+            <div class="page-entete-titre">Fabrication</div>
+          </div>
+          <button class="btn btn-primary" onclick="ouvrirFormFabrication()">+ Nouveau lot</button>
+        </div>
+        <div class="msg-zone" id="msg-fabrication"></div>
+        <div class="chargement" id="loading-fabrication"><span class="spinner"><span></span><span></span><span></span><span></span><span></span></span>Chargement...</div>
+        <div id="contenu-fabrication"></div>
+      </div>
+
+    <!-- INVENTAIRE PRODUCTION -->
+      <div class="section-admin" id="section-inventaire-production">
+        <div class="page-entete fade-in">
+          <div class="page-entete-gauche">
+            <div class="page-entete-eyebrow">Production</div>
+            <div class="page-entete-titre">Inventaire</div>
+          </div>
+        </div>
+        <div class="msg-zone" id="msg-inventaire-production"></div>
+        <div class="chargement" id="loading-inventaire-production"><span class="spinner"><span></span><span></span><span></span><span></span><span></span></span>Chargement...</div>
+        <div id="contenu-inventaire-production"></div>
       </div>
 
     <!-- CONTENU DU SITE -->

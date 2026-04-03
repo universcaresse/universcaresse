@@ -107,6 +107,7 @@ if (cible) reobserverFadeIn(cible);
  if (id === 'nouvelle-facture' && !factureActive) initialiserNouvelleFacture();
 if (id === 'contenu-site')    chargerContenuSite();
 if (id === 'mediatheque')     chargerMediatheque();
+if (id === 'fabrication')     chargerFabrication();
 if (id === 'import-recettes') {
   appelAPI('getRecettes').then(resRec => {
     if (resRec && resRec.recettes) donneesRecettes = resRec.recettes;
@@ -3755,7 +3756,99 @@ async function confirmerImportFacture() {
 
   await appelAPIPost('finalizeInvoice', { numeroFacture: numero, tps, tvq, livraison, sousTotal });
 
-  afficherMsg('import-facture', `✅ Facture ${numero} importée avec succès.`);
+afficherMsg('import-facture', `✅ Facture ${numero} importée avec succès.`);
   document.getElementById('if-apercu').classList.add('cache');
   btn.disabled = false;
+}
+
+// ========================================
+// FABRICATION
+// ========================================
+
+async function chargerFabrication() {
+  document.getElementById('loading-fabrication').classList.remove('cache');
+  document.getElementById('contenu-fabrication').innerHTML = '';
+  const res = await appelAPI('getProductions');
+  document.getElementById('loading-fabrication').classList.add('cache');
+  if (!res || !res.success) {
+    afficherMsg('fabrication', '❌ Erreur de chargement.');
+    return;
+  }
+  afficherTableauFabrication(res.lots || []);
+}
+
+function afficherTableauFabrication(lots) {
+  const aujourd_hui = new Date().toISOString().split('T')[0];
+  const enCure      = lots.filter(l => l.statut === 'en_cure');
+  const disponibles = lots.filter(l => l.statut === 'disponible');
+  const epuises     = lots.filter(l => l.statut === 'epuise');
+
+  let html = '';
+
+  html += `<div class="carte-admin">
+    <div class="carte-admin-entete">EN CURE <span class="texte-secondaire">(${enCure.length})</span></div>`;
+  if (enCure.length === 0) {
+    html += `<div class="texte-secondaire">Aucun lot en cure</div>`;
+  } else {
+    html += `<table class="table-admin"><thead><tr>
+      <th>Recette</th><th>Fabriqué le</th><th>Disponible le</th><th>Unités</th>
+    </tr></thead><tbody>`;
+    enCure.forEach(l => {
+      html += `<tr>
+        <td>${l.recette_nom}</td>
+        <td>${l.date_fabrication}</td>
+        <td>${l.date_disponibilite}</td>
+        <td>${l.nb_unites}</td>
+      </tr>`;
+    });
+    html += `</tbody></table>`;
+  }
+  html += `</div>`;
+
+  html += `<div class="carte-admin">
+    <div class="carte-admin-entete">DISPONIBLE <span class="texte-secondaire">(${disponibles.length})</span></div>`;
+  if (disponibles.length === 0) {
+    html += `<div class="texte-secondaire">Aucun lot disponible</div>`;
+  } else {
+    html += `<table class="table-admin"><thead><tr>
+      <th>Recette</th><th>Disponible le</th><th>Unités produites</th><th>Unités restantes</th><th>Coût/unité</th>
+    </tr></thead><tbody>`;
+    disponibles.forEach(l => {
+      html += `<tr>
+        <td>${l.recette_nom}</td>
+        <td>${l.date_disponibilite}</td>
+        <td>${l.nb_unites}</td>
+        <td>${l.unites_restantes ?? l.nb_unites}</td>
+        <td>${l.cout_par_unite ? l.cout_par_unite.toFixed(2) + ' $' : '—'}</td>
+      </tr>`;
+    });
+    html += `</tbody></table>`;
+  }
+  html += `</div>`;
+
+  html += `<div class="carte-admin">
+    <div class="carte-admin-entete">ÉPUISÉ <span class="texte-secondaire">(${epuises.length})</span></div>`;
+  if (epuises.length === 0) {
+    html += `<div class="texte-secondaire">Aucun lot épuisé</div>`;
+  } else {
+    html += `<table class="table-admin"><thead><tr>
+      <th>Recette</th><th>Fabriqué le</th><th>Unités</th><th>Coût/unité</th>
+    </tr></thead><tbody>`;
+    epuises.forEach(l => {
+      html += `<tr>
+        <td>${l.recette_nom}</td>
+        <td>${l.date_fabrication}</td>
+        <td>${l.nb_unites}</td>
+        <td>${l.cout_par_unite ? l.cout_par_unite.toFixed(2) + ' $' : '—'}</td>
+      </tr>`;
+    });
+    html += `</tbody></table>`;
+  }
+  html += `</div>`;
+
+  document.getElementById('contenu-fabrication').innerHTML = html;
+}
+
+function ouvrirFormFabrication() {
+  afficherMsg('fabrication', '🚧 Formulaire à venir.');
 }
