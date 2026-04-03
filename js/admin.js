@@ -3786,77 +3786,93 @@ async function chargerFabrication() {
   afficherTableauFabrication(res.lots || []);
 }
 
+function fabToggleAccordeon(el) {
+  const body = el.nextElementSibling;
+  body.classList.toggle('cache');
+}
+
 function afficherTableauFabrication(lots) {
-  const aujourd_hui = new Date().toISOString().split('T')[0];
-  const enCure      = lots.filter(l => l.statut === 'en_cure');
+ const enCure      = lots.filter(l => l.statut === 'en_cure');
   const disponibles = lots.filter(l => l.statut === 'disponible');
   const epuises     = lots.filter(l => l.statut === 'epuise');
 
+  const totalEnCure      = enCure.reduce((s, l) => s + l.nb_unites, 0);
+  const totalDisponibles = disponibles.reduce((s, l) => s + (l.unites_restantes ?? l.nb_unites), 0);
+  const totalEpuises     = epuises.reduce((s, l) => s + l.nb_unites, 0);
+
+  function grouperParCollectionLigne(liste) {
+    const groupes = {};
+    liste.forEach(l => {
+      const col   = l.collection || 'Sans collection';
+      const ligne = l.ligne      || 'Sans ligne';
+      const cle   = col + '||' + ligne;
+      if (!groupes[cle]) groupes[cle] = { collection: col, ligne, lots: [] };
+      groupes[cle].lots.push(l);
+    });
+    return Object.values(groupes).sort((a, b) => a.collection.localeCompare(b.collection) || a.ligne.localeCompare(b.ligne));
+  }
+
+  function rendreBlocStatut(titre, total, liste, colonnes, rendreLigne) {
+    let h = `<div class="carte-admin">
+      <div class="carte-admin-entete">${titre} <span class="texte-secondaire">${total} savon${total !== 1 ? 's' : ''}</span></div>`;
+    if (liste.length === 0) {
+      h += `<div class="texte-secondaire" style="padding:12px 0">Aucun lot</div>`;
+    } else {
+      const groupes = grouperParCollectionLigne(liste);
+      groupes.forEach(g => {
+        const totalGroupe = g.lots.reduce((s, l) => s + (l.unites_restantes ?? l.nb_unites), 0);
+        h += `<div class="form-panel visible" style="margin:8px 0">
+          <div class="form-panel-header" onclick="fabToggleAccordeon(this)" style="cursor:pointer">
+            <div class="form-panel-titre">${g.collection} — ${g.ligne}</div>
+            <span class="texte-secondaire">${totalGroupe} savon${totalGroupe !== 1 ? 's' : ''}</span>
+          </div>
+          <div class="form-body">
+            <table class="table-admin"><thead><tr>${colonnes.map(c => `<th>${c}</th>`).join('')}</tr></thead>
+            <tbody>${g.lots.map(rendreLigne).join('')}</tbody></table>
+          </div>
+        </div>`;
+      });
+    }
+    h += `</div>`;
+    return h;
+  }
+
   let html = '';
 
-  html += `<div class="carte-admin">
-    <div class="carte-admin-entete">EN CURE <span class="texte-secondaire">(${enCure.length})</span></div>`;
-  if (enCure.length === 0) {
-    html += `<div class="texte-secondaire">Aucun lot en cure</div>`;
-  } else {
-    html += `<table class="table-admin"><thead><tr>
-      <th>Recette</th><th>Fabriqué le</th><th>Disponible le</th><th>Unités</th>
-    </tr></thead><tbody>`;
-    enCure.forEach(l => {
-      html += `<tr>
-        <td>${l.recette_nom}</td>
-        <td>${l.date_fabrication}</td>
-        <td>${l.date_disponibilite}</td>
-        <td>${l.nb_unites}</td>
-      </tr>`;
-    });
-    html += `</tbody></table>`;
-  }
-  html += `</div>`;
+  html += rendreBlocStatut('EN CURE', totalEnCure, enCure,
+    ['Recette', 'Fabriqué le', 'Disponible le', 'Unités'],
+    l => `<tr>
+      <td>${l.recette_nom}</td>
+      <td>${l.date_fabrication}</td>
+      <td>${l.date_disponibilite}</td>
+      <td>${l.nb_unites}</td>
+    </tr>`
+  );
 
-  html += `<div class="carte-admin">
-    <div class="carte-admin-entete">DISPONIBLE <span class="texte-secondaire">(${disponibles.length})</span></div>`;
-  if (disponibles.length === 0) {
-    html += `<div class="texte-secondaire">Aucun lot disponible</div>`;
-  } else {
-    html += `<table class="table-admin"><thead><tr>
-      <th>Recette</th><th>Disponible le</th><th>Unités produites</th><th>Unités restantes</th><th>Coût/unité</th>
-    </tr></thead><tbody>`;
-    disponibles.forEach(l => {
-      html += `<tr>
-        <td>${l.recette_nom}</td>
-        <td>${l.date_disponibilite}</td>
-        <td>${l.nb_unites}</td>
-        <td>${l.unites_restantes ?? l.nb_unites}</td>
-        <td>${l.cout_par_unite ? l.cout_par_unite.toFixed(2) + ' $' : '—'}</td>
-      </tr>`;
-    });
-    html += `</tbody></table>`;
-  }
-  html += `</div>`;
+  html += rendreBlocStatut('DISPONIBLE', totalDisponibles, disponibles,
+    ['Recette', 'Disponible le', 'Unités produites', 'Unités restantes', 'Coût/unité'],
+    l => `<tr>
+      <td>${l.recette_nom}</td>
+      <td>${l.date_disponibilite}</td>
+      <td>${l.nb_unites}</td>
+      <td>${l.unites_restantes ?? l.nb_unites}</td>
+      <td>${l.cout_par_unite ? parseFloat(l.cout_par_unite).toFixed(2) + ' $' : '—'}</td>
+    </tr>`
+  );
 
-  html += `<div class="carte-admin">
-    <div class="carte-admin-entete">ÉPUISÉ <span class="texte-secondaire">(${epuises.length})</span></div>`;
-  if (epuises.length === 0) {
-    html += `<div class="texte-secondaire">Aucun lot épuisé</div>`;
-  } else {
-    html += `<table class="table-admin"><thead><tr>
-      <th>Recette</th><th>Fabriqué le</th><th>Unités</th><th>Coût/unité</th>
-    </tr></thead><tbody>`;
-    epuises.forEach(l => {
-      html += `<tr>
-        <td>${l.recette_nom}</td>
-        <td>${l.date_fabrication}</td>
-        <td>${l.nb_unites}</td>
-        <td>${l.cout_par_unite ? l.cout_par_unite.toFixed(2) + ' $' : '—'}</td>
-      </tr>`;
-    });
-    html += `</tbody></table>`;
-  }
-  html += `</div>`;
+  html += rendreBlocStatut('ÉPUISÉ', totalEpuises, epuises,
+    ['Recette', 'Fabriqué le', 'Unités', 'Coût/unité'],
+    l => `<tr>
+      <td>${l.recette_nom}</td>
+      <td>${l.date_fabrication}</td>
+      <td>${l.nb_unites}</td>
+      <td>${l.cout_par_unite ? parseFloat(l.cout_par_unite).toFixed(2) + ' $' : '—'}</td>
+    </tr>`
+  );
 
   document.getElementById('contenu-fabrication').innerHTML = html;
 }
+
 
 function ouvrirFormFabrication(existant) {
   const selectCol = document.getElementById('fab-collection');
@@ -3913,8 +3929,13 @@ function fabFiltrerRecettes() {
 }
 
 function fermerFormFabrication() {
-document.getElementById('form-fabrication').classList.remove('visible');
+  document.getElementById('form-fabrication').classList.remove('visible');
   document.getElementById('contenu-fabrication').classList.remove('cache');
+  document.getElementById('fab-collection').value = '';
+  document.getElementById('fab-recette').innerHTML = '<option value="">— Choisir une recette —</option>';
+  document.getElementById('fab-multiplicateur').value = '1';
+  document.getElementById('fab-nb-unites').value = '';
+  document.getElementById('fab-apercu').classList.add('cache');
   afficherMsg('fabrication', '');
 }
 
