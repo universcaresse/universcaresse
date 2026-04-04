@@ -4071,5 +4071,5 @@ function fabFiltrerFormats() {
     o.textContent = `${f.poids} ${f.unite} — ${f.prix_vente ? f.prix_vente.toFixed(2) + ' $' : 'sans prix'}`;
     formatSel.appendChild(o);
   });
-  calculerApercuLot();}
+  calculerApercuLot();
 }
