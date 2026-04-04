@@ -46,12 +46,12 @@
       <li class="nav-admin-item">
         <button class="nav-admin-btn" onclick="toggleDropdownAdmin(this)">Production <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
         <div class="nav-dropdown">
-          <button class="nav-dropdown-item bientot">Confection</button>
+          <button class="nav-dropdown-item" onclick="afficherSection('fabrication', this)">Fabrication</button>
           <button class="nav-dropdown-item bientot">Ventes</button>
         </div>
       </li>
       <li class="nav-admin-item">
-        <button class="nav-admin-btn" onclick="toggleDropdownAdmin(this)">Listes <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
+        <button class="nav-admin-btn" onclick="toggleDropdownAdmin(this)">Statistiques <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg></button>
         <div class="nav-dropdown">
           <button class="nav-dropdown-item bientot">Les produits</button>
           <button class="nav-dropdown-item bientot">Inventaire</button>
@@ -65,7 +65,9 @@
           <button class="nav-dropdown-item" onclick="afficherSection('inci', null)">INCI</button>
           <button class="nav-dropdown-item" onclick="afficherSection('densites', null)">Densité</button>
           <button class="nav-dropdown-item" onclick="afficherSection('contenu-site', null)">Contenu du site</button>
+          <button class="nav-dropdown-item" onclick="afficherSection('mediatheque', null)">Médiathèque</button>
           <button class="nav-dropdown-item bientot">Corrections inventaire</button>
+
           <a class="nav-dropdown-item" href="../index.html" target="_blank">Site public</a>
           <button class="nav-dropdown-item" onclick="seDeconnecter()">Déconnexion</button>
         </div>
@@ -107,8 +109,8 @@
       <div class="sidebar-sep"></div>
       <div class="sidebar-groupe">
         <div class="sidebar-titre">Production</div>
-        <button class="sidebar-lien bientot">Confection</button>
-        <button class="sidebar-lien bientot">Ventes</button>
+        <button class="sidebar-lien" onclick="afficherSection('fabrication', this)">Fabrication</button>
+        <button class="sidebar-lien" onclick="afficherSection('inventaire-production', this)">Inventaire</button>
       </div>
       <div class="sidebar-sep"></div>
      <div class="sidebar-groupe">
@@ -116,6 +118,7 @@
         <button class="sidebar-lien" onclick="afficherSection('inci', this)">INCI</button>
         <button class="sidebar-lien" onclick="afficherSection('densites', this)">Densité</button>
         <button class="sidebar-lien" onclick="afficherSection('contenu-site', this)">Contenu du site</button>
+        <button class="sidebar-lien" onclick="afficherSection('mediatheque', this)">Médiathèque</button>
      <button class="sidebar-lien bientot">Corrections inventaire</button>
       </div>
       <div class="sidebar-sep"></div>
@@ -364,6 +367,11 @@
                   <div class="cloudinary-zone">
                     <input type="text" class="form-ctrl" id="fc-photo-url">
                     <button type="button" class="btn btn-secondary" onclick="ouvrirCloudinaryCollection()">Choisir une photo</button>
+<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fc-photo-url', 'fc-photo-preview', 'Collection')">Médiathèque</button>
+
+
+
+
                   </div>
                   <div id="fc-photo-preview"></div>
                 </div>
@@ -372,6 +380,7 @@
                   <div class="cloudinary-zone">
                     <input type="text" class="form-ctrl" id="fc-photo-url-noel">
                     <button type="button" class="btn btn-secondary" onclick="ouvrirCloudinaryCollectionNoel()">Choisir une photo</button>
+<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fc-photo-url-noel', 'fc-photo-preview-noel', 'Collection Noël')">Médiathèque</button>
                   </div>
                   <div id="fc-photo-preview-noel"></div>
                 </div>
@@ -403,6 +412,7 @@
                   <div class="cloudinary-zone">
                     <input type="text" class="form-ctrl" id="fc-photo-url-ligne">
                     <button type="button" class="btn btn-secondary" onclick="ouvrirCloudinaryLigne()">Choisir une photo</button>
+<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fc-photo-url-ligne', 'fc-photo-preview-ligne', 'Collection')">Médiathèque</button>
                   </div>
                   <div id="fc-photo-preview-ligne"></div>
                 </div>
@@ -555,6 +565,7 @@
               <div class="cloudinary-zone">
                 <input type="text" class="form-ctrl" id="fr-image-url">
                 <button type="button" class="btn btn-secondary" onclick="ouvrirCloudinary()">Choisir une photo</button>
+<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fr-image-url', 'fr-image-preview', 'Recette')">Médiathèque</button>
               </div>
               <div id="fr-image-preview"></div>
             </div>
@@ -563,6 +574,8 @@
               <div class="cloudinary-zone">
                 <input type="text" class="form-ctrl" id="fr-image-url-noel">
                 <button type="button" class="btn btn-secondary" onclick="ouvrirMediaLibrary('fr-image-url-noel', 'fr-image-preview-noel')">Choisir une photo</button>
+<button type="button" class="btn btn-secondary" onclick="ouvrirMediatheque('fr-image-url-noel', 'fr-image-preview-noel', 'Recette Noël')">Médiathèque</button>
+
               </div>
               <div id="fr-image-preview-noel"></div>
             </div>
@@ -1001,6 +1014,111 @@
         </div>
       </div>
 
+<!-- FABRICATION -->
+      <div class="section-admin" id="section-fabrication">
+        <div class="page-entete fade-in">
+          <div class="page-entete-gauche">
+            <div class="page-entete-eyebrow">Production</div>
+            <div class="page-entete-titre">Fabrication</div>
+          </div>
+          <button class="btn btn-primary" onclick="ouvrirFormFabrication()">+ Nouveau lot</button>
+          <button class="btn btn-outline" onclick="ouvrirFormFabrication(true)">Entrer un lot existant</button>
+        </div>
+        <div class="msg-zone" id="msg-fabrication"></div>
+        <div class="chargement" id="loading-fabrication"><span class="spinner"><span></span><span></span><span></span><span></span><span></span></span>Chargement...</div>
+        <div id="contenu-fabrication"></div>
+
+        <!-- FORMULAIRE NOUVEAU LOT -->
+        <div id="form-fabrication" class="form-panel" data-mode="">
+          <div class="form-panel-header">
+            <span class="form-panel-titre">Nouveau lot</span>
+            <button class="btn-fermer-panneau" onclick="fermerFormFabrication()">✕</button>
+          </div>
+          <div class="form-body">
+            <div class="form-grille">
+
+              <div class="form-groupe col-plein">
+                <label class="form-label">Collection</label>
+                <select id="fab-collection" class="form-ctrl" onchange="fabFiltrerRecettes()">
+                  <option value="">— Choisir une collection —</option>
+                </select>
+              </div>
+
+              <div class="form-groupe">
+                <label class="form-label">Recette</label>
+                <select id="fab-recette" class="form-ctrl" onchange="fabFiltrerFormats()">
+                  <option value="">— Choisir une recette —</option>
+                </select>
+              </div>
+
+              <div class="form-groupe" id="fab-groupe-format">
+                <label class="form-label">Format</label>
+                <select id="fab-format" class="form-ctrl" onchange="calculerApercuLot()">
+                  <option value="">— Choisir un format —</option>
+                </select>
+              </div>
+
+              <div class="form-groupe" id="fab-groupe-multiplicateur">
+                <label class="form-label">Multiplicateur</label>
+                <select id="fab-multiplicateur" class="form-ctrl" onchange="calculerApercuLot()">
+                  <option value="1">1×</option>
+                  <option value="2">2×</option>
+                  <option value="3">3×</option>
+                </select>
+              </div>
+              <div class="form-groupe cache" id="fab-groupe-nb-unites">
+                <label class="form-label">Nombre de savons</label>
+                <input type="number" id="fab-nb-unites" class="form-ctrl" min="1" oninput="calculerApercuLot()">
+              </div>
+
+              <div class="form-groupe">
+                <label class="form-label">Date de fabrication</label>
+                <input type="date" id="fab-date" class="form-ctrl" onchange="calculerApercuLot()">
+              </div>
+
+            </div>
+
+            <!-- APERÇU CALCULÉ -->
+            <div id="fab-apercu" class="carte-admin cache">
+              <div class="carte-admin-entete">Aperçu</div>
+              <div class="form-grille">
+                <div class="form-groupe">
+                  <label class="form-label">Unités produites</label>
+                  <div id="fab-apercu-unites" class="texte-secondaire">—</div>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Disponible le</label>
+                  <div id="fab-apercu-dispo" class="texte-secondaire">—</div>
+                </div>
+                <div class="form-groupe">
+                  <label class="form-label">Coût estimé</label>
+                  <div id="fab-apercu-cout" class="texte-secondaire">—</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-outline" onclick="fermerFormFabrication()">Annuler</button>
+              <button class="btn btn-primary" onclick="sauvegarderLot()">Confirmer</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    <!-- INVENTAIRE PRODUCTION -->
+      <div class="section-admin" id="section-inventaire-production">
+        <div class="page-entete fade-in">
+          <div class="page-entete-gauche">
+            <div class="page-entete-eyebrow">Production</div>
+            <div class="page-entete-titre">Inventaire</div>
+          </div>
+        </div>
+        <div class="msg-zone" id="msg-inventaire-production"></div>
+        <div class="chargement" id="loading-inventaire-production"><span class="spinner"><span></span><span></span><span></span><span></span><span></span></span>Chargement...</div>
+        <div id="contenu-inventaire-production"></div>
+      </div>
+
     <!-- CONTENU DU SITE -->
       <div class="section-admin" id="section-contenu-site">
         <div class="page-entete fade-in">
@@ -1418,8 +1536,60 @@
       </div>
 
 
+    <div class="section-admin" id="section-mediatheque">
+  <div class="page-entete fade-in">
+    <div class="page-entete-gauche">
+      <div class="page-entete-eyebrow">Photos disponibles dans le sélecteur</div>
+      <div class="page-entete-titre">Médiathèque</div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" onclick="mediathequeOuvrirAjout()">+ Ajouter une photo</button>
+      <button class="btn btn-secondary" onclick="mediathequeSyncCloudinary()">↺ Synchroniser Cloudinary</button>
+    </div>
+  </div>
+  <div class="msg-zone" id="msg-mediatheque"></div>
+  <div class="carte-admin fade-in cache" id="med-form-ajout">
+    <div class="carte-admin-entete">Ajouter une photo</div>
+    <div class="form-groupe">
+      <label class="form-label">URL Cloudinary</label>
+      <div class="champ-avec-reset">
+        <input type="text" class="form-ctrl" id="med-url" placeholder="Coller l'URL ici">
+        <button class="btn-reset-champ" onclick="document.getElementById('med-url').value=''">✕</button>
+      </div>
+    </div>
+    <div class="form-groupe">
+      <label class="form-label">Nom</label>
+      <input type="text" class="form-ctrl" id="med-nom" placeholder="Ex. : saponica-principale">
+    </div>
+    <div class="form-groupe">
+      <label class="form-label">Catégorie</label>
+      <select class="form-ctrl" id="med-categorie">
+        <option value="">— Choisir —</option>
+        <option>Site général</option>
+        <option>Recette</option>
+        <option>Recette Noël</option>
+        <option>Collection</option>
+        <option>Collection Noël</option>
+      </select>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" onclick="mediathequeSauvegarder()">Sauvegarder</button>
+      <button class="btn btn-outline" onclick="mediathequeFermerAjout()">Annuler</button>
+    </div>
+  </div>
+  <div class="filtres-bar">
+    <select class="form-ctrl filtre-select" id="med-filtre-cat" onchange="medFiltrer()">
+      <option value="">Toutes les catégories</option>
+    </select>
+    <span class="texte-secondaire" id="med-compteur"></span>
+  </div>
+  <div class="chargement cache" id="med-chargement"><span class="spinner"><span></span><span></span><span></span><span></span><span></span></span>Chargement...</div>
+  <div id="med-grille" class="collections-grille"></div>
+</div>
+
     </main>
   </div>
+
 
  <script src="https://media-library.cloudinary.com/global/all.js"></script>
 <script src="../js/main.js"></script>
@@ -1509,6 +1679,32 @@
       </div>
     </div>
   </div>
+
+<div class="modal-admin-overlay" id="modal-mediatheque">
+  <div class="modal-admin modal-mediatheque-contenu">
+    <div class="modal-admin-header">
+      <div class="modal-admin-titre">Médiathèque</div>
+      <button class="btn-fermer-panneau" onclick="fermerModalMediatheque()" title="Fermer">✕</button>
+    </div>
+    <div class="modal-admin-body">
+      <div class="filtres-bar">
+        <select class="form-ctrl filtre-select" id="mediatheque-filtre-cat" onchange="filtrerMediatheque()">
+          <option value="">Toutes les catégories</option>
+        </select>
+        <input type="text" class="form-ctrl filtre-recherche" id="mediatheque-filtre-nom" oninput="filtrerMediatheque()" placeholder="Rechercher par nom">
+      </div>
+      <div id="mediatheque-grille" class="mediatheque-grille"></div>
+      <div class="chargement cache" id="mediatheque-chargement"><span class="spinner"><span></span><span></span><span></span><span></span><span></span></span>Chargement...</div>
+    </div>
+    <div class="modal-admin-body">
+      <div class="form-actions">
+        <button class="btn btn-outline btn-sm" onclick="fermerModalMediatheque()">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </body>
  
 </html>
