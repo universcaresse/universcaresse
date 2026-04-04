@@ -3934,7 +3934,7 @@ function fabFiltrerFormats() {
   calculerApercuLot();
 }
 
-function fabFiltrerRecettes() { {
+function fabFiltrerRecettes() { 
   const col    = document.getElementById('fab-collection').value;
   const select = document.getElementById('fab-recette');
   select.innerHTML = '<option value="">— Choisir une recette —</option>';
