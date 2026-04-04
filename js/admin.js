@@ -3874,6 +3874,7 @@ function afficherTableauFabrication(lots) {
 
   document.getElementById('contenu-fabrication').innerHTML = html;
 }
+}
 
 
 function ouvrirFormFabrication(existant) {
