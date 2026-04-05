@@ -293,7 +293,7 @@ async function appelAPI(action, params = {}) {
     url.searchParams.set('action', action);
     Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
     url.searchParams.set('t', Date.now());
-    const response = await fetch(url.toString());
+    const response = await fetch(url.toString(), { redirect: 'follow' });
     if (!response.ok) throw new Error('Erreur réseau');
     return await response.json();
   } catch (err) {
