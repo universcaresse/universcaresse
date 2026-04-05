@@ -3,14 +3,12 @@
    ═══════════════════════════════════════ */
 
 // ─── CONFIGURATION ───
-
-const GAS_URL_V2 = 'https://script.google.com/macros/s/AKfycbwwiGLwj8QJ6c5dGEtPEHUojzdbdncsTXnmEn-LJJxg7xBeckcbiCX1bvkMb3E3ba1FEA/exec';
+const GAS_URL_V2 = 'https://script.google.com/macros/s/AKfycbyZYLb_LWaaJ0kQRTdvJHuOamYI4OrO0fdaJjDAFk-UTOXIRF6OK67QiA6DjKUcBSU9/exec';
 
 // ─── APPELS API V2 ───
-
 async function appelAPI_v2(action, params = {}) {
   try {
-    const qs = new URLSearchParams({ action, v: '2', ...params }).toString();
+    const qs = new URLSearchParams({ action, ...params }).toString();
     const res = await fetch(`${GAS_URL_V2}?${qs}`);
     return await res.json();
   } catch(e) {
@@ -23,7 +21,7 @@ async function appelAPIPost_v2(action, data = {}) {
   try {
     const res = await fetch(GAS_URL_V2, {
       method: 'POST',
-      body: JSON.stringify({ action, v: '2', ...data })
+      body: JSON.stringify({ action, ...data })
     });
     return await res.json();
   } catch(e) {
