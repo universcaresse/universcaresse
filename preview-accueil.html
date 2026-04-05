@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Univers Caresse — Aperçu Accueil</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Birthstone&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary:        #5a8a3a;
+  --primary-dark:   #4a6e2e;
+  --accent:         #d4a445;
+  --danger:         #c44536;
+  --blanc:          #ffffff;
+  --beige:          #e8dcc8;
+  --gris:           #8b8680;
+  --gris-fonce:     #3d3b39;
+  --logo:           #333333;
+  --nav-h:          72px;
+  --padding-page:   80px;
+  --padding-mobile: 20px;
+  --primary-04:    rgba(90,138,58,0.04);
+  --primary-06:    rgba(90,138,58,0.06);
+  --primary-08:    rgba(90,138,58,0.08);
+  --primary-10:    rgba(90,138,58,0.10);
+  --primary-15:    rgba(90,138,58,0.15);
+  --primary-60:    rgba(90,138,58,0.60);
+  --primary-70:    rgba(90,138,58,0.70);
+  --accent-60:     rgba(212,164,69,0.60);
+  --accent-70:     rgba(212,164,69,0.70);
+  --gris-60:       rgba(139,134,128,0.60);
+  --gris-fonce-60: rgba(61,59,57,0.60);
+  --beige-15:      rgba(232,220,200,0.15);
+  --noir-10:       rgba(0,0,0,0.10);
+  --noir-30:       rgba(0,0,0,0.30);
+  --blanc-pur-50:  rgba(255,255,255,0.50);
+  --blanc-pur-70:  rgba(255,255,255,0.70);
+  --blanc-pur-75:  rgba(255,255,255,0.75);
+  --texte-micro:   0.70rem;
+  --texte-xs:      0.75rem;
+  --texte-xs-2:    0.82rem;
+  --texte-sm:      0.90rem;
+  --texte-corps:   1.05rem;
+  --texte-titre-sm:1.30rem;
+  --texte-titre-md:1.50rem;
+  --texte-signature:2rem;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; font-weight: 300; background: #ffffff; color: var(--gris-fonce); overflow-x: hidden; }
+h1, h2, h3 { font-family: 'Playfair Display', serif; }
+p { white-space: pre-line; overflow-wrap: break-word; }
+a { text-decoration: none; }
+.cache { display: none !important; }
+.invisible { opacity: 0; pointer-events: none; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--nav-h);
+  display: flex; align-items: center; justify-content: flex-end;
+  background: rgba(255,255,255,0.95);
+  padding: 0 48px;
+}
+.nav-logo { display: flex; flex-direction: column; text-decoration: none; line-height: 1.1; margin-right: auto; }
+.logo-nom { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--logo); letter-spacing: 0.04em; }
+.logo-tagline { font-family: 'Birthstone', cursive; font-size: 0.95rem; color: var(--accent); line-height: 1.2; }
+.logo-sub { font-family: 'Playfair Display', serif; font-size: 0.6rem; font-weight: 400; color: var(--gris); letter-spacing: 0.18em; text-transform: lowercase; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-family: 'DM Sans', sans-serif; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gris); text-decoration: none; font-weight: 400; transition: color 0.2s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--accent); transform: scaleX(0); transition: transform 0.3s; }
+.nav-links a:hover { color: var(--primary); }
+.nav-links a.active { color: var(--primary); }
+.nav-links a.active::after { transform: scaleX(1); }
+
+/* MAIN */
+main { padding-top: var(--nav-h); }
+
+/* HERO */
+.hero { min-height: calc(100vh - var(--nav-h)); display: grid; grid-template-columns: 1fr 1fr; }
+.hero-left { display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; padding: 24px 64px 80px 80px; position: relative; }
+.hero-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 0.78rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; font-weight: 500; min-height: 1.2rem; }
+.hero-logo-img { max-width: 325px; width: 100%; margin-bottom: 16px; display: block; margin-left: auto; margin-right: auto; }
+.hero-cta { display: flex; align-items: center; gap: 16px; background: var(--primary); color: white; padding: 16px 36px; font-size: 0.78rem; font-family: 'DM Sans', sans-serif; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; font-weight: 500; transition: background 0.3s, transform 0.2s; min-height: 52px; }
+.hero-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
+.hero-cta svg { width: 16px; height: 16px; }
+.hero-stats { display: flex; justify-content: space-between; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--beige); width: 100%; max-width: 480px; margin-left: auto; margin-right: auto; }
+.hero-stat { flex: 1; text-align: center; }
+.hero-stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 600; color: var(--primary); line-height: 1; }
+.hero-stat-label { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--gris); text-transform: uppercase; margin-top: 4px; }
+.hero-right { position: relative; overflow: hidden; }
+.hero-mosaic { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; height: 100%; gap: 16px; padding: 16px; }
+.mosaic-item { overflow: hidden; position: relative; }
+.mosaic-item:first-child { grid-row: span 2; }
+.mosaic-soap { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; color: rgba(255,255,255,0.9); text-transform: uppercase; position: relative; overflow: hidden; transition: transform 0.6s; opacity: 0.82; }
+.mosaic-soap:hover { transform: scale(1.03); }
+.mosaic-soap-accent  { background: var(--accent-60); height: 100%; }
+.mosaic-soap-primary { background: var(--primary-60); height: 100%; }
+.mosaic-soap-gris    { background: var(--gris-60); height: 100%; }
+.mosaic-soap-label { position: relative; z-index: 1; text-align: center; }
+.mosaic-soap-name { font-size: 0.85rem; font-weight: 500; display: block; }
+.mosaic-soap-col { font-size: 0.62rem; opacity: 0.75; letter-spacing: 0.12em; }
+
+/* SECTION LINE */
+.section-line { flex: 1; height: 1px; background: var(--beige); margin-top: 24px; }
+
+/* SECTION TEXTE */
+.section-texte { padding: var(--padding-page); display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: stretch; }
+.texte-principal p { font-family: 'DM Sans', sans-serif; font-size: var(--texte-corps); line-height: 1.9; color: var(--gris); font-weight: 300; margin-bottom: 24px; }
+.page-hero-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; font-weight: 500; }
+.page-hero-titre { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 400; line-height: 1.1; color: var(--gris-fonce); margin-bottom: 8px; }
+.page-hero-titre em { font-style: italic; color: var(--primary); display: block; }
+.page-hero-texte { font-family: 'DM Sans', sans-serif; font-size: var(--texte-corps); line-height: 1.9; color: var(--gris); font-weight: 300; margin-top: 28px; max-width: 480px; }
+.page-hero-signature { font-family: 'Birthstone', cursive; font-size: var(--texte-signature); color: var(--accent); margin-top: 20px; margin-bottom: 4px; }
+.page-hero-titre-signature { font-family: 'DM Sans', sans-serif; font-size: var(--texte-xs-2); letter-spacing: 0.15em; text-transform: uppercase; color: var(--gris); font-weight: 400; }
+.page-hero-signature-bloc { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--beige); }
+.section-texte-photo-3-4 { width: 100%; aspect-ratio: 3/4; position: relative; overflow: hidden; }
+.section-texte-photo-3-4 img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.section-texte-photo-16-9 { width: 100%; aspect-ratio: 16/9; position: relative; overflow: hidden; margin-top: 32px; }
+.section-texte-photo-16-9 img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+
+/* VALEURS */
+.valeur-item { padding: 28px 0; border-bottom: 1px solid var(--beige); }
+.valeur-item:first-child { padding-top: 0; }
+.valeur-item:last-child { border-bottom: none; }
+.valeur-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 600; color: var(--beige); line-height: 1; margin-bottom: 8px; }
+.valeur-titre { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--gris-fonce); margin-bottom: 8px; }
+.valeur-desc { font-family: 'DM Sans', sans-serif; font-size: var(--texte-corps); line-height: 1.7; color: var(--gris); font-weight: 300; }
+
+/* CITATION */
+.bandeau-citation { background: var(--primary); padding: 64px var(--padding-page); text-align: center; }
+.citation-texte { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 400; font-style: italic; color: white; line-height: 1.5; max-width: 800px; margin: 0 auto 20px; }
+.citation-guillemet { color: white; }
+.citation-source { font-family: 'DM Sans', sans-serif; font-size: var(--texte-xs-2); letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.65); }
+
+/* COLLECTIONS */
+.section-collections { padding: var(--padding-page); background: var(--blanc); }
+.section-header { display: flex; align-items: baseline; gap: 24px; margin-bottom: 48px; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 400; color: var(--gris-fonce); }
+.section-count { font-family: 'DM Sans', sans-serif; font-size: var(--texte-sm); letter-spacing: 0.15em; color: var(--accent); text-transform: uppercase; }
+.collections-strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2px; }
+.collection-tile { aspect-ratio: 3/4; position: relative; overflow: hidden; cursor: pointer; display: block; }
+.collection-tile-bg { position: absolute; inset: 0; transition: transform 0.6s ease; }
+.collection-tile:hover .collection-tile-bg { transform: scale(1.05); }
+.collection-tile-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,28,25,0.7) 0%, rgba(30,28,25,0.1) 60%, transparent 100%); }
+.collection-tile-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px 16px; }
+.collection-tile-name { font-family: 'Playfair Display', serif; font-size: var(--texte-titre-sm); font-weight: 600; color: white; letter-spacing: 0.03em; display: block; }
+.collection-tile-slogan { font-family: 'DM Sans', sans-serif; font-size: var(--texte-xs-2); color: rgba(255,255,255,0.75); margin-top: 4px; display: block; letter-spacing: 0.04em; font-weight: 300; }
+
+/* FOOTER */
+footer { background: var(--gris-fonce); color: var(--blanc-pur-75); padding: 28px var(--padding-page); display: flex; justify-content: space-between; align-items: center; font-family: 'DM Sans', sans-serif; font-size: var(--texte-xs-2); letter-spacing: 0.06em; }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: white; font-weight: 400; letter-spacing: 0.04em; }
+.footer-tagline { font-family: 'Birthstone', cursive; font-size: 1.1rem; margin-top: 4px; color: var(--accent); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <span class="logo-nom">Univers Caresse</span>
+    <span class="logo-tagline">La douceur à chaque geste</span>
+    <span class="logo-sub">savonnerie artisanale</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" class="active">Accueil</a></li>
+    <li><a href="#">Catalogue</a></li>
+    <li><a href="#">Le savon artisanal</a></li>
+    <li><a href="#">Bon à savoir</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+  <section id="section-accueil">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-left">
+        <p class="hero-eyebrow">Collections printemps 2026</p>
+        <img src="https://res.cloudinary.com/dfasrauyy/image/upload/v1774627932/a-warm-inviting-photograph-of-an-artisan_uCbddMjKSkWQWJrd_XQJdg_VTqWCfYYQ_Kna8JgcGw28A_lmm3kj.jpg" alt="Univers Caresse" class="hero-logo-img" onerror="this.style.background='var(--beige)';this.style.height='180px'">
+        <a href="#" class="hero-cta">
+          Découvrir nos produits
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num">9</div>
+            <div class="hero-stat-label">Collections</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">84</div>
+            <div class="hero-stat-label">Produits</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">100%</div>
+            <div class="hero-stat-label">Artisanal</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-mosaic">
+          <div class="mosaic-item">
+            <div class="mosaic-soap mosaic-soap-accent">
+              <div class="mosaic-soap-label">
+                <span class="mosaic-soap-name">Nouvelles</span>
+                <span class="mosaic-soap-col">arrivées</span>
+              </div>
+            </div>
+          </div>
+          <div class="mosaic-item">
+            <div class="mosaic-soap mosaic-soap-primary">
+              <div class="mosaic-soap-label">
+                <span class="mosaic-soap-name">Disponible</span>
+                <span class="mosaic-soap-col">en stock</span>
+              </div>
+            </div>
+          </div>
+          <div class="mosaic-item">
+            <div class="mosaic-soap mosaic-soap-gris">
+              <div class="mosaic-soap-label">
+                <span class="mosaic-soap-name">À voir</span>
+                <span class="mosaic-soap-col">cette saison</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="height:1px;background:var(--beige);margin:0 80px;"></div>
+
+    <!-- QUI SOMMES-NOUS -->
+    <section class="section-texte">
+      <div class="texte-principal">
+        <p class="page-hero-eyebrow">Notre histoire</p>
+        <h1 class="page-hero-titre">
+          Fait avec soin,<br>
+          <em>à chaque geste</em>
+        </h1>
+        <p class="page-hero-texte">Chantal Mondor a toujours voulu faire les choses elle-même, avec de vrais ingrédients, des gestes simples, le respect de ce qu'on met sur sa peau. À la retraite, le temps est enfin arrivé. Des formations, beaucoup de lectures, des tests et encore des tests. Univers Caresse naît.</p>
+        <div class="page-hero-signature-bloc">
+          <div class="page-hero-signature">Chantal</div>
+          <div class="page-hero-titre-signature">Fondatrice, Univers Caresse</div>
+        </div>
+      </div>
+      <div>
+        <div class="section-texte-photo-3-4">
+          <img src="https://res.cloudinary.com/dfasrauyy/image/upload/v1774627932/a-warm-inviting-photograph-of-an-artisan_uCbddMjKSkWQWJrd_XQJdg_VTqWCfYYQ_Kna8JgcGw28A_lmm3kj.jpg" alt="Atelier Univers Caresse" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </section>
+
+    <!-- VALEURS -->
+    <section class="section-texte">
+      <div class="texte-principal">
+        <p>Saponification à froid — pas de chaleur, pas de compromis. Chaque savon est fabriqué en petite quantité, sur commande, avec des ingrédients choisis pour ce qu'ils font vraiment.</p>
+        <p>Sans huile de palme. Fait au Québec. Entièrement biodégradable.</p>
+        <div class="section-texte-photo-16-9">
+          <img src="https://res.cloudinary.com/dfasrauyy/image/upload/v1774628531/a-portrait-oriented-wide-shot-photograph_UA7yPYBBSgOecAa7wOi9rg_spPvtpQoRN-GmTAeUlQQwg_cover_qnihfd.jpg" alt="Atelier" onerror="this.style.display='none'">
+        </div>
+      </div>
+      <div>
+        <div class="valeur-item">
+          <div class="valeur-num">01</div>
+          <div class="valeur-titre">Saponification à froid</div>
+          <div class="valeur-desc">Pas de chaleur ajoutée. Les propriétés naturelles des huiles sont préservées intégralement.</div>
+        </div>
+        <div class="valeur-item">
+          <div class="valeur-num">02</div>
+          <div class="valeur-titre">Sans huile de palme</div>
+          <div class="valeur-desc">Un choix éthique et environnemental. Toujours, sans exception.</div>
+        </div>
+        <div class="valeur-item">
+          <div class="valeur-num">03</div>
+          <div class="valeur-titre">Petites quantités</div>
+          <div class="valeur-desc">Chaque lot est fabriqué sur commande. Jamais de surproduction.</div>
+        </div>
+        <div class="valeur-item">
+          <div class="valeur-num">04</div>
+          <div class="valeur-titre">Fait au Québec</div>
+          <div class="valeur-desc">Dans un atelier artisanal, avec soin et intention.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CITATION -->
+    <div class="bandeau-citation">
+      <p class="citation-texte">
+        <span class="citation-guillemet">«&nbsp;</span>
+        Le savon artisanal, c'est la même philosophie que la cuisine maison — on sait ce qu'il y a dedans.
+        <span class="citation-guillemet">&nbsp;»</span>
+      </p>
+      <span class="citation-source">Chantal Mondor — Univers Caresse</span>
+    </div>
+
+    <!-- COLLECTIONS -->
+    <section class="section-collections">
+      <div class="section-header">
+        <h2 class="section-title">Nos collections</h2>
+        <div class="section-line"></div>
+        <span class="section-count">9 collections</span>
+      </div>
+      <div class="collections-strip">
+        <div class="collection-tile">
+          <div class="collection-tile-bg" style="background:linear-gradient(135deg,#5a8a3a,#4a6e2e);"></div>
+          <div class="collection-tile-overlay"></div>
+          <div class="collection-tile-content">
+            <span class="collection-tile-name">SAPONICA</span>
+            <span class="collection-tile-slogan">Le savon dans sa forme la plus pure</span>
+          </div>
+        </div>
+        <div class="collection-tile">
+          <div class="collection-tile-bg" style="background:linear-gradient(135deg,#d4a445,#b8892e);"></div>
+          <div class="collection-tile-overlay"></div>
+          <div class="collection-tile-content">
+            <span class="collection-tile-name">PETIT NUAGE</span>
+            <span class="collection-tile-slogan">Pour les tout-petits</span>
+          </div>
+        </div>
+        <div class="collection-tile">
+          <div class="collection-tile-bg" style="background:linear-gradient(135deg,#8b8680,#6b6560);"></div>
+          <div class="collection-tile-overlay"></div>
+          <div class="collection-tile-content">
+            <span class="collection-tile-name">CAPRIN</span>
+            <span class="collection-tile-slogan">Savon au lait de chèvre</span>
+          </div>
+        </div>
+        <div class="collection-tile">
+          <div class="collection-tile-bg" style="background:linear-gradient(135deg,#c44536,#a33528);"></div>
+          <div class="collection-tile-overlay"></div>
+          <div class="collection-tile-content">
+            <span class="collection-tile-name">ÉMOLIA</span>
+            <span class="collection-tile-slogan">Se choyer</span>
+          </div>
+        </div>
+        <div class="collection-tile">
+          <div class="collection-tile-bg" style="background:linear-gradient(135deg,#3d3b39,#2a2826);"></div>
+          <div class="collection-tile-overlay"></div>
+          <div class="collection-tile-content">
+            <span class="collection-tile-name">ÉPURE</span>
+            <span class="collection-tile-slogan">Pour les mains qui travaillent</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </section>
+</main>
+
+<footer>
+  <div>
+    <div class="footer-logo">univers caresse</div>
+    <div class="footer-tagline">La douceur à chaque geste</div>
+  </div>
+  <div>© 2026 Univers Caresse — Savonnerie artisanale</div>
+</footer>
+
+</body>
+</html>
